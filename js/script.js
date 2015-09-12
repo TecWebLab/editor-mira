@@ -25,6 +25,31 @@ var prototype = (function(){
     var base = $('#panel-base').html();
     var sidebar = null;
 
+    /* Funções do webstorage */
+    var saveWebStorage = function(){
+        var obj = new Object();
+        obj.name = $('#nameInterface').val();
+        obj.html = $('#prototype').html();
+        obj.elements = JSON.stringify(elements);
+
+        localStorage.setItem('project', JSON.stringify(obj));
+    }
+
+    var loadWebStorage = function(){
+        var project = localStorage.getItem('project');
+
+        if(project && confirm('Já existe um projeto em andamento. Deseja abrí-lo?')){
+            project = JSON.parse(project);
+            console.log(project);
+            $('#nameInterface').val(project.name);
+            $('#prototype').html(project.html);
+            elements = JSON.parse(project.elements);
+
+            updateList();
+            agente.execute();
+        }
+    }
+
     var save = function(input){
         var dados = input.parents('form').serializeArray();
         var attrs = [];
@@ -50,6 +75,7 @@ var prototype = (function(){
 
         updateElement(currentObj);
         updateList(); //atualiza a interface abstrata
+        saveWebStorage();
     }
 
     var radioEvent = function(){
@@ -462,6 +488,7 @@ var prototype = (function(){
             createEl(el);
         }
 
+        saveWebStorage();
         return el;
     }
 
@@ -601,10 +628,11 @@ var prototype = (function(){
 
         if((parent.attrs.data instanceof Array && parent.attrs.data.length > 0) || parent.attrs.data instanceof Object) {
             //pega os dados do parent
-            currentElement.attrs.parentData = JSON.parse(JSON.stringify(parent.attrs.data));
+            current.attrs.parentData = JSON.parse(JSON.stringify(parent.attrs.data));
         }else{
             //pega os dados do parent do parent
-            currentElement.attrs.parentData = JSON.parse(JSON.stringify(parent.attrs.dataParent));    
+            console.log(current);
+            current.attrs.parentData = JSON.parse(JSON.stringify(parent.attrs.dataParent));    
         }
 
         return current;
@@ -625,12 +653,13 @@ var prototype = (function(){
             var type = current.attr('data-type');
             var item = findItem(elements, id);
             
+            console.log(elements);
             item = setData(item, rootItem); //defino quais são os dados utilizáveis 
             
             var obj = new Object();
 
-            obj.datasource = item.attrs.datasource.length > 0 ? item.attrs.datasource.replace('http://localhost:3000', 'url') : undefined;
-            obj.parse =  item.attrs.parse.length > 0 ? '$data["'+ item.attrs.parse +'"]' : undefined;
+            obj.datasource = item.attrs.datasource.length > 0 ? item.attrs.datasource.replace('http://localhost:3000', 'url') : '';
+            obj.parse =  item.attrs.parse.length > 0 ? '$data["'+ item.attrs.parse +'"]' : '';
             obj.name = $(this).attr('data-name');
             obj.children = [];
 
@@ -709,6 +738,7 @@ var prototype = (function(){
         saveCloseOption(); //ação ao clicar no botão salvar
         radioEvent(); //ação ao selecionar estático ou dinâmico no formulário
         tabBootstrap(); //evento para exibição do modo preview ou design
+        loadWebStorage();
 
         //monitora de 3 em 3 segundos    
         setInterval(function(){

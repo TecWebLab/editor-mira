@@ -20,14 +20,22 @@ and open the template in the editor.
             <nav class="navbar navbar-default navbar-static-top">
               <div class="container">
                 <div id="navbar" class="navbar-collapse collapse">
-                  <ul class="nav navbar-nav">
-                    <form class="navbar-form navbar-left" role="nameInterface">
-                        <div class="form-group">
-                            <label> Nome da Inferface </label>
-                            <input type="text" class="form-control" id="nameInterface" placeholder="Digite o nome da interface">
-                        </div>
-                    </form>
-                  </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projeto <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id="project-new">Novo</a></li>
+                                <li><a href="#" id="project-open">Abrir</a></li>
+                                <li><a href="#" id="project-save">Salvar</a></li>
+                            </ul>
+                        </li>
+                        <form class="navbar-form navbar-left" role="nameInterface">
+                            <div class="form-group">
+                                <label> Nome da Inferface </label>
+                                <input type="text" class="form-control" id="nameInterface" placeholder="Digite o nome da interface">
+                            </div>
+                        </form>
+                    </ul>
                 </div><!--/.nav-collapse -->
               </div>
             </nav>            
