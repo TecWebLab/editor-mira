@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Gerador de Interfaces</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.sidr.dark.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <section id="navigation">
+            <nav class="navbar navbar-default navbar-static-top">
+              <div class="container">
+                <div id="navbar" class="navbar-collapse collapse">
+                  <ul class="nav navbar-nav">
+                    <form class="navbar-form navbar-left" role="nameInterface">
+                        <div class="form-group">
+                            <label> Nome da Inferface </label>
+                            <input type="text" class="form-control" id="nameInterface" placeholder="Digite o nome da interface">
+                        </div>
+                    </form>
+                  </ul>
+                </div><!--/.nav-collapse -->
+              </div>
+            </nav>            
+        </section>
+        <section id="enviroment">
+            <div class="row">
+                <div id="elements" class="col-md-2">
+                    <div class="panel-group" id="accordionElements" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingNav">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordionElements" href="#collapseNav" aria-expanded="true" aria-controls="collapseNav">
+                                        Navegação
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseNav" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingNav">
+                                <div class="panel-body">
+                                    <div class="element-item component-nav" data-type="nav" data-name="Menu" data-item="navbar" data-component="component-nav">
+                                        <i class="fa fa-plus"></i> Menu Horizontal
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingContainer">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordionElements" href="#collapseContainer" aria-expanded="true" aria-controls="collapseContainer">
+                                        Container
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseContainer" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingContainer">
+                                <div class="panel-body">
+                                    <div class="element-item-div component-div" data-type="container" data-name="Container" data-item="pss-container" data-component="container-div">
+                                        <i class="fa fa-plus"></i> Container
+                                    </div>
+                                    <div class="element-item-div component-div" data-type="div" data-name="Div" data-item="pss-div" data-component="container-div">
+                                        <i class="fa fa-plus"></i> Div
+                                    </div>
+                                    <div class="element-item-div component-div" data-type="panel" data-name="Painel" data-item="pss-panel panel panel-default" data-component="container-div">
+                                        <i class="fa fa-plus"></i> Panel
+                                    </div>
+                                    <div class="element-item-div component-div" data-type="jumbotron" data-name="Jumbotron" data-item="pss-jumbotron" data-component="container-div">
+                                        <i class="fa fa-plus"></i> Jumbotron
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingText">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordionElements" href="#collapseText" aria-expanded="true" aria-controls="collapseText">
+                                        Texto
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseText" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingText">
+                                <div class="panel-body">
+                                    <div class="element-item component-text" data-type="paragraph" data-name="Parágrafo" data-item="text" data-component="container-text">
+                                        <i class="fa fa-plus"></i> Parágrafo
+                                    </div>
+                                    <div class="element-item component-text" data-type="header" data-name="Título" data-item="title" data-component="container-text">
+                                        <i class="fa fa-plus"></i> Título
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingImage">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordionElements" href="#collapseImage" aria-expanded="true" aria-controls="collapseImage">
+                                        Imagens
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseImage" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingImage">
+                                <div class="panel-body">
+                                    <div class="element-item component-image" data-type="image" data-name="Imagem" data-item="image" data-component="component-image">
+                                        <i class="fa fa-plus"></i> Imagem
+                                    </div>
+                                    <div class="element-item component-image" data-type="thumbnail" data-name="Thumbnail" data-item="thumbnail" data-component="component-image">
+                                        <i class="fa fa-plus"></i> Thumbnail
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingForm">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordionElements" href="#collapseForm" aria-expanded="true" aria-controls="collapseForm">
+                                        Formulário
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseForm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingForm">
+                                <div class="panel-body">
+                                    <div class="element-item component-form" data-name="Formulário Normal" data-item="form-normal" data-component="component-form">
+                                        <i class="fa fa-plus"></i> Formulário Normal
+                                    </div>
+                                    <div class="element-item component-form" data-name="Formulário Horizontal" data-item="form-horizontal" data-component="component-form">
+                                        <i class="fa fa-plus"></i> Formulário Horizontal
+                                    </div>
+                                    <div class="element-item component-form" data-name="Formulário Inline" data-item="form-inline" data-component="component-form">
+                                        <i class="fa fa-plus"></i> Formulário Inline
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingList">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordionElements" href="#collapseList" aria-expanded="true" aria-controls="collapseList">
+                                        Listas
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseList" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingList">
+                                <div class="panel-body">
+                                	<div class="element-item component-list" data-type="list-unordered" data-name="Lista Não Ordenada" data-item="unordered" data-component="component-list">
+                                        <i class="fa fa-plus"></i> Lista Não Ordenada
+                                    </div>
+                                    <div class="element-item component-list" data-type="list-ordered" data-name="Lista Ordenada" data-item="ordered" data-component="component-list">
+                                        <i class="fa fa-plus"></i> Lista Ordenada
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 col-md-offset-2">
+                    <ul id="tab-prototype" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#mode-design" aria-controls="mode-design" role="tab" data-toggle="tab" data-mode="design">Design</a></li>
+                        <li role="presentation"><a href="#mode-preview" aria-controls="mode-preview" role="tab" data-toggle="tab" data-mode="preview">Preview</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="mode-design">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">Protótipo</div>
+                                <div id="prototype" class="panel-body">
+
+                                </div>    
+                            </div>    
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="mode-preview">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">Protótipo</div>
+                                <div id="preview" class="panel-body">
+
+                                </div>    
+                            </div>    
+                        </div>   
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-2">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">Widget Abstrato</div>
+                        <div id="abstract-code" class="panel-body">
+                            <pre></pre>
+                        </div>    
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">Widget Concreto</div>
+                        <div id="concrete-code" class="panel-body">
+                            <pre></pre>
+                        </div>  
+                    </div>    
+
+                </div>
+
+                
+            </div>
+        </section>
+        
+        <section id="footer">
+        
+        </section>
+        <div id="title-property" style="display: none;">
+            <h1>Propriedades</h1>
+        </div>
+
+        <div id="content-property">
+            <div id="form-content">
+                
+            </div>
+        </div>
+
+        <!-- Templates -->
+        <script id="panel-base" type="text/template">
+            <div class="panel panel-default panel-drag" data-id="" data-component="" data-name="" data-type="<%- item.type %>">
+                <div class="panel-heading"> 
+                    <%- item.nameComponent %> 
+                    <div class="pull-right">
+                        <span class="btn-move btn btn-warning btn-xs"><i class="fa fa-arrows"></i></span>
+                        <button data-open="0" class="btn-prop btn btn-primary btn-xs"><i class="fa fa-cog"></i></button>
+                        <button class="btn-remove btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <%= item.html %>
+                </div>
+            </div>
+        </script>
+        
+        <script id="container-div" type="text/template">
+            <div class="<%- item %>">
+                <% if(item.indexOf('panel') !=  -1) { %>
+                    <div class="panel-heading">Título</div>
+                    <div class="panel-body">
+
+                    </div>
+                <% } %>
+            </div>
+        </script>
+
+        <script id="container-text" type="text/template">
+        	<% if(item == 'text') { %>
+        		<p>Texto de exemplo</p>
+        	<%} else if (item == 'title') { %>
+        		<h1>Texto de exemplo</h1> 
+        	<%} %>	
+        </script>
+
+        <script id="component-image" type="text/template">
+        	<% if(item == 'image') { %>
+        		<img src="http://placehold.it/400x300" alt="image" />
+        	<%} else if (item == 'thumbnail') { %>
+        		<div class="thumbnail">
+        			<img src="http://placehold.it/400x300" alt="image" />
+        		</div>
+        	<%}	%>
+        </script>
+
+        <script id="component-form" type="text/template">
+        	<% if(item == 'form-normal') { %>
+        		<form>
+        			<div class="form-group">
+        				<label>Campo 1</label>
+        				<input type="text" class="form-control">
+        			</div>
+        			<div class="form-group">
+        				<button class="btn btn-primary" type="submit">Ação</button>
+        			</div>
+        		</form>
+        	<%} else if (item == 'form-horizontal') { %>
+        		<form class="form-horizontal">
+        			<div class="form-group">
+        				<label class="col-sm-2 control-label">Campo 1</label>
+        				<div class="col-sm-10">
+        					<input type="text" class="form-control">
+        				</div>
+        			</div>
+        			<div class="form-group">
+        				<div class="col-sm-10 col-sm-offset-2">
+        					<button class="btn btn-primary" type="submit">Ação</button>
+        				</div>
+        			</div>
+        		</form>
+        	<%}	else if(item == 'form-inline') { %>
+        		<form class="form-inline">
+        			<div class="form-group">
+        				<label>Campo 1</label>
+        				<input type="text" class="form-control">
+        			</div>
+        			<div class="form-group">
+        				<button class="btn btn-primary" type="submit">Ação</button>
+        			</div>
+        		</form>
+        	<%} %>
+        </script>
+
+        <script id="component-nav" type="text/template">
+        	<nav class="navbar navbar-default">
+        		<div class="container-fluid">
+        			<div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Título</a>
+                    </div>
+        			<div class="collapse navbar-collapse">
+        				<ul class="nav navbar-nav">
+        					<li><a href="#">Item 1</a></li>
+        					<li><a href="#">Item 2</a></li>
+        					<li><a href="#">Item 3</a></li>
+        				</ul>
+        			</div>
+        		</div>
+        	</nav>
+        </script>
+
+        <script id="component-list" type="text/template">
+        	<% if(item == 'unordered') { %>
+        			<ul>
+        				<li>Item 1</li>
+        				<li>Item 2</li>
+        				<li>Item 3</li>
+        			</ul>
+        	<% } else { %>
+        			<ol>
+        				<li>Item 1</li>
+        				<li>Item 2</li>
+        				<li>Item 3</li>
+        			</ol>
+        	<%}%>
+        </script>
+
+        <!--Template dos formulários -->
+        <script type="text/template" id="form-nav">
+            <form class="form-horizontal form-properties">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
+                </div>
+                <div class="form-group">
+                    <label>Datasource</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Parse</label>
+                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
+                </div>
+                <div class="form-group">
+                    <label>Título</label>
+                    <input type="text" class="form-control" name="title" value="<%=item.title%>" id="title" /> 
+                </div>
+
+                <div class="form-group">
+                    <label>Valores</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="value" id="radio-static" value="0" checked> Estáticos
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="value" id="radio-dynamic" value="1"> Dinamicos
+                    </label>
+                </div>
+
+                <!-- Valores estátitocs -->
+                <div id="control-static">
+                    <div class="form-group">
+                        <label>Itens</label>
+                        <textarea id="txtItens" name="itens" class="form-control" rows="6"><% print(item.itens.join('\n')) %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Label</label>
+                        <textarea id="txtItens" name="hrefs" class="form-control" rows="6"><% print(item.hrefs.join('\n')) %></textarea>
+                    </div>
+                </div>
+                
+                <!-- Valores Dinamicos -->
+                <div id="control-dynamic" style="display:none">
+                    <div class="form-group">
+                        <label>Itens</label>
+                        <input type="text" class="form-control" name="itens" value="<%=item.itens instanceof Array ? print('') : print(item.itens[0]) %>" id="itens" />
+                    </div>
+                    <div class="form-group">
+                        <label>Link</label>
+                        <input type="text" class="form-control" name="hrefs" value="<%=item.hrefs[0] %>" id="links" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Classes</label>
+                    <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%=item.classes%></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
+                    <button class="btn btn-default" id="btnFechar">Fechar</button>
+                </div>
+            </form>
+        </script>
+
+        <script type="text/template" id="form-container">
+            <form class="form-horizontal form-properties">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
+                </div>
+                <div class="form-group">
+                    <label>Parse</label>
+                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
+                </div>
+                <div class="form-group">
+                    <label>Datasource</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Largura da Coluna</label>
+                    <select class="form-control" id="selectLargura" name="width" value="<%=item.width%>">
+                        <option value="0">Indefinida</option>
+                        <option value="1" <% if(item.width == '1') print('selected') %> >1</option>
+                        <option value="2" <% if(item.width == '2') print('selected') %> >2</option>
+                        <option value="3" <% if(item.width == '3') print('selected') %> >3</option>
+                        <option value="4" <% if(item.width == '4') print('selected') %> >4</option>
+                        <option value="5" <% if(item.width == '5') print('selected') %> >5</option>
+                        <option value="6" <% if(item.width == '6') print('selected') %> >6</option>
+                        <option value="7" <% if(item.width == '7') print('selected') %> >7</option>
+                        <option value="8" <% if(item.width == '8') print('selected') %> >8</option>    
+                        <option value="9" <% if(item.width == '9') print('selected') %> >9</option>
+                        <option value="10" <% if(item.width == '10') print('selected') %> >10</option>
+                        <option value="11" <% if(item.width == '11') print('selected') %> >11</option>
+                        <option value="12" <% if(item.width == '12') print('selected') %> >12</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Classes</label>
+                    <textarea class="form-control" id="txtClasses" name="classes" rows="5"><%=item.classes%></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
+                    <button class="btn btn-default" id="btnFechar">Fechar</button>
+                </div>
+            </form>
+        </script>
+        
+        <script type="text/template" id="form-text">
+            <form class="form-horizontal form-properties ">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" value="<%=item.name%>" name="name" id="nameComponent" /> 
+                </div>
+                <div class="form-group">
+                    <label>Parse</label>
+                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
+                </div>
+                <div class="form-group">
+                    <label>Datasource</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
+                        </span>
+                    </div>
+                </div>
+                <% if(item.type == 'header') {%>
+                     <div class="form-group">
+                        <label>Largura da Coluna</label>
+                        <select class="form-control" id="selectTag" name="tag"  value="<%=item.tag%>">
+                            <option value="h1" <% if(item.tag == 'h1') print('selected') %> >h1</option>
+                            <option value="h2" <% if(item.tag == 'h2') print('selected') %> >h2</option>
+                            <option value="h3" <% if(item.tag == 'h3') print('selected') %> >h3</option>
+                            <option value="h4" <% if(item.tag == 'h4') print('selected') %> >h4</option>
+                            <option value="h5" <% if(item.tag == 'h5') print('selected') %> >h5</option>
+                            <option value="h6" <% if(item.tag == 'h6') print('selected') %> >h6</option>
+                        </select>
+                    </div>
+                <%}%>
+                <div class="form-group">
+                    <label>Texto</label>
+                    <textarea id="txtTexto" name="text" class="form-control" rows="6"><%= item.text %></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Alinhamento</label>
+                    <select class="form-control" id="selectAlign" name="align" value="<%=item.align%>">
+                        <option value="normal" <% if(item.align == 'normal') print('selected') %> >Normal</option>
+                        <option value="left" <% if(item.align == 'left') print('selected') %> >Esquerdo</option>
+                        <option value="right" <% if(item.align == 'right') print('selected') %> >Direito</option>
+                        <option value="center" <% if(item.align == 'center') print('selected') %> >Centralizado</option>
+                        <option value="justify" <% if(item.align == 'justify') print('selected') %> >Justificado</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Classes</label>
+                    <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%= item.classes %></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
+                    <button class="btn btn-default" id="btnFechar">Fechar</button>
+                </div>
+            </form>
+        </script>
+
+        <script type="text/template" id="form-image">
+            <form class="form-horizontal form-properties">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
+                </div>
+                <div class="form-group">
+                    <label>Parse</label>
+                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
+                </div>
+                <div class="form-group">
+                    <label>Datasource</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Source</label>
+                    <input type="text" class="form-control" name="src" value="<%=item.src%>" id="srcImage" /> 
+                </div>
+                
+                <div class="form-group">
+                    <label>Largura</label>
+                    <input type="text" id="txtLargura" name="width" class="form-control" value="<%=item.width %>" />
+                </div>
+                <div class="form-group">
+                    <label>Altura</label>
+                    <input type="text" id="txtAltura" class="form-control" name="height" value="<%=item.height %>" />
+                </div>
+                <div class="form-group">
+                    <label>Classes</label>
+                    <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%= item.classes %></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
+                    <button class="btn btn-default" id="btnFechar">Fechar</button>
+                </div>
+            </form>
+        </script>
+
+        <script type="text/template" id="form-list">
+            <form class="form-horizontal form-properties">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
+                </div>
+                <div class="form-group">
+                    <label>Parse</label>
+                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
+                </div>
+                <div class="form-group">
+                    <label>Datasource</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Valores</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="value" id="radio-static" value="0" checked> Estáticos
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="value" id="radio-dynamic" value="1"> Dinamicos
+                    </label>
+                </div>
+                <div class="control-static">
+                    <div class="form-group">
+                        <label>Itens</label>
+                        <textarea id="txtItens" name="itens" class="form-control" rows="6"><% print(item.itens.join('\n')) %></textarea>
+                    </div>
+                </div>
+                <div class="control-dynamic">
+                    <div class="form-group">
+                        <label>Itens</label>
+                        <input type="text" class="form-control" name="itens" value="<%=item.itens%>" /> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Lista do Boostrap</label><br />
+                    <label class="radio-inline">
+                        <input type="radio" name="bootstrap" value="0" <% if(item.bootstrap == 0) print('checked') %> > Não
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="bootstrap" value="1" <% if(item.bootstrap == 1) print('checked') %>> Sim
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Classes</label>
+                    <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%=item.classes%></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
+                    <button class="btn btn-default" id="btnFechar">Fechar</button>
+                </div>
+            </form>
+        </script>
+        
+        <script src="js/lib/jquery.min.js"></script>
+        <script src="js/lib/bootstrap.min.js"></script>
+        <script src="js/lib/jquery-ui.min.js"></script>
+        <script src="js/lib/underscore-min.js"></script>
+        <script type="text/javascript" src="js/lib/jquery.sidr.min.js"></script>
+
+        <script type="text/javascript" src="js/classes.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,80 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 16, 2015, 10:43:58 AM
+    Author     : magela
+*/
+
+html,body { height: 100%; margin: 0px; padding: 0px; }
+
+
+#enviroment {
+    padding: 5px;
+}
+
+.element-item, #accordionElements .component-nav, .element-item-div {
+    cursor: move;
+    height: 40px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 40px;
+}
+
+.panel.component-nav {
+    width: 100%;
+}
+
+#prototype, #properties, #preview { height: 600px; overflow-y: auto;}
+#abstract-code, #concrete-code { height: 200px; overflow-y: auto;}
+
+.helper {
+    min-width: 200px;
+    z-index: 9999;
+    float: left;
+    /*margin: 5px;*/
+    padding: 0 !important;   
+}
+
+.highlight {
+    border: 2px dashed #ffff00;
+}
+
+#elements {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 90000;
+    top: 75px;
+}
+
+.container-div {
+    min-height: 200px;
+}
+
+.container-text {
+    /*min-width: 600px !important;*/
+}
+
+.drop {
+    min-height: 180px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.drop.jumbotron{
+    margin-bottom: 0px;
+}
+
+#sidr-id-form-content {
+    padding: 8px;
+}
+
+.sidr input[type="text"], .sidr input[type="password"], .sidr input[type="date"], .sidr input[type="datetime"], .sidr input[type="email"], 
+.sidr input[type="number"], .sidr input[type="search"], .sidr input[type="tel"], .sidr input[type="time"], .sidr input[type="url"], .sidr textarea, 
+.sidr select {
+    background-color: #fff;
+    color: #000; 
+}
