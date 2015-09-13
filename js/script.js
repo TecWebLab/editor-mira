@@ -25,29 +25,76 @@ var prototype = (function(){
     var base = $('#panel-base').html();
     var sidebar = null;
 
+    //define o tamanho de um objeto
+    Object.size = function(obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
+
+    var cloneElements = function(){
+        var clone = new Object();
+
+        for(var i=0; i < elements.length; i++){
+            var aux = new Object();
+            aux.attrs = new Object();
+            for(var item in elements[i].attrs){
+                aux.attrs[item] = item == 'html' ? $('<div />').append(elements[i].attrs[item]).html() : elements[i].attrs[item];
+            }
+
+            clone[i] = aux;
+        }
+
+        return clone;
+    }
+
+    var restoreElements = function(json){
+        elements = JSON.parse(json);
+        var size = Object.size(elements);
+
+        for(var i=0; i<size; i++){
+            console.log(elements[i].attrs.html);
+            elements[i].attrs.html = $(elements[i].attrs.html); //convert string do jquery
+            console.log(elements[i].attrs.html);
+        }
+
+        console.log(elements);
+    }
+
     /* Funções do webstorage */
     var saveWebStorage = function(){
         var obj = new Object();
         obj.name = $('#nameInterface').val();
         obj.html = $('#prototype').html();
-        obj.elements = JSON.stringify(elements);
+        //console.log(JSON.stringify(cloneElements()));
+        obj.elements = JSON.stringify(cloneElements());
+        
 
         localStorage.setItem('project', JSON.stringify(obj));
     }
+
+    
 
     var loadWebStorage = function(){
         var project = localStorage.getItem('project');
 
         if(project && confirm('Já existe um projeto em andamento. Deseja abrí-lo?')){
             project = JSON.parse(project);
-            console.log(project);
+            console.log(project.elements);
             $('#nameInterface').val(project.name);
             $('#prototype').html(project.html);
-            elements = JSON.parse(project.elements);
+
+            restoreElements(project.elements);
+
+            //elements = JSON.parse(project.elements);
 
             updateList();
             agente.execute();
         }
+
+        localStorage.clear(); //limpa o localStorage
     }
 
     var save = function(input){
@@ -532,7 +579,8 @@ var prototype = (function(){
     };
 
     var findItem = function(array, id){
-        for(var i=0; i<array.length; i++){
+        var size = Object.size(array);
+        for(var i=0; i<size; i++){
             if(array[i].attrs.id == id) return array[i];
         }
 
@@ -652,8 +700,6 @@ var prototype = (function(){
             var id = current.attr('data-id');
             var type = current.attr('data-type');
             var item = findItem(elements, id);
-            
-            console.log(elements);
             item = setData(item, rootItem); //defino quais são os dados utilizáveis 
             
             var obj = new Object();
@@ -705,18 +751,24 @@ var prototype = (function(){
         var id = root.parent().attr('data-id');
         var rootType = root.parent().attr('data-type');
         var item = findItem(elements, id);
-        var times = item == null || item.attrs.data.length == 0 ? 1 : item.attrs.data.length; //quantidade de vezes que será repetido
+        var times = item == null || !item.attrs.data.length || item.attrs.data.length == 0 ? 1 : item.attrs.data.length; //quantidade de vezes que será repetido
 
         var selecteds = rootType == 'panel' ? root.children('.panel').children('.panel-body').children('.panel-drag') : root.children('.panel-drag');
+        console.log(item);
+        console.log(times);
+        console.log(selecteds);
         
         for(var i=0; i<times; i++){
             selecteds.each(function(index, element){
                 var $this = $(this); //panel drag corrente
                 var currentObj = findItem(elements, $this.attr('data-id')); //elemento com as informações do objeto
                 var type = $this.attr('data-type'); //tipo do elemento
+                console.log(currentObj);
                 var newElement = currentObj.attrs.html.clone();
+                
+                console.log(currentElement);
                 console.log(newElement);
-
+                
                 //insere o novo item no preview
                 if(currentElement.hasClass('panel')){
                     currentElement.children('.panel-body').append(newElement);
@@ -724,7 +776,9 @@ var prototype = (function(){
                     currentElement.append(newElement);
                 }
 
-                var children = $this.find('.panel-drag')
+                var children = $this.find('.panel-drag');
+                console.log(children);
+                console.log('');
                 if(children.length > 0) generatePreview($this.children('.panel-body'), newElement);
             })    
         }        

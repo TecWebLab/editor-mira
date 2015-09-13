@@ -11,7 +11,6 @@ var id = 1;
 //geração de hmtl de um content
 var generateContainer = function(htmlElement){
     var div = $('<div />');
-    console.log(htmlElement.attrs.type);
     switch(htmlElement.attrs.type){
         case 'container': return div.clone().addClass('container');
         case 'div' : return div.clone();
@@ -76,7 +75,7 @@ var generateList = function(){
 /***********************Design Pattern Builder **********************************/
 //product
 function HTMLElement() {
-	var attrs = [];
+	var attrs = new Object();
 
 	this.updateAttr = function(params){
 		
@@ -509,7 +508,7 @@ function Abstrato(){
 	this.instance = null;
 	this.attrs = new Object();
 	this.attrs.name = "";
-	this.attrs.widgets = [];
+	this.attrs.widgets = new Object();
 
 	this.getInstance = function(){
 		if(abstrato == null){
@@ -522,13 +521,13 @@ function Abstrato(){
 
 function StrategyDrag(){
 	this.initParams = function(){
-		var params = [];
+		var params = new Object();
 		params.datasource = '';
 		params.id = id;
 		params.name = 'obj' + id; id++;
 		params.classes = '';
 		params.parse = "";
-		params.data = params.dataParent = [];
+		params.data = params.dataParent = new Object();
 
 		return params;
 	}
