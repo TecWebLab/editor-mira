@@ -280,8 +280,17 @@ function Navigation(){
 
 	this.buildParams = function(params){
 		this.htmlElement.attrs = params;
-		this.htmlElement.attrs.itens = ['Item 1','Item 2','Item 3'];
-		this.htmlElement.attrs.hrefs = ["#","#","#"];
+		var itens = new Object();
+		itens['0'] = 'Item 1';
+		itens['1'] = 'Item 1';
+		itens['2'] = 'Item 1';
+		this.htmlElement.attrs.itens = itens;
+
+		var hrefs = new Object();
+		hrefs['0'] = '#';
+		hrefs['1'] = '#';
+		hrefs['2'] = '#';
+		this.htmlElement.attrs.hrefs = hrefs;
 		this.htmlElement.attrs.value = 0; //estático
 		this.htmlElement.attrs.title = "Título";
 	}
@@ -297,7 +306,11 @@ function List(){
 
 	this.buildParams = function(params){
 		params.bootstrap = '0';
-		params.itens = ['Item 1','Item 2','Item 3'];
+		var itens = new Object();
+		itens['0'] = 'Item 1';
+		itens['1'] = 'Item 1';
+		itens['2'] = 'Item 1';
+		params.itens = itens;
 		this.htmlElement.attrs = params;
 		this.htmlElement.attrs.value = 0; //estático
 	}
@@ -331,7 +344,7 @@ function mapNavigation(el){
 	}else{
 		for(var i in el.attrs.itens){
 			var item = new Object();
-			item.name = el.attrs.name + 'ListItem';
+			item.name = el.attrs.name + 'ListItem' + (parseInt(i)+1);
 			item.value = el.attrs.itens[i];
 			item.widget = "BootstrapNavigationListItem";
 			item.href = el.attrs.hrefs[i] ? el.attrs.hrefs[i] : '#';
@@ -426,15 +439,15 @@ function mapList(el){
 		var li = new Object();
 		li.name = el.attrs.name + "Item";
 		li.class = el.attrs.bootstrap ? 'list-group-item' : undefined;
-		li.value = '$data["'+el.attrs.itens[0]+'"]';
+		li.value = '$data["'+el.attrs.itens['0']+'"]';
 		listItem = li;
 
 	}else{
-		for (var i = 0; i < el.attrs.itens.length; i++) {
+		for (var i in el.attrs.itens) {
 			var li = new Object();
-			li.name = el.attrs.name + "Item" + (i+1);
+			li.name = el.attrs.name + "Item" + (parseInt(i)+1);
 			li.class = el.attrs.bootstrap == 1 ? 'list-group-item' : undefined;
-			li.value = el.attrs.itens[0];
+			li.value = el.attrs.itens['0'];
 			listItem.push(li);
 
 		}
@@ -483,7 +496,8 @@ function Agente(){
 
 	this.generateConcreteInterface = function(){
 		var maps = []
-		for(var i=0; i<elements.length; i++) {
+		var size = Object.size(elements);
+		for(var i=0; i<size; i++) {
 			var map = mapElement(elements[i]);
 			if(map.length) maps = maps.concat(map);
 			else maps.push(map);
@@ -492,6 +506,8 @@ function Agente(){
 		concreto.attrs.name = $('#nameInterface').val();
 		concreto.attrs.head = []; 
 		concreto.attrs.maps = maps; 
+
+		console.log(maps);
 
 		$('#concrete-code pre').html(
 			cleanString(JSON.stringify(concreto.attrs, null, 2))

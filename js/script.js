@@ -73,6 +73,7 @@ var prototype = (function(){
         
 
         localStorage.setItem('project', JSON.stringify(obj));
+        console.log('salvou');
     }
 
     
@@ -104,7 +105,10 @@ var prototype = (function(){
         //Pega todos os dados do formulários
         $.each(dados, function(i,el){
             if(el.name == 'itens' || el.name == 'hrefs'){
-                attrs[el.name] = el.value.trim().split('\n');
+                var values = el.value.trim().split('\n');
+                for(var i=0; i<values.length;i++){
+                    attrs[el.name][i] = values[i];     
+                }
             }else{
                 attrs[el.name] = el.value;    
             }
@@ -184,9 +188,9 @@ var prototype = (function(){
                 error: function(error){
                     alert('error na requisição');
                     if(Object.is(currentObj.attrs.data, currentObj.attrs.dataParent)){
-                        currentObj.attrs.dataParent = currentObj.attrs.data = [];    
+                        currentObj.attrs.dataParent = currentObj.attrs.data = new Object();    
                     }else{
-                        currentObj.attrs.data = [];    
+                        currentObj.attrs.data = new Object();    
                     }
                 },
 
@@ -600,7 +604,6 @@ var prototype = (function(){
 
         //criando os itens
         var listItem = [];
-        console.log(item.attrs.value);
         //se for estático, gera um lista com todos os itens
         if(item.attrs.value == 0){
             for(var i=0; i<item.attrs.itens.length; i++){
