@@ -55,12 +55,8 @@ var prototype = (function(){
         var size = Object.size(elements);
 
         for(var i=0; i<size; i++){
-            console.log(elements[i].attrs.html);
             elements[i].attrs.html = $(elements[i].attrs.html); //convert string do jquery
-            console.log(elements[i].attrs.html);
         }
-
-        console.log(elements);
     }
 
     /* Funções do webstorage */
@@ -69,11 +65,10 @@ var prototype = (function(){
         obj.name = $('#nameInterface').val();
         obj.html = $('#prototype').html();
         //console.log(JSON.stringify(cloneElements()));
-        obj.elements = JSON.stringify(cloneElements());
+        obj.elements = JSON.stringify(cloneElements(), null, 2);
         
 
         localStorage.setItem('project', JSON.stringify(obj));
-        console.log('salvou');
     }
 
     
@@ -83,7 +78,6 @@ var prototype = (function(){
 
         if(project && confirm('Já existe um projeto em andamento. Deseja abrí-lo?')){
             project = JSON.parse(project);
-            console.log(project.elements);
             $('#nameInterface').val(project.name);
             $('#prototype').html(project.html);
 
@@ -93,9 +87,83 @@ var prototype = (function(){
 
             updateList();
             agente.execute();
+        }else{
+            localStorage.clear(); //limpa o localStorage    
         }
+    }
 
-        localStorage.clear(); //limpa o localStorage
+    var downloadJson = function(){
+        var link = $('#link-download');
+        saveWebStorage();
+
+        var data = "text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem('project'));
+        link.attr('href', 'data:' + data).attr('download', 'Inteface.json');
+
+        console.log(link);
+        link[0].click();
+    }
+
+    var getExtensionFile = function(filename){
+        return filename.split('.').pop();
+    }
+
+    var isJson = function(filename){
+        return getExtensionFile(filename).toLowerCase() == 'json';    
+    };
+
+    var projectFunctions = function(){
+        //salvando um projeto
+        $('#project-save').click(function(e){
+            e.preventDefault();
+            downloadJson();
+        });
+
+        //abrindo um projeto existente
+        $('#project-open').on('change', function(e){
+            var filename = $(this).val().replace("C:\\fakepath\\", "");
+            $("#upload-file-info").html(filename);
+            
+            if(!isJson(filename)){
+                alert('O arquivo selecionado não é do formato JSON');
+                return;
+            }
+
+
+            var files = e.target.files;
+            for(var i=0; i<files.length; i++){
+                var file = files[i];
+
+                var reader = new FileReader();
+                reader.onload = (function(f){
+                    return function(e){
+                        var obj = JSON.parse(e.target.result);
+                        console.log(obj.name == undefined);
+                        if(obj.name == undefined || obj.html == undefined || obj.elements == undefined){
+                            alert('O arquivo selecionado não está no padrão desejado.');
+                        }else{
+                            localStorage.setItem('project', e.target.result);
+                            $('#nameInterface').val(obj.name);
+                            $('#prototype').html(obj.html);
+                            restoreElements(obj.elements);
+                        }
+                    }
+                })(file);
+
+                reader.readAsText(file);
+            }
+        });
+
+        $('#project-new').click(function(e){
+            e.preventDefault();
+
+            if(confirm('Deseja realmente fechar esse projeto para iniciar outro?')){
+                localStorage.clear();
+                location.reload();    
+            }
+            
+
+        })
+
     }
 
     var save = function(input){
@@ -796,6 +864,7 @@ var prototype = (function(){
         radioEvent(); //ação ao selecionar estático ou dinâmico no formulário
         tabBootstrap(); //evento para exibição do modo preview ou design
         loadWebStorage();
+        projectFunctions();
 
         //monitora de 3 em 3 segundos    
         setInterval(function(){

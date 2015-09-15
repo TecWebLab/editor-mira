@@ -78,3 +78,16 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
     background-color: #fff;
     color: #000; 
 }
+
+/*Button Upload*/
+#project-open {
+    position:absolute;
+    z-index:2;
+    top:0;
+    left:0;
+    filter: alpha(opacity=0);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    opacity:0;
+    background-color:transparent;
+    color:transparent;
+}

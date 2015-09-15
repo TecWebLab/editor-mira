@@ -16,24 +16,33 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
+        <a id="link-download" href="#" download=""></a>
         <section id="navigation">
             <nav class="navbar navbar-default navbar-static-top">
               <div class="container">
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projeto <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" id="project-new">Novo</a></li>
-                                <li><a href="#" id="project-open">Abrir</a></li>
-                                <li><a href="#" id="project-save">Salvar</a></li>
-                            </ul>
-                        </li>
                         <form class="navbar-form navbar-left" role="nameInterface">
                             <div class="form-group">
                                 <label> Nome da Inferface </label>
                                 <input type="text" class="form-control" id="nameInterface" placeholder="Digite o nome da interface">
                             </div>
+                        </form>
+
+                        <form class="navbar-form navbar-left" role="search">
+                            <button class="btn btn-success" id="project-save"><i class="fa fa-download"></i> Salvar</button>
+                            <button class="btn btn-primary" id="project-new"><i class="fa fa-plus"></i> Novo</button>
+                            <div class="form-group" style="position:relative">
+                                <a class='btn btn-primary' href='javascript:;'>
+                                    <i class="fa fa-folder-open-o"></i> Abrir
+                                    <!--Tirar o css inline -->
+                                    <input type="file" id="project-open" name="file" >
+                                </a>
+
+                                <span class='label label-info' id="upload-file-info"></span>    
+                            </div>
+                            
+                            
                         </form>
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -392,11 +401,11 @@ and open the template in the editor.
                 <div id="control-static">
                     <div class="form-group">
                         <label>Itens</label>
-                        <textarea id="txtItens" name="itens" class="form-control" rows="6"><% print(item.itens.join('\n')) %></textarea>
+                        <textarea id="txtItens" name="itens" class="form-control" rows="6"><% _.each(item.itens, function(obj){ print(obj + '\n'); })%></textarea>
                     </div>
                     <div class="form-group">
                         <label>Label</label>
-                        <textarea id="txtItens" name="hrefs" class="form-control" rows="6"><% print(item.hrefs.join('\n')) %></textarea>
+                        <textarea id="txtItens" name="hrefs" class="form-control" rows="6"><% _.each(item.hrefs, function(obj){ print(obj + '\n') })%></textarea>
                     </div>
                 </div>
                 
@@ -404,7 +413,7 @@ and open the template in the editor.
                 <div id="control-dynamic" style="display:none">
                     <div class="form-group">
                         <label>Itens</label>
-                        <input type="text" class="form-control" name="itens" value="<%=item.itens instanceof Array ? print('') : print(item.itens[0]) %>" id="itens" />
+                        <input type="text" class="form-control" name="itens" value="<%-item.itens[0] %>" id="itens" />
                     </div>
                     <div class="form-group">
                         <label>Link</label>
@@ -605,13 +614,13 @@ and open the template in the editor.
                 <div class="control-static">
                     <div class="form-group">
                         <label>Itens</label>
-                        <textarea id="txtItens" name="itens" class="form-control" rows="6"><% print(item.itens.join('\n')) %></textarea>
+                        <textarea id="txtItens" name="itens" class="form-control" rows="6"><% _.each(item.itens, function(obj){ print(obj + '\n'); })%></textarea>
                     </div>
                 </div>
                 <div class="control-dynamic">
                     <div class="form-group">
                         <label>Itens</label>
-                        <input type="text" class="form-control" name="itens" value="<%=item.itens%>" /> 
+                        <input type="text" class="form-control" name="itens" value="<%=item.itens['0']%>" /> 
                     </div>
                 </div>
 

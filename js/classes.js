@@ -282,8 +282,8 @@ function Navigation(){
 		this.htmlElement.attrs = params;
 		var itens = new Object();
 		itens['0'] = 'Item 1';
-		itens['1'] = 'Item 1';
-		itens['2'] = 'Item 1';
+		itens['1'] = 'Item 2';
+		itens['2'] = 'Item 3';
 		this.htmlElement.attrs.itens = itens;
 
 		var hrefs = new Object();
@@ -308,8 +308,8 @@ function List(){
 		params.bootstrap = '0';
 		var itens = new Object();
 		itens['0'] = 'Item 1';
-		itens['1'] = 'Item 1';
-		itens['2'] = 'Item 1';
+		itens['1'] = 'Item 2';
+		itens['2'] = 'Item 3';
 		params.itens = itens;
 		this.htmlElement.attrs = params;
 		this.htmlElement.attrs.value = 0; //estático
@@ -506,8 +506,6 @@ function Agente(){
 		concreto.attrs.name = $('#nameInterface').val();
 		concreto.attrs.head = []; 
 		concreto.attrs.maps = maps; 
-
-		console.log(maps);
 
 		$('#concrete-code pre').html(
 			cleanString(JSON.stringify(concreto.attrs, null, 2))
