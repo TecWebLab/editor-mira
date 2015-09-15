@@ -5,6 +5,52 @@ var abstrato = null;
 var elements = [];
 var id = 1;
 
+var filterClass = [
+	'row',
+	'container',
+	'jumbotron',
+	'well',
+	'alert alert-success',
+	'alert alert-danger',
+	'alert alert-warning',
+	'alert alert-info'
+]
+
+var skipClasses = function(sentence){
+	for(var i=0; i< filterClass.length; i++){
+		sentence.replaceAll(filterClass[i], '');
+	}
+
+	return sentence;
+}
+
+var formatterJSON = function(key, value){
+    if(value instanceof Array){
+    	if(value.length == 0) return undefined;
+
+        var obj = new Object();
+        for(var i in value){
+            obj[i] = value[i];
+        }
+
+        return obj;
+    }else if(typeof value === "string" && value.length == 0) return undefined;
+
+    return value;
+}
+
+//clone de um array
+Array.prototype.clone = function() {
+	return this.slice(0);
+};
+
+var removeDuplicateWord = function(sentence){
+	var uniqueList = sentence.split(' ').filter(function(item,i,allItems){
+	    return i==allItems.indexOf(item);
+	}).join(' ');
+
+	return uniqueList;	
+}
 
 /*********************** Funções auxiliares para geração de html **********************************/
 
@@ -12,9 +58,7 @@ var id = 1;
 var generateContainer = function(htmlElement){
     var div = $('<div />');
     switch(htmlElement.attrs.type){
-        case 'container': return div.clone().addClass('container');
         case 'div' : return div.clone();
-        case 'jumbotron': return div.clone().addClass('jumbotron');
         case 'panel': return $(
         	'<div class="panel panel-default">\
   				<div class="panel-heading">\
@@ -75,10 +119,9 @@ var generateList = function(){
 /***********************Design Pattern Builder **********************************/
 //product
 function HTMLElement() {
-	var attrs = new Object();
+	var attrs = [];
 
 	this.updateAttr = function(params){
-		
 		for(var key in params){
 			this.attrs[key] = params[key];	
 		}
@@ -129,6 +172,10 @@ function HTMLElement() {
 			case 'list-ordered':
 			case 'list-unordered':
 				this.attrs.html = generateList();
+				break;
+
+			default: 
+				this.attrs.html = generateContainer(this);
 				break;
 		}
 	}
@@ -207,7 +254,7 @@ function Content(){
 	
 	this.buildParams = function(params){
 		this.htmlElement.attrs = params; 
-		this.htmlElement.attrs.width = 12;
+		this.htmlElement.attrs.width = '0';
 		this.htmlElement.attrs.context = 'default';
 	}
 
@@ -280,17 +327,9 @@ function Navigation(){
 
 	this.buildParams = function(params){
 		this.htmlElement.attrs = params;
-		var itens = new Object();
-		itens['0'] = 'Item 1';
-		itens['1'] = 'Item 2';
-		itens['2'] = 'Item 3';
-		this.htmlElement.attrs.itens = itens;
+		this.htmlElement.attrs.itens = ["Item 1", "Item 2", "Item 3"];;
 
-		var hrefs = new Object();
-		hrefs['0'] = '#';
-		hrefs['1'] = '#';
-		hrefs['2'] = '#';
-		this.htmlElement.attrs.hrefs = hrefs;
+		this.htmlElement.attrs.hrefs = ["#","#","#"];
 		this.htmlElement.attrs.value = 0; //estático
 		this.htmlElement.attrs.title = "Título";
 	}
@@ -306,11 +345,8 @@ function List(){
 
 	this.buildParams = function(params){
 		params.bootstrap = '0';
-		var itens = new Object();
-		itens['0'] = 'Item 1';
-		itens['1'] = 'Item 2';
-		itens['2'] = 'Item 3';
-		params.itens = itens;
+		
+		params.itens = ["Item 1", "Item 2", "Item 3"];;;
 		this.htmlElement.attrs = params;
 		this.htmlElement.attrs.value = 0; //estático
 	}
@@ -362,7 +398,8 @@ function mapNavigation(el){
 function mapDiv(el){
 	var content = new Object();
 	content.name = el.attrs.name;
-	content.class = el.attrs.classes;
+	var aux = el.attrs.type != 'div' ? + el.attrs.type : '';
+	content.class = el.attrs.classes == undefined ? aux : el.attrs.classes + ' ' + aux;
 
 	return content;
 }
@@ -467,9 +504,7 @@ function Agente(){
 			case 'nav': return mapNavigation(el);
 
 			//container
-			case "container": 
-			case "div": 
-			case "jumbotron": return mapDiv(el);
+			case "div": return mapDiv(el);
 			case "panel": return mapPanel(el);
 
 			//text
@@ -485,30 +520,48 @@ function Agente(){
 			//list
 			case 'list-ordered':
 			case 'list-unordered': return mapList(el);
+
+			default: return mapDiv(el);
 		}
 	}
 
 	this.generateAbstractInterface = function(){
 		abstrato.attrs.name = $('#nameInterface').val();
 		abstrato.attrs.widgets = concreto.htmlElements;
-		$('#abstract-code pre').html(cleanString(JSON.stringify(abstrato.attrs, null, 2))); 
+		$('#abstract-code pre').html(
+			cleanString(JSON.stringify(abstrato.attrs, function(key, value){
+				if(key == 'name' || key == 'widgets') return value;
+
+				if(typeof value === "string") value = value.trim();
+
+				if((typeof value === "string"  || typeof value === "object") && value.length == 0) return undefined;
+				return value;
+			}, 2))
+		); 
 	}
 
 	this.generateConcreteInterface = function(){
 		var maps = []
-		var size = Object.size(elements);
-		for(var i=0; i<size; i++) {
+		
+		for(var i=0; i<elements.length; i++) {
 			var map = mapElement(elements[i]);
 			if(map.length) maps = maps.concat(map);
 			else maps.push(map);
 		}
 
-		concreto.attrs.name = $('#nameInterface').val();
-		concreto.attrs.head = []; 
 		concreto.attrs.maps = maps; 
+		concreto.attrs.name = $('#nameInterface').val();
+		concreto.attrs.head = [];
 
 		$('#concrete-code pre').html(
-			cleanString(JSON.stringify(concreto.attrs, null, 2))
+			cleanString(JSON.stringify(concreto.attrs, function(key, value){
+				if(key == 'name' || key == "head" || key == "maps") return value;
+
+				if(typeof value === "string") value = value.trim();
+
+				if((typeof value === "string"  || typeof value === "object") && value.length == 0) return undefined;
+				return value;
+			}, 2))
 		); 	
 	}
 
@@ -535,13 +588,13 @@ function Abstrato(){
 
 function StrategyDrag(){
 	this.initParams = function(){
-		var params = new Object();
+		var params = []
 		params.datasource = '';
 		params.id = id;
 		params.name = 'obj' + id; id++;
 		params.classes = '';
 		params.parse = "";
-		params.data = params.dataParent = new Object();
+		params.data = params.dataParent = [];
 
 		return params;
 	}
@@ -556,6 +609,7 @@ function StrategyInput(){
 function cleanString(string){
 	return string.replaceAll('\"name\":', 'name:')
 	.replaceAll('\"widget\":', 'widget:')
+	.replaceAll('\"widgets\":', 'widgets:')
 	.replaceAll('\"datasource\":', 'datasource:')
 	.replaceAll('\"children\":', 'children:')
 	.replaceAll('\"head\":', 'head:')

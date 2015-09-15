@@ -50,13 +50,33 @@ var prototype = (function(){
         return clone;
     }
 
-    var restoreElements = function(json){
-        elements = JSON.parse(json);
-        var size = Object.size(elements);
+    var createHtmlElement = function(attrs){
+        var el = new HTMLElement();
+        el.attrs = [];
+        var data = [], dataParent = [];
+        
 
+        el.updateAttr(attrs);
+
+        for(var i in el.attrs.data) data[i] = el.attrs.data[i];
+        for(var i in el.attrs.dataParent) dataParent[i] = el.attrs.dataParent[i];
+        
+        el.attrs.data = data;
+        el.attrs.dataParent = dataParent;
+        return el;
+    }
+
+    var restoreElements = function(json){
+        var restore = JSON.parse(json);
+        var size = Object.size(restore);
+        elements = [];
+        
         for(var i=0; i<size; i++){
-            elements[i].attrs.html = $(elements[i].attrs.html); //convert string do jquery
+            restore[i].attrs.html = $(restore[i].attrs.html); //convert string do jquery
+            elements[i] = createHtmlElement(restore[i].attrs);
         }
+
+        id = size+1;
     }
 
     /* Funções do webstorage */
@@ -64,14 +84,9 @@ var prototype = (function(){
         var obj = new Object();
         obj.name = $('#nameInterface').val();
         obj.html = $('#prototype').html();
-        //console.log(JSON.stringify(cloneElements()));
-        obj.elements = JSON.stringify(cloneElements(), null, 2);
-        
-
-        localStorage.setItem('project', JSON.stringify(obj));
+        obj.elements = JSON.stringify(cloneElements(), formatterJSON, 2);
+        localStorage.setItem('project', JSON.stringify(obj, formatterJSON, 2));
     }
-
-    
 
     var loadWebStorage = function(){
         var project = localStorage.getItem('project');
@@ -80,13 +95,25 @@ var prototype = (function(){
             project = JSON.parse(project);
             $('#nameInterface').val(project.name);
             $('#prototype').html(project.html);
-
             restoreElements(project.elements);
 
             //elements = JSON.parse(project.elements);
 
             updateList();
             agente.execute();
+            
+            $('#prototype .drop').sortable({
+                connectWith: '.drop, #prototype',
+                handle: '.btn-move',
+                tolerance: 'pointer',
+                helper: 'clone',
+                receive: function(event, ui){
+                    dropElement(ui.helper).show();
+                }
+            }).droppable({
+                tolerance: 'pointer'
+            });
+
         }else{
             localStorage.clear(); //limpa o localStorage    
         }
@@ -99,7 +126,6 @@ var prototype = (function(){
         var data = "text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem('project'));
         link.attr('href', 'data:' + data).attr('download', 'Inteface.json');
 
-        console.log(link);
         link[0].click();
     }
 
@@ -137,7 +163,7 @@ var prototype = (function(){
                 reader.onload = (function(f){
                     return function(e){
                         var obj = JSON.parse(e.target.result);
-                        console.log(obj.name == undefined);
+                        
                         if(obj.name == undefined || obj.html == undefined || obj.elements == undefined){
                             alert('O arquivo selecionado não está no padrão desejado.');
                         }else{
@@ -160,8 +186,6 @@ var prototype = (function(){
                 localStorage.clear();
                 location.reload();    
             }
-            
-
         })
 
     }
@@ -173,15 +197,22 @@ var prototype = (function(){
         //Pega todos os dados do formulários
         $.each(dados, function(i,el){
             if(el.name == 'itens' || el.name == 'hrefs'){
-                var values = el.value.trim().split('\n');
-                for(var i=0; i<values.length;i++){
-                    attrs[el.name][i] = values[i];     
-                }
+                attrs[el.name] = el.value.trim().split('\n');
             }else{
                 attrs[el.name] = el.value;    
             }
         });
 
+        if(currentElement.attr('data-component') == 'component-div' && currentObj.attrs.type != 'panel'){
+            var type = attrs.type != 'div' ? attrs.type : '';
+            var width = '';
+
+            if(attrs.width == 'row') width = 'row';
+            else if(attrs.width != '0') width = 'col-md-' + attrs.width;
+            
+            attrs.classes += ' ' + type + ' ' + width;
+            attrs.classes = removeDuplicateWord(attrs.classes);
+        }
 
         //atualiza o elemento
         updateWidget(currentElement.attr('data-component'), attrs);
@@ -334,17 +365,26 @@ var prototype = (function(){
             }    
         }
         
-
         ul.removeClass().addClass('nav navbar-nav' + params.classes);
         currentObj.attrs.html = currentElement.find('.navbar');
     }
 
     var updateContent = function(params){
         currentElement.attr('data-name', params.name); //altera o nome do elemento no atributo data
-        
+        var pss = params.type == undefined ? "pss-panel" : "pss-div";
+        var classWidth = '';
+
+        if(params.width == 'row' || params.width == '0') classWidth = 'col-md-12';
+        else classWidth = 'col-md-' + params.width;
+
+        var classes = 'panel panel-default panel-drag container-div helper '+ classWidth +' '+ pss;
         //adiciona a classe, caso necessário
-        currentElement.addClass('col-md-'+params.width);
-        currentElement.addClass(params.classes); //adiociona as classes adicionadas pelo usuário
+        currentElement.removeClass().addClass(removeDuplicateWord(skipClasses(classes)));
+        //currentElement.addClass(params.classes); //adiociona as classes adicionadas pelo usuário
+        
+        if(params.type != undefined ){
+            currentElement.children('.panel-body').removeClass().addClass('panel-body drop ui-sortable ui-droppable ' + (params.type != 'div' ? params.type : ""));
+        }
     }
 
     var updateText = function(params){
@@ -368,8 +408,6 @@ var prototype = (function(){
                         .removeClass('text-normal text-center text-left text-right text-justify')
                         .addClass(params.classes + ' text-'+params.align)
                         .text(params.text);
-        
-
     }
 
     var updateImage = function(params){
@@ -438,18 +476,23 @@ var prototype = (function(){
             if(confirm("Deseja realmente excluir esse item?")){
                 if($('#sidr-sidebar').is(':visible')) currentProp.click(); //fecha as propriedades antes de excluir
                 //remove o objeto do array de elementos
-                var id = $(this).parent().parent().parent().attr('data-id');
+                var panel = $(this).parent().parent().parent();
+                var id = panel.attr('data-id');
                 removeElementInArray(id);
                 
+                //remove os filhos do elemento
+                panel.find('.panel-drag').each(function(index, element){
+                    var children = $(this).attr('data-id');
+                    removeElementInArray(children);
+                });
+
                 //remove do protótipo
                 $(this).parent().parent().parent().remove();
                 
                 //refaz a lista
-                concreto.htmlElements = generateListItems($('#prototype')); //refaz a lista de elementos    
+                concreto.htmlElements = generateListItems($('#prototype')); //refaz a lista de elementos
+                saveWebStorage();
             }
-
-            
-
         })
     }
 
@@ -481,7 +524,7 @@ var prototype = (function(){
         var nameComponent = current.data('name')
         var helper;
 
-        if(data == 'pss-container' || data == 'pss-div') helper = ""; //se for um container ou div, então deixa como está
+        if(data == 'pss-div') helper = ""; //se for um container ou div, então deixa como está
         else helper = _.template(template)({item:data}); //compila o template
         
         var item = new Object();
@@ -496,18 +539,15 @@ var prototype = (function(){
             aux.addClass(component);
 
             //define qual a região de possível arraste
-            if(data == 'pss-container' || data == 'pss-div' || data == 'pss-jumbotron') {
+            if(data == 'pss-div') {
                 aux.find('.panel-body').first().addClass('drop');
-                if(data == 'pss-jumbotron') aux.find('.panel-body').first().addClass('jumbotron');
             } else {
                 aux.find('.panel-body .panel-body').first().addClass('drop');
-                //if(data == 'pss-jumbotron') aux.find('.panel-body').first().addClass('jumbotron');
             }
 
             aux.addClass(data);
         }else if(component == 'container-text' || component == 'component-nav'){
-            aux.addClass(component);
-            
+            aux.addClass(component);   
         }
 
         //determina que tipo de componente o objeto é
@@ -553,13 +593,6 @@ var prototype = (function(){
                 }).droppable({
                     tolerance: 'pointer'
                 });
-
-                /*
-                $('#prototype .drop').droppable({
-                    drop: function(event, ui){
-                        ui.draggable.removeAttr('style');                
-                    }
-                })*/
             }
         });
 
@@ -579,22 +612,6 @@ var prototype = (function(){
 
         }).disableSelection();
 
-        /*
-        $('#prototype').droppable({
-            accept: '.container-div, .component-nav',
-            drop: function(event, ui){
-                dropElement(ui.helper);
-            }
-        })
-
-        
-        $('.drop').droppable({
-            //accept: '.container-div, .component-nav'
-            drop: function(event, ui){
-                dropElement(ui.helper);    
-            }
-
-        })*/
     }
 
     var dropElement = function(el){
@@ -609,16 +626,6 @@ var prototype = (function(){
 
         saveWebStorage();
         return el;
-    }
-
-    var initClassElement = function(obj){
-        switch(obj.attrs.type){
-            //content
-            case 'container': obj.attrs.classes = 'container'; break;
-            case 'jumbotron': obj.attrs.classes = 'jumbotron'; break;
-        }
-
-        return obj;
     }
 
     var updateElement = function(el){
@@ -644,15 +651,13 @@ var prototype = (function(){
         obj.attrs.type = el.data('type');
         obj.generateHtml();
 
-        obj = initClassElement(obj);
         elements.push(obj); //insere na lista de objetos
         concreto.htmlElements = generateListItems($('#prototype')); //refaz a lista de elementos
         
     };
 
     var findItem = function(array, id){
-        var size = Object.size(array);
-        for(var i=0; i<size; i++){
+        for(var i=0; i<array.length; i++){
             if(array[i].attrs.id == id) return array[i];
         }
 
@@ -663,12 +668,9 @@ var prototype = (function(){
         //cria a lista
         var list = new Object();
         list.name = abstractObj.name + "List";
-        list.datasource = abstractObj.datasource.length > 0 ?  abstractObj.datasource : undefined;
-        list.parse = abstractObj.parse.length > 0 ? abstractObj.parse : undefined;
+        list.datasource = abstractObj.datasource;
+        list.parse = abstractObj.parse;
         list.children = [];
-
-        abstractObj.datasource = undefined;
-        abstractObj.parse = undefined;
 
         //criando os itens
         var listItem = [];
@@ -694,11 +696,8 @@ var prototype = (function(){
     var generateAbstractThumbnail = function(abstractObj, item){
         var thumbnail = new Object();
         thumbnail.name = abstractObj.name + 'Thumbnail';
-        thumbnail.datasource = abstractObj.datasource.length > 0 ? abstractObj.datasource : undefined;
-        thumbnail.parse = abstractObj.parse.length > 0 ? abstractObj.parse : undefined;
-
-        abstractObj.datasource = undefined;
-        abstractObj.parse = undefined;
+        thumbnail.datasource = abstractObj.datasource;
+        thumbnail.parse = abstractObj.parse;
 
         thumbnail.children = [];
         thumbnail.children.push(abstractObj);
@@ -737,7 +736,6 @@ var prototype = (function(){
         }
 
         abstractObj.children = abstractObj.children.concat(listItem);
-        console.log(abstractObj);
 
         return abstractObj;
     }
@@ -747,11 +745,11 @@ var prototype = (function(){
 
         if((parent.attrs.data instanceof Array && parent.attrs.data.length > 0) || parent.attrs.data instanceof Object) {
             //pega os dados do parent
-            current.attrs.parentData = JSON.parse(JSON.stringify(parent.attrs.data));
+            current.attrs.parentData = parent.attrs.data.clone();
         }else{
             //pega os dados do parent do parent
-            console.log(current);
-            current.attrs.parentData = JSON.parse(JSON.stringify(parent.attrs.dataParent));    
+            
+            current.attrs.parentData = parent.attrs.dataParent.clone();    
         }
 
         return current;
@@ -775,8 +773,8 @@ var prototype = (function(){
             
             var obj = new Object();
 
-            obj.datasource = item.attrs.datasource.length > 0 ? item.attrs.datasource.replace('http://localhost:3000', 'url') : '';
-            obj.parse =  item.attrs.parse.length > 0 ? '$data["'+ item.attrs.parse +'"]' : '';
+            obj.datasource = item.attrs.datasource == undefined || item.attrs.datasource.length == 0 ? '': item.attrs.datasource.replace('http://localhost:3000', 'url');
+            obj.parse =  item.attrs.parse == undefined || item.attrs.parse.length == 0  ? '' : '$data["'+ item.attrs.parse +'"]';
             obj.name = $(this).attr('data-name');
             obj.children = [];
 
@@ -825,20 +823,27 @@ var prototype = (function(){
         var times = item == null || !item.attrs.data.length || item.attrs.data.length == 0 ? 1 : item.attrs.data.length; //quantidade de vezes que será repetido
 
         var selecteds = rootType == 'panel' ? root.children('.panel').children('.panel-body').children('.panel-drag') : root.children('.panel-drag');
-        console.log(item);
-        console.log(times);
-        console.log(selecteds);
         
         for(var i=0; i<times; i++){
             selecteds.each(function(index, element){
                 var $this = $(this); //panel drag corrente
                 var currentObj = findItem(elements, $this.attr('data-id')); //elemento com as informações do objeto
-                var type = $this.attr('data-type'); //tipo do elemento
-                console.log(currentObj);
+                var component = $this.attr('data-component'); //tipo do elemento
                 var newElement = currentObj.attrs.html.clone();
-                
-                console.log(currentElement);
-                console.log(newElement);
+
+                if(component == "component-div"){
+                    //width
+                    if(currentObj.attrs.width == 'row'){
+                        newElement.addClass('row');
+                    }else if(currentObj.attrs.width != '0'){
+                        newElement.addClass('col-md-' + currentObj.attrs.width);    
+                    }
+
+                    //type
+                    if(currentObj.attrs.type != 'panel' && currentObj.attrs.type != 'div'){
+                        newElement.addClass(currentObj.attrs.type);
+                    }
+                }
                 
                 //insere o novo item no preview
                 if(currentElement.hasClass('panel')){
@@ -848,28 +853,25 @@ var prototype = (function(){
                 }
 
                 var children = $this.find('.panel-drag');
-                console.log(children);
-                console.log('');
                 if(children.length > 0) generatePreview($this.children('.panel-body'), newElement);
             })    
         }        
     }
 
-
     var init = function(){
-        createDrag(); //cria a propriedade de drag para todos os elementos
         installSidebar(); //cria o sidebar com as propriedades dos objetos
         removeElement(); //criar a opção de remoção dos objetos    
         saveCloseOption(); //ação ao clicar no botão salvar
         radioEvent(); //ação ao selecionar estático ou dinâmico no formulário
         tabBootstrap(); //evento para exibição do modo preview ou design
-        loadWebStorage();
-        projectFunctions();
+        loadWebStorage(); //carrega os dados do web storage
+        projectFunctions(); //insere a funcionalidades para criação, download e importação de um projeto.
+        createDrag(); //cria a propriedade de drag para todos os elementos
 
         //monitora de 3 em 3 segundos    
         setInterval(function(){
             agente.execute(); 
-        }, 5000);
+        }, 3000);
     }
 
     init();    

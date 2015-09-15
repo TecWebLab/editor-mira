@@ -79,17 +79,11 @@ and open the template in the editor.
                             </div>
                             <div id="collapseBasics" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasics">
                                 <div class="panel-body">
-                                    <div class="element-item-div component-div" data-type="container" data-name="Container" data-item="pss-container" data-component="container-div">
-                                        <i class="fa fa-plus"></i> Container
-                                    </div>
                                     <div class="element-item-div component-div" data-type="div" data-name="Div" data-item="pss-div" data-component="container-div">
                                         <i class="fa fa-plus"></i> Div
                                     </div>
                                     <div class="element-item-div component-div" data-type="panel" data-name="Painel" data-item="pss-panel panel panel-default" data-component="container-div">
                                         <i class="fa fa-plus"></i> Panel
-                                    </div>
-                                    <div class="element-item-div component-div" data-type="jumbotron" data-name="Jumbotron" data-item="pss-jumbotron" data-component="container-div">
-                                        <i class="fa fa-plus"></i> Jumbotron
                                     </div>
 
                                     <hr />
@@ -443,10 +437,26 @@ and open the template in the editor.
                         </span>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <select class="form-control" id="selectType" name="type" value="<%=item.type%>">
+                        <option value="div">Comum</option>
+                        <option value="container" <% if(item.type == 'container') print('selected') %> >Container</option>
+                        <option value="jumbotron" <% if(item.type == 'jumbotron') print('selected') %> >Jumbotron</option>
+                        <option value="well" <% if(item.type == 'well') print('selected') %> >Well</option>
+                        <option value="alert-success" <% if(item.type == 'alert-success') print('selected') %> >Alerta - Sucesso</option>
+                        <option value="alert-danger" <% if(item.type == 'alert-danger') print('selected') %> >Alerta - Perigo</option>
+                        <option value="alert-warning" <% if(item.type == 'alert-info') print('selected') %> >Alerta - Atenção</option>
+                        <option value="alert-info" <% if(item.type == 'alert-info') print('selected') %> >Alerta - Informação</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label>Largura da Coluna</label>
                     <select class="form-control" id="selectLargura" name="width" value="<%=item.width%>">
                         <option value="0">Indefinida</option>
+                        <option value="row" <% if(item.width == 'row') print('selected') %> >Row</option>
                         <option value="1" <% if(item.width == '1') print('selected') %> >1</option>
                         <option value="2" <% if(item.width == '2') print('selected') %> >2</option>
                         <option value="3" <% if(item.width == '3') print('selected') %> >3</option>
