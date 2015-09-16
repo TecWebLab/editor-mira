@@ -1,5 +1,4 @@
 "use strict"
-
 var concreto = null;
 var abstrato = null;
 var elements = [];
@@ -128,13 +127,8 @@ function HTMLElement() {
 	}
 
 	this.isVariable = function(label){
-		if(!this.attrs.dataParent || this.attrs.dataParent.length == 0) return false;
-
-		//se for um array, verifica no primeiro item se existe a viriável
-		if(this.attrs.dataParent instanceof Array && this.attrs.dataParent[0][label]) return true;
-
-		//se for um objeto, verifica no próprio data
-		if(this.attrs.dataParent[label]) return true;
+		if(this.attrs.dataParent.length == 0) return false;
+		if(_.has(this.attrs.dataParent[0], label)) return true;
 
 		//não existe a variável
 		return false;

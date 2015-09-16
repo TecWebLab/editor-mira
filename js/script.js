@@ -41,7 +41,7 @@ var prototype = (function(){
             var aux = new Object();
             aux.attrs = new Object();
             for(var item in elements[i].attrs){
-                aux.attrs[item] = item == 'html' ? $('<div />').append(elements[i].attrs[item]).html() : elements[i].attrs[item];
+                aux.attrs[item] = item == 'html' ? $('<div />').append(elements[i].attrs[item].clone()).html() : elements[i].attrs[item];
             }
 
             clone[i] = aux;
@@ -98,7 +98,7 @@ var prototype = (function(){
             restoreElements(project.elements);
 
             //elements = JSON.parse(project.elements);
-
+            console.log(elements);
             updateList();
             agente.execute();
             
@@ -220,12 +220,13 @@ var prototype = (function(){
 
         //atualiza os dados de acordo com o parse
         if(attrs['parse'].length > 0 && currentObj.attrs.data[attrs['parse']]){
-            currentObj.attrs.data = currentObj.attrs.data[attrs['parse']];
+            currentObj.attrs.data = currentObj.attrs.dataParent = currentObj.attrs.data[attrs['parse']];
         }
 
         updateElement(currentObj);
         updateList(); //atualiza a interface abstrata
         saveWebStorage();
+        console.log(elements);
     }
 
     var radioEvent = function(){
@@ -285,11 +286,10 @@ var prototype = (function(){
                 },
 
                 error: function(error){
-                    alert('error na requisição');
                     if(Object.is(currentObj.attrs.data, currentObj.attrs.dataParent)){
-                        currentObj.attrs.dataParent = currentObj.attrs.data = new Object();    
+                        currentObj.attrs.dataParent = currentObj.attrs.data = [];    
                     }else{
-                        currentObj.attrs.data = new Object();    
+                        currentObj.attrs.data = [];    
                     }
                 },
 
@@ -353,10 +353,11 @@ var prototype = (function(){
         var header = currentElement.find('.navbar-brand');
 
         header.text(params.title);
-        
+
         if(params.itens.length == 1 && currentObj.isVariable(params.itens[0])){
+            ul.empty();
             for(var i=0; i < currentObj.attrs.data.length; i++){
-                ul.append('<li><a href="#">'+currentObj.attrs.data[i][params.itens[0]]+'</a></li>');
+                ul.append('<li><a href="#">'+currentObj.attrs.data[i][params.itens[0]][0]+'</a></li>');
             }
         }else{
             //caso sejam itens fixos
@@ -365,7 +366,7 @@ var prototype = (function(){
             }    
         }
         
-        ul.removeClass().addClass('nav navbar-nav' + params.classes);
+        ul.removeClass().addClass('nav navbar-nav ' + params.classes);
         currentObj.attrs.html = currentElement.find('.navbar');
     }
 
@@ -389,13 +390,19 @@ var prototype = (function(){
 
     var updateText = function(params){
         currentElement.attr('data-name', params.name); //altera o nome do elemento no atributo data
+
+        var text = params.text;
+        if(_.any(currentObj.attrs.dataParent) && currentObj.isVariable(params.text) ){
+            text = currentObj.attrs.dataParent[0][params.text];
+        }
+        
         
         //adiciona o texto do objeto e as classes definidas pelo usuário
         if(params.tag != undefined) {
-            currentElement.find('.panel-body').addClass(params.classes).html($('<'+params.tag+' />').text(params.text)); //atualiza o elemento visual
+            currentElement.find('.panel-body').addClass(params.classes).html($('<'+params.tag+' />').text(text)); //atualiza o elemento visual
             currentObj.attrs.html = $('<'+params.tag+' />'); //atualiza o elemento do preview
         }else {
-            currentElement.find('.panel-body p').addClass(params.classes).text(params.text);
+            currentElement.find('.panel-body p').addClass(params.classes).text(text);
         }
 
 
@@ -407,7 +414,7 @@ var prototype = (function(){
         currentObj.attrs.html
                         .removeClass('text-normal text-center text-left text-right text-justify')
                         .addClass(params.classes + ' text-'+params.align)
-                        .text(params.text);
+                        .text(text);
     }
 
     var updateImage = function(params){
@@ -741,29 +748,36 @@ var prototype = (function(){
     }
 
     var setData = function(current, parent){
+        /*
+        console.log(current);
+        console.log(parent);
+        console.log('');*/
         if (parent == null) return current;
 
-        if((parent.attrs.data instanceof Array && parent.attrs.data.length > 0) || parent.attrs.data instanceof Object) {
-            //pega os dados do parent
-            current.attrs.parentData = parent.attrs.data.clone();
+        if(_.any(current.attrs.data)){
+            //se o objeto data estiver setado com algo, então dataParent passa a ser os seus dados
+            current.attrs.dataParent = JSON.parse(JSON.stringify(current.attrs.data));
+        }else if(_.any(parent.attrs.dataParent)) {
+            //se o pai do elemento conter dados, então os dados são passados para o filho 
+            current.attrs.dataParent = JSON.parse(JSON.stringify(parent.attrs.dataParent));
         }else{
-            //pega os dados do parent do parent
-            
-            current.attrs.parentData = parent.attrs.dataParent.clone();    
+            //não existem dados
+            current.attrs.dataParent = [];
         }
 
         return current;
-        
     }
 
 
     var generateListItems = function(root){
         var array = [];
 
+        var panel = root.closest('.panel-drag');
+        
         //dados do root
-        var rootId = root.attr('data-id');
+        var rootId = panel.length > 0 ? panel.attr('data-id') : undefined;
         var rootItem = findItem(elements, rootId);
-
+        
         root.children('.panel-drag').each(function(index, element){
             var current = $(this);
             var id = current.attr('data-id');
@@ -773,7 +787,7 @@ var prototype = (function(){
             
             var obj = new Object();
 
-            obj.datasource = item.attrs.datasource == undefined || item.attrs.datasource.length == 0 ? '': item.attrs.datasource.replace('http://localhost:3000', 'url');
+            obj.datasource = item.attrs.datasource == undefined || item.attrs.datasource.length == 0 ? '': item.attrs.datasource.replace('http://localhost:3000', 'url:');
             obj.parse =  item.attrs.parse == undefined || item.attrs.parse.length == 0  ? '' : '$data["'+ item.attrs.parse +'"]';
             obj.name = $(this).attr('data-name');
             obj.children = [];
@@ -787,9 +801,15 @@ var prototype = (function(){
                 case 'list-unordered': obj = generateAbstractList(obj, item);
             }
 
-            var children = $(this).children('.panel-body').children('.panel-drag');
+            var children = [];
+            if(type == 'panel'){
+                children = $(this).children('.panel-body').children('.panel').children('.panel-body').children('.panel-drag');
+            }else{
+                children = $(this).children('.panel-body').children('.panel-drag');    
+            }
+            
             if(children.length > 0){
-                if(type == 'panel') obj.children[1] = generateListItems($(this).children('.panel-body'));
+                if(type == 'panel') obj.children[1] = generateListItems($(this).children('.panel-body').children('.panel').children('.panel-body'));
                 else obj.children = generateListItems($(this).children('.panel-body'));
             }
 
@@ -816,6 +836,30 @@ var prototype = (function(){
         concreto.htmlElements = generateListItems($('#prototype')); //refaz a lista de elementos
     }
 
+    var previewDiv = function(currentObj, newElement){
+        //width
+        if(currentObj.attrs.width == 'row'){
+            newElement.addClass('row');
+        }else if(currentObj.attrs.width != '0'){
+            newElement.addClass('col-md-' + currentObj.attrs.width);    
+        }
+
+        //type
+        if(currentObj.attrs.type != 'panel' && currentObj.attrs.type != 'div'){
+            newElement.addClass(currentObj.attrs.type);
+        }
+
+        return newElement;
+    }
+
+    var previewText = function(currentObj, newElement, index){
+        if(_.any(currentObj.attrs.dataParent) && _.has(currentObj.attrs.dataParent[0], currentObj.attrs.text) && index != undefined){
+            newElement.text(currentObj.attrs.dataParent[index][currentObj.attrs.text]);
+        }
+
+        return newElement;
+    }
+
     var generatePreview = function(root, currentElement){
         var id = root.parent().attr('data-id');
         var rootType = root.parent().attr('data-type');
@@ -831,18 +875,12 @@ var prototype = (function(){
                 var component = $this.attr('data-component'); //tipo do elemento
                 var newElement = currentObj.attrs.html.clone();
 
+                switch(component){
+                    case 'component-div': newElement = previewDiv(currentObj, newElement); break;
+                    case 'component-text': newElement = previewText(currentObj, newElement, i);
+                }
                 if(component == "component-div"){
-                    //width
-                    if(currentObj.attrs.width == 'row'){
-                        newElement.addClass('row');
-                    }else if(currentObj.attrs.width != '0'){
-                        newElement.addClass('col-md-' + currentObj.attrs.width);    
-                    }
-
-                    //type
-                    if(currentObj.attrs.type != 'panel' && currentObj.attrs.type != 'div'){
-                        newElement.addClass(currentObj.attrs.type);
-                    }
+                    
                 }
                 
                 //insere o novo item no preview
