@@ -566,7 +566,7 @@ var prototype = (function(){
     
     var createDrag = function(){
         $('.element-item').draggable({
-            connectToSortable: '.drop',
+            connectToSortable: '.drop, #prototype',
 
             helper: function(){
                 return getHelper(this);
@@ -614,7 +614,7 @@ var prototype = (function(){
             }
 
         }).droppable({
-            accept: '.container-div, .component-nav',
+            //accept: '.container-div, .component-nav',
             tolerance: 'pointer'
 
         }).disableSelection();
@@ -786,7 +786,6 @@ var prototype = (function(){
             item = setData(item, rootItem); //defino quais são os dados utilizáveis 
             
             var obj = new Object();
-
             obj.datasource = item.attrs.datasource == undefined || item.attrs.datasource.length == 0 ? '': item.attrs.datasource.replace('http://localhost:3000', 'url:');
             obj.parse =  item.attrs.parse == undefined || item.attrs.parse.length == 0  ? '' : '$data["'+ item.attrs.parse +'"]';
             obj.name = $(this).attr('data-name');
@@ -860,6 +859,17 @@ var prototype = (function(){
         return newElement;
     }
 
+    var previewImage = function(currentObj, newElement, index){
+        if(_.any(currentObj.attrs.dataParent) && _.has(currentObj.attrs.dataParent[0], currentObj.attrs.text) && index != undefined){
+            var img = newElement.find('img');
+            newElement = img.length > 0 ? img : newElement;
+
+            newElement.attr('src', currentObj.attrs.dataParent[index][currentObj.attrs.src]);
+        }
+
+        return newElement;    
+    }
+
     var generatePreview = function(root, currentElement){
         var id = root.parent().attr('data-id');
         var rootType = root.parent().attr('data-type');
@@ -877,10 +887,9 @@ var prototype = (function(){
 
                 switch(component){
                     case 'component-div': newElement = previewDiv(currentObj, newElement); break;
-                    case 'component-text': newElement = previewText(currentObj, newElement, i);
-                }
-                if(component == "component-div"){
-                    
+                    case 'component-text': newElement = previewText(currentObj, newElement, i); break;
+                    case 'component-image': newElement = previewImage(currentObj, newElement, i); break;
+
                 }
                 
                 //insere o novo item no preview
@@ -908,6 +917,7 @@ var prototype = (function(){
 
         //monitora de 3 em 3 segundos    
         setInterval(function(){
+            updateList();
             agente.execute(); 
         }, 3000);
     }

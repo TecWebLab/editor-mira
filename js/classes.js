@@ -127,7 +127,7 @@ function HTMLElement() {
 	}
 
 	this.isVariable = function(label){
-		if(this.attrs.dataParent.length == 0) return false;
+		if(!_.any(this.attrs.dataParent)) return false;
 		if(_.has(this.attrs.dataParent[0], label)) return true;
 
 		//não existe a variável
@@ -340,9 +340,10 @@ function List(){
 	this.buildParams = function(params){
 		params.bootstrap = '0';
 		
-		params.itens = ["Item 1", "Item 2", "Item 3"];;;
+		params.itens = ["Item 1", "Item 2", "Item 3"];
 		this.htmlElement.attrs = params;
 		this.htmlElement.attrs.value = 0; //estático
+		this.htmlElement.attrs.hrefs = [];
 	}
 
 	this.get = function(){
@@ -474,19 +475,18 @@ function mapList(el){
 		listItem = li;
 
 	}else{
-		for (var i in el.attrs.itens) {
+		for (var i=0; i< el.attrs.itens.length; i++) {
 			var li = new Object();
-			li.name = el.attrs.name + "Item" + (parseInt(i)+1);
+			li.name = el.attrs.name + "Item" + (i+1);
 			li.class = el.attrs.bootstrap == 1 ? 'list-group-item' : undefined;
-			li.value = el.attrs.itens['0'];
+			li.value = el.attrs.itens[i];
 			listItem.push(li);
-
 		}
 	}
 
 	if(el.attrs.type == 'list-ordered') list.tag = 'ol';
 	else list.tag = 'ul';
-
+	
 	return [list, listItem];
 }
 

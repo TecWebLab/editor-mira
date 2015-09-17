@@ -625,6 +625,10 @@ and open the template in the editor.
                         <input type="text" class="form-control" name="itens" value="<%=item.itens['0']%>" /> 
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>Links</label>
+                    <textarea id="txtLink" name="hrefs" class="form-control" rows="6"><%=item.hrefs.join('\n') %></textarea>
+                </div>
 
                 <div class="form-group">
                     <label>Lista do Boostrap</label><br />
