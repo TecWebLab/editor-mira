@@ -465,6 +465,7 @@ function mapList(el){
 	var list = new Object();
 	list.name = el.attrs.name;
 	list.class = el.attrs.classes != undefined && el.attrs.classes.length > 0 ? el.attrs.classes : undefined;
+	list.tag = el.attrs.html.prop('tagName').toLowerCase();
 
 
 	var listItem = [];
@@ -474,7 +475,7 @@ function mapList(el){
 		var li = new Object();
 		li.name = el.attrs.name + "Item";
 		li.class = el.attrs.bootstrap ? 'list-group-item' : undefined;
-		li.tag = el.attrs.html.prop('tagName').toLowerCase();
+		li.tag = 'li';
 		
 
 		//link do item
@@ -500,7 +501,7 @@ function mapList(el){
 			var li = new Object();
 			li.name = el.attrs.name + "Item" + (i+1);
 			li.class = el.attrs.bootstrap == 1 ? 'list-group-item' : undefined;
-			li.tag = el.attrs.html.prop('tagName').toLowerCase();
+			li.tag = 'li'
 
 			if(el.attrs.hrefs.length > 0){
 				//link do item
