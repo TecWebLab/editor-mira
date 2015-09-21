@@ -17,10 +17,8 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
 
 .element-item, #accordionElements .component-nav, .element-item-div {
     cursor: move;
-    height: 40px;
     margin-bottom: 5px;
-    font-size: 16px;
-    line-height: 40px;
+    font-size: 14px;
 }
 
 .panel.component-nav {
@@ -90,4 +88,8 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
     opacity:0;
     background-color:transparent;
     color:transparent;
+}
+
+.form-properties .input-group-btn {
+    top: -5px;
 }

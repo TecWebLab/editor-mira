@@ -24,7 +24,7 @@ var prototype = (function(){
     var elementsDroppable = ['#prototype'];
     var base = $('#panel-base').html();
     var sidebar = null;
-
+    var divElements = $('#elements');
     //define o tamanho de um objeto
     Object.size = function(obj) {
         var size = 0, key;
@@ -98,7 +98,6 @@ var prototype = (function(){
             restoreElements(project.elements);
 
             //elements = JSON.parse(project.elements);
-            console.log(elements);
             updateList();
             agente.execute();
             
@@ -214,14 +213,15 @@ var prototype = (function(){
             attrs.classes = removeDuplicateWord(attrs.classes);
         }
 
-        //atualiza o elemento
-        updateWidget(currentElement.attr('data-component'), attrs);
-        currentObj.updateAttr(attrs);
-
         //atualiza os dados de acordo com o parse
         if(attrs['parse'].length > 0 && currentObj.attrs.data[attrs['parse']]){
             currentObj.attrs.data = currentObj.attrs.dataParent = currentObj.attrs.data[attrs['parse']];
         }
+
+        //atualiza o elemento
+        updateWidget(currentElement.attr('data-component'), attrs);
+        currentObj.updateAttr(attrs);
+
 
         updateElement(currentObj);
         updateList(); //atualiza a interface abstrata
@@ -231,7 +231,9 @@ var prototype = (function(){
 
     var radioEvent = function(){
         $(document).on('change', 'input[type=radio][name=value]', function(e){
+            console.log('change');
             var value = parseInt($(this).val());
+            console.log($(this).parents('form'));
             var controlStatic = $(this).parents('form').find('#control-static');
             var controlDynamic =  $(this).parents('form').find('#control-dynamic');
             if(value == 0){
@@ -320,6 +322,8 @@ var prototype = (function(){
             var component = $this.parent().parent().parent().attr('data-component');
 
             if(open == 0) {
+                console.log(divElements);
+                divElements.css('left', '-350px');
                 $.sidr('open', 'sidr-sidebar');
                 
                 currentObj = findItem(elements, id);
@@ -330,6 +334,7 @@ var prototype = (function(){
 
                 open = 1;
             }else {
+                divElements.css('left', '0');
                 $.sidr('close', 'sidr-sidebar');
                 open = 0;
             }
@@ -446,21 +451,60 @@ var prototype = (function(){
         var ul = currentElement.find('ul').empty();
         var ol = currentElement.find('ol').empty();
 
+        // Define os itens do menu com respectivos links, caso necessário
+        var itens = [], links = [];
+        if(params.value == 1){
+            var variable = params.itens;
+            var label = params.label;
+
+            if(currentObj.isVariable(variable)){
+                if(label.length > 0){
+                    for(var i=0; i<currentObj.attrs.dataParent.length; i++){
+                        if(currentObj.attrs.dataParent[i][variable][label]) itens.push(currentObj.attrs.dataParent[i][variable][label]);
+                        if(currentObj.attrs.dataParent[i][variable][params.hrefs[0]]) links.push(currentObj.attrs.dataParent[i][variable][params.hrefs[0]]);
+
+                    }
+                }else{
+                    for(var i=0; i<currentObj.attrs.dataParent.length; i++){
+                        if(currentObj.attrs.dataParent[i][variable]) itens.push(currentObj.attrs.dataParent[i][variable]);
+                        if(currentObj.attrs.dataParent[i][params.hrefs[0]]) links.push(currentObj.attrs.dataParent[i][params.hrefs[0]]);
+                    }
+                }
+            }
+        }else{
+            itens = params.itens;
+        }
+
         //insere as classes
         ul.addClass(params.classes); 
         ol.addClass(params.classes);
         ul.removeClass('list-group').addClass(params.bootstrap == 0 ? '' : 'list-group');
         ol.removeClass('list-group').addClass(params.bootstrap == 0 ? '' : 'list-group');
 
-        for(var i=0; i<params.itens.length; i++){
+        for(var i=0; i<itens.length; i++){
+            //monta a lista
             if(ul.length > 0){
-                ul.append($('<li />').removeClass('list-group-item')
-                    .addClass(params.bootstrap == 0 ? '' : 'list-group-item')
-                    .text(params.itens[i]));
+                //insere o link, se necessário
+                if(links.length == 0){
+                    ul.append($('<li />').removeClass('list-group-item')
+                        .addClass(params.bootstrap == 0 ? '' : 'list-group-item')
+                        .text(itens[i]));    
+                }else{
+                    ul.append($('<li />').removeClass('list-group-item')
+                        .addClass(params.bootstrap == 0 ? '' : 'list-group-item')
+                        .append('<a href="#">'+ itens[i] +'</a>'));
+                }
+                
             }else{
-                ol.append($('<li />').removeClass('list-group-item')
-                    .addClass(params.bootstrap == 0 ? '' : 'list-group-item')
-                    .text(params.itens[i]));
+                if(links.length == 0){
+                    ol.append($('<li />').removeClass('list-group-item')
+                        .addClass(params.bootstrap == 0 ? '' : 'list-group-item')
+                        .text(itens[i]));
+                }else{
+                    ol.append($('<li />').removeClass('list-group-item')
+                        .addClass(params.bootstrap == 0 ? '' : 'list-group-item')
+                        .append('<a href="#">'+ itens[i] +'</a>'));
+                }
             }
         }
 
@@ -729,16 +773,30 @@ var prototype = (function(){
 
     var generateAbstractList = function(abstractObj, item){
         var listItem = [];
+        var listLinks = [];
         if(item.attrs.value == 0){
             for(var i=0; i<item.attrs.itens.length; i++){
                 var aux = new Object();
                 aux.name = abstractObj.name + "Item" + (i+1);
+
+                var link = new Object();
+                link.name = abstractObj.name + "Item" + (i+1) + "ItemLink";
+
+                aux.children = [];
+                aux.children.push(link);
                 listItem.push(aux);    
             }
             
         }else {
             var aux = new Object();
             aux.name = abstractObj.name + "Item";
+            
+            var link = new Object();
+            link.name = abstractObj.name + "ItemLink";
+
+            aux.children = [];
+            aux.children.push(link);
+
             listItem.push(aux);
         }
 
@@ -783,6 +841,9 @@ var prototype = (function(){
             var id = current.attr('data-id');
             var type = current.attr('data-type');
             var item = findItem(elements, id);
+
+            if(item == null) return true; //continue
+            
             item = setData(item, rootItem); //defino quais são os dados utilizáveis 
             
             var obj = new Object();

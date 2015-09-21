@@ -4,6 +4,7 @@ var abstrato = null;
 var elements = [];
 var id = 1;
 
+
 var filterClass = [
 	'row',
 	'container',
@@ -408,7 +409,7 @@ function mapPanel(el){
 	//panel body
 	var body = new Object();
 	body.name = el.attrs.name;
-	body.class = el.attrs.classes.length > 0 ? el.attrs.classes : undefined;
+	body.class = el.attrs.classes != undefined && el.attrs.classes.length > 0 ? el.attrs.classes : undefined;
 	body.widget = "BootstrapPanelBody";
 
 	return [panel,body];
@@ -452,7 +453,7 @@ function mapThumbnail(el){
 
 	var image = new Object();
 	image.name = el.attrs.name;
-	image.class = el.attrs.classes.length > 0 ? el.attrs.classes : undefined;
+	image.class = el.attrs.classes != undefined && el.attrs.classes.length > 0 ? el.attrs.classes : undefined;
 	image.tag = 'img';
 	image.src = el.isVariable(el.attrs.src) ? '$data["'+el.attrs.src+'"]' : el.attrs.src;
 	image.alt = el.attrs.alt != undefined ? el.attrs.alt : "";
@@ -463,30 +464,63 @@ function mapThumbnail(el){
 function mapList(el){
 	var list = new Object();
 	list.name = el.attrs.name;
-	list.class = el.attrs.classes.length > 0 ? el.attrs.classes : undefined;
+	list.class = el.attrs.classes != undefined && el.attrs.classes.length > 0 ? el.attrs.classes : undefined;
 
 
 	var listItem = [];
+	var listLinks = [];
 	if(el.attrs.value == 1){
+		//item da lista
 		var li = new Object();
 		li.name = el.attrs.name + "Item";
 		li.class = el.attrs.bootstrap ? 'list-group-item' : undefined;
-		li.value = '$data["'+el.attrs.itens['0']+'"]';
-		listItem = li;
+		li.tag = el.attrs.html.prop('tagName').toLowerCase();
+		
 
+		//link do item
+		if(el.attrs.hrefs.length > 0){
+			var link = new Object();
+			link.name = el.attrs.name + "ItemLink";
+
+			if(el.attrs.label.length > 0){
+				link.value = '$data["'+el.attrs.itens[0]+'"]['+el.attrs.label+']';	
+			}else{
+				link.value = '$data["'+el.attrs.itens[0]+'"]';	
+			}
+
+			link.href = 'navigate("/rest/resource/", {s:$data["'+el.attrs.hrefs[0] +'"].replace("#", "%23")})';
+			listLinks.push(link)	
+		}else{
+			li.value = el.attrs.itens[i];
+		}
+
+		listItem = li;
 	}else{
 		for (var i=0; i< el.attrs.itens.length; i++) {
 			var li = new Object();
 			li.name = el.attrs.name + "Item" + (i+1);
 			li.class = el.attrs.bootstrap == 1 ? 'list-group-item' : undefined;
-			li.value = el.attrs.itens[i];
+			li.tag = el.attrs.html.prop('tagName').toLowerCase();
+
+			if(el.attrs.hrefs.length > 0){
+				//link do item
+				var link = new Object();
+				link.name = el.attrs.name + "ItemLink";
+				link.value = el.attrs.hrefs[i] != undefined ?  el.attrs.hrefs[i] : '#';
+				link.value = el.attrs.itens[i];
+				
+				link.href = 'navigate("/rest/resource/", {s:$data["'+el.attrs.hrefs[0] +'"].replace("#", "%23")})';
+				listLinks.push(link)	
+			}else{
+				li.value = el.attrs.itens[i];
+			}
+
 			listItem.push(li);
+			
 		}
 	}
 
-	if(el.attrs.type == 'list-ordered') list.tag = 'ol';
-	else list.tag = 'ul';
-	
+	if(listLinks.length > 0) return [list, listItem, listLinks];
 	return [list, listItem];
 }
 

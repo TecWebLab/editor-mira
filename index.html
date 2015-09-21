@@ -376,10 +376,10 @@ and open the template in the editor.
                 <div class="form-group">
                     <label>Valores</label>
                     <label class="radio-inline">
-                        <input type="radio" name="value" id="radio-static" value="0" checked> Estáticos
+                        <input type="radio" name="value" id="radio-static" value="0" <% if(item.value == 0) print('cheked')%>> Estáticos
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="value" id="radio-dynamic" value="1"> Dinamicos
+                        <input type="radio" name="value" id="radio-dynamic" value="1" <% if(item.value == 1) print('cheked')%>> Dinamicos
                     </label>
                 </div>
 
@@ -607,27 +607,35 @@ and open the template in the editor.
                 <div class="form-group">
                     <label>Valores</label>
                     <label class="radio-inline">
-                        <input type="radio" name="value" id="radio-static" value="0" checked> Estáticos
+                        <input type="radio" name="value" id="radio-static" value="0" <% if(item.value == 0) print('cheked')%>> Estáticos
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="value" id="radio-dynamic" value="1"> Dinamicos
+                        <input type="radio" name="value" id="radio-dynamic" value="1" <% if(item.value == 1) print('cheked')%>> Dinamicos
                     </label>
                 </div>
-                <div class="control-static">
+                <div id="control-static">
                     <div class="form-group">
                         <label>Itens</label>
                         <textarea id="txtItens" name="itens" class="form-control" rows="6"><% _.each(item.itens, function(obj){ print(obj + '\n'); })%></textarea>
                     </div>
-                </div>
-                <div class="control-dynamic">
                     <div class="form-group">
-                        <label>Itens</label>
-                        <input type="text" class="form-control" name="itens" value="<%=item.itens['0']%>" /> 
+                        <label>Links</label>
+                        <textarea id="txtLink" name="hrefs" class="form-control" rows="6"><% _.each(item.hrefs, function(obj){ print(obj + '\n'); })%></textarea>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Links</label>
-                    <textarea id="txtLink" name="hrefs" class="form-control" rows="6"><%=item.hrefs.join('\n') %></textarea>
+                <div id="control-dynamic">
+                    <div class="form-group">
+                        <label>Variável</label>
+                        <input type="text" class="form-control" name="itens" value="<%=item.itens[0]%>" /> 
+                    </div>
+                    <div class="form-group">
+                        <label>Label</label>
+                        <input type="text" class="form-control" name="label" value="<%=item.label%>" /> 
+                    </div>
+                    <div class="form-group">
+                        <label>Link</label>
+                        <input type="text" class="form-control" name="hrefs" value="<%=item.hrefs[0]%>" /> 
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -655,7 +663,7 @@ and open the template in the editor.
         <script src="js/lib/jquery-ui.min.js"></script>
         <script src="js/lib/underscore-min.js"></script>
         <script type="text/javascript" src="js/lib/jquery.sidr.min.js"></script>
-
+        <script type="text/javascript" src="js/lib/pretty-json.js"></script>
         <script type="text/javascript" src="js/classes.js"></script>
         <script type="text/javascript" src="js/script.js"></script>
     </body>
