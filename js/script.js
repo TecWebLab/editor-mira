@@ -613,7 +613,15 @@ var prototype = (function(){
     }
     
     var createDrag = function(){
-        $('.element-item, .element-item-form').draggable({
+        $('.element-item').draggable({
+            connectToSortable: '.drop, #prototype',
+
+            helper: function(){
+                return getHelper(this);
+            }
+        });
+
+        $('.element-item-form').draggable({
             connectToSortable: '.drop, #prototype',
 
             helper: function(){
@@ -629,11 +637,6 @@ var prototype = (function(){
             }
         });
 
-        $('.pss-form .drop').droppable({
-            tolerance: 'pointer',
-            accept: '.element-item-form'
-        })        
-
         $('.element-item-div').draggable({
             connectToSortable: '#prototype, #prototype .drop',
 
@@ -647,20 +650,40 @@ var prototype = (function(){
                     handle: '.btn-move',
                     tolerance: 'pointer',
                     helper: 'clone',
+                    
+                    stop: function(event, ui){
+                        var current = $(this).parents('.panel-drag').first();
+                        var type = ui.item.data('type');
+
+                        if(current.hasClass('pss-form') && type != 'input'){
+                            ui.item.remove();
+                        }
+                    },
+
                     receive: function(event, ui){
-                        dropElement(ui.helper).show();
+                        var current = $(this).parents('.panel-drag').first();
+                        var type = ui.item.data('type');
+                        
+                        if(current.hasClass('pss-form') && type != 'input'){
+                            ui.item.remove();
+                        }else{
+                            console.log(type, current.hasClass('pss-form'));    
+                            dropElement(ui.helper).show();    
+                        }
                     }
+
                 }).droppable({
                     tolerance: 'pointer'
                 });
 
+                /*
                 $('.pss-form .drop').droppable({
                     accept: function(el){
                         var component = el.data('component');
                         console.log(component == 'component-form');
                         return component == 'component-form';
                     }    
-                })
+                });*/
             }
         });
 
