@@ -613,28 +613,13 @@ var prototype = (function(){
     }
     
     var createDrag = function(){
-        $('.element-item').draggable({
+        $('.element-item, .element-item-form').draggable({
             connectToSortable: '.drop, #prototype',
 
             helper: function(){
                 return getHelper(this);
             }
         });
-
-        $('.element-item-form').draggable({
-            connectToSortable; '.drop, #prototype, .pss-form .drop',
-
-            helper: function(){
-                return getHelper(this);
-            },
-
-            stop: function(event, ui){
-                $('.pss-form .drop').droppable({
-                    tolerance: 'pointer',
-                    accept: '.element-item-form'
-                });
-            }
-        })
 
         $('.component-nav').draggable({
             connectToSortable: '#prototype',
@@ -668,6 +653,14 @@ var prototype = (function(){
                 }).droppable({
                     tolerance: 'pointer'
                 });
+
+                $('.pss-form .drop').droppable({
+                    accept: function(el){
+                        var component = el.data('component');
+                        console.log(component == 'component-form');
+                        return component == 'component-form';
+                    }    
+                })
             }
         });
 
