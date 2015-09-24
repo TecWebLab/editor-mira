@@ -53,16 +53,20 @@ var prototype = (function(){
     var createHtmlElement = function(attrs){
         var el = new HTMLElement();
         el.attrs = [];
-        var data = [], dataParent = [];
+        var data = [], dataParent = [], hrefs = [], itens = [];
         
 
         el.updateAttr(attrs);
-
+        
         for(var i in el.attrs.data) data[i] = el.attrs.data[i];
         for(var i in el.attrs.dataParent) dataParent[i] = el.attrs.dataParent[i];
+        for(var i in el.attrs.hrefs) hrefs[i] = el.attrs.hrefs[i];
+        for(var i in el.attrs.itens) itens[i] = el.attrs.itens[i];
         
         el.attrs.data = data;
         el.attrs.dataParent = dataParent;
+        el.attrs.hrefs = hrefs.length > 0 ? hrefs : undefined;
+        el.attrs.itens = itens.length > 0 ? itens : undefined;
         return el;
     }
 
@@ -575,7 +579,7 @@ var prototype = (function(){
         var nameComponent = current.data('name')
         var helper;
 
-        if(data == 'pss-div') helper = ""; //se for um container ou div, então deixa como está
+        if(data == 'pss-div' || data == 'pss-form') helper = ""; //se for um container ou div, então deixa como está
         else helper = _.template(template)({item:data}); //compila o template
         
         var item = new Object();
@@ -586,11 +590,11 @@ var prototype = (function(){
         var aux = $(_.template(base)({item:item})); //insere o elemento dentro do panel base
 
 
-        if(component == 'container-div'){
+        if(component == 'container-div' || component == 'form-form'){
             aux.addClass(component);
 
             //define qual a região de possível arraste
-            if(data == 'pss-div') {
+            if(data == 'pss-div' || data == 'pss-form') {
                 aux.find('.panel-body').first().addClass('drop');
             } else {
                 aux.find('.panel-body .panel-body').first().addClass('drop');
@@ -617,6 +621,21 @@ var prototype = (function(){
             }
         });
 
+        $('.element-item-form').draggable({
+            connectToSortable; '.drop, #prototype, .pss-form .drop',
+
+            helper: function(){
+                return getHelper(this);
+            },
+
+            stop: function(event, ui){
+                $('.pss-form .drop').droppable({
+                    tolerance: 'pointer',
+                    accept: '.element-item-form'
+                });
+            }
+        })
+
         $('.component-nav').draggable({
             connectToSortable: '#prototype',
 
@@ -624,6 +643,11 @@ var prototype = (function(){
                 return getHelper(this);
             }
         });
+
+        $('.pss-form .drop').droppable({
+            tolerance: 'pointer',
+            accept: '.element-item-form'
+        })        
 
         $('.element-item-div').draggable({
             connectToSortable: '#prototype, #prototype .drop',
@@ -660,8 +684,15 @@ var prototype = (function(){
         }).droppable({
             //accept: '.container-div, .component-nav',
             tolerance: 'pointer'
+        });
 
-        }).disableSelection();
+        /*
+        $('.pss-form .drop').droppable({
+            accept: function(el){
+                console.log(el);
+                return true;
+            }
+        })*/
 
     }
 
@@ -686,7 +717,6 @@ var prototype = (function(){
                 return;
             }
         }
-
     }
     
 
@@ -889,6 +919,7 @@ var prototype = (function(){
             case 'component-text': return new Text();
             case 'component-image': return new Image();
             case 'component-list': return new List();
+            case 'component-form' : return new Form();
         }
     }
 

@@ -267,7 +267,6 @@ function Text(){
 		this.htmlElement.attrs = params; 
 		this.htmlElement.attrs.text = 'Texto de Exemplo';
 		this.htmlElement.attrs.align = 'normal';
-		
 	}
 
 	this.get = function(){
@@ -295,20 +294,12 @@ function Image(){
 
 //concrete builder
 function Form(){
-	this.htmlElement = null;
+	this.htmlElement = new HTMLElement();
 
 	this.buildParams = function(params){
-		if(params == null){
-			//caso venha alguma parâmetro, indica que foi lido de algum input
-
-			this.htmlElement = new HTMLElement();
-			for(var key in params){
-				this.htmlElement[key] = params[key]; 
-			}	
-		}else{
-			//caso contrário, inicializa com os valores default
-		}
-		
+		this.htmlElement.attrs = params; 
+		this.htmlElement.attrs.hasLabel = 0;
+		this.htmlElement.attrs.label = '';
 	}
 
 	this.get = function(){
@@ -470,6 +461,7 @@ function mapList(el){
 
 	var listItem = [];
 	var listLinks = [];
+	console.log(el);
 	if(el.attrs.value == 1){
 		//item da lista
 		var li = new Object();
@@ -482,15 +474,16 @@ function mapList(el){
 		if(el.attrs.hrefs.length > 0){
 			var link = new Object();
 			link.name = el.attrs.name + "ItemLink";
+			link.tag = 'a';
 
-			if(el.attrs.label.length > 0){
+			if(el.attrs.label && el.attrs.label.length > 0){
 				link.value = '$data["'+el.attrs.itens[0]+'"]['+el.attrs.label+']';	
 			}else{
 				link.value = '$data["'+el.attrs.itens[0]+'"]';	
 			}
 
 			link.href = 'navigate("/rest/resource/", {s:$data["'+el.attrs.hrefs[0] +'"].replace("#", "%23")})';
-			listLinks.push(link)	
+			listLinks = link;
 		}else{
 			li.value = el.attrs.itens[i];
 		}
@@ -521,8 +514,7 @@ function mapList(el){
 		}
 	}
 
-	if(listLinks.length > 0) return [list, listItem, listLinks];
-	return [list, listItem];
+	return [list, listItem, listLinks];
 }
 
 

@@ -141,7 +141,33 @@ and open the template in the editor.
                             </div>
                             <div id="collapseForm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingForm">
                                 <div class="panel-body">
-                                    
+                                    <div class="element-item component-form" data-type="form" data-name="Formulário" data-item="pss-form" data-component="form-form">
+                                        <i class="fa fa-plus"></i> Formulário
+                                    </div>
+                                    <div class="element-item-form component-form" data-type="input" data-name="Text" data-item="input-text" data-component="form-text">
+                                        <i class="fa fa-plus"></i> Text
+                                    </div>
+                                    <div class="element-item-form component-form" data-type="input" data-name="Select" data-item="input-select" data-component="form-select">
+                                        <i class="fa fa-plus"></i> Select
+                                    </div>
+                                    <div class="element-item-form component-form" data-type="input" data-name="Textarea" data-item="input-textarea" data-component="form-textarea">
+                                        <i class="fa fa-plus"></i> Textarea
+                                    </div>
+                                    <div class="element-item-form component-form" data-type="input" data-name="Radio" data-item="input-radio" data-component="form-radio-checkbox">
+                                        <i class="fa fa-plus"></i> Radio
+                                    </div>
+                                    <div class="element-item-form component-form" data-type="input" data-name="Textarea" data-item="input-textarea" data-component="form-radio-checkbox">
+                                        <i class="fa fa-plus"></i> Checkbox
+                                    </div>
+                                    <div class="element-item-form component-form" data-type="input" data-name="File" data-item="input-file" data-component="form-file">
+                                        <i class="fa fa-plus"></i> File
+                                    </div>
+                                    <div class="element-item-form component-form" data-type="input" data-name="Static" data-item="input-static" data-component="form-static">
+                                        <i class="fa fa-plus"></i> Static
+                                    </div>
+                                    <div class="element-item-form component-form" data-type="input" data-name="Input Group" data-item="input-group" data-component="form-group">
+                                        <i class="fa fa-plus"></i> Input Group
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -271,44 +297,7 @@ and open the template in the editor.
         	<%}	%>
         </script>
 
-        <script id="component-form" type="text/template">
-        	<% if(item == 'form-normal') { %>
-        		<form>
-        			<div class="form-group">
-        				<label>Campo 1</label>
-        				<input type="text" class="form-control">
-        			</div>
-        			<div class="form-group">
-        				<button class="btn btn-primary" type="submit">Ação</button>
-        			</div>
-        		</form>
-        	<%} else if (item == 'form-horizontal') { %>
-        		<form class="form-horizontal">
-        			<div class="form-group">
-        				<label class="col-sm-2 control-label">Campo 1</label>
-        				<div class="col-sm-10">
-        					<input type="text" class="form-control">
-        				</div>
-        			</div>
-        			<div class="form-group">
-        				<div class="col-sm-10 col-sm-offset-2">
-        					<button class="btn btn-primary" type="submit">Ação</button>
-        				</div>
-        			</div>
-        		</form>
-        	<%}	else if(item == 'form-inline') { %>
-        		<form class="form-inline">
-        			<div class="form-group">
-        				<label>Campo 1</label>
-        				<input type="text" class="form-control">
-        			</div>
-        			<div class="form-group">
-        				<button class="btn btn-primary" type="submit">Ação</button>
-        			</div>
-        		</form>
-        	<%} %>
-        </script>
-
+        <!-- Menu de navegação -->
         <script id="component-nav" type="text/template">
         	<nav class="navbar navbar-default">
         		<div class="container-fluid">
@@ -347,6 +336,57 @@ and open the template in the editor.
         			</ol>
         	<%}%>
         </script>
+
+        <!-- Formulário -->
+        <script id="form-form" type="text/template">
+            <form class="<%- item %>">
+                
+            </form>
+        </script>
+
+        <script id="form-text" type="text/template">
+            <input class="form-control" type="text" name="" />
+        </script>
+
+        <script id="form-select" type="text/template">
+            <select class="form-control">
+                <option value="valor 1">Opção 1</option>
+                <option value="valor 2">Opção 2</option>
+                <option value="valor 3">Opção 3</option>
+            </select>
+        </script>
+
+        <script id="form-textarea" type="text/template">
+            <textarea class="form-control" name=""></textarea> 
+        </script>
+
+        <script id="form-radio-checkbox" type="text/template">
+            <div class="<% item == 'input-radio' ? print('radio') : print('checkbox')%>">
+                <label><input type="<% item == 'input-radio' ? print('radio') : print('checkbox')%>" name="" value="valor 1">Opção 1</label>
+            </div>
+            <div class="<% item == 'input-radio' ? print('radio') : print('checkbox')%>">
+                <label><input type="<% item == 'input-radio' ? print('radio') : print('checkbox')%>" name="" value="valor 2">Opção 2</label>
+            </div>
+            <div class="<% item == 'input-radio' ? print('radio') : print('checkbox')%>">
+                <label><input type="<% item == 'input-radio' ? print('radio') : print('checkbox')%>" name="" value="valor 3">Opção 3</label>
+            </div>
+        </script>
+
+        <script id="form-file" type="text/template">
+            <input class="form-control" type="file" name="" />
+        </script>
+        <script id="form-static" type="text/template">
+            <p class="form-control-static">Item estático</p>
+        </script>
+
+        <script id="form-group" type="text/template">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">@</span>
+                <input type="text" class="form-control" placeholder="Username">
+            </div>
+        </script>
+
+
 
         <!--Template dos formulários -->
         <script type="text/template" id="form-nav">

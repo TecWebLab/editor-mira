@@ -15,7 +15,7 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
     padding: 5px;
 }
 
-.element-item, #accordionElements .component-nav, .element-item-div {
+.element-item, .element-item-form, #accordionElements .component-nav, .element-item-div {
     cursor: move;
     margin-bottom: 5px;
     font-size: 14px;
