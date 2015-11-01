@@ -13,6 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.sidr.dark.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-treeview.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -238,7 +239,11 @@ and open the template in the editor.
         </section>
         
         <section id="footer">
-        
+            <div class="row">
+                <div id="tree"class="col-md-4">
+                
+                </div>    
+            </div>
         </section>
         <div id="title-property" style="display: none;">
             <h1>Propriedades</h1>
@@ -702,9 +707,48 @@ and open the template in the editor.
         <script src="js/lib/bootstrap.min.js"></script>
         <script src="js/lib/jquery-ui.min.js"></script>
         <script src="js/lib/underscore-min.js"></script>
-        <script type="text/javascript" src="js/lib/jquery.sidr.min.js"></script>
-        <script type="text/javascript" src="js/lib/pretty-json.js"></script>
-        <script type="text/javascript" src="js/classes.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
+        <script src="js/lib/jquery.sidr.min.js"></script>
+        <script src="js/lib/pretty-json.js"></script>
+        <script src="js/lib/bootstrap-treeview.js"></script>
+        <script src="js/classes.js"></script>
+        <script src="js/script.js"></script>
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+            var dataTree = 
+            [
+                {
+                    text: "Parent 1",
+                    nodes: 
+                    [
+                        {
+                            text: "Child 1",
+                            nodes: 
+                            [
+                                { text: "Grandchild 1" },
+                                { text: "Grandchild 2" }
+                            ]
+                        },
+                        { text: "Child 2" }
+                    ]
+                },
+                { text: "Parent 2" },
+                { text: "Parent 3" },
+                { text: "Parent 4" },
+                { text: "Parent 5" }
+            ];
+
+            $("#tree").treeview({
+                data: dataTree,
+                showCheckbox: true,
+                multiSelect: true
+
+            })
+        })
+
+        $(document).on('click', '.btn-tree', function(e){
+            console.log('tree');
+        });
+        </script>
     </body>
 </html>
