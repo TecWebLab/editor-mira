@@ -19,8 +19,8 @@
 
 .treeview .list-group-item {
 	cursor: pointer;
-	min-height: 50px;
-	line-height: 50px;
+	min-height: 20px;
+	line-height: 20px;
 }
 
 .treeview span.indent {
@@ -36,4 +36,9 @@
 .treeview .node-disabled {
 	color: silver;
 	cursor: not-allowed;
+}
+
+.treeview .tree-text {
+	width: auto !important;
+	display: table-cell !important;
 }

@@ -317,7 +317,7 @@ var prototype = (function(){
         })
 
         $(document).on('click', '.btn-prop', function(e){
-            currentProp = $(this);
+            currentProp = $(this);  
             e.preventDefault();
             var $this = $(this);
 
@@ -1013,6 +1013,13 @@ var prototype = (function(){
         }        
     }
 
+    var concreteInterfaceNodes = [];
+    var concreteInterfaceItems = [];
+    //geração de interface concreta
+    var generateConcreteInterface = function(){
+
+    }
+
     var init = function(){
         installSidebar(); //cria o sidebar com as propriedades dos objetos
         removeElement(); //criar a opção de remoção dos objetos    
@@ -1022,12 +1029,12 @@ var prototype = (function(){
         loadWebStorage(); //carrega os dados do web storage
         projectFunctions(); //insere a funcionalidades para criação, download e importação de um projeto.
         createDrag(); //cria a propriedade de drag para todos os elementos
-
+        /*
         //monitora de 3 em 3 segundos    
         setInterval(function(){
             updateList();
             agente.execute(); 
-        }, 3000);
+        }, 3000);*/
     }
 
     init();    

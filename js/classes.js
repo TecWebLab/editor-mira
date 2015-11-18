@@ -243,6 +243,37 @@ function HTMLElementBuilder(){
 }
 
 //concrete builder
+/********************** ELEMENTOS PARA INTERFACE CONCRETA **********************/
+
+
+function Div(){
+	this.htmlElement = new HTMLElement();
+	
+	this.buildParams = function(params){
+		this.htmlElement.attrs = params; 
+	}
+
+	this.get = function(){
+		return this.htmlElement;
+	}
+}
+
+function SimpleHtml(){
+	this.htmlElement = new HTMLElement();
+
+	
+	this.buildParams = function(params){
+		this.htmlElement.attrs = params; 
+		this.htmlElement.attrs.width = '0';
+		this.htmlElement.attrs.context = 'default';
+	}
+
+
+	this.get = function(){
+		return this.htmlElement;
+	}
+}
+
 function Content(){
 	this.htmlElement = new HTMLElement();
 

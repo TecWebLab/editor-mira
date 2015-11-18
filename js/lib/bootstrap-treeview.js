@@ -31,15 +31,15 @@
 
 		injectStyle: true,
 
-		levels: 2,
+		levels: 6,
 
-		expandIcon: 'glyphicon glyphicon-plus',
-		collapseIcon: 'glyphicon glyphicon-minus',
-		emptyIcon: 'glyphicon',
+		expandIcon: 'fa fa-chevron-right',
+		collapseIcon: 'fa fa-chevron-down',
+		emptyIcon: 'fa',
 		nodeIcon: '',
 		selectedIcon: '',
-		checkedIcon: 'glyphicon glyphicon-check',
-		uncheckedIcon: 'glyphicon glyphicon-unchecked',
+		checkedIcon: 'fa fa-check-square-o',
+		uncheckedIcon: 'fa fa-square-o',
 
 		color: undefined, // '#000000',
 		backColor: undefined, // '#FFFFFF',
@@ -69,7 +69,8 @@
 		onNodeUnchecked: undefined,
 		onNodeUnselected: undefined,
 		onSearchComplete: undefined,
-		onSearchCleared: undefined
+		onSearchCleared: undefined,
+		onTreeRender: undefined
 	};
 
 	_default.options = {
@@ -88,6 +89,7 @@
 		this.$element = $(element);
 		this.elementId = element.id;
 		this.styleId = this.elementId + '-style';
+		this.id = 0;
 
 		this.init(options);
 
@@ -133,6 +135,10 @@
 			uncheckNode: $.proxy(this.uncheckNode, this),
 			toggleNodeChecked: $.proxy(this.toggleNodeChecked, this),
 
+			//Custom Methods
+			addElement: $.proxy(this.addElement, this),
+			removeElements: $.proxy(this.removeElements, this),
+
 			// Disable / enable methods
 			disableAll: $.proxy(this.disableAll, this),
 			disableNode: $.proxy(this.disableNode, this),
@@ -155,6 +161,7 @@
 			if (typeof options.data === 'string') {
 				options.data = $.parseJSON(options.data);
 			}
+
 			this.tree = $.extend(true, [], options.data);
 			delete options.data;
 		}
@@ -163,8 +170,412 @@
 		this.destroy();
 		this.subscribeEvents();
 		this.setInitialStates({ nodes: this.tree }, 0);
+		this.initModalAndEvents();
 		this.render();
 	};
+
+	Tree.prototype.setId = function(){
+		this.id++;
+		return this.id;
+	}
+
+	//cria filhos para um determinado nó.
+	Tree.prototype.createNodes = function(node, values){
+		for(var item in values){
+			var newItem = new Object();
+			newItem.text = item;
+			newItem.state = [];
+			newItem.checked = false;
+			newItem.nodeId = this.nodes.length;
+			newItem.id = this.setId();
+			newItem.selectable = true;
+			newItem.parentId = node.nodeId;
+
+			if(node.$data) newItem.$data = node.$data;
+
+			node.state.editable = false;
+			node.state.disabled = false;
+			node.state.added = false;
+
+			node.nodes.push(newItem);
+			this.nodes.push(newItem);
+		}
+
+		return node;
+	}
+
+	Tree.prototype.createAbstractInterface = function(nodes){
+		var abstractInterface = []; 
+		for(var i = 0; i<nodes.length; i++){
+			var element = new Object();
+			element.name = nodes[i].text;
+			
+			element.datasource = nodes[i].datasource && nodes[i].datasource.length > 0 ? nodes[i].datasource.replace("http://localhost:3000", "url:") : undefined;
+			element.parse = nodes[i].parse && nodes[i].parse.length > 0 ? '$data["' + nodes[i].parse + '"]' : undefined;
+			element.bind = nodes[i].bind && nodes[i].bind.length > 0 ? nodes[i].bind : undefined;
+
+			if(nodes[i].nodes) element.children = this.createAbstractInterface(nodes[i].nodes);
+			abstractInterface.push(element);
+		}
+
+		return abstractInterface;
+	}
+
+	Tree.prototype.reloadData = function(tree, nodes){
+		this.tree = tree;
+		this.nodes = nodes;
+	}
+
+	Tree.prototype.initModalAndEvents = function(){
+		var _this = this;
+		var values; //valores baixados
+		var currentData = [];
+
+		//Modal
+		var modalDownload = 
+			'<div class="modal fade" id="modal-tree-download" data-id="">\
+				<div class="modal-dialog">\
+					<div class="modal-content">\
+						<div class="modal-header">\
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+							<h4 class="modal-title">Baixar Informações</h4>\
+						</div>\
+						<div class="modal-body">\
+							<form class="form-horizontal" role="form">\
+								<div class="form-group">\
+									<label class="control-label col-sm-2">Bind</label>\
+									<div class="col-sm-10">\
+										<div class="input-group">\
+											<input type="text" class="form-control" id="field-bind" placeholder="Insira a expressão">\
+										</div>\
+										<span id="msg-error-download" class="help-block" style="display:none">Erro ao obter informações. Observe se o link está correto</span>\
+									</div>\
+								</div>\
+								<div class="form-group">\
+									<label class="control-label col-sm-2">Link</label>\
+									<div class="col-sm-10">\
+										<div class="input-group">\
+											<input type="text" class="form-control" id="field-datasource" placeholder="Insira o Link">\
+											<span class="input-group-btn">\
+												<button class="btn btn-success" id="btn-download-information" type="button"><i class="fa fa-download"></i></button>\
+											</span>\
+										</div>\
+										<span id="msg-error-download" class="help-block" style="display:none">Erro ao obter informações. Observe se o link está correto</span>\
+									</div>\
+								</div>\
+								<div class="form-group" id="group-parse" style="display:none">\
+									<label class="control-label col-sm-2">Parse</label>\
+									<div class="col-sm-4">\
+										<div class="input-group">\
+											<input type="text" class="form-control" name="parse" id="parse"/>\
+											<span class="input-group-btn">\
+												<button class="btn btn-success" id="btn-process-parse" type="button"><i class="fa fa-refresh"></i></button>\
+											</span>\
+										</div>\
+									</div>\
+								</div>\
+							</form>\
+							<hr />\
+							<div class="panel panel-default" id="panel-download-fields" style="display:none">\
+								<div class="panel-heading">\
+									Campos\
+								</div>\
+								<table class="table table-bordered" id="table-fields">\
+									<thead>\
+										<tr>\
+											<th>Nome</th>\
+										</tr>\
+									</thead>\
+									<tbody></tbody>\
+  								</table>\
+							</div>\
+						</div>\
+						<div class="modal-footer">\
+							<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>\
+							<button type="button" class="btn btn-success" data-dismiss="modal" id="btn-confirm-download">Confirmar</button>\
+						</div>\
+					</div>\
+				</div>\
+			</div>';
+
+		var modalConfirm = 
+			'<div class="modal fade" id="modal-tree-confirm" data-confirm="">\
+				<div class="modal-dialog">\
+					<div class="modal-content">\
+						<div class="modal-header">\
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+							<h4 class="modal-title">Confirmação</h4>\
+						</div>\
+						<div class="modal-body"></div>\
+						<div class="modal-footer">\
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>\
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Confirmar</button>\
+						</div>\
+					</div>\
+				</div>\
+			</div>';
+
+		/* Eventos dos botões */
+		//editar
+		$(document).on('click', '#btn-tree-edit', function(e){
+			var item = $(this).parent().parent();
+			var node = _this.findNode(item);
+			node.state.editable = true;
+			node.state.disabled = true;
+
+			item.contents().filter(function() {
+				return this.nodeType === 3;
+			}).remove();
+
+			item.append($(_this.template.text)
+						.focus()
+						.val(node.text)
+						.keyup(function(e){
+							if(e.which == 13 || e.which == 9 ){
+								node.state.editable = false;
+								node.state.disabled = false;
+								node.text = $(this).val();
+
+								_this.tree = _this.refreshTree(_this.tree, node);
+
+								_this.$element.empty().append(_this.$wrapper.empty());
+								_this.buildTree(_this.tree, 0);
+								_this.$element.trigger('treeRender', $.extend(true, {}, _this));
+							} else if(e.which == 27) {
+								node.state.editable = false;
+								node.state.disabled = false;
+
+								_this.tree = _this.refreshTree(_this.tree, node);
+								_this.$element.empty().append(_this.$wrapper.empty());
+								_this.buildTree(_this.tree, 0);
+								_this.$element.trigger('treeRender', $.extend(true, {}, _this));
+							}
+						}));
+		});
+
+		//adicionar
+		$(document).on('click', '#btn-tree-add', function(e){
+			var node = _this.findNode($(this).parents('li'));
+			if(!node) return;
+
+			//cria um novo objeto
+			var newItem = new Object();
+			newItem.text = "Novo Item";
+			newItem.state = new Object();
+			newItem.state.added = true;
+			newItem.state.disabled = true;
+			newItem.nodeId = _this.nodes.length;
+			newItem.id = _this.setId();
+			newItem.selectable = false;
+			newItem.parentId = node.nodeId;
+
+			if(!node.nodes) node.nodes = [];
+			if(node.$data) newItem.$data = node.$data;
+			
+			//insere como filho do nó corrente
+			node.nodes.push(newItem);
+
+			//insere a fila de nós
+			_this.nodes.push(newItem);
+
+			//muda o estado do nó corrente para expandido
+			node.state.expanded = true;
+
+			//atualiza a tree
+			_this.tree = _this.refreshTree(_this.tree, node);
+			_this.$element.empty().append(_this.$wrapper.empty());
+			_this.buildTree(_this.tree, 0);
+			_this.$element.trigger('treeRender', $.extend(true, {}, _this));
+		});
+
+		//download
+		$(document).on('click', '#btn-tree-download', function(e){
+			var node = _this.findNode($(this).parents('li'));
+			$('#modal-tree-download').data('id', $(this).parents('li').data('nodeid'));
+
+			$('#field-bind').val(node.bind ?  node.bind : '');
+
+			if(node.datasource){
+				values = getValue(node.$data);
+				$('#field-datasource').val(node.datasource ? node.datasource : '');
+				$('#field-parse').val(node.parse ? node.parse : '');
+
+				refreshTable($('#table-fields tbody'), values)
+
+				$('#group-parse').show();
+				$('#panel-download-fields').show();
+			}else {
+				values = null;
+
+				$('#field-datasource').val('');
+				$('#field-parse').hide().val('');
+
+				$('#table-fields tbody').empty();
+
+				$('#group-parse').hide();
+				$('#panel-download-fields').hide();
+			}
+		});
+
+		//remover
+		$(document).on('click', '#btn-tree-remove', function(e){
+			//TODO: fazer o modal de confirmação
+
+			var node = _this.findNode($(this).parents('li'));
+			if(!node) return;
+			_this.tree = _this.removeNodes(_this.tree, [node.nodeId]);
+			_this.$element.empty().append(_this.$wrapper.empty());
+			_this.buildTree(_this.tree, 0);
+			_this.$element.trigger('treeRender', $.extend(true, {}, _this));
+		});
+
+		//remover todos
+		$(document).on('click', '#btn-tree-removeall', function(e){
+			//TODO: fazer o modal de confirmação
+
+			var node = _this.findNode($(this).parents('li'));
+			if(!node) return;
+
+			//verifica quais os filhos estão selecionados
+			var ids = [];
+			for(var i = 0; i < node.nodes.length; i++){
+				if(node.nodes[i].state.checked) ids.push(node.nodes[i].nodeId);
+			}
+
+			_this.tree = _this.removeNodes(_this.tree, ids);
+			_this.$element.empty().append(_this.$wrapper.empty());
+			_this.buildTree(_this.tree, 0);
+			_this.$element.trigger('treeRender', $.extend(true, {}, _this));
+		});
+
+		var getValue = function(data){
+			return data[0] ? data[0] : data;
+		}
+
+		var refreshTable = function(table, data) {
+			//linha da tabela
+			var line = $(
+					'<tr>\
+						<td class="name-item"></td>\
+					</tr>'
+				);
+
+			table.empty(); //limpa previamente a tabela
+
+			for(var item in data){
+				var aux = line.clone();
+				aux.find('.name-item').text(item);
+				table.append(aux);
+			}
+		}
+
+		var getDataFromDatasource = function(data){
+			values = getValue(data);
+			currentData = data;
+				
+			$('#msg-error-download').hide();
+			$('#group-parse').show();
+			
+			var panel = $('#panel-download-fields');
+			var table = panel.find('table tbody');
+			
+			panel.show();
+			refreshTable(table, values);
+		}
+
+		var getDataFromDatasourceFail = function(button){
+			currentData = [];
+			button.parents('.form-group').addClass('has-error');
+			$('#msg-error-download').show();
+			$('#group-parse').hide();
+			$('#panel-download-fields').hide();
+		}
+
+		//download informações
+		$(document).on('click', '#btn-download-information', function(e){
+			var link = $(this).parents('.form-group').find('input').val().trim();
+			var button = $(this);
+			var node = _this.findNode(button.parents('#modal-tree-download').data('id'));
+
+			if(node.$data){
+
+				try {
+					var data = eval('node.' + link);
+					
+					if(data){
+						getDataFromDatasource(data);		
+					}else{
+						getDataFromDatasourceFail(button);
+					}
+				} catch (e){
+					$.get(link, function(data){
+						getDataFromDatasource(data);
+					}).fail(function(){
+						getDataFromDatasourceFail(button);
+					});					
+				}
+			} else{
+				$.get(link, function(data){
+					getDataFromDatasource(data);
+				}).fail(function(){
+					getDataFromDatasourceFail(button);
+				});
+
+			}
+		});
+
+		$(document).on('click', '#btn-process-parse', function(e){
+			var parse = $(this).parents('.form-group').find('input').val().trim();
+			if(parse.length > 0){
+				if(values[parse]){
+					currentData = values[parse];
+					values = getValue(values[parse]);
+					refreshTable($('#panel-download-fields tbody'), values);
+				}else{
+					alert('Não existe o campo "'+ parse + '" nos dados');
+				}
+			}else{
+				alert('Insira um valor.');
+			}
+		});
+
+		var broadcastData = function(node, data){
+			if(!node) return node;
+
+			if(!node.$data) node.$data = data;
+			if(node.nodes){
+				for(var i=0; i<node.nodes.length;i++) node.nodes[i] = broadcastData(node.nodes[i], data);
+			}
+
+			return node;
+		}
+
+		$(document).on('click', '#btn-confirm-download', function(e){
+			//if(!values && !bind.length && parse.) return;
+
+			var id = $('#modal-tree-download').data('id');
+			var node = _this.findNode(id);
+			
+			//insere os dados no nó
+			//node.data = values;
+			if(values != null) node = broadcastData(node, currentData);
+			
+			node.datasource = $('#field-datasource').val().trim();
+			node.bind = $('#field-bind').val().trim().length > 0 ? $('#field-bind').val().trim() : undefined;
+			node.parse = $('#parse').is(':visible') && $('#parse').val().trim().length ? $('#parse').val().trim() : undefined;
+
+			//insere o novos dados no modelo
+			//node = _this.createNodes(node, values);
+
+			//refaz a tree
+			_this.tree = _this.refreshTree(_this.tree, node);
+			_this.$element.empty().append(_this.$wrapper.empty());
+			_this.buildTree(_this.tree, 0);
+			_this.$element.trigger('treeRender', $.extend(true, {}, _this));
+		})
+
+		$('body').append(modalDownload).append(modalConfirm);
+	}
 
 	Tree.prototype.remove = function () {
 		this.destroy();
@@ -199,6 +610,7 @@
 		this.$element.off('nodeUnselected');
 		this.$element.off('searchComplete');
 		this.$element.off('searchCleared');
+		this.$element.off('treeRender');
 	};
 
 	Tree.prototype.subscribeEvents = function () {
@@ -246,6 +658,11 @@
 		if (typeof (this.options.onSearchCleared) === 'function') {
 			this.$element.on('searchCleared', this.options.onSearchCleared);
 		}
+
+		if (typeof (this.options.onTreeRender) === 'function') {
+			this.$element.on('treeRender', this.options.onTreeRender);
+		}
+
 	};
 
 	/*
@@ -265,6 +682,7 @@
 
 			// nodeId : unique, incremental identifier
 			node.nodeId = _this.nodes.length;
+			node.id = _this.setId();
 
 			// parentId : transversing up the tree
 			node.parentId = parent.nodeId;
@@ -285,6 +703,16 @@
 			// set enabled state; unless set always false
 			if (!node.state.hasOwnProperty('disabled')) {
 				node.state.disabled = false;
+			}
+
+			// set enabled state; unless set always false
+			if (!node.state.hasOwnProperty('editable')) {
+				node.state.editable = false;
+			}
+
+			// set enabled state; unless set always false
+			if (!node.state.hasOwnProperty('added')) {
+				node.state.added = false;
 			}
 
 			// set expanded state; if not provided based on levels
@@ -319,7 +747,7 @@
 
 		var target = $(event.target);
 		var node = this.findNode(target);
-		if (target.is(':button') || !node || node.state.disabled) return;
+		if (target.parent().is(':button') || target.is(':button') || !node || node.state.disabled) return;
 		
 		var classList = target.attr('class') ? target.attr('class').split(' ') : [];
 		if ((classList.indexOf('expand-icon') !== -1)) {
@@ -347,8 +775,13 @@
 	// Looks up the DOM for the closest parent list item to retrieve the
 	// data attribute nodeid, which is used to lookup the node in the flattened structure.
 	Tree.prototype.findNode = function (target) {
+		if( parseInt(target).toString() == 'NaN' && 
+			(target.parent().is(':button') || target.is(':button') 
+				|| target.is(':input'))) target = target.parents('li');
 
-		var nodeId = target.closest('li.list-group-item').attr('data-nodeid');
+		var nodeId = parseInt(target).toString() == 'NaN' ? target.closest('li.list-group-item').attr('data-nodeid') : parseInt(target);
+		
+		//var nodeId = target.closest('li.list-group-item').attr('data-nodeid');
 		var node = this.nodes[nodeId];
 
 		if (!node) {
@@ -356,6 +789,57 @@
 		}
 		return node;
 	};
+
+	Tree.prototype.findNodeById = function (id) {
+		var items = $.grep(this.nodes, function(item){
+			return item.id == id;
+		})
+
+		var node = items.length > 0 ? items[0] : undefined;
+
+		if (!node) {
+			console.log('Error: node does not exist');
+		}
+
+		return node;
+	};
+
+	Tree.prototype.refreshTree = function (nodes, node) {
+		if (!node) return nodes;
+		
+		for(var i=0; i < nodes.length; i++){
+			if(nodes[i].id == node.id) nodes[i] = node;
+			if(nodes[i].nodes) nodes[i].nodes = this.refreshTree(nodes[i].nodes, node);
+		}
+
+		this.nodes[node.nodeId] = node;
+		return nodes;
+	};
+
+	/*
+		Remove um ou mais nós
+		@nodes array de nós
+		@ids array de identificadores a serem removidos
+		@return lista com itens removidos
+	*/
+	Tree.prototype.removeNodes = function(nodes, ids){
+		if(!ids || ids.length == 0) {
+			console.log('Identificadores inválidos')
+			return nodes;
+		}
+
+		for(var i = nodes.length-1; i >= 0; i--){
+			if($.inArray(nodes[i].nodeId, ids) > -1) {
+				this.nodes.splice(nodes[i].nodeId); //remove da lista de nós
+				nodes.splice(i,1); //remove da lista aninhada
+				continue;
+			}
+
+			if(nodes[i].nodes) nodes[i].nodes = this.removeNodes(nodes[i].nodes, ids); 
+		}
+
+		return nodes.length > 0 ? nodes : undefined;
+	}
 
 	Tree.prototype.toggleExpandedState = function (node, options) {
 		if (!node) return;
@@ -498,18 +982,18 @@
 
 		// Build tree
 		this.buildTree(this.tree, 0);
+		this.$element.trigger('treeRender', $.extend(true, {}, this));
 	};
 
 	// Starting from the root node, and recursing down the
 	// structure we build the tree one node at a time
 	Tree.prototype.buildTree = function (nodes, level) {
-
+		this.abstractInterface = this.createAbstractInterface(this.tree);
 		if (!nodes) return;
 		level += 1;
 
 		var _this = this;
 		$.each(nodes, function addNodes(id, node) {
-
 			var treeItem = $(_this.template.item)
 				.addClass('node-' + _this.elementId)
 				.addClass(node.state.checked ? 'node-checked' : '')
@@ -518,6 +1002,50 @@
 				.addClass(node.searchResult ? 'search-result' : '') 
 				.attr('data-nodeid', node.nodeId)
 				.attr('style', _this.buildStyleOverride(node));
+
+			//caso seja um nó editável, apenas insere um campo texto
+			if(node.state.added) {
+				// cria um novo item editavel
+				treeItem.append($(_this.template.text)
+								.data('id', node.nodeId)
+								.val(node.text)
+								.css('margin-left', ((level) * 20) + 'px')
+								.focus()
+								.keyup(function(e){
+									/*
+										Para um item que foi adicionando, caso aperte tab(9) ou enter(13), confirma o nome atual.
+										Caso aperte ESC(27), apenas remove o item;
+									*/
+									if(e.which == 13 || e.which == 9 ){
+										node.state.added = false;
+										node.state.disabled = false;
+										node.text = $(this).val();
+
+										_this.tree = _this.refreshTree(_this.tree, node);
+
+										_this.$element.empty().append(_this.$wrapper.empty());
+										_this.buildTree(_this.tree, 0);
+										_this.$element.trigger('treeRender', $.extend(true, {}, _this));
+									} else if(e.which == 27) {
+										_this.tree = _this.removeNodes(_this.tree, [node.nodeId]);
+
+										_this.$element.empty().append(_this.$wrapper.empty());
+										_this.buildTree(_this.tree, 0);
+										_this.$element.trigger('treeRender', $.extend(true, {}, _this));
+									}
+								}));
+				
+				// Add item to the tree
+				_this.$wrapper.append(treeItem);
+
+				// Recursively add child ndoes
+				if (node.nodes && node.state.expanded && !node.state.disabled) {
+					return _this.buildTree(node.nodes, level);
+				}
+
+				//vai para o próximo item
+				return true; 
+			}
 
 			// Add indent/spacer to mimic tree structure
 			for (var i = 0; i < (level - 1); i++) {
@@ -586,14 +1114,14 @@
 				treeItem
 					.append($(_this.template.link)
 						.attr('href', node.href)
-						.append(node.text)
+						.append(node.state.editable ? $(_this.template.text).val(node.text) : node.text)
 						.append(_this.template.buttons)
 					);
 			}
 			else {
 				// otherwise just text
 				treeItem
-					.append(node.text)
+					.append(node.state.editable ? $(_this.template.text).val(node.text) : node.text)
 					.append(_this.template.buttons);
 			}
 
@@ -617,6 +1145,8 @@
 				return _this.buildTree(node.nodes, level);
 			}
 		});
+
+		return _this.tree;
 	};
 
 	// Define any node level style override for
@@ -700,11 +1230,13 @@
 		// TODO inserir tooltip
 		buttons: 
 				'<div class="pull-right">\
-					<button class="btn btn-primary btn-tree">Add</button>\
-					<button class="btn btn-primary btn-tree">Import</button>\
-					<button class="btn btn-primary btn-tree">Remove</button>\
-					<button class="btn btn-primary btn-tree">Remover All</button>\
-				</div>'
+					<button class="btn btn-primary btn-xs btn-tree" id="btn-tree-edit"><i class="fa fa-pencil"></i></button>\
+					<button class="btn btn-success btn-xs btn-tree" id="btn-tree-add"><i class="fa fa-plus"></i></button>\
+					<button class="btn btn-success btn-xs btn-tree" id="btn-tree-download"data-toggle="modal" data-target="#modal-tree-download"><i class="fa fa-download"></i></button>\
+					<button class="btn btn-danger btn-xs btn-tree" id="btn-tree-remove"><i class="fa fa-trash"></i></button>\
+					<button class="btn btn-danger btn-xs btn-tree" id="btn-tree-removeall"><i class="fa fa-times"></i> <i class="fa fa-list"></i></button>\
+				</div>',
+		text: '<input type="text" class="form-control tree-text" data-id="" />'
 	};
 
 	Tree.prototype.css = '.treeview .list-group-item{cursor:pointer}.treeview span.indent{margin-left:10px;margin-right:10px}.treeview span.icon{width:12px;margin-right:5px}.treeview .node-disabled{color:silver;cursor:not-allowed}'
@@ -718,6 +1250,16 @@
 	Tree.prototype.getNode = function (nodeId) {
 		return this.nodes[nodeId];
 	};
+
+	Tree.prototype.addElement = function(node){
+		this.tree.push(node);
+		this.nodes.push(node);
+		this.id++;
+	}
+
+	Tree.prototype.removeElements = function(ids){
+		this.tree = this.removeNodes(this.tree, ids);
+	}
 
 	/**
 		Returns the parent node of a given node, if valid otherwise returns undefined.

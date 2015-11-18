@@ -44,7 +44,7 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
     position: fixed;
     right: 0;
     left: 0;
-    z-index: 90000;
+    z-index: 1000;
     top: 75px;
 }
 
@@ -93,3 +93,17 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
 .form-properties .input-group-btn {
     top: -5px;
 }
+
+.panel-resize {
+    float: left;
+    width: 100%;
+    margin-right: 5px; 
+}
+
+.carousel, .text-concrete {
+    margin-bottom: 10px;
+}
+
+
+/* <script src="js/classes.js"></script>
+        <script src="js/script.js"></script>*/

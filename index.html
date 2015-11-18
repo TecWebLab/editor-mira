@@ -26,7 +26,7 @@ and open the template in the editor.
                         <form class="navbar-form navbar-left" role="nameInterface">
                             <div class="form-group">
                                 <label> Nome da Inferface </label>
-                                <input type="text" class="form-control" id="nameInterface" placeholder="Digite o nome da interface">
+                                <input type="text" class="form-control" id="nameInterface" value="landing" placeholder="Digite o nome da interface">
                             </div>
                         </form>
 
@@ -52,6 +52,7 @@ and open the template in the editor.
         </section>
         <section id="enviroment">
             <div class="row">
+                <!--
                 <div id="elements" class="col-md-2">
                     <div class="panel-group" id="accordionElements" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
@@ -189,7 +190,25 @@ and open the template in the editor.
                         </div>
                     </div>
                 </div>
-                <div class="col-md-10 col-md-offset-2">
+                -->
+                <div class="col-md-4">
+                    <div class="panel panel-primary" >
+                        <div class="panel-heading">
+                            Interface Abstrata
+                            <div class="pull-right">
+                                <button class="btn btn-success btn-xs btn-tree" id="btn-root-add">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <button class="btn btn-danger btn-xs btn-tree" id="btn-root-removeall">
+                                    <i class="fa fa-times"></i> <i class="fa fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-body" id="tree" style="padding: 0px">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
                     <ul id="tab-prototype" class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#mode-design" aria-controls="mode-design" role="tab" data-toggle="tab" data-mode="design">Design</a></li>
                         <li role="presentation"><a href="#mode-preview" aria-controls="mode-preview" role="tab" data-toggle="tab" data-mode="preview">Preview</a></li>
@@ -216,17 +235,29 @@ and open the template in the editor.
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5 col-md-offset-2">
+                <div class="col-md-4 col-md-offset-4">
                     <div class="panel panel-danger">
-                        <div class="panel-heading">Widget Abstrato</div>
+                        <div class="panel-heading">
+                            Widget Abstrato
+                            <div class="pull-right">
+                                <!--<button class="btn btn-primary btn-xs btn-copy-clipboard"><i class="fa fa-clipboard"></i></button>-->
+                                <button class="btn btn-primary btn-xs btn-open-modal"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
                         <div id="abstract-code" class="panel-body">
                             <pre></pre>
                         </div>    
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <div class="panel panel-danger">
-                        <div class="panel-heading">Widget Concreto</div>
+                        <div class="panel-heading">
+                            Widget Concreto
+                            <div class="pull-right">
+                                <!--<button class="btn btn-primary btn-xs btn-copy-clipboard"><i class="fa fa-clipboard"></i></button>-->
+                                <button class="btn btn-primary btn-xs btn-open-modal"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
                         <div id="concrete-code" class="panel-body">
                             <pre></pre>
                         </div>  
@@ -240,9 +271,7 @@ and open the template in the editor.
         
         <section id="footer">
             <div class="row">
-                <div id="tree"class="col-md-4">
-                
-                </div>    
+                    
             </div>
         </section>
         <div id="title-property" style="display: none;">
@@ -254,448 +283,318 @@ and open the template in the editor.
                 
             </div>
         </div>
+        <div id="modal-code" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalCode">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalCode">Código Gerado</h4>
+                </div>
+                <div class="modal-body">
+                    
+                </div>  
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+            
+            
+          </div>
+        </div>
 
         <!-- Templates -->
         <script id="panel-base" type="text/template">
-            <div class="panel panel-default panel-drag" data-id="" data-component="" data-name="" data-type="<%- item.type %>">
+            <div class="panel panel-default panel-drag panel-resize" data-id="<%- item.id %>" data-component="" data-name="" data-type="<%- item.typeElement %>" 
+            <% if(item.componentWidth){ %>
+                style="width: <%-item.componentWidth%>"
+            <%}%>    
+            >
                 <div class="panel-heading"> 
-                    <%- item.nameComponent %> 
+                    <span><% print(item.name) %></span> 
                     <div class="pull-right">
-                        <span class="btn-move btn btn-warning btn-xs"><i class="fa fa-arrows"></i></span>
-                        <button data-open="0" class="btn-prop btn btn-primary btn-xs"><i class="fa fa-cog"></i></button>
-                        <button class="btn-remove btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
+                        <div class="col-md-11">
+                            <select class="select-type-element form-control" value="<%-item.typeElement%>" name="typeElement" style="margin-top: -7px">
+                                <optgroup label="Container">
+                                    <option value="div">div</option>
+                                </optgroup>
 
+                                <optgroup label="Texto">
+                                    <option value="p" <% if(item.typeElement == 'p') print('selected')%>>p</option>
+                                    <option value="header" <% if(item.typeElement == 'header') print('selected')%>>h1 - h6</option>
+                                    <option value="a" <% if(item.typeElement == 'a') print('selected')%>>link</option>
+                                    <option value="label" <% if(item.typeElement == 'label') print('selected')%>>label</option>
+                                    <option value="span" <% if(item.typeElement == 'span') print('selected')%>>span</option>
+                                </optgroup>
+
+                                <optgroup label="Lista">
+                                    <option value="list" <% if(item.typeElement == 'list') print('selected')%>>ul-ol</option>
+                                    <option value="list-item" <% if(item.typeElement == 'list-item') print('selected')%>>li</option>
+                                </optgroup>
+
+                                <optgroup label="Imagem">
+                                    <option value="image" <% if(item.typeElement == 'image') print('selected')%>>img</option>
+                                    <option value="carousel" <% if(item.typeElement == 'carousel') print('selected')%>>carousel</option>
+                                    <option value="carousel-item" <% if(item.typeElement == 'carousel-item') print('selected')%>>carousel-item</option>    
+                                </optgroup>
+
+                                <optgroup label="Navegação - Menu">
+                                    <option value="navigation" <% if(item.typeElement == 'navigation') print('selected')%>>BootstrapNavigation</option>
+                                    <option value="navigation-list" <% if(item.typeElement == 'navigation-list') print('selected')%>>BootstrapNavigationList</option>
+                                    <option value="navigation-list-item" <% if(item.typeElement == 'navigation-list-item') print('selected')%>>BootstrapNavigationListItem</option>
+                                </optgroup>
+
+                                <optgroup label="Formulário">
+                                    <option value="form" <% if(item.typeElement == 'form') print('selected')%>>form</option>
+                                    <option value="input-text" <% if(item.typeElement == 'input-text') print('selected')%>>input - text</option>
+                                    <option value="input-textarea" <% if(item.typeElement == 'input-textarea') print('selected')%>>input - textarea</option>
+                                    <option value="input-radio" <% if(item.typeElement == 'input-radio') print('selected')%>>input - radio/checkbox</option>
+                                    <option value="input-select" <% if(item.typeElement == 'input-select') print('selected')%>>select</option>
+                                    <option value="input-option" <% if(item.typeElement == 'input-option') print('selected')%>>option</option>
+                                    <option value="input-button" <% if(item.typeElement == 'input-button') print('selected')%>>button</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <button data-open="0" class="btn-prop btn btn-primary btn-xs pull-right"><i class="fa fa-cog"></i></button>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <%= item.html %>
+                    <%= item.html ? item.html.html() : "" %>
                 </div>
             </div>
         </script>
-        
-        <script id="container-div" type="text/template">
-            <div class="<%- item %>">
-                <% if(item.indexOf('panel') !=  -1) { %>
-                    <div class="panel-heading">Título</div>
-                    <div class="panel-body">
 
-                    </div>
-                <% } %>
-            </div>
-        </script>
-
-        <script id="container-text" type="text/template">
-        	<% if(item == 'text') { %>
-        		<p>Texto de exemplo</p>
-        	<%} else if (item == 'title') { %>
-        		<h1>Texto de exemplo</h1> 
-        	<%} %>	
-        </script>
-
-        <script id="component-image" type="text/template">
-        	<% if(item == 'image') { %>
-        		<img src="http://placehold.it/400x300" alt="image" />
-        	<%} else if (item == 'thumbnail') { %>
-        		<div class="thumbnail">
-        			<img src="http://placehold.it/400x300" alt="image" />
-        		</div>
-        	<%}	%>
-        </script>
-
-        <!-- Menu de navegação -->
-        <script id="component-nav" type="text/template">
-        	<nav class="navbar navbar-default">
-        		<div class="container-fluid">
-        			<div class="navbar-header">
+        <!-- Template BootstrapNavigationItem -->
+        <script type="text/template" id="template-navigationitem">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Título</a>
+                        <a class="navbar-brand" href="#">Brand</a>
                     </div>
-        			<div class="collapse navbar-collapse">
-        				<ul class="nav navbar-nav">
-        					<li><a href="#">Item 1</a></li>
-        					<li><a href="#">Item 2</a></li>
-        					<li><a href="#">Item 3</a></li>
-        				</ul>
-        			</div>
-        		</div>
-        	</nav>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Item 1 <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">Item 2</a></li>
+                            <li><a href="#">Item 3</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </script>
 
-        <script id="component-list" type="text/template">
-        	<% if(item == 'unordered') { %>
-        			<ul>
-        				<li>Item 1</li>
-        				<li>Item 2</li>
-        				<li>Item 3</li>
-        			</ul>
-        	<% } else { %>
-        			<ol>
-        				<li>Item 1</li>
-        				<li>Item 2</li>
-        				<li>Item 3</li>
-        			</ol>
-        	<%}%>
+        <!-- Template Paragraph -->
+        <script type="text/template" id="template-paragraph">
+            <p> 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas laoreet, sem sit amet tempor luctus, erat lorem cursus turpis, nec condimentum est leo eu massa. Integer tincidunt sodales enim in interdum. Nam ac elit enim. Mauris neque quam, viverra eu magna quis, suscipit fermentum ligula. Vestibulum tempor tortor ac lacus egestas lobortis. Praesent placerat porttitor ante, a maximus tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+            </p> 
         </script>
 
-        <!-- Formulário -->
-        <script id="form-form" type="text/template">
-            <form class="<%- item %>">
-                
-            </form>
+        <!-- Template Title -->
+        <script type="text/template" id="template-title">
+            <h1>Título de Exemplo</h1>
         </script>
 
-        <script id="form-text" type="text/template">
-            <input class="form-control" type="text" name="" />
+        <!-- Template link -->
+        <script type="text/template" id="template-link">
+            <a href="#">Link de exemplo</a>
         </script>
 
-        <script id="form-select" type="text/template">
-            <select class="form-control">
-                <option value="valor 1">Opção 1</option>
-                <option value="valor 2">Opção 2</option>
-                <option value="valor 3">Opção 3</option>
+        <!-- Template span -->
+        <script type="text/template" id="template-span">
+            <span href="#">Texto de exemplo do span</span>
+        </script>
+
+        <!-- Template label -->
+        <script type="text/template" id="template-label">
+            <label>Texto de exemplo do label</label>
+        </script>
+
+        <!-- Template listItem -->
+        <script type="text/template" id="template-listitem">
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+        </script>
+
+        <!-- Template img -->
+        <script type="text/template" id="template-img">
+            <img src="img/template-img.png" alt="Imagem de Exemplo" class="img-responsive" />
+        </script>
+
+        <!-- Template Carousel Item -->
+        <script type="text/template" id="template-carouselitem">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="img/carousel-item.jpg" alt="Imagem de Exemplo" />
+                    </div>
+                    <div class="item">
+                        <img src="img/carousel-item.jpg" alt="Imagem de Exemplo" />
+                    </div>
+                    <div class="item">
+                        <img src="img/carousel-item.jpg" alt="Imagem de Exemplo" />
+                    </div>
+                </div>
+
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </script>
+
+        <!-- Template text/textarea -->
+        <script type="text/template" id="template-inputtext">
+            <input type="text" class="form-control text-concrete" placeholder="Digite seu texto aqui" />
+        </script>
+
+        <!-- Template text/textarea -->
+        <script type="text/template" id="template-inputtextarea">
+            <textarea class="form-control text-concrete" placeholder="Digite seu texto aqui"></textarea>
+        </script>
+
+        <!-- Template radio/checkbox -->
+        <script type="text/template" id="template-inputradio">
+            <div class="radio">
+                <label><input type="radio" name="optionsRadios" checked> Opçao 1</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="optionsRadios"> Opçao 2</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="optionsRadios"> Opçao 3</label>
+            </div>
+        </script>
+
+        <!-- Template option -->
+        <script type="text/template" id="template-inputoption">
+            <select class="form-control text-concrete">
+                <option value="v1">Opção 1</option>
+                <option value="v2">Opção 2</option>
+                <option value="v3">Opção 3</option>
             </select>
         </script>
 
-        <script id="form-textarea" type="text/template">
-            <textarea class="form-control" name=""></textarea> 
+        <!-- Template button -->
+        <script type="text/template" id="template-button">
+            <button class="btn btn-primary text-concrete">Botão</button>
         </script>
 
-        <script id="form-radio-checkbox" type="text/template">
-            <div class="<% item == 'input-radio' ? print('radio') : print('checkbox')%>">
-                <label><input type="<% item == 'input-radio' ? print('radio') : print('checkbox')%>" name="" value="valor 1">Opção 1</label>
-            </div>
-            <div class="<% item == 'input-radio' ? print('radio') : print('checkbox')%>">
-                <label><input type="<% item == 'input-radio' ? print('radio') : print('checkbox')%>" name="" value="valor 2">Opção 2</label>
-            </div>
-            <div class="<% item == 'input-radio' ? print('radio') : print('checkbox')%>">
-                <label><input type="<% item == 'input-radio' ? print('radio') : print('checkbox')%>" name="" value="valor 3">Opção 3</label>
-            </div>
-        </script>
-
-        <script id="form-file" type="text/template">
-            <input class="form-control" type="file" name="" />
-        </script>
-        <script id="form-static" type="text/template">
-            <p class="form-control-static">Item estático</p>
-        </script>
-
-        <script id="form-group" type="text/template">
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">@</span>
-                <input type="text" class="form-control" placeholder="Username">
-            </div>
-        </script>
-
-
-
-        <!--Template dos formulários -->
-        <script type="text/template" id="form-nav">
-            <form class="form-horizontal form-properties">
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
-                </div>
-                <div class="form-group">
-                    <label>Datasource</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Parse</label>
-                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
-                </div>
-                <div class="form-group">
-                    <label>Título</label>
-                    <input type="text" class="form-control" name="title" value="<%=item.title%>" id="title" /> 
-                </div>
-
-                <div class="form-group">
-                    <label>Valores</label>
-                    <label class="radio-inline">
-                        <input type="radio" name="value" id="radio-static" value="0" <% if(item.value == 0) print('cheked')%>> Estáticos
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="value" id="radio-dynamic" value="1" <% if(item.value == 1) print('cheked')%>> Dinamicos
-                    </label>
-                </div>
-
-                <!-- Valores estátitocs -->
-                <div id="control-static">
+        <script type="text/template" id="form-prop">
+            <form class="form-horizontal form-properties" id="form-properties">
+                <% if(item.value != undefined) { %>
                     <div class="form-group">
-                        <label>Itens</label>
-                        <textarea id="txtItens" name="itens" class="form-control" rows="6"><% _.each(item.itens, function(obj){ print(obj + '\n'); })%></textarea>
+                        <label>Valor</label>
+                        <textarea class="form-control" name="value" rows="10"><%=item.value%></textarea> 
                     </div>
-                    <div class="form-group">
-                        <label>Label</label>
-                        <textarea id="txtItens" name="hrefs" class="form-control" rows="6"><% _.each(item.hrefs, function(obj){ print(obj + '\n') })%></textarea>
-                    </div>
-                </div>
-                
-                <!-- Valores Dinamicos -->
-                <div id="control-dynamic" style="display:none">
-                    <div class="form-group">
-                        <label>Itens</label>
-                        <input type="text" class="form-control" name="itens" value="<%-item.itens[0] %>" id="itens" />
-                    </div>
-                    <div class="form-group">
-                        <label>Link</label>
-                        <input type="text" class="form-control" name="hrefs" value="<%=item.hrefs[0] %>" id="links" />
-                    </div>
-                </div>
+                <%}%>
 
-                <div class="form-group">
-                    <label>Classes</label>
-                    <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%=item.classes%></textarea>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
-                    <button class="btn btn-default" id="btnFechar">Fechar</button>
-                </div>
-            </form>
-        </script>
-
-        <script type="text/template" id="form-container">
-            <form class="form-horizontal form-properties">
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
-                </div>
-                <div class="form-group">
-                    <label>Parse</label>
-                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
-                </div>
-                <div class="form-group">
-                    <label>Datasource</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
-                        </span>
+                <% if(item.headerTag != undefined) { %>
+                    <div class="form-group">
+                        <label>Tag</label>
+                        <select class="form-control" id="select-header-tag" name="headerTag" value="<%=item.headerTag%>">
+                            <option value="h1">h1</option>
+                            <option value="h2" <% if(item.headerTag == 'h2') print('selected') %> >h2</option>
+                            <option value="h3" <% if(item.headerTag == 'h2') print('selected') %> >h3</option>
+                            <option value="h4" <% if(item.headerTag == 'h2') print('selected') %> >h4</option>
+                            <option value="h5" <% if(item.headerTag == 'h2') print('selected') %> >h5</option>
+                            <option value="h6" <% if(item.headerTag == 'h2') print('selected') %> >h6</option>
+                        </select>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Tipo</label>
-                    <select class="form-control" id="selectType" name="type" value="<%=item.type%>">
-                        <option value="div">Comum</option>
-                        <option value="container" <% if(item.type == 'container') print('selected') %> >Container</option>
-                        <option value="jumbotron" <% if(item.type == 'jumbotron') print('selected') %> >Jumbotron</option>
-                        <option value="well" <% if(item.type == 'well') print('selected') %> >Well</option>
-                        <option value="alert-success" <% if(item.type == 'alert-success') print('selected') %> >Alerta - Sucesso</option>
-                        <option value="alert-danger" <% if(item.type == 'alert-danger') print('selected') %> >Alerta - Perigo</option>
-                        <option value="alert-warning" <% if(item.type == 'alert-info') print('selected') %> >Alerta - Atenção</option>
-                        <option value="alert-info" <% if(item.type == 'alert-info') print('selected') %> >Alerta - Informação</option>
-                    </select>
-                </div>
+                <%}%>
 
-                <div class="form-group">
-                    <label>Largura da Coluna</label>
-                    <select class="form-control" id="selectLargura" name="width" value="<%=item.width%>">
-                        <option value="0">Indefinida</option>
-                        <option value="row" <% if(item.width == 'row') print('selected') %> >Row</option>
-                        <option value="1" <% if(item.width == '1') print('selected') %> >1</option>
-                        <option value="2" <% if(item.width == '2') print('selected') %> >2</option>
-                        <option value="3" <% if(item.width == '3') print('selected') %> >3</option>
-                        <option value="4" <% if(item.width == '4') print('selected') %> >4</option>
-                        <option value="5" <% if(item.width == '5') print('selected') %> >5</option>
-                        <option value="6" <% if(item.width == '6') print('selected') %> >6</option>
-                        <option value="7" <% if(item.width == '7') print('selected') %> >7</option>
-                        <option value="8" <% if(item.width == '8') print('selected') %> >8</option>    
-                        <option value="9" <% if(item.width == '9') print('selected') %> >9</option>
-                        <option value="10" <% if(item.width == '10') print('selected') %> >10</option>
-                        <option value="11" <% if(item.width == '11') print('selected') %> >11</option>
-                        <option value="12" <% if(item.width == '12') print('selected') %> >12</option>
-                    </select>
-                </div>
+                <% if(item.action != undefined) { %>
+                    <div class="form-group">
+                        <label>Action</label>
+                        <input type="text" class="form-control" name="action" value="<%=item.action%>" /> 
+                    </div>
+                <%}%>
+
+                <% if(item.simpleHtmlTag != undefined) { %>
+                    <div class="form-group">
+                        <label>Tag</label>
+                        <input type="text" class="form-control" name="alt" value="<%=item.simpleHtmlTag%>" /> 
+                    </div>
+                <%}%>
+
+                <% if(item.href != undefined) { %>
+                    <div class="form-group">
+                        <label>Href</label>
+                        <input type="text" class="form-control" name="href" value="<%=item.href%>" /> 
+                    </div>
+                <%}%>
+
+                <% if(item.src != undefined) { %>
+                    <div class="form-group">
+                        <label>Src</label>
+                        <input type="text" class="form-control" name="src" value="<%=item.src%>" /> 
+                    </div>
+                <%}%>
+
+                <% if(item.tagRadio != undefined) { %>
+                    <div class="form-group">
+                        <label>Tag</label>
+                        <select class="form-control" id="select-tag-text" name="tagRadio" value="<%=item.tagRadio%>">
+                            <option value="radio">radio</option>
+                            <option value="checkbox" <% if(item.tagRadio == 'checkbox') print('selected') %> >checkbox</option>
+                        </select>
+                    </div>
+                <%}%>
+
+                <% if(item.listTag != undefined) { %>
+                    <div class="form-group">
+                        <label>Tag</label>
+                        <select class="form-control" id="select-tag-text" name="listTag" value="<%=item.listTag%>">
+                            <option value="ul">ul</option>
+                            <option value="ol" <% if(item.listTag == 'ol') print('selected') %> >ol</option>
+                        </select>
+                    </div>
+                <%}%>
+
+                <% if(item.alt != undefined) { %>
+                    <div class="form-group">
+                        <label>Alt</label>
+                        <input type="text" class="form-control" name="alt" value="<%=item.alt%>" /> 
+                    </div>
+                <%}%>
+
+                <% if(item.width != undefined) { %>
+                    <div class="form-group">
+                        <label>Largura</label>
+                        <input type="text" class="form-control" name="width" value="<%=item.width%>" /> 
+                    </div>
+                <%}%>
+
+                <% if(item.height != undefined) { %>
+                    <div class="form-group">
+                        <label>Altura</label>
+                        <input type="text" class="form-control" name="height" value="<%=item.height%>" /> 
+                    </div>
+                <%}%>
+
+                <% if(item.text != undefined) { %>
+                    <div class="form-group">
+                        <label>Texto</label>
+                        <textarea class="form-control" name="text" rows="5"><%=item.text%></textarea> 
+                    </div>
+                <%}%>
+
                 <div class="form-group">
                     <label>Classes</label>
                     <textarea class="form-control" id="txtClasses" name="classes" rows="5"><%=item.classes%></textarea>
                 </div>
 
-                <div class="form-group">
-                    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
-                    <button class="btn btn-default" id="btnFechar">Fechar</button>
-                </div>
-            </form>
-        </script>
-        
-        <script type="text/template" id="form-text">
-            <form class="form-horizontal form-properties ">
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" class="form-control" value="<%=item.name%>" name="name" id="nameComponent" /> 
-                </div>
-                <div class="form-group">
-                    <label>Parse</label>
-                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
-                </div>
-                <div class="form-group">
-                    <label>Datasource</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
-                        </span>
-                    </div>
-                </div>
-                <% if(item.type == 'header') {%>
-                     <div class="form-group">
-                        <label>Largura da Coluna</label>
-                        <select class="form-control" id="selectTag" name="tag"  value="<%=item.tag%>">
-                            <option value="h1" <% if(item.tag == 'h1') print('selected') %> >h1</option>
-                            <option value="h2" <% if(item.tag == 'h2') print('selected') %> >h2</option>
-                            <option value="h3" <% if(item.tag == 'h3') print('selected') %> >h3</option>
-                            <option value="h4" <% if(item.tag == 'h4') print('selected') %> >h4</option>
-                            <option value="h5" <% if(item.tag == 'h5') print('selected') %> >h5</option>
-                            <option value="h6" <% if(item.tag == 'h6') print('selected') %> >h6</option>
-                        </select>
-                    </div>
-                <%}%>
-                <div class="form-group">
-                    <label>Texto</label>
-                    <textarea id="txtTexto" name="text" class="form-control" rows="6"><%= item.text %></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Alinhamento</label>
-                    <select class="form-control" id="selectAlign" name="align" value="<%=item.align%>">
-                        <option value="normal" <% if(item.align == 'normal') print('selected') %> >Normal</option>
-                        <option value="left" <% if(item.align == 'left') print('selected') %> >Esquerdo</option>
-                        <option value="right" <% if(item.align == 'right') print('selected') %> >Direito</option>
-                        <option value="center" <% if(item.align == 'center') print('selected') %> >Centralizado</option>
-                        <option value="justify" <% if(item.align == 'justify') print('selected') %> >Justificado</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Classes</label>
-                    <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%= item.classes %></textarea>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
-                    <button class="btn btn-default" id="btnFechar">Fechar</button>
-                </div>
-            </form>
-        </script>
-
-        <script type="text/template" id="form-image">
-            <form class="form-horizontal form-properties">
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
-                </div>
-                <div class="form-group">
-                    <label>Parse</label>
-                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
-                </div>
-                <div class="form-group">
-                    <label>Datasource</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Source</label>
-                    <input type="text" class="form-control" name="src" value="<%=item.src%>" id="srcImage" /> 
-                </div>
-                
-                <div class="form-group">
-                    <label>Largura</label>
-                    <input type="text" id="txtLargura" name="width" class="form-control" value="<%=item.width %>" />
-                </div>
-                <div class="form-group">
-                    <label>Altura</label>
-                    <input type="text" id="txtAltura" class="form-control" name="height" value="<%=item.height %>" />
-                </div>
-                <div class="form-group">
-                    <label>Classes</label>
-                    <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%= item.classes %></textarea>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary" id="btnSalvar">Salvar</button>
-                    <button class="btn btn-default" id="btnFechar">Fechar</button>
-                </div>
-            </form>
-        </script>
-
-        <script type="text/template" id="form-list">
-            <form class="form-horizontal form-properties">
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
-                </div>
-                <div class="form-group">
-                    <label>Parse</label>
-                    <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
-                </div>
-                <div class="form-group">
-                    <label>Datasource</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
-                        <span class="input-group-btn">
-                            <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Valores</label>
-                    <label class="radio-inline">
-                        <input type="radio" name="value" id="radio-static" value="0" <% if(item.value == 0) print('cheked')%>> Estáticos
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="value" id="radio-dynamic" value="1" <% if(item.value == 1) print('cheked')%>> Dinamicos
-                    </label>
-                </div>
-                <div id="control-static">
-                    <div class="form-group">
-                        <label>Itens</label>
-                        <textarea id="txtItens" name="itens" class="form-control" rows="6"><% _.each(item.itens, function(obj){ print(obj + '\n'); })%></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Links</label>
-                        <textarea id="txtLink" name="hrefs" class="form-control" rows="6"><% _.each(item.hrefs, function(obj){ print(obj + '\n'); })%></textarea>
-                    </div>
-                </div>
-                <div id="control-dynamic">
-                    <div class="form-group">
-                        <label>Variável</label>
-                        <input type="text" class="form-control" name="itens" value="<%=item.itens[0]%>" /> 
-                    </div>
-                    <div class="form-group">
-                        <label>Label</label>
-                        <input type="text" class="form-control" name="label" value="<%=item.label%>" /> 
-                    </div>
-                    <div class="form-group">
-                        <label>Link</label>
-                        <input type="text" class="form-control" name="hrefs" value="<%=item.hrefs[0]%>" /> 
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Lista do Boostrap</label><br />
-                    <label class="radio-inline">
-                        <input type="radio" name="bootstrap" value="0" <% if(item.bootstrap == 0) print('checked') %> > Não
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="bootstrap" value="1" <% if(item.bootstrap == 1) print('checked') %>> Sim
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Classes</label>
-                    <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%=item.classes%></textarea>
-                </div>
                 <div class="form-group">
                     <button class="btn btn-primary" id="btnSalvar">Salvar</button>
                     <button class="btn btn-default" id="btnFechar">Fechar</button>
@@ -710,45 +609,1146 @@ and open the template in the editor.
         <script src="js/lib/jquery.sidr.min.js"></script>
         <script src="js/lib/pretty-json.js"></script>
         <script src="js/lib/bootstrap-treeview.js"></script>
-        <script src="js/classes.js"></script>
-        <script src="js/script.js"></script>
-
         <script type="text/javascript">
         $(document).ready(function(){
+            var globalTree = null;
+            /**************************************** Interface concreta *****************************************/
+            var updateAttr = function(htmlElement, attrs){
+                for(var attr in attrs){
+                    htmlElement[attr] = attrs[attr];
+                }
+
+                return htmlElement;
+            }
+
+            var HTMLElement = function(node){
+
+                this.id = node.id;
+                this.name = node.text;
+                this.value = node.bind ? "$bind" : undefined;
+                this.class = ''; 
+             
+                return this;
+            }
+
+            var getTemplate = function(item){
+                switch(item){
+                    case 'p':               return $('<div/>').append($(_.template($("#template-paragraph").html())()));
+                    case 'header':          return $('<div/>').append($(_.template($("#template-title").html())()));
+                    case 'a':            return $('<div/>').append($(_.template($("#template-link").html())()));
+                    case 'span':            return $('<div/>').append($(_.template($("#template-span").html())()));
+                    case 'label':           return $('<div/>').append($(_.template($("#template-label").html())()));
+                    case 'list-item':       return $('<div/>').append($(_.template($("#template-listitem").html())()));
+                    case 'img':             return $('<div/>').append($(_.template($("#template-img").html())()));
+                    case 'carousel-item':   return $('<div/>').append($(_.template($("#template-carouselitem").html())()));
+                    case 'navigation-item': return $('<div/>').append($(_.template($("#template-navigationitem").html())()));
+                    case 'input-text':      return $('<div/>').append($(_.template($("#template-inputtext").html())()));
+                    case 'input-textarea':  return $('<div/>').append($(_.template($("#template-inputtextarea").html())()));
+                    case 'input-radio':     return $('<div/>').append($(_.template($("#template-inputradio").html())()));
+                    case 'input-option':    return $('<div/>').append($(_.template($("#template-inputoption").html())()));
+                    case 'input-button':    return $('<div/>').append($(_.template($("#template-button").html())()));
+                    default:                return undefined;
+                }
+            }
+
+            //container
+            var Div = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.typeElement = 'div';
+                htmlElement.value = "";
+                
+                return htmlElement;
+            }
+
+            //texto
+            var Paragraph = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'p';
+                htmlElement.value = node.bind ? "$bind" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas laoreet, sem sit amet tempor luctus, erat lorem cursus turpis, nec condimentum est leo eu massa. Integer tincidunt sodales enim in interdum. Nam ac elit enim. Mauris neque quam, viverra eu magna quis, suscipit fermentum ligula. Vestibulum tempor tortor ac lacus egestas lobortis. Praesent placerat porttitor ante, a maximus tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.";
+                htmlElement.typeElement = 'p';
+                htmlElement.html = getTemplate('p');
+                return htmlElement;
+            }
+
+            var Header = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'h1';
+                htmlElement.headerTag = 'h1';
+                htmlElement.typeElement = 'header';
+                htmlElement.value = node.bind ? "$bind" : "Valor de exemplo";
+                htmlElement.html = getTemplate('header');
+
+                return htmlElement;
+            }
+
+            var Link = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'a';
+                htmlElement.typeElement = 'a';
+                htmlElement.href = '#';
+                htmlElement.value = node.bind ? "$bind" : "Valor de exemplo";
+                htmlElement.html = getTemplate('a');
+
+                return htmlElement;
+            }
+
+            var Span = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'span';
+                htmlElement.typeElement = 'span';
+                htmlElement.value = node.bind ? "$bind" : "Texto de exemplo do span";
+                htmlElement.html = getTemplate('span');
+
+                return htmlElement;    
+            }
+
+            var Label = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'label';
+                htmlElement.typeElement = 'label';
+                htmlElement.value = node.bind ? "$bind" : "Texto de exemplo do label";
+                htmlElement.html = getTemplate('label');
+
+                return htmlElement;    
+            }
+
+            //lista
+            var List = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'ul';
+                htmlElement.typeElement = 'list';
+                htmlElement.listTag = 'ul';
+
+                return htmlElement;
+            }
+
+            var ListItem = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'li';
+                htmlElement.typeElement = 'list-item';
+                htmlElement.value = node.bind ? "$bind" : "Item da lista";
+                htmlElement.html = getTemplate('list-item');
+
+                return htmlElement;
+            }
+
+            //html genérico (qualquer outra tag)
+            var SimpleHtml = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = '';
+                htmlElement.simpleHtmlTag = 'h1';
+                htmlElement.value = '';
+                htmlElement.typeElement = 'simple-html';
+
+                return htmlElement;
+            }
+
+            //imagem
+            var ImageHtml = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'img';
+                htmlElement.alt = 'Valor de Exemplo';
+                htmlElement.src = node.bind ? "$bind" : "img/template-img.png";
+                htmlElement.value = undefined;
+                htmlElement.width = '';
+                htmlElement.height = '';
+                htmlElement.typeElement = 'image';
+                htmlElement.html = getTemplate('img');
+
+                return htmlElement;
+            }
+
+            var Carousel = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.widget = 'BootstrapCarousel';
+                htmlElement.value = undefined;
+                htmlElement.typeElement = 'carousel';
+                return htmlElement;
+            }
+
+            var CarouselItem = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.widget = 'BootstrapCarouselItem';
+                htmlElement.typeElement = 'carousel-item';
+                htmlElement.value = node.bind ? "$bind" : "img/carousel-item.jpg";
+                htmlElement.html = getTemplate('carousel-item');
+
+                return htmlElement;
+            }
+
+            //navegação
+            var BootstrapNavigation = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.widget = 'BootstrapNavigation';
+                htmlElement.typeElement = 'navigation';
+                htmlElement.value = node.bind ? "$bind" : "Brand";
+
+                return htmlElement;
+            }
+
+            var BootstrapNavigationList = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.widget = 'BootstrapNavigationList';
+                htmlElement.typeElement = 'navigation-list';
+                htmlElement.value = undefined;
+
+                return htmlElement;
+            }
+
+            var BootstrapNavigationListItem = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.widget = 'BootstrapNavigationListItem';
+                htmlElement.typeElement = 'navigation-list-item';
+                htmlElement.html = getTemplate('navigation-item');
+                htmlElement.value = node.bind ? "$bind" : "Item do Menu";
+                htmlElement.href = '#';
+                
+                return htmlElement;
+            }
+
+            //Formulário
+            var Formulario = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'form';
+                htmlElement.typeElement = 'form';
+                htmlElement.action = node.bind ? "$bind" : "";
+                
+                return htmlElement;
+            }
+
+            var InputText = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'input';
+                htmlElement.typeElement = 'input-text';
+                htmlElement.type = 'text';
+                htmlElement.html = getTemplate('input-text');
+                
+                return htmlElement;
+            }
+
+            var InputTextarea = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'input';
+                htmlElement.typeElement = 'input-textarea';
+                htmlElement.html = getTemplate('input-textarea');
+                
+                return htmlElement;
+            }
+
+            var InputRadioCheck = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'input';
+                htmlElement.typeElement = 'input-radio';
+                htmlElement.type = 'radio';
+                htmlElement.tagRadio = 'radio';
+                htmlElement.text =  node.bind ? "$bind" : "Opção";
+                htmlElement.html = getTemplate('input-radio');
+                
+                return htmlElement;
+            }
+
+            var InputSelect = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'select';
+                htmlElement.typeElement = 'input-select';
+                
+                return htmlElement;
+            }
+
+            var InputOption = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'option';
+                htmlElement.type = 'text';
+                htmlElement.typeElement = 'input-option';
+                htmlElement.html = getTemplate('input-option');
+                htmlElement.text =  node.bind ? "$bind" : "Opção";
+                
+                return htmlElement;
+            }
+
+            var Button = function(node){
+                var htmlElement = new HTMLElement(node);
+                htmlElement.tag = 'button';
+                htmlElement.type = 'submit';
+                htmlElement.typeElement = 'input-button';
+                htmlElement.html = getTemplate('input-button');
+                htmlElement.text =  node.bind ? "$bind" : "Opção";
+                
+                return htmlElement;
+            }
+
+            /*************************** fim elementos concretos ***********************/
+
+            /************************** funções que serão usadas no script *************/
+            // Sidebar
+            var currentObj = null;
+            var currentElement = null;
+            var sidebar = null;
+            
+            
+            var getForm = function(attrs){
+                return _.template($('#form-prop').html())({item:attrs});    
+            }
+            //install sidebar
+            var installSidebarAndPropForm = function(){
+                var currentProp = null;
+
+                sidebar = $('.btn-prop').sidr({
+                    name: 'sidr-sidebar',
+                    side: 'right',
+                    source: "#title-property, #content-property"
+
+                });
+
+                var getAttrs = function(data){
+                    var attrs = new Object();
+                    for(var i=0; i<data.length; i++){
+                        attrs[data[i].name] = data[i].value;
+                    }
+
+                    return attrs;
+                }
+
+                var saveForm = function(){
+                    var data = $('#form-properties').serializeArray();
+                    updateAttr(currentObj, getAttrs(data));
+                    replaceItem(currentObj);
+                }
+
+                $(document).on('click', '#btnSalvar', function(e){
+                    e.preventDefault();
+                    saveForm();
+                    currentProp.click()
+                    
+                });
+
+                //ao clicar no botão fechar
+                $(document).on('click', '#btnFechar', function(e){
+                    e.preventDefault();
+                    currentProp.click();           
+                });
+
+                $(document).on('click', '.btn-prop', function(e){
+                    currentProp = $(this);  
+                    e.preventDefault();
+                    var $this = $(this);
+
+                    var open = $this.data('open');
+                    var id = $this.parent().parent().parent().attr('data-id');
+                    var node = new Object();
+                    node.id = id;
+                    
+                    if(open == 0) {
+                        $.sidr('open', 'sidr-sidebar');
+                        
+                        currentObj = findItem(node);
+                        currentElement = $this.parent().parent().parent();
+                        if(currentObj.id != undefined){
+                            $('#sidr-id-form-content').html(getForm(currentObj));
+                        }
+
+                        open = 1;
+                    }else {
+                        $.sidr('close', 'sidr-sidebar');
+                        open = 0;
+                    }
+
+                    $this.data('open', open);
+                });
+            }
+            //fim sidebar
+
+            installSidebarAndPropForm();
+
+            //Evento change do select para o tipo de elemento
+            $(document).on('change', '.select-type-element', function(e){
+                var value = $(this).val();
+                var root = $(this).parent().parent().parent().parent();
+                var id = root.data('id');
+                var node = globalTree.findNodeById(id);
+                var item = findItem(node);
+
+                switch(value){
+                    case 'div' : item = new Div(node); break;
+                    case 'p' : item = new Paragraph(node); break;
+                    case 'header' : item = new Header(node); break;
+                    case 'a' : item = new Link(node); break;
+                    case 'label' : item = new Label(node); break;
+                    case 'span' : item = new Span(node); break;
+                    case 'list' : item = new List(node); break;
+                    case 'list-item' : item = new ListItem(node); break;
+                    case 'image' : item = new ImageHtml(node); break;
+                    case 'carousel' : item = new Carousel(node); break;
+                    case 'carousel-item' : item = new CarouselItem(node); break;
+                    case 'navigation' : item = new BootstrapNavigation(node); break;
+                    case 'navigation-list' : item = new BootstrapNavigationList(node); break;
+                    case 'navigation-list-item' : item = new BootstrapNavigationListItem(node); break;
+                    case 'div' : item = new Div(node); break;
+                    case 'form' : item = new Formulario(node); break;
+                    case 'input-text' : item = new InputText(node); break;
+                    case 'input-textarea' : item = new InputTextarea(node); break;
+                    case 'input-radio' : item = new InputRadioCheck(node); break;
+                    case 'input-select' : item = new InputSelect(node); break;
+                    case 'input-option' : item = new InputOption(node); break;
+                    case 'input-button' : item = new Button(node); break;
+                }
+
+                item.componentWidth = root.width() + 'px';
+                replaceItem(item);
+                generateConcreteInterface();
+
+                
+                //$(this).parent().parent().parent().find('span').text(item.name + ' - ' + item.typeElement);
+                $('#tree').trigger('treeRender', $.extend({}, true, globalTree));
+                //if(currentProp != null) currentProp.click();
+                
+                
+            })
+
+            var renderConcreteElement = function(element, item){
+                var type = element.data('type');
+
+                if(type != item.typeElement){
+
+                }
+            }
+
             var dataTree = 
             [
                 {
-                    text: "Parent 1",
+                    text: "Navigation",
                     nodes: 
                     [
                         {
-                            text: "Child 1",
+                            text: "NavigationList",
                             nodes: 
                             [
-                                { text: "Grandchild 1" },
-                                { text: "Grandchild 2" }
+                                { text: "NavlgationListItem" },
                             ]
                         },
-                        { text: "Child 2" }
                     ]
                 },
-                { text: "Parent 2" },
-                { text: "Parent 3" },
-                { text: "Parent 4" },
-                { text: "Parent 5" }
+                { 
+                    text: "Container 1",
+                    nodes: 
+                    [
+                        {
+                            text: "Header 1"
+                        }
+                    ]
+                }
             ];
 
-            $("#tree").treeview({
-                data: dataTree,
-                showCheckbox: true,
-                multiSelect: true
 
-            })
+
+            var panelBase = $('#panel-base').html();
+            var concreteInterfaceItems = [];
+
+            var findItem = function(node){
+                var items = $.grep(concreteInterfaceItems, function(obj){
+                    return obj.id == node.id;
+                });
+                return items.length > 0 ? items[0] : new Object();
+            }
+
+            var replaceItem = function(item){
+                var finded = false;
+                for(var i=0; i<concreteInterfaceItems.length; i++){
+                    if(concreteInterfaceItems[i].id == item.id) {
+                        finded = true;
+                        concreteInterfaceItems[i] = item;
+                        break;
+                    }
+                }
+
+                if(!finded) concreteInterfaceItems.push(item);
+            }
+
+            var cleanConcreteInterface = function(){
+                for(var i=concreteInterfaceItems.length-1; i>=0; i--){
+                    var node = globalTree.findNodeById(concreteInterfaceItems[i].id);
+                    if(!node) concreteInterfaceItems.splice(i,1);    
+                }
+            }
+
+            var renderConcreteInterface = function(node, root){
+                if(!root){
+                    var item = findItem(node);
+                    if(item.id == undefined) item = new Div(node);
+                    item.typeElement = item.typeElement ? item.typeElement : "div";
+                    item.html = item.html && item.html.jquery ? item.html.clone() : getTemplate(item.typeElement);
+                    item.name = node.text;
+                    item.bind = node.bind ? node.bind : undefined;
+                    replaceItem(item);
+                    root = $(_.template(panelBase)({item:item})); //insere o elemento dentro do panel base
+                }
+
+                var length = node.nodes ? node.nodes.length : 0;
+                for(var i=0; i < length; i++){
+                    var itemNode = findItem(node.nodes[i]);
+                    if(itemNode.id == undefined) itemNode = new Div(node.nodes[i]);
+                    itemNode.typeElement = itemNode.typeElement ? itemNode.typeElement : "div";
+                    itemNode.html = itemNode.html && itemNode.html.jquery ? itemNode.html.clone() : getTemplate(itemNode.typeElement);
+                    itemNode.name = node.nodes[i].text;
+                    itemNode.bind = node.nodes[i].bind ? node.nodes[i].bind : undefined;
+                    replaceItem(itemNode);
+
+                    var child = $(_.template(panelBase)({item:itemNode})); //insere o elemento dentro do panel base
+                    if(node.nodes[i].nodes) child = renderConcreteInterface(node.nodes[i], child);
+
+                    root.find('.panel-body').first().append(child);
+                }
+
+                return root;
+            }
+
+            /* resize element */
+            var resizeBox = function(){
+                var getWidth = function(el){
+                    var parent = el.parents('.panel-resize').length > 0 ? el.parents('.panel-resize').first() : $('#prototype');
+                    var widthParent = parent.width();
+                    //var paddingParent = parseInt(parent.css('padding-right'));
+
+                    //padding = 15px;
+                    //Border = 1px;
+
+                    if(parent.prop('id') == "prototype") return widthParent - 15;
+                    return widthParent - 30;
+                };
+
+                var refreshResize = function(el){
+                    var parent = el.parents('.panel-resize').length > 0 ? el.parents('.panel-resize').first() : $('#prototype');
+                    el.resizable('option', 'maxWidth', getWidth(el));
+                    
+                    var id = el.data('id');
+                    var node = globalTree.findNodeById(id);
+                    var item = findItem(node);
+                    item.style = el.attr('style');
+                    item.componentWidth = el.width() + 'px';
+                    replaceItem(item);
+
+                    var children = el.children('.panel-body').children('.panel-resize');
+                    for(var i=0; i<children.length; i++){
+                        var child = $(children[i]);
+                        refreshResize(child);
+                        if(child.width() > el.width()) child.removeAttr('style');
+                    }
+                };
+
+                $('#prototype .panel-resize').each(function(index, element){
+                    $(this).resizable({
+                        maxWidth: getWidth($(element)),
+                        minWidth: 200,
+                        handles: "e",
+                        resize : function(event, ui){
+                            refreshResize($(element));
+                        }
+                    });
+                })
+            }
+
+            
+            var getValue = function(node, element, isBind, attr, index){
+                var value = "";
+
+                if(node.$data && (element[attr] == "$bind" || element[attr].indexOf("$data") > -1)){
+                    var data = [];
+                    if(index == undefined ){
+                        $data = node.$data;
+
+                    } else if(node.$data[index]) {
+                        $data = node.$data[index];
+                    }
+
+                    try {
+
+                        var strEval = isBind ? node.bind : element[attr];
+                        value = eval(strEval) ? eval(strEval) : element[attr]; 
+
+                    }catch(error){
+                        value = element[attr];
+                    }
+                }else{
+                    value = element[attr];
+                }
+
+                return value;
+            }
+
+            var renderDiv = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+                return $('<div />')
+                    .append(value)
+                    .addClass(element.classes ? element.classes : "")
+                    .css('width', element.componentWidth);
+            };
+
+            var renderParagraph = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+
+                return $('<p />').append(value).addClass(element.classes ? element.classes : "").css('width', element.componentWidth);
+            }
+
+            var renderHeader = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+
+                return $('<'+element.headerTag+' />').append(value).addClass(element.classes ? element.classes : "");
+            }
+
+            var renderLink = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+                var href = getValue(node, element, false, "href", index);
+
+                return $('<a />')
+                    .append(value)
+                    .attr('href', href)
+                    .addClass(element.classes ? element.classes : "");
+            }
+
+            var renderLabel = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+
+                return $('<label />').append(value).removeClass().addClass(element.classes ? element.classes : "");
+            }
+
+            var renderSpan = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+
+                return $('<span />').append(value).removeClass().addClass(element.classes ? element.classes : "");
+            }
+
+            var renderList = function(node, element, index){
+                return $('<'+ element.listTag +' />')
+                    .addClass(element.classes ? element.classes : "")
+                    .css('width', element.componentWidth);
+            }
+
+            var renderListItem = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+                
+                return $('<li />').append(value).removeClass().addClass(element.classes ? element.classes : "");
+            }
+
+            var renderImage = function(node, element, index){
+                var src = getValue(node, element, true, "src", index);
+                var alt = getValue(node, element, false, "alt", index);
+                
+                return $('<img />')
+                    .attr('src', src)
+                    .attr('alt', alt)
+                    .addClass(element.classes ? element.classes : "");
+            }
+
+            var renderCarousel = function(node, element, index){
+                var carousel = $(getTemplate('carousel-item').clone().html());
+
+                carousel.find('.carousel-inner').empty();
+                carousel.find('.carousel-control').attr('href', '#preview-carousel');
+
+                return carousel
+                    .attr('id', "preview-carousel")
+                    .addClass("carousel slide " + element.classes ? element.classes : "");
+            }
+
+            var renderCarouselItem = function(node, element, index){
+                var src = getValue(node, element, true, "value", index);
+
+                var carouselItem = $(
+                    '<div class="item">\
+                        <img src="'+src+'" alt="Carousel Item" />\
+                    </div>');
+                
+                return carouselItem = carouselItem
+                    .removeClass()
+                    .addClass("item " + element.classes ? element.classes : "");
+            }
+
+            var renderNavigation = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+                var navigation = $(getTemplate('navigation-item').clone().html());
+                navigation.find('.collapse').remove();
+                navigation.find('.navbar-brand').text(value);
+
+                
+                return navigation.addClass("navbar navbar-default " + element.classes ? element.classes : "");
+            }
+
+            var renderNavigationList = function(node, element, index){
+                var navigation = $(getTemplate('navigation-item').clone().html());
+                var navigationList = navigation.find('.collapse');
+                navigationList.find('ul').empty();
+                
+                return navigationList.addClass("collapse navbar-collapse " + element.classes ? element.classes : "");
+            }
+
+            var renderNavigationListItem = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+                var listItem = $('<li><a href=#>'+value+'</a></li>');
+                
+                return listItem.addClass(element.classes ? element.classes : "");
+            }
+
+            var renderForm = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+                return $('<form />').attr('action', value).addClass(element.classes ? element.classes : "");
+            }
+
+            var renderInputText = function(node, element, index){
+                return $('<input />').attr('type', 'text').addClass(element.classes ? element.classes : "");
+            }
+
+            var renderInputTextarea = function(node, element, index){
+                return $('<textarea />').addClass(element.classes ? element.classes : "");
+            }
+
+            var renderInputRadioCheck = function(node, element, index){
+                var value = getValue(node, element, true, "text", index);
+                return $('<input />')
+                    .attr('type', element.tagRadio)
+                    .attr('name', element.name.replaceAll(" ", "") + element.tagRadio)
+                    .addClass(element.classes ? element.classes : "")
+                    .after('<label>'+value+'</label>');
+            }
+
+            var renderInputSelect = function(node, element, index){
+                return $('<select />').addClass(element.classes ? element.classes : "")
+            }
+
+            var renderInputOption = function(node, element, index){
+                var value = getValue(node, element, true, "text", index);
+                return $('<option />').text(value).addClass(element.classes ? element.classes : "")
+                    
+            }
+
+            var renderInputButton = function(node, element, index){
+                var value = getValue(node, element, true, "value", index);
+                return $('<button />').text(element.text).addClass(element.classes ? element.classes : "")
+            }
+
+            /*
+                node = nó na interface abstrada com os dados
+                element = item da interface concreta com os dados concretos
+                index = índice da lista de dados
+            */
+            var renderElement = function(node, element, index){
+                switch(element.typeElement){
+                    case 'div': return renderDiv(node, element, index);
+                    case 'p': return renderParagraph(node,element, index);
+                    case 'header': return renderHeader(node,element, index);
+                    case 'a': return renderLink(node,element, index);
+                    case 'span': return renderSpan(node,element, index);
+                    case 'label': return renderLabel(node,element, index);
+                    case 'image': return renderImage(node,element, index);
+                    case 'carousel': return renderCarousel(node,element, index);
+                    case 'carousel-item': return renderCarouselItem(node,element, index);
+                    case 'navigation': return renderNavigation(node,element, index);
+                    case 'navigation-list': return renderNavigationList(node,element, index);
+                    case 'navigation-list-item': return renderNavigationListItem(node,element, index);
+                    case 'list': return renderList(node,element, index);
+                    case 'list-item': return renderListItem(node,element, index);
+                    case 'form': return renderForm(node,element, index);
+                    case 'input-text': return renderInputText(node,element, index);
+                    case 'input-textarea': return renderInputTextarea(node,element, index);
+                    case 'input-radio': return renderInputRadioCheck(node,element, index);
+                    case 'input-select': return renderInputSelect(node,element, index);
+                    case 'input-option': return renderInputOption(node,element, index);
+                    case 'input-button': return renderInputButton(node,element, index);
+                    default: return "";
+                }
+            }
+
+            var renderPreview = function(nodes, root, rootNode){
+                if(!root){
+                    root = $("#preview"); 
+                }
+
+                
+                var numData = !rootNode || !rootNode.datasource || !rootNode.$data || !rootNode.$data.length ? 1 : rootNode.$data.length;
+                
+                for(var j=0; j<numData; j++){
+                    for(var i=0; i<nodes.length; i++){
+                        var element = findItem(nodes[i]);    
+                        var rendered = renderElement(nodes[i], element, nodes[i].$data && nodes[i].$data[0] ? j : undefined);
+
+                        if(nodes[i].nodes){
+                            renderPreview(nodes[i].nodes, rendered, nodes[i]);
+                        }
+
+                        switch(element.typeElement){
+                            case 'navigation-list': root.find('.container-fluid').append(rendered); break;
+                            case 'navigation-list-item': root.find('ul').append(rendered); break;
+                            case 'carousel-item': root.addClass('carousel slide').find('.carousel-inner').append(rendered.addClass("item")); break;
+                            case 'input-radio': root.append(rendered).append('<label> '+ element.text +'</label>'); break;
+                            default: root.append(rendered); break;
+                        }
+                        
+                    }    
+                }
+
+                return root;
+            }
+
+            var runPreview = function(){
+                renderPreview(globalTree.tree);
+                //$('.carousel').carousel();
+            }
+
+            var commandsRootTree = function(){
+                $("#btn-root-add").click(function(e){
+                    //cria um novo objeto
+                    var newItem = new Object();
+                    newItem.text = "Novo Item";
+                    newItem.state = new Object();
+                    newItem.state.added = true;
+                    newItem.state.disabled = true;
+                    newItem.nodeId = globalTree.nodes.length;
+                    newItem.id = globalTree.setId();
+                    newItem.selectable = false;
+                    
+                    
+                    //insere como filho do nó corrente
+                    globalTree.tree.push(newItem);
+
+                    //insere a fila de nós
+                    globalTree.nodes.push(newItem);
+
+                    $('#tree').treeview('addElement', [ newItem , { silent: true } ]);
+
+                    globalTree.$element.empty().append(globalTree.$wrapper.empty());
+                    globalTree.buildTree(globalTree.tree, 0);
+                    globalTree.$element.trigger('treeRender', $.extend(true, {}, globalTree));
+                });
+
+                $("#btn-root-removeall").click(function(e){
+                    var ids = [];
+                    for(var i=0; i<globalTree.tree.length; i++){
+                        if(globalTree.tree[i].state.checked) ids.push(globalTree.tree[i].nodeId);
+                    }
+
+                    globalTree.removeNodes(globalTree.tree, ids);
+                    
+                    $("#tree").treeview('removeElements', [ ids , { silent: true } ]);
+                    
+                    globalTree.$element.empty().append(globalTree.$wrapper.empty());
+                    globalTree.buildTree(globalTree.tree, 0);
+                    globalTree.$element.trigger('treeRender', $.extend(true, {}, globalTree));
+                })
+            }
+
+            String.prototype.replaceAll = function(de, para){
+                var str = this;
+                var pos = str.indexOf(de);
+                while (pos > -1){
+                    str = str.replace(de, para);
+                    pos = str.indexOf(de);
+                }
+                return (str);
+            }
+
+            //função auxiliar para remover aspas de strings
+            var cleanString = function(string){
+                return string.replaceAll('\"name\":', 'name:')
+                .replaceAll('\"widget\":', 'widget:')
+                .replaceAll('\"widgets\":', 'widgets:')
+                .replaceAll('\"datasource\":', 'datasource:')
+                .replaceAll('\"children\":', 'children:')
+                .replaceAll('\"head\":', 'head:')
+                .replaceAll('\"maps\":', 'maps:')
+                .replaceAll('\"class\":', 'class:')
+                .replaceAll('\"value\":', 'value:')
+                .replaceAll('\"href\":', 'href:')
+                .replaceAll('\"parse\":', 'parse:')
+                .replaceAll('\"tag\":', 'tag:')
+                .replaceAll('\"src\":', 'src:')
+                .replaceAll('\"alt\":', 'alt:')
+                .replaceAll('\"bind\":', 'bind:')
+                .replaceAll('\\\"', '\'')
+            }
+
+            var openModalCode = function(){
+                $('.btn-open-modal').click(function(e){
+                    var code = $(this).parents('.panel').find('pre').clone();
+                    
+                    $('#modal-code').find('.modal-body').html(code);
+                    $('#modal-code').modal('show');
+                })
+            }
+
+            var generateConcreteInterface = function(){
+                var concreto = new Object();
+                concreto.attrs = new Object();
+
+                var invalidKeys = [
+                  'id', 'typeElement', 'componentWidth', 'html', 'listTag', 'headerTag', 'simpleHtmlTag', 'bind'
+                ];
+                var maps = [];
+                for(var i=0; i<concreteInterfaceItems.length; i++){
+                    var item = new Object();
+                    for(var attr in concreteInterfaceItems[i]){
+                        if(invalidKeys.indexOf(attr) > -1) continue;
+
+                        item[attr] = concreteInterfaceItems[i][attr]; 
+                    }
+
+                    maps.push(item);
+                }
+
+                concreto.attrs.maps = maps; 
+                concreto.attrs.name = $('#nameInterface').val();
+                concreto.attrs.head = [];
+
+                $('#concrete-code pre').html(
+                    cleanString(stringify(concreto.attrs, {maxLength: 160, indent: 2}))
+                );
+            }
+
+            var tabBootstrap = function(){
+                $('#tab-prototype a').click(function (e) {
+                  e.preventDefault();
+
+                  $(this).tab('show');
+                  if($(this).data('mode') == 'preview'){
+                    $("#preview").empty();
+                    runPreview();
+                  }
+                })
+            }
+
+            var renderTree = function(data){
+                var listItens = [];
+                globalTree = data;
+                cleanConcreteInterface();
+                
+                $("#prototype").empty();
+                for(var i=0; i<data.tree.length; i++){
+                    $("#prototype").append(renderConcreteInterface(data.tree[i]));
+                }
+
+                var abstractInterface = new Object();
+
+                abstractInterface.name = $('#nameInterface').val();
+                abstractInterface.widgets = data.abstractInterface;
+                $('#abstract-code pre').html(
+                    cleanString(stringify(abstractInterface, {maxWidth: 160, indent: 2}))
+                );
+
+                generateConcreteInterface();
+                resizeBox();
+                $('.carousel').carousel();
+                saveWebStorage();
+            }
+
+            var initDefault = function(){
+                /*
+                var dataTree = 
+                [
+                    {
+                        text: "navigation",
+                        nodes: 
+                        [
+                            {
+                                text: "navigation-list",
+                                nodes: 
+                                [
+                                    { text: "navigation-list-item" },
+                                ]
+                            },
+                        ]
+                    },
+                    { 
+                        text: "container",
+                        nodes:
+                        [
+                            {text: "title-autores"},
+                            {
+                                text: "content-list",
+                                nodes:
+                                [
+                                    {
+                                        text: "list-autor",
+                                        nodes:
+                                        [
+                                            {
+                                                text: "list-autor-item",
+                                                nodes:
+                                                [
+                                                    {text: "link-autor"}
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                        ]
+                    }
+                ];*/
+
+                var dataTree = 
+                [
+                    {
+                        text: "navigation",
+                        nodes: 
+                        [
+                            {
+                                text: "navigation-list",
+                                nodes: 
+                                [
+                                    { text: "navigation-list-item" },
+                                ]
+                            },
+                        ]
+                    },
+                    { text: "container" }
+                ];
+
+                concreteInterfaceItems = [];
+
+                $("#tree").treeview({
+                    data: dataTree,
+                    showCheckbox: true,
+                    highlightSelected: false,
+
+                    onTreeRender: function(event, data){
+                        renderTree(data);    
+                    }
+                });
+            }
+
+            var initCustom = function(abstractInterface){
+                var dataTree = abstractInterface;
+                $("#tree").treeview({
+                    data: dataTree,
+                    showCheckbox: true,
+                    highlightSelected: false,
+
+                    onTreeRender: function(event, data){
+                        renderTree(data);    
+                    }
+                });
+            }
+
+            /* Funções do webstorage */
+            var saveWebStorage = function(){
+                var obj = new Object();
+                obj.name = $('#nameInterface').val();
+                obj.abstractInterface = JSON.stringify($.extend({}, true, globalTree.tree));
+                obj.concreteInterfaceItems = JSON.stringify($.extend({}, true, concreteInterfaceItems));
+
+                localStorage.setItem('project', JSON.stringify(obj));
+            }
+
+            var loadWebStorage = function(){
+                var project = localStorage.getItem('project');
+
+                if(project && confirm('Já existe um projeto em andamento. Deseja abrí-lo?')){
+                    project = JSON.parse(project);
+                    $('#nameInterface').val(project.name);
+                    concreteInterfaceItems = JSON.parse(project.concreteInterfaceItems);
+                    concreteInterfaceItems = Array.prototype.slice(concreteInterfaceItems);
+
+                    var abstractInterface = JSON.parse(project.abstractInterface);
+                    abstractInterface = Array.prototype.slice(abstractInterface);
+                    initCustom(abstractInterface);
+                }else{
+                    localStorage.clear(); //limpa o localStorage
+                    initDefault();
+                }
+            }
+
+            var downloadJson = function(){
+                var link = $('#link-download');
+                saveWebStorage();
+
+                var data = "text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem('project'));
+                link.attr('href', 'data:' + data).attr('download', 'Inteface.json');
+
+                link[0].click();
+            }
+
+            var nestedObjectToArray = function(obj){
+                var result = [];
+
+                for(var i in obj){
+                    result.push(obj[i]);
+                }
+
+                return result;
+            }
+
+            var btnProjectEvents = function(){
+                var getExtensionFile = function(filename){
+                    return filename.split('.').pop();
+                }
+
+                var isJson = function(filename){
+                    return getExtensionFile(filename).toLowerCase() == 'json';    
+                };
+
+                $('#project-new').click(function(e){
+                    e.preventDefault();
+
+                    if(confirm('Deseja realmente fechar esse projeto para iniciar outro?')){
+                        initDefault();    
+                    }
+                });
+
+                $('#project-save').click(function(e){
+                    e.preventDefault();
+                    downloadJson();
+                });
+
+                //abrindo um projeto existente
+                $('#project-open').on('change', function(e){
+                    var filename = $(this).val().replace("C:\\fakepath\\", "");
+                    $("#upload-file-info").html(filename);
+                    
+                    if(!isJson(filename)){
+                        alert('O arquivo selecionado não é do formato JSON');
+                        return;
+                    }
+
+
+                    var files = e.target.files;
+                    for(var i=0; i<files.length; i++){
+                        var file = files[i];
+
+                        var reader = new FileReader();
+                        reader.onload = (function(f){
+                            return function(e){
+                                var obj = JSON.parse(e.target.result);
+                                if(obj.name == undefined || obj.abstractInterface == undefined || obj.concreteInterfaceItems == undefined){
+                                    alert('O arquivo selecionado não está no padrão desejado.');
+                                }else{
+                                    localStorage.setItem('project', e.target.result);
+                                    $('#nameInterface').val(obj.name);
+                                    concreteInterfaceItems = nestedObjectToArray(JSON.parse(obj.concreteInterfaceItems));
+
+                                    var project = JSON.parse(localStorage.getItem('project'));
+                                    initCustom(JSON.parse(project.abstractInterface));
+                                }
+                            }
+                        })(file);
+
+                        reader.readAsText(file);
+                    }
+                });
+            }
+
+
+
+            var init = function(){
+                initDefault()
+                tabBootstrap();
+                commandsRootTree();
+                openModalCode();
+                btnProjectEvents();
+            }
+
+
+            init();
+
+
         })
-
-        $(document).on('click', '.btn-tree', function(e){
-            console.log('tree');
-        });
         </script>
     </body>
 </html>
