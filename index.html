@@ -1498,7 +1498,7 @@ and open the template in the editor.
                 concreto.attrs.head = [];
 
                 $('#concrete-code pre').html(
-                    cleanString(stringify(concreto.attrs, {maxLength: 160, indent: 2}))
+                    cleanString(stringify(concreto.attrs, {maxLength: 120, indent: 2}))
                 );
             }
 
@@ -1529,7 +1529,7 @@ and open the template in the editor.
                 abstractInterface.name = $('#nameInterface').val();
                 abstractInterface.widgets = data.abstractInterface;
                 $('#abstract-code pre').html(
-                    cleanString(stringify(abstractInterface, {maxWidth: 160, indent: 2}))
+                    cleanString(stringify(abstractInterface, {maxWidth: 120, indent: 2}))
                 );
 
                 generateConcreteInterface();
