@@ -1230,11 +1230,11 @@
 		// TODO inserir tooltip
 		buttons: 
 				'<div class="pull-right">\
-					<button class="btn btn-primary btn-xs btn-tree" id="btn-tree-edit"><i class="fa fa-pencil"></i></button>\
-					<button class="btn btn-success btn-xs btn-tree" id="btn-tree-add"><i class="fa fa-plus"></i></button>\
-					<button class="btn btn-success btn-xs btn-tree" id="btn-tree-download"data-toggle="modal" data-target="#modal-tree-download"><i class="fa fa-download"></i></button>\
-					<button class="btn btn-danger btn-xs btn-tree" id="btn-tree-remove"><i class="fa fa-trash"></i></button>\
-					<button class="btn btn-danger btn-xs btn-tree" id="btn-tree-removeall"><i class="fa fa-times"></i> <i class="fa fa-list"></i></button>\
+					<button class="btn btn-primary btn-xs btn-tree" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Edita o nome do elemento abstrato." id="btn-tree-edit"><i class="fa fa-pencil"></i></button>\
+					<button class="btn btn-success btn-xs btn-tree" id="btn-tree-add" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Adiciona um elemento como seu filho."><i class="fa fa-plus"></i></button>\
+					<button class="btn btn-success btn-xs btn-tree" id="btn-tree-download"data-toggle="modal" data-target="#modal-tree-download" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Define as informações Bind, Datasource e Parse."><i class="fa fa-download"></i></button>\
+					<button class="btn btn-danger btn-xs btn-tree" id="btn-tree-remove" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Remove o elemento."><i class="fa fa-trash"></i></button>\
+					<button class="btn btn-danger btn-xs btn-tree" id="btn-tree-removeall"><i class="fa fa-times" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Remove os filhos que estão selecionados."></i> <i class="fa fa-list"></i></button>\
 				</div>',
 		text: '<input type="text" class="form-control tree-text" data-id="" />'
 	};
