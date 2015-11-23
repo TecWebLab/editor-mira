@@ -1138,8 +1138,6 @@ and open the template in the editor.
                     var id = el.data('id');
                     var node = globalTree.findNodeById(id);
                     var item = findItem(node);
-                    console.log(el);
-                    console.log(item);
                     item.style = el.attr('style');
                     item.componentWidth = el.width() + 'px';
                     replaceItem(item);
