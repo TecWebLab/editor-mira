@@ -97,11 +97,17 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
 .panel-resize {
     float: left;
     width: 100%;
-    margin-right: 5px; 
+    margin-right: 5px;
+    min-height: 200px;
+    min-width: 200px;
 }
 
 .carousel, .text-concrete {
     margin-bottom: 10px;
+}
+
+.btn-prop {
+    margin-left: 5px;
 }
 
 

@@ -305,14 +305,14 @@ and open the template in the editor.
         <!-- Templates -->
         <script id="panel-base" type="text/template">
             <div class="panel panel-default panel-drag panel-resize" data-id="<%- item.id %>" data-component="" data-name="" data-type="<%- item.typeElement %>" 
-            <% if(item.componentWidth){ %>
-                style="width: <%-item.componentWidth%>"
+            <% if(item.style){ %>
+                style="<%=item.style%>"
             <%}%>    
             >
                 <div class="panel-heading"> 
                     <span><% print(item.name) %></span> 
                     <div class="pull-right">
-                        <div class="col-md-11">
+                        <div class="col-md-10">
                             <select class="select-type-element form-control" value="<%-item.typeElement%>" name="typeElement" style="margin-top: -7px">
                                 <optgroup label="Container">
                                     <option value="div">div</option>
@@ -354,7 +354,10 @@ and open the template in the editor.
                                 </optgroup>
                             </select>
                         </div>
+                        
                         <button data-open="0" class="btn-prop btn btn-primary btn-xs pull-right" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Exibe o formulário de opções do widget concreto."><i class="fa fa-cog"></i></button>
+                        <span class="btn-handle btn btn-warning btn-xs pull-right" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Possibita arrastar o elemento."><i class="fa fa-arrows"></i></span>
+
                     </div>
                 </div>
                 <div class="panel-body">
@@ -1116,13 +1119,27 @@ and open the template in the editor.
                     return widthParent - 30;
                 };
 
+
+
+                var setMinHeight = function(el){
+                    var children = el.children('.panel-body').children('.panel-resize');
+                    var height = 0;
+
+                    for(var i=0; i < children.length; i++) height += $(children[i]).height() + 61; 
+
+                    return height == 0 ? 200 : height; 
+                }
+
                 var refreshResize = function(el){
                     var parent = el.parents('.panel-resize').length > 0 ? el.parents('.panel-resize').first() : $('#prototype');
                     el.resizable('option', 'maxWidth', getWidth(el));
+                    el.resizable('option', 'minWidth', setMinHeight(el));
                     
                     var id = el.data('id');
                     var node = globalTree.findNodeById(id);
                     var item = findItem(node);
+                    console.log(el);
+                    console.log(item);
                     item.style = el.attr('style');
                     item.componentWidth = el.width() + 'px';
                     replaceItem(item);
@@ -1139,12 +1156,46 @@ and open the template in the editor.
                     $(this).resizable({
                         maxWidth: getWidth($(element)),
                         minWidth: 200,
-                        handles: "e",
+                        minHeight: setMinHeight($(element)),
+                        //handles: "e",
                         resize : function(event, ui){
                             refreshResize($(element));
                         }
                     });
                 })
+            }
+
+            var setDraggable = function(){
+                var getParent = function(el){
+                    return el.parents('.panel-resize').length > 0 ? el.parents('.panel-resize').first().children('.panel-body') : $('#prototype');
+                }
+
+                var getHandle = function(el) {
+                    return el.children('.panel-heading').find('.btn-handle');
+                }
+
+                var refreshPosition = function(el){
+                    var parent = getParent(el);
+                    //el.resizable('option', 'maxWidth', getWidth(el));
+                    
+                    var id = el.data('id');
+                    var node = globalTree.findNodeById(id);
+                    var item = findItem(node);
+                    item.style = el.attr('style');
+                    replaceItem(item);
+                }
+
+                $('#prototype .panel-resize').each(function(index, element){
+                    var _this = $(this);
+                    $(this).draggable({
+                        scroll: true,
+                        containment: getParent(_this),
+                        handle: getHandle(_this),
+                        stop: function(event, ui){
+
+                        }
+                    });
+                })    
             }
 
             
@@ -1534,6 +1585,8 @@ and open the template in the editor.
 
                 generateConcreteInterface();
                 resizeBox();
+                setDraggable();
+
                 $('.carousel').carousel();
                 saveWebStorage();
             }
