@@ -248,7 +248,6 @@
 										<div class="input-group">\
 											<input type="text" class="form-control" id="field-bind" placeholder="Insira a expressão">\
 										</div>\
-										<span id="msg-error-download" class="help-block" style="display:none">Erro ao obter informações. Observe se o link está correto</span>\
 									</div>\
 								</div>\
 								<div class="form-group">\
@@ -424,6 +423,9 @@
 			var node = _this.findNode($(this).parents('li'));
 			if(!node) return;
 			_this.tree = _this.removeNodes(_this.tree, [node.nodeId]);
+			_this.refreshIds();
+			_this.broadcastData();
+
 			_this.$element.empty().append(_this.$wrapper.empty());
 			_this.buildTree(_this.tree, 0);
 			_this.$element.trigger('treeRender', $.extend(true, {}, _this));
@@ -443,6 +445,9 @@
 			}
 
 			_this.tree = _this.removeNodes(_this.tree, ids);
+			_this.refreshIds();
+			_this.broadcastData();
+
 			_this.$element.empty().append(_this.$wrapper.empty());
 			_this.buildTree(_this.tree, 0);
 			_this.$element.trigger('treeRender', $.extend(true, {}, _this));
@@ -508,18 +513,32 @@
 						getDataFromDatasourceFail(button);
 					}
 				} catch (e){
-					$.get(link, function(data){
-						getDataFromDatasource(data);
-					}).fail(function(){
-						getDataFromDatasourceFail(button);
-					});					
+					$.ajax({
+						url: link,
+						type: 'GET',
+						success: function(data){
+							data = $.parseJSON($(data.responseText)[0].data);
+							getDataFromDatasource(data);	
+						},
+
+						error: function(){
+							getDataFromDatasourceFail(button);	
+						}
+					})					
 				}
 			} else{
-				$.get(link, function(data){
-					getDataFromDatasource(data);
-				}).fail(function(){
-					getDataFromDatasourceFail(button);
-				});
+				$.ajax({
+					url: link,
+					type: 'GET',
+					success: function(data){
+						data = $.parseJSON($(data.responseText)[0].data);
+						getDataFromDatasource(data);	
+					},
+
+					error: function(){
+						getDataFromDatasourceFail(button);	
+					}
+				})
 
 			}
 		});
@@ -539,16 +558,6 @@
 			}
 		});
 
-		var broadcastData = function(node, data){
-			if(!node) return node;
-
-			if(!node.$data) node.$data = data;
-			if(node.nodes){
-				for(var i=0; i<node.nodes.length;i++) node.nodes[i] = broadcastData(node.nodes[i], data);
-			}
-
-			return node;
-		}
 
 		$(document).on('click', '#btn-confirm-download', function(e){
 			//if(!values && !bind.length && parse.) return;
@@ -558,7 +567,7 @@
 			
 			//insere os dados no nó
 			//node.data = values;
-			if(values != null) node = broadcastData(node, currentData);
+			if(values != null) node = _this.setDataToChildren(node, currentData);
 			
 			node.datasource = $('#field-datasource').val().trim();
 			node.bind = $('#field-bind').val().trim().length > 0 ? $('#field-bind').val().trim() : undefined;
@@ -575,6 +584,23 @@
 		})
 
 		$('body').append(modalDownload).append(modalConfirm);
+	}
+
+	Tree.prototype.broadcastData = function(){
+		for(var i=0; i< this.tree.length; i++){
+			this.tree[i] = this.setDataToChildren(this.tree[i], this.tree[i].$data);
+		}
+	}
+
+	Tree.prototype.setDataToChildren = function(node, data){
+		if(!node) return node;
+
+		if(!node.$data) node.$data = data;
+		if(node.nodes){
+			for(var i=0; i<node.nodes.length;i++) node.nodes[i] = this.setDataToChildren(node.nodes[i], data);
+		}
+
+		return node;
 	}
 
 	Tree.prototype.remove = function () {
@@ -830,7 +856,7 @@
 
 		for(var i = nodes.length-1; i >= 0; i--){
 			if($.inArray(nodes[i].nodeId, ids) > -1) {
-				this.nodes.splice(nodes[i].nodeId); //remove da lista de nós
+				this.nodes.splice(nodes[i].nodeId, 1); //remove da lista de nós
 				nodes.splice(i,1); //remove da lista aninhada
 				continue;
 			}
@@ -839,6 +865,17 @@
 		}
 
 		return nodes.length > 0 ? nodes : undefined;
+	}
+
+	//Atualiza o identificador dos nós
+	Tree.prototype.refreshIds = function(){
+		for(var i=0; i<this.nodes.length; i++) {
+			var node = this.findNodeById(this.nodes[i].id);
+			node.nodeId = i;
+			this.nodes[i].id = i;
+
+			this.tree = this.refreshTree(this.tree, node);
+		}
 	}
 
 	Tree.prototype.toggleExpandedState = function (node, options) {
@@ -1028,6 +1065,8 @@
 										_this.$element.trigger('treeRender', $.extend(true, {}, _this));
 									} else if(e.which == 27) {
 										_this.tree = _this.removeNodes(_this.tree, [node.nodeId]);
+										_this.refreshIds();
+										_this.broadcastData();
 
 										_this.$element.empty().append(_this.$wrapper.empty());
 										_this.buildTree(_this.tree, 0);
@@ -1259,6 +1298,8 @@
 
 	Tree.prototype.removeElements = function(ids){
 		this.tree = this.removeNodes(this.tree, ids);
+		this.refreshIds();
+		this.broadcastData();
 	}
 
 	/**
