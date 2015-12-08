@@ -11,41 +11,33 @@
     /**
      * sidebar
      * Initialize sidebar on selected elements.
-     *
      * ```js
      * $(".my-sidebar").sidebar({...});
      * ```
-     *
      * After the call above, you can programatically open/close/toggle the sidebar using:
-     *
      * ```js
      * $(".my-sidebar").trigger("sidebar:open");
      * $(".my-sidebar").trigger("sidebar:close");
      * $(".my-sidebar").trigger("sidebar:toggle");
      * ```
-     *
      * After the sidebar is opened/closed, `sidebar:opened`/`sidebar:closed` event is emitted.
-     *
      * ```js
      * $(".my-sidebar").on("sidebar:opened", function () {
      *    // Do something on open
      * });
-     *
      * $(".my-sidebar").on("sidebar:closed", function () {
      *    // Do something on close
      * });
      * ```
-     *
-     * @name sidebar
      * @function
-     * @param {Object} options An object that will be merged with the default options.
-     *
      *  - `speed` (Number): animation speed (default: `200`)
      *  - `side` (String): left|right|top|bottom (default: `"left"`)
      *  - `isClosed` (Boolean): A boolean value indicating if the sidebar is closed or not (default: `false`).
      *  - `close` (Boolean): If `true`, the sidebar will be closed by default.
-     *
-     * @return {jQuery} The jQuery elements that were selected.
+     * @name sidebar
+     * @method sidebar
+     * @param {Object} options An object that will be merged with the default options.
+     * @return self
      */
     $.fn.sidebar = function(options) {
 

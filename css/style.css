@@ -110,6 +110,6 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
     margin-left: 5px;
 }
 
-
-/* <script src="js/classes.js"></script>
-        <script src="js/script.js"></script>*/
+#qunit-tests li.pass a {
+    display: none;
+}

@@ -1,0 +1,42 @@
+YUI.add("yuidoc-meta", function(Y) {
+   Y.YUIDoc = { meta: {
+    "classes": [
+        "AbstractElement",
+        "AbstractInterface",
+        "BootstrapNavigation",
+        "BootstrapNavigationList",
+        "BootstrapNavigationListItem",
+        "Button",
+        "Carousel",
+        "CarouselItem",
+        "Code",
+        "ConcreteInterface",
+        "Div",
+        "Formulario",
+        "HTMLElement",
+        "Header",
+        "ImageHtml",
+        "InputOption",
+        "InputRadioCheck",
+        "InputSelect",
+        "InputText",
+        "InputTextarea",
+        "Label",
+        "Link",
+        "List",
+        "ListItem",
+        "Paragraph",
+        "Preview",
+        "Project",
+        "RenderElements",
+        "SimpleHtml",
+        "Span",
+        "Tree",
+        "Tree.initModalAndEvents",
+        "UIEvents"
+    ],
+    "modules": [],
+    "allModules": [],
+    "elements": []
+} };
+});

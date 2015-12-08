@@ -1,0 +1,5117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Tree - Mira-Editor</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Mira-Editor" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AbstractElement.html">AbstractElement</a></li>
+                                <li><a href="../classes/AbstractInterface.html">AbstractInterface</a></li>
+                                <li><a href="../classes/BootstrapNavigation.html">BootstrapNavigation</a></li>
+                                <li><a href="../classes/BootstrapNavigationList.html">BootstrapNavigationList</a></li>
+                                <li><a href="../classes/BootstrapNavigationListItem.html">BootstrapNavigationListItem</a></li>
+                                <li><a href="../classes/Button.html">Button</a></li>
+                                <li><a href="../classes/Carousel.html">Carousel</a></li>
+                                <li><a href="../classes/CarouselItem.html">CarouselItem</a></li>
+                                <li><a href="../classes/Code.html">Code</a></li>
+                                <li><a href="../classes/ConcreteInterface.html">ConcreteInterface</a></li>
+                                <li><a href="../classes/Div.html">Div</a></li>
+                                <li><a href="../classes/Formulario.html">Formulario</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
+                                <li><a href="../classes/HTMLElement.html">HTMLElement</a></li>
+                                <li><a href="../classes/ImageHtml.html">ImageHtml</a></li>
+                                <li><a href="../classes/InputOption.html">InputOption</a></li>
+                                <li><a href="../classes/InputRadioCheck.html">InputRadioCheck</a></li>
+                                <li><a href="../classes/InputSelect.html">InputSelect</a></li>
+                                <li><a href="../classes/InputText.html">InputText</a></li>
+                                <li><a href="../classes/InputTextarea.html">InputTextarea</a></li>
+                                <li><a href="../classes/Label.html">Label</a></li>
+                                <li><a href="../classes/Link.html">Link</a></li>
+                                <li><a href="../classes/List.html">List</a></li>
+                                <li><a href="../classes/ListItem.html">ListItem</a></li>
+                                <li><a href="../classes/Paragraph.html">Paragraph</a></li>
+                                <li><a href="../classes/Preview.html">Preview</a></li>
+                                <li><a href="../classes/Project.html">Project</a></li>
+                                <li><a href="../classes/RenderElements.html">RenderElements</a></li>
+                                <li><a href="../classes/SimpleHtml.html">SimpleHtml</a></li>
+                                <li><a href="../classes/Span.html">Span</a></li>
+                                <li><a href="../classes/Tree.html">Tree</a></li>
+                                <li><a href="../classes/Tree.initModalAndEvents.html">Tree.initModalAndEvents</a></li>
+                                <li><a href="../classes/UIEvents.html">UIEvents</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>Tree Class</h1>
+<div class="box meta">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/bootstrap-treeview.js.html#l87"><code>bootstrap-treeview.js:87</code></a>
+        </div>
+
+
+</div>
+
+
+<div class="box intro">
+    <p>Módulo reponsável por gerenciar a TreeView representando a interface abstrata. Isso é uma adaptação do Plugin BootstrapTreeView,
+desenvolvido por Jonathan Miles.</p>
+
+</div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_addElement">addElement</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_broadcastData">broadcastData</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_buildStyle">buildStyle</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_buildStyleOverride">buildStyleOverride</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_buildTree">buildTree</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_checkAll">checkAll</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_checkNode">checkNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_clearSearch">clearSearch</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_clickHandler">clickHandler</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_collapseAll">collapseAll</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_collapseNode">collapseNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_createAbstractInterface">createAbstractInterface</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_createNodes">createNodes</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_destroy">destroy</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_disableAll">disableAll</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_disableNode">disableNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_enableAll">enableAll</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_enableNode">enableNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_expandAll">expandAll</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_expandLevels">expandLevels</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_expandNode">expandNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_findNode">findNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_findNodeById">findNodeById</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_findNodes">findNodes</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_forEachIdentifier">forEachIdentifier</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getChecked">getChecked</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getCollapsed">getCollapsed</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getDisabled">getDisabled</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getEnabled">getEnabled</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getExpanded">getExpanded</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getNode">getNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getNodeValue">getNodeValue</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getParent">getParent</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getSelected">getSelected</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getSiblings">getSiblings</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getUnchecked">getUnchecked</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getUnselected">getUnselected</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_identifyNode">identifyNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_init">init</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_initModalAndEvents">initModalAndEvents</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_injectStyle">injectStyle</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_refreshIds">refreshIds</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_refreshTree">refreshTree</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_reloadData">reloadData</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_remove">remove</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_removeElements">removeElements</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_removeNodes">removeNodes</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_render">render</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_revealNode">revealNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_search">search</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_selectNode">selectNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setCheckedState">setCheckedState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setDataToChildren">setDataToChildren</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setDisabledState">setDisabledState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setExpandedState">setExpandedState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setId">setId</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setInitialStates">setInitialStates</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setSelectedState">setSelectedState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_subscribeEvents">subscribeEvents</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_toggleCheckedState">toggleCheckedState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_toggleExpandedState">toggleExpandedState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_toggleNodeChecked">toggleNodeChecked</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_toggleNodeDisabled">toggleNodeDisabled</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_toggleNodeExpanded">toggleNodeExpanded</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_toggleNodeSelected">toggleNodeSelected</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_toggleSelectedState">toggleSelectedState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_uncheckAll">uncheckAll</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_uncheckNode">uncheckNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_unselectNode">unselectNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_unsubscribeEvents">unsubscribeEvents</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property">
+                                <a href="#property_$element Objeto jQuery onde o plugin irá atuar.">$element Objeto jQuery onde o plugin irá atuar.</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_css">css</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_elementId Identificador do item da lista.">elementId Identificador do item da lista.</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_id classe inicial para identificação do item da lista.">id classe inicial para identificação do item da lista.</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_template">template</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                            <li class="index-item event">
+                                <a href="#event_Adicionar um filho.">Adicionar um filho.</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_Adicionar um filho.">Adicionar um filho.</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_Baixar informações para um nó.">Baixar informações para um nó.</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_Confirmar dados do modal.">Confirmar dados do modal.</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_Editar nó">Editar nó</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_Parse dos dados obtidos.">Parse dos dados obtidos.</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_Remover baixar informações a partir de um datasource.">Remover baixar informações a partir de um datasource.</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_Remover filhos selecionados.">Remover filhos selecionados.</a>
+
+                            </li>
+                    </ul>
+                </div>
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_addElement" class="method item">
+    <h3 class="name"><code>addElement</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1572"><code>bootstrap-treeview.js:1572</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por adicionar um nó na raiz da TreeView.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó a ser adicionado.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_broadcastData" class="method item">
+    <h3 class="name"><code>broadcastData</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l708"><code>bootstrap-treeview.js:708</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por repassar os dados do pai pro filho, se necessário em toda a Tree.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_buildStyle" class="method item">
+    <h3 class="name"><code>buildStyle</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1489"><code>bootstrap-treeview.js:1489</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por definir a estilização do no de acordo com as opções passadas para o plugin.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Expressão CSS padrões de acordo com as opções passadas.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_buildStyleOverride" class="method item">
+    <h3 class="name"><code>buildStyleOverride</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1441"><code>bootstrap-treeview.js:1441</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por definir o estilo (CSS) do nó.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>No corrente.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>A expressão CSS para o nó da TreeView.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_buildTree" class="method item">
+    <h3 class="name"><code>buildTree</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nodes</code>
+                </li>
+                <li class="arg">
+                        <code>level</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1269"><code>bootstrap-treeview.js:1269</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por contruir a TreeView.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nodes</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">level</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>Nível corrente.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>A instância atual da Tree.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_checkAll" class="method item">
+    <h3 class="name"><code>checkAll</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1875"><code>bootstrap-treeview.js:1875</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por marcar todos os nós;</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_checkNode" class="method item">
+    <h3 class="name"><code>checkNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1890"><code>bootstrap-treeview.js:1890</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por marcar um conjunto de nós.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_clearSearch" class="method item">
+    <h3 class="name"><code>clearSearch</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l2109"><code>bootstrap-treeview.js:2109</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por limpar o campo de busca.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_clickHandler" class="method item">
+    <h3 class="name"><code>clickHandler</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>event</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l924"><code>bootstrap-treeview.js:924</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por definir como será o clique em cada item da lista</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">event</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Dados do evento.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+            </div>
+        </div>
+
+
+</div>
+<div id="method_collapseAll" class="method item">
+    <h3 class="name"><code>collapseAll</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1751"><code>bootstrap-treeview.js:1751</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por retrair todos os nós.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_collapseNode" class="method item">
+    <h3 class="name"><code>collapseNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1766"><code>bootstrap-treeview.js:1766</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por retrair un conjunto de nós.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_createAbstractInterface" class="method item">
+    <h3 class="name"><code>createAbstractInterface</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nodes</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l246"><code>bootstrap-treeview.js:246</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método reponsável por gerar os widgets abstratos.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nodes</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjuntos de nós do BootstrapTreeView</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjuto de elementos abstratos aninhados, caso necessário.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_createNodes" class="method item">
+    <h3 class="name"><code>createNodes</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>values</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l215"><code>bootstrap-treeview.js:215</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por criar filhos para um determinado nó.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">values</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>node</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_destroy" class="method item">
+    <h3 class="name"><code>destroy</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l749"><code>bootstrap-treeview.js:749</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por destruir a instancia da Tree.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_disableAll" class="method item">
+    <h3 class="name"><code>disableAll</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1951"><code>bootstrap-treeview.js:1951</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por desativar todos os nós</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_disableNode" class="method item">
+    <h3 class="name"><code>disableNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1966"><code>bootstrap-treeview.js:1966</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por desativar um conjunto de nós</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_enableAll" class="method item">
+    <h3 class="name"><code>enableAll</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1981"><code>bootstrap-treeview.js:1981</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por ativar todos os nós</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_enableNode" class="method item">
+    <h3 class="name"><code>enableNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1996"><code>bootstrap-treeview.js:1996</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por ativar um conjunto de nós</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_expandAll" class="method item">
+    <h3 class="name"><code>expandAll</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1781"><code>bootstrap-treeview.js:1781</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por expandir todos os nós.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_expandLevels" class="method item">
+    <h3 class="name"><code>expandLevels</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nodes</code>
+                </li>
+                <li class="arg">
+                        <code>level</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1821"><code>bootstrap-treeview.js:1821</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por expandir um conjunto de nós de um determinado nível.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nodes</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">level</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>Nível que permite expansão</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_expandNode" class="method item">
+    <h3 class="name"><code>expandNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1803"><code>bootstrap-treeview.js:1803</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por expandir um conjunto de nós.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_findNode" class="method item">
+    <h3 class="name"><code>findNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>target</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l961"><code>bootstrap-treeview.js:961</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por procurar um nó na Tree.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">target</code>
+                        <span class="type">Number | jQuery</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>node Nó da Tree.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_findNodeById" class="method item">
+    <h3 class="name"><code>findNodeById</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>id</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l984"><code>bootstrap-treeview.js:984</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por procurar um nó pelo seu idenficador</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">id</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>Identificador do nó.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>node Nó da Tree.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_findNodes" class="method item">
+    <h3 class="name"><code>findNodes</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>pattern</code>
+                </li>
+                <li class="arg">
+                        <code>modifier</code>
+                </li>
+                <li class="arg">
+                        <code>attribute</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l2130"><code>bootstrap-treeview.js:2130</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por procurar um conjunto de nós segundo um critério (atributo).</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">pattern</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Termo a ser pesquisado</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">modifier</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Opção para o Regex.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">attribute</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Atributo a ser pesquisado o termo</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_forEachIdentifier" class="method item">
+    <h3 class="name"><code>forEachIdentifier</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+                <li class="arg">
+                        <code>callback</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l2027"><code>bootstrap-treeview.js:2027</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por identificar um conjunto de seletores.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">callback</code>
+                        <span class="type">Function</span>
+
+
+                    <div class="param-description">
+                        <p>Função a ser executada para cada nó.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_getChecked" class="method item">
+    <h3 class="name"><code>getChecked</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1664"><code>bootstrap-treeview.js:1664</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter todos os nós marcados.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós marcados.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getCollapsed" class="method item">
+    <h3 class="name"><code>getCollapsed</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1654"><code>bootstrap-treeview.js:1654</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter todos os nós não expandidos.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós não expandidos.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getDisabled" class="method item">
+    <h3 class="name"><code>getDisabled</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1684"><code>bootstrap-treeview.js:1684</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter todos os nós desativados.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós desativados.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getEnabled" class="method item">
+    <h3 class="name"><code>getEnabled</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1694"><code>bootstrap-treeview.js:1694</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter todos os nós desativados.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós desativados.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getExpanded" class="method item">
+    <h3 class="name"><code>getExpanded</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1644"><code>bootstrap-treeview.js:1644</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter todos os nós expandidos.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós expandidos.
+for Tree</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getNode" class="method item">
+    <h3 class="name"><code>getNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nodeId</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1561"><code>bootstrap-treeview.js:1561</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por retornar um nó da TreeView a partir do identificador interno do plugin</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nodeId</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <ul>
+<li>Identificador interno do nó.</li>
+</ul>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Nó da TreeView.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getNodeValue" class="method item">
+    <h3 class="name"><code>getNodeValue</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>obj</code>
+                </li>
+                <li class="arg">
+                        <code>attr</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l2153"><code>bootstrap-treeview.js:2153</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter o valor de um determinado atributo de um nó.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó ou um objeto qualquer.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">attr</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Atributo no qual deseja-se obter o valor.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>O valor do atributo do objeto.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getParent" class="method item">
+    <h3 class="name"><code>getParent</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifier</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1596"><code>bootstrap-treeview.js:1596</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter o pai de um determinado nó</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifier</code>
+                        <span class="type">JQuery | Number | Selector</span>
+
+
+                    <div class="param-description">
+                        <p>Identificador do nó filho.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>O pai do nó informado.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getSelected" class="method item">
+    <h3 class="name"><code>getSelected</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1624"><code>bootstrap-treeview.js:1624</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter todos os nós selecionados.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto do nós selecionados.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getSiblings" class="method item">
+    <h3 class="name"><code>getSiblings</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifier</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1608"><code>bootstrap-treeview.js:1608</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter os irmãos de um nó</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifier</code>
+                        <span class="type">JQuery | Number | Selector</span>
+
+
+                    <div class="param-description">
+                        <p>Identificador do nó</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Os irmãos de um determinado nó.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getUnchecked" class="method item">
+    <h3 class="name"><code>getUnchecked</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1674"><code>bootstrap-treeview.js:1674</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter todos os nós não marcados.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós não marcados.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getUnselected" class="method item">
+    <h3 class="name"><code>getUnselected</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1634"><code>bootstrap-treeview.js:1634</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter todos os nós não selecionados.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós não selecionados.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_identifyNode" class="method item">
+    <h3 class="name"><code>identifyNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifier</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l2048"><code>bootstrap-treeview.js:2048</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por identificar um seletor</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifier</code>
+                        <span class="type">Selector | Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Nó da TreeView.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_init" class="method item">
+    <h3 class="name"><code>init</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l176"><code>bootstrap-treeview.js:176</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por iniciar o plugin com os opões informadas</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções desejadas.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_initModalAndEvents" class="method item">
+    <h3 class="name"><code>initModalAndEvents</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l283"><code>bootstrap-treeview.js:283</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por iniciar as operações com modal e eventos do botões.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_injectStyle" class="method item">
+    <h3 class="name"><code>injectStyle</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1477"><code>bootstrap-treeview.js:1477</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por injetar o estilo de acordo com a identificação do nó.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_refreshIds" class="method item">
+    <h3 class="name"><code>refreshIds</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1052"><code>bootstrap-treeview.js:1052</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por atualizar o identificador dos nós.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_refreshTree" class="method item">
+    <h3 class="name"><code>refreshTree</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nodes</code>
+                </li>
+                <li class="arg">
+                        <code>node</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1005"><code>bootstrap-treeview.js:1005</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por atualizar um nó e seus filhos.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nodes</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó com novas informações.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>nodes Retorna o conjunto de nós atualizados.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_reloadData" class="method item">
+    <h3 class="name"><code>reloadData</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>tree</code>
+                </li>
+                <li class="arg">
+                        <code>nodes</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l271"><code>bootstrap-treeview.js:271</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por sincronizar os dados da TreeView com dados externos ao plugin.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">tree</code>
+                        <span class="type">Elementos da TreeView aninhados</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">nodes</code>
+                        <span class="type">Elementos da TreeView como uma lista linear</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_remove" class="method item">
+    <h3 class="name"><code>remove</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l738"><code>bootstrap-treeview.js:738</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por remover os dados do plugin.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_removeElements" class="method item">
+    <h3 class="name"><code>removeElements</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>ids</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1584"><code>bootstrap-treeview.js:1584</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por remover um conjunto de nós da Tree.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">ids</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de identificadores do nós a serem removidos.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_removeNodes" class="method item">
+    <h3 class="name"><code>removeNodes</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nodes</code>
+                </li>
+                <li class="arg">
+                        <code>ids</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1025"><code>bootstrap-treeview.js:1025</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por remover um ou mais nós da Tree.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nodes</code>
+                        <span class="type">Árray</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós para pesquisa</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">ids</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de identificadores dos nós a serem removidos.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós com os nós removidos.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_render" class="method item">
+    <h3 class="name"><code>render</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1244"><code>bootstrap-treeview.js:1244</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por renderizar a TreeView.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_revealNode" class="method item">
+    <h3 class="name"><code>revealNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1840"><code>bootstrap-treeview.js:1840</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por expandir o pai de um conjunto de nós</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_search" class="method item">
+    <h3 class="name"><code>search</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>pattern</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l2060"><code>bootstrap-treeview.js:2060</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por buscar por um item na TreeView (Caso a opção de busca esteja ativada).</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">pattern</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>Termo a ser pesquisado.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>Conjunto de nós.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_selectNode" class="method item">
+    <h3 class="name"><code>selectNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1705"><code>bootstrap-treeview.js:1705</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por selecionar um conjunto de nós.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós a serem selecionados.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setCheckedState" class="method item">
+    <h3 class="name"><code>setCheckedState</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>state</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1177"><code>bootstrap-treeview.js:1177</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por determinar o estado de checagem do nó.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó alvo.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">state</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Estado de checagem do nó (true, para marcado).</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setDataToChildren" class="method item">
+    <h3 class="name"><code>setDataToChildren</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>data</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l719"><code>bootstrap-treeview.js:719</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por passar os dados de pai para filho, se necessário</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó corrente</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">data</code>
+                        <span class="type">Object | Array</span>
+
+
+                    <div class="param-description">
+                        <p>Dados associados ao nó corrente.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>node Nó com os dados obtidos do pai.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setDisabledState" class="method item">
+    <h3 class="name"><code>setDisabledState</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>state</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1208"><code>bootstrap-treeview.js:1208</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por determinar o estado de ativação do nó.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó alvo.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">state</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Estado de ativação do no (true, para desativado).</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setExpandedState" class="method item">
+    <h3 class="name"><code>setExpandedState</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>state</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1079"><code>bootstrap-treeview.js:1079</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por deixar um nó como expandido ou não</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó alvo.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">state</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>Estado de expansão (true para expandido) .</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setId" class="method item">
+    <h3 class="name"><code>setId</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l204"><code>bootstrap-treeview.js:204</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Dertermina o identificador de um elemento gerado pelo plugin.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>O idenficador do elemento gerado.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setInitialStates" class="method item">
+    <h3 class="name"><code>setInitialStates</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>level</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l846"><code>bootstrap-treeview.js:846</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Define o estado inicial de cada nó da árvore (valores padrões)</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Elemento da Tree.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">level</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>Nível na qual o nó se encontra.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setSelectedState" class="method item">
+    <h3 class="name"><code>setSelectedState</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>state</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1128"><code>bootstrap-treeview.js:1128</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por determinar o estado de seleção do nó (selecionado ou não)</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó alvo.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">state</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Estado de seleção do nó (true, para selecionado).</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_subscribeEvents" class="method item">
+    <h3 class="name"><code>subscribeEvents</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l789"><code>bootstrap-treeview.js:789</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por ativar os eventos da Tree.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_toggleCheckedState" class="method item">
+    <h3 class="name"><code>toggleCheckedState</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1165"><code>bootstrap-treeview.js:1165</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por trocar o estado de checagem do nó</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó alvo.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_toggleExpandedState" class="method item">
+    <h3 class="name"><code>toggleExpandedState</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1067"><code>bootstrap-treeview.js:1067</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por trocar o modo e expansão do nó (expandido ou não)</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó corrente.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_toggleNodeChecked" class="method item">
+    <h3 class="name"><code>toggleNodeChecked</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1935"><code>bootstrap-treeview.js:1935</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por trocar o estado de marcação de um conjunto de nós.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_toggleNodeDisabled" class="method item">
+    <h3 class="name"><code>toggleNodeDisabled</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l2011"><code>bootstrap-treeview.js:2011</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por trocar o estado de ativação de um conjunto de nós</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_toggleNodeExpanded" class="method item">
+    <h3 class="name"><code>toggleNodeExpanded</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1859"><code>bootstrap-treeview.js:1859</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por trocar o modo de expansão de um conjunto de nós</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_toggleNodeSelected" class="method item">
+    <h3 class="name"><code>toggleNodeSelected</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1735"><code>bootstrap-treeview.js:1735</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por trocar a seleção de um conjunto de nós.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_toggleSelectedState" class="method item">
+    <h3 class="name"><code>toggleSelectedState</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>node</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1116"><code>bootstrap-treeview.js:1116</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por trocar o estado de seleção do nó.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">node</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Nó alvo.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_uncheckAll" class="method item">
+    <h3 class="name"><code>uncheckAll</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1905"><code>bootstrap-treeview.js:1905</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por desmarcar todos os nós</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+            </div>
+        </div>
+
+
+</div>
+<div id="method_uncheckNode" class="method item">
+    <h3 class="name"><code>uncheckNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1920"><code>bootstrap-treeview.js:1920</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por desmarcar um conjunto de nós</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_unselectNode" class="method item">
+    <h3 class="name"><code>unselectNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>identifiers</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1720"><code>bootstrap-treeview.js:1720</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por não selecionar um conjunto de nós.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">identifiers</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de nós</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>Conjunto de opções do plugin.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_unsubscribeEvents" class="method item">
+    <h3 class="name"><code>unsubscribeEvents</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l768"><code>bootstrap-treeview.js:768</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por desativar todos os eventos da Tree.</p>
+
+    </div>
+
+
+
+
+</div>
+            </div>
+
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+<div id="property_$element Objeto jQuery onde o plugin irá atuar." class="property item">
+    <h3 class="name"><code>$element Objeto jQuery onde o plugin irá atuar.</code></h3>
+    <span class="type">JQuery</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l96"><code>bootstrap-treeview.js:96</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+</div>
+<div id="property_css" class="property item">
+    <h3 class="name"><code>css</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1551"><code>bootstrap-treeview.js:1551</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Estilo padrão para os nós da TreeView.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_elementId Identificador do item da lista." class="property item">
+    <h3 class="name"><code>elementId Identificador do item da lista.</code></h3>
+    <span class="type">Selector</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l102"><code>bootstrap-treeview.js:102</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+</div>
+<div id="property_id classe inicial para identificação do item da lista." class="property item">
+    <h3 class="name"><code>id classe inicial para identificação do item da lista.</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l108"><code>bootstrap-treeview.js:108</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+</div>
+<div id="property_template" class="property item">
+    <h3 class="name"><code>template</code></h3>
+    <span class="type">Object</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/bootstrap-treeview.js.html#l1524"><code>bootstrap-treeview.js:1524</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Template para a renderização da TreeView.</p>
+
+    </div>
+
+
+
+</div>
+            </div>
+
+
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_Adicionar um filho." class="events item">
+                        <h3 class="name"><code>Adicionar um filho.</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/bootstrap-treeview.js.html#l417"><code>bootstrap-treeview.js:417</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao clicar no botão de adicionar um filho a partir de algum nó da TreeView. Com isso um novo elemento é inserido como filho do
+                    nó correspondente.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_Adicionar um filho." class="events item">
+                        <h3 class="name"><code>Adicionar um filho.</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/bootstrap-treeview.js.html#l491"><code>bootstrap-treeview.js:491</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao clicar no botão de remover um nó da TreeView. Com isso o nó e seus filhos são excluídos.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_Baixar informações para um nó." class="events item">
+                        <h3 class="name"><code>Baixar informações para um nó.</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/bootstrap-treeview.js.html#l457"><code>bootstrap-treeview.js:457</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao clicar no botão de baixar informações a partir de algum nó da TreeView. Com isso um modal é exibindo podendo inserir as
+                    informações &quot;bind&quot;, &quot;datasource&quot; e &quot;parse&quot; (caso haja um datasource válido).</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_Confirmar dados do modal." class="events item">
+                        <h3 class="name"><code>Confirmar dados do modal.</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/bootstrap-treeview.js.html#l676"><code>bootstrap-treeview.js:676</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao confirmar os dados informados no formulário do modal.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_Editar nó" class="events item">
+                        <h3 class="name"><code>Editar nó</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/bootstrap-treeview.js.html#l376"><code>bootstrap-treeview.js:376</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao clicar no botão de editar a partir de algum nó da TreeView. Com isso o elemento fica editável.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_Parse dos dados obtidos." class="events item">
+                        <h3 class="name"><code>Parse dos dados obtidos.</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/bootstrap-treeview.js.html#l654"><code>bootstrap-treeview.js:654</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao clicar no botão parse. Exibe os atributos referentes aos novos dados obtidos.
+                    obter dados internos aos já obtidos.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_Remover baixar informações a partir de um datasource." class="events item">
+                        <h3 class="name"><code>Remover baixar informações a partir de um datasource.</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/bootstrap-treeview.js.html#l602"><code>bootstrap-treeview.js:602</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao clicar no botão baixar informações a partir de um datasource. Caso seja um datasource válido será possível inserir um parse para
+                    obter dados internos aos já obtidos.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_Remover filhos selecionados." class="events item">
+                        <h3 class="name"><code>Remover filhos selecionados.</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/bootstrap-treeview.js.html#l508"><code>bootstrap-treeview.js:508</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao clicar no botão de remover nós selecionados a partir de algum nó da TreeView. Com isso os nós filhos que estão selecionados são
+                    excluídos, bem como seus filhos.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

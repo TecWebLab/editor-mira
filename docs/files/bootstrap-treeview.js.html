@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>bootstrap-treeview.js - Mira-Editor</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Mira-Editor" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AbstractElement.html">AbstractElement</a></li>
+                                <li><a href="../classes/AbstractInterface.html">AbstractInterface</a></li>
+                                <li><a href="../classes/BootstrapNavigation.html">BootstrapNavigation</a></li>
+                                <li><a href="../classes/BootstrapNavigationList.html">BootstrapNavigationList</a></li>
+                                <li><a href="../classes/BootstrapNavigationListItem.html">BootstrapNavigationListItem</a></li>
+                                <li><a href="../classes/Button.html">Button</a></li>
+                                <li><a href="../classes/Carousel.html">Carousel</a></li>
+                                <li><a href="../classes/CarouselItem.html">CarouselItem</a></li>
+                                <li><a href="../classes/Code.html">Code</a></li>
+                                <li><a href="../classes/ConcreteInterface.html">ConcreteInterface</a></li>
+                                <li><a href="../classes/Div.html">Div</a></li>
+                                <li><a href="../classes/Formulario.html">Formulario</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
+                                <li><a href="../classes/HTMLElement.html">HTMLElement</a></li>
+                                <li><a href="../classes/ImageHtml.html">ImageHtml</a></li>
+                                <li><a href="../classes/InputOption.html">InputOption</a></li>
+                                <li><a href="../classes/InputRadioCheck.html">InputRadioCheck</a></li>
+                                <li><a href="../classes/InputSelect.html">InputSelect</a></li>
+                                <li><a href="../classes/InputText.html">InputText</a></li>
+                                <li><a href="../classes/InputTextarea.html">InputTextarea</a></li>
+                                <li><a href="../classes/Label.html">Label</a></li>
+                                <li><a href="../classes/Link.html">Link</a></li>
+                                <li><a href="../classes/List.html">List</a></li>
+                                <li><a href="../classes/ListItem.html">ListItem</a></li>
+                                <li><a href="../classes/Paragraph.html">Paragraph</a></li>
+                                <li><a href="../classes/Preview.html">Preview</a></li>
+                                <li><a href="../classes/Project.html">Project</a></li>
+                                <li><a href="../classes/RenderElements.html">RenderElements</a></li>
+                                <li><a href="../classes/SimpleHtml.html">SimpleHtml</a></li>
+                                <li><a href="../classes/Span.html">Span</a></li>
+                                <li><a href="../classes/Tree.html">Tree</a></li>
+                                <li><a href="../classes/Tree.initModalAndEvents.html">Tree.initModalAndEvents</a></li>
+                                <li><a href="../classes/UIEvents.html">UIEvents</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: bootstrap-treeview.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/* =========================================================
+ * bootstrap-treeview.js v1.2.0
+ * =========================================================
+ * Copyright 2013 Jonathan Miles
+ * Project URL : http://www.jondmiles.com/bootstrap-treeview
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ========================================================= */
+
+;(function ($, window, document, undefined) {
+
+	/*global jQuery, console*/
+
+	&#x27;use strict&#x27;;
+
+	var pluginName = &#x27;treeview&#x27;;
+
+	var _default = {};
+
+	_default.settings = {
+
+		injectStyle: true,
+
+		levels: 6,
+
+		expandIcon: &#x27;fa fa-chevron-right&#x27;,
+		collapseIcon: &#x27;fa fa-chevron-down&#x27;,
+		emptyIcon: &#x27;fa&#x27;,
+		nodeIcon: &#x27;&#x27;,
+		selectedIcon: &#x27;&#x27;,
+		checkedIcon: &#x27;fa fa-check-square-o&#x27;,
+		uncheckedIcon: &#x27;fa fa-square-o&#x27;,
+
+		color: undefined, // &#x27;#000000&#x27;,
+		backColor: undefined, // &#x27;#FFFFFF&#x27;,
+		borderColor: undefined, // &#x27;#dddddd&#x27;,
+		onhoverColor: &#x27;#F5F5F5&#x27;,
+		selectedColor: &#x27;#FFFFFF&#x27;,
+		selectedBackColor: &#x27;#428bca&#x27;,
+		searchResultColor: &#x27;#D9534F&#x27;,
+		searchResultBackColor: undefined, //&#x27;#FFFFFF&#x27;,
+
+		enableLinks: false,
+		highlightSelected: true,
+		highlightSearchResults: true,
+		showBorder: true,
+		showIcon: true,
+		showCheckbox: false,
+		showTags: false,
+		multiSelect: false,
+
+		// Event handlers
+		onNodeChecked: undefined,
+		onNodeCollapsed: undefined,
+		onNodeDisabled: undefined,
+		onNodeEnabled: undefined,
+		onNodeExpanded: undefined,
+		onNodeSelected: undefined,
+		onNodeUnchecked: undefined,
+		onNodeUnselected: undefined,
+		onSearchComplete: undefined,
+		onSearchCleared: undefined,
+		onTreeRender: undefined
+	};
+
+	_default.options = {
+		silent: false,
+		ignoreChildren: false
+	};
+
+	_default.searchOptions = {
+		ignoreCase: true,
+		exactMatch: false,
+		revealResults: true
+	};
+
+	/**
+	 * Módulo reponsável por gerenciar a TreeView representando a interface abstrata. Isso é uma adaptação do Plugin BootstrapTreeView,
+	 * desenvolvido por Jonathan Miles.
+	 * @class Tree
+	 * @param {Selector} element Seletor jQuery onde o plugin irá atuar.
+	 * @param {Object} options Conjunto de opções de inicialização do plugin.
+	 * @return Uma instância do plugin BootstrapTreeView.
+	 */
+	var Tree = function (element, options) {
+		/**
+	    * @property $element Objeto jQuery onde o plugin irá atuar.
+	    * @type {jQuery}
+	    */
+		this.$element = $(element);
+
+		/**
+	    * @property elementId Identificador do item da lista.
+	    * @type {Selector}
+	    */
+		this.elementId = element.id;
+
+		/**
+	    * @property id classe inicial para identificação do item da lista.
+	    * @type {string}
+	    */
+		this.styleId = this.elementId + &#x27;-style&#x27;;
+		this.id = 0;
+
+		this.init(options);
+
+		return {
+
+			// Options (public access)
+			options: this.options,
+
+			// Initialize / destroy methods
+			init: $.proxy(this.init, this),
+			remove: $.proxy(this.remove, this),
+
+			// Get methods
+			getNode: $.proxy(this.getNode, this),
+			getParent: $.proxy(this.getParent, this),
+			getSiblings: $.proxy(this.getSiblings, this),
+			getSelected: $.proxy(this.getSelected, this),
+			getUnselected: $.proxy(this.getUnselected, this),
+			getExpanded: $.proxy(this.getExpanded, this),
+			getCollapsed: $.proxy(this.getCollapsed, this),
+			getChecked: $.proxy(this.getChecked, this),
+			getUnchecked: $.proxy(this.getUnchecked, this),
+			getDisabled: $.proxy(this.getDisabled, this),
+			getEnabled: $.proxy(this.getEnabled, this),
+
+			// Select methods
+			selectNode: $.proxy(this.selectNode, this),
+			unselectNode: $.proxy(this.unselectNode, this),
+			toggleNodeSelected: $.proxy(this.toggleNodeSelected, this),
+
+			// Expand / collapse methods
+			collapseAll: $.proxy(this.collapseAll, this),
+			collapseNode: $.proxy(this.collapseNode, this),
+			expandAll: $.proxy(this.expandAll, this),
+			expandNode: $.proxy(this.expandNode, this),
+			toggleNodeExpanded: $.proxy(this.toggleNodeExpanded, this),
+			revealNode: $.proxy(this.revealNode, this),
+
+			// Expand / collapse methods
+			checkAll: $.proxy(this.checkAll, this),
+			checkNode: $.proxy(this.checkNode, this),
+			uncheckAll: $.proxy(this.uncheckAll, this),
+			uncheckNode: $.proxy(this.uncheckNode, this),
+			toggleNodeChecked: $.proxy(this.toggleNodeChecked, this),
+
+			//Custom Methods
+			addElement: $.proxy(this.addElement, this),
+			removeElements: $.proxy(this.removeElements, this),
+
+			// Disable / enable methods
+			disableAll: $.proxy(this.disableAll, this),
+			disableNode: $.proxy(this.disableNode, this),
+			enableAll: $.proxy(this.enableAll, this),
+			enableNode: $.proxy(this.enableNode, this),
+			toggleNodeDisabled: $.proxy(this.toggleNodeDisabled, this),
+
+			// Search methods
+			search: $.proxy(this.search, this),
+			clearSearch: $.proxy(this.clearSearch, this)
+		};
+	};
+
+	/**
+	 * Método responsável por iniciar o plugin com os opões informadas
+	 * @method init
+	 * @param {Object} options Conjunto de opções desejadas.
+	 * @for Tree
+	 */
+	Tree.prototype.init = function (options) {
+
+		this.tree = [];
+		this.nodes = [];
+
+		if (options.data) {
+			if (typeof options.data === &#x27;string&#x27;) {
+				options.data = $.parseJSON(options.data);
+			}
+
+			this.tree = $.extend(true, [], options.data);
+			delete options.data;
+		}
+		this.options = $.extend({}, _default.settings, options);
+
+		this.destroy();
+		this.subscribeEvents();
+		this.setInitialStates({ nodes: this.tree }, 0);
+		this.initModalAndEvents();
+		this.render();
+	};
+
+	/**
+	 * Dertermina o identificador de um elemento gerado pelo plugin.
+	 * @method setId
+	 * @return O idenficador do elemento gerado.
+	 * @for Tree
+	 */
+	Tree.prototype.setId = function(){
+		this.id++;
+		return this.id;
+	}
+
+	/**
+	 * Método responsável por criar filhos para um determinado nó.
+	 * @method createNodes
+	 * @param {} node
+	 * @param {} values
+	 * @return node
+	 */
+	Tree.prototype.createNodes = function(node, values){
+		for(var item in values){
+			var newItem = new Object();
+			newItem.text = item;
+			newItem.state = [];
+			newItem.checked = false;
+			newItem.nodeId = this.nodes.length;
+			newItem.id = this.setId();
+			newItem.selectable = true;
+			newItem.parentId = node.nodeId;
+
+			if(node.$data) newItem.$data = node.$data;
+
+			node.state.editable = false;
+			node.state.disabled = false;
+			node.state.added = false;
+
+			node.nodes.push(newItem);
+			this.nodes.push(newItem);
+		}
+
+		return node;
+	}
+
+	/**
+	 * Método reponsável por gerar os widgets abstratos.
+	 * @method createAbstractInterface
+	 * @param {Array} nodes Conjuntos de nós do BootstrapTreeView
+	 * @for Tree
+	 * @return Conjuto de elementos abstratos aninhados, caso necessário.
+	 */
+	Tree.prototype.createAbstractInterface = function(nodes){
+		var abstractInterface = []; 
+		for(var i = 0; i&lt;nodes.length; i++){
+			var element = new AbstractElement(nodes[i]);
+			/*
+			element.name = nodes[i].text;
+			
+			element.datasource = nodes[i].datasource &amp;&amp; nodes[i].datasource.length &gt; 0 ? nodes[i].datasource.replace(&quot;http://localhost:3000&quot;, &quot;url:&quot;) : undefined;
+			element.parse = nodes[i].parse &amp;&amp; nodes[i].parse.length &gt; 0 ? &#x27;$data[&quot;&#x27; + nodes[i].parse + &#x27;&quot;]&#x27; : undefined;
+			element.bind = nodes[i].bind &amp;&amp; nodes[i].bind.length &gt; 0 ? nodes[i].bind : undefined;*/
+
+			if(nodes[i].nodes) element.children = this.createAbstractInterface(nodes[i].nodes);
+			abstractInterface.push(element);
+		}
+
+		return abstractInterface;
+	}
+
+	/**
+	 * Método responsável por sincronizar os dados da TreeView com dados externos ao plugin.
+	 * @method reloadData
+	 * @param {Elementos da TreeView aninhados} tree
+	 * @param {Elementos da TreeView como uma lista linear} nodes
+	 * @for Tree 
+	 */
+	Tree.prototype.reloadData = function(tree, nodes){
+		this.tree = tree;
+		this.nodes = nodes;
+	}
+
+	/**
+	 * Método responsável por iniciar as operações com modal e eventos do botões.
+	 * @method initModalAndEvents
+	 * @for Tree
+	 */
+	Tree.prototype.initModalAndEvents = function(){
+		var _this = this;
+		var values; //valores baixados
+		var currentData = [];
+
+		//Modal
+		var modalDownload = 
+			&#x27;&lt;div class=&quot;modal fade&quot; id=&quot;modal-tree-download&quot; data-id=&quot;&quot;&gt;\
+				&lt;div class=&quot;modal-dialog&quot;&gt;\
+					&lt;div class=&quot;modal-content&quot;&gt;\
+						&lt;div class=&quot;modal-header&quot;&gt;\
+							&lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;\
+							&lt;h4 class=&quot;modal-title&quot;&gt;Baixar Informações&lt;/h4&gt;\
+						&lt;/div&gt;\
+						&lt;div class=&quot;modal-body&quot;&gt;\
+							&lt;form class=&quot;form-horizontal&quot; role=&quot;form&quot;&gt;\
+								&lt;div class=&quot;form-group&quot;&gt;\
+									&lt;label class=&quot;control-label col-sm-2&quot;&gt;Bind&lt;/label&gt;\
+									&lt;div class=&quot;col-sm-10&quot;&gt;\
+										&lt;div class=&quot;input-group&quot;&gt;\
+											&lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;field-bind&quot; placeholder=&quot;Insira a expressão&quot;&gt;\
+										&lt;/div&gt;\
+									&lt;/div&gt;\
+								&lt;/div&gt;\
+								&lt;div class=&quot;form-group&quot;&gt;\
+									&lt;label class=&quot;control-label col-sm-2&quot;&gt;Link&lt;/label&gt;\
+									&lt;div class=&quot;col-sm-10&quot;&gt;\
+										&lt;div class=&quot;input-group&quot;&gt;\
+											&lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;field-datasource&quot; placeholder=&quot;Insira o Link&quot;&gt;\
+											&lt;span class=&quot;input-group-btn&quot;&gt;\
+												&lt;button class=&quot;btn btn-success&quot; id=&quot;btn-download-information&quot; type=&quot;button&quot;&gt;&lt;i class=&quot;fa fa-download&quot;&gt;&lt;/i&gt;&lt;/button&gt;\
+											&lt;/span&gt;\
+										&lt;/div&gt;\
+										&lt;span id=&quot;msg-error-download&quot; class=&quot;help-block&quot; style=&quot;display:none&quot;&gt;Erro ao obter informações. Observe se o link está correto&lt;/span&gt;\
+									&lt;/div&gt;\
+								&lt;/div&gt;\
+								&lt;div class=&quot;form-group&quot; id=&quot;group-parse&quot; style=&quot;display:none&quot;&gt;\
+									&lt;label class=&quot;control-label col-sm-2&quot;&gt;Parse&lt;/label&gt;\
+									&lt;div class=&quot;col-sm-4&quot;&gt;\
+										&lt;div class=&quot;input-group&quot;&gt;\
+											&lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;parse&quot; id=&quot;parse&quot;/&gt;\
+											&lt;span class=&quot;input-group-btn&quot;&gt;\
+												&lt;button class=&quot;btn btn-success&quot; id=&quot;btn-process-parse&quot; type=&quot;button&quot;&gt;&lt;i class=&quot;fa fa-refresh&quot;&gt;&lt;/i&gt;&lt;/button&gt;\
+											&lt;/span&gt;\
+										&lt;/div&gt;\
+									&lt;/div&gt;\
+								&lt;/div&gt;\
+							&lt;/form&gt;\
+							&lt;hr /&gt;\
+							&lt;div class=&quot;panel panel-default&quot; id=&quot;panel-download-fields&quot; style=&quot;display:none&quot;&gt;\
+								&lt;div class=&quot;panel-heading&quot;&gt;\
+									Campos\
+								&lt;/div&gt;\
+								&lt;table class=&quot;table table-bordered&quot; id=&quot;table-fields&quot;&gt;\
+									&lt;thead&gt;\
+										&lt;tr&gt;\
+											&lt;th&gt;Nome&lt;/th&gt;\
+										&lt;/tr&gt;\
+									&lt;/thead&gt;\
+									&lt;tbody&gt;&lt;/tbody&gt;\
+  								&lt;/table&gt;\
+							&lt;/div&gt;\
+						&lt;/div&gt;\
+						&lt;div class=&quot;modal-footer&quot;&gt;\
+							&lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;Fechar&lt;/button&gt;\
+							&lt;button type=&quot;button&quot; class=&quot;btn btn-success&quot; data-dismiss=&quot;modal&quot; id=&quot;btn-confirm-download&quot;&gt;Confirmar&lt;/button&gt;\
+						&lt;/div&gt;\
+					&lt;/div&gt;\
+				&lt;/div&gt;\
+			&lt;/div&gt;&#x27;;
+
+		var modalConfirm = 
+			&#x27;&lt;div class=&quot;modal fade&quot; id=&quot;modal-tree-confirm&quot; data-confirm=&quot;&quot;&gt;\
+				&lt;div class=&quot;modal-dialog&quot;&gt;\
+					&lt;div class=&quot;modal-content&quot;&gt;\
+						&lt;div class=&quot;modal-header&quot;&gt;\
+							&lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;\
+							&lt;h4 class=&quot;modal-title&quot;&gt;Confirmação&lt;/h4&gt;\
+						&lt;/div&gt;\
+						&lt;div class=&quot;modal-body&quot;&gt;&lt;/div&gt;\
+						&lt;div class=&quot;modal-footer&quot;&gt;\
+							&lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;Cancelar&lt;/button&gt;\
+							&lt;button type=&quot;button&quot; class=&quot;btn btn-danger&quot; data-dismiss=&quot;modal&quot;&gt;Confirmar&lt;/button&gt;\
+						&lt;/div&gt;\
+					&lt;/div&gt;\
+				&lt;/div&gt;\
+			&lt;/div&gt;&#x27;;
+
+		/**
+		 * Evento disparado ao clicar no botão de editar a partir de algum nó da TreeView. Com isso o elemento fica editável.
+		 * @event Editar nó
+		 * @for Tree
+		 */
+		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-edit&#x27;, function(e){
+			var item = $(this).parent().parent();
+			var node = _this.findNode(item);
+			node.state.editable = true;
+			node.state.disabled = true;
+
+			item.contents().filter(function() {
+				return this.nodeType === 3;
+			}).remove();
+
+			item.append($(_this.template.text)
+						.focus()
+						.val(node.text)
+						.keyup(function(e){
+							if(e.which == 13 || e.which == 9 ){
+								node.state.editable = false;
+								node.state.disabled = false;
+								node.text = $(this).val();
+
+								_this.tree = _this.refreshTree(_this.tree, node);
+
+								_this.$element.empty().append(_this.$wrapper.empty());
+								_this.buildTree(_this.tree, 0);
+								_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
+							} else if(e.which == 27) {
+								node.state.editable = false;
+								node.state.disabled = false;
+
+								_this.tree = _this.refreshTree(_this.tree, node);
+								_this.$element.empty().append(_this.$wrapper.empty());
+								_this.buildTree(_this.tree, 0);
+								_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
+							}
+						}));
+		});
+
+		/**
+		 * Evento disparado ao clicar no botão de adicionar um filho a partir de algum nó da TreeView. Com isso um novo elemento é inserido como filho do
+		 * nó correspondente.
+		 * @event Adicionar um filho.
+		 * @for Tree
+		 */
+		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-add&#x27;, function(e){
+			var node = _this.findNode($(this).parents(&#x27;li&#x27;));
+			if(!node) return;
+
+			//cria um novo objeto
+			var newItem = new Object();
+			newItem.text = &quot;Novo Item&quot;;
+			newItem.state = new Object();
+			newItem.state.added = true;
+			newItem.state.disabled = true;
+			newItem.nodeId = _this.nodes.length;
+			newItem.id = _this.setId();
+			newItem.selectable = false;
+			newItem.parentId = node.nodeId;
+
+			if(!node.nodes) node.nodes = [];
+			if(node.$data) newItem.$data = node.$data;
+			
+			//insere como filho do nó corrente
+			node.nodes.push(newItem);
+
+			//insere a fila de nós
+			_this.nodes.push(newItem);
+
+			//muda o estado do nó corrente para expandido
+			node.state.expanded = true;
+
+			//atualiza a tree
+			_this.tree = _this.refreshTree(_this.tree, node);
+			_this.$element.empty().append(_this.$wrapper.empty());
+			_this.buildTree(_this.tree, 0);
+			_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
+		});
+
+		/**
+		 * Evento disparado ao clicar no botão de baixar informações a partir de algum nó da TreeView. Com isso um modal é exibindo podendo inserir as
+		 * informações &quot;bind&quot;, &quot;datasource&quot; e &quot;parse&quot; (caso haja um datasource válido).
+		 * @event Baixar informações para um nó.
+		 * @for Tree
+		 */
+		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-download&#x27;, function(e){
+			var node = _this.findNode($(this).parents(&#x27;li&#x27;));
+			$(&#x27;#modal-tree-download&#x27;).data(&#x27;id&#x27;, $(this).parents(&#x27;li&#x27;).data(&#x27;nodeid&#x27;));
+
+			$(&#x27;#field-bind&#x27;).val(node.bind ?  node.bind : &#x27;&#x27;);
+
+			if(node.datasource){
+				values = _getValue(node.$data);
+				$(&#x27;#field-datasource&#x27;).val(node.datasource ? node.datasource : &#x27;&#x27;);
+				$(&#x27;#field-parse&#x27;).val(node.parse ? node.parse : &#x27;&#x27;);
+
+				_refreshTable($(&#x27;#table-fields tbody&#x27;), values)
+
+				$(&#x27;#group-parse&#x27;).show();
+				$(&#x27;#panel-download-fields&#x27;).show();
+			}else {
+				values = null;
+
+				$(&#x27;#field-datasource&#x27;).val(&#x27;&#x27;);
+				$(&#x27;#field-parse&#x27;).hide().val(&#x27;&#x27;);
+
+				$(&#x27;#table-fields tbody&#x27;).empty();
+
+				$(&#x27;#group-parse&#x27;).hide();
+				$(&#x27;#panel-download-fields&#x27;).hide();
+			}
+		});
+
+		/**
+		 * Evento disparado ao clicar no botão de remover um nó da TreeView. Com isso o nó e seus filhos são excluídos.
+		 * @event Adicionar um filho.
+		 * @for Tree
+		 */
+		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-remove&#x27;, function(e){
+			var node = _this.findNode($(this).parents(&#x27;li&#x27;));
+			if(!node) return;
+			_this.tree = _this.removeNodes(_this.tree, [node.nodeId]);
+			_this.refreshIds();
+			_this.broadcastData();
+
+			_this.$element.empty().append(_this.$wrapper.empty());
+			_this.buildTree(_this.tree, 0);
+			_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
+		});
+
+		/**
+		 * Evento disparado ao clicar no botão de remover nós selecionados a partir de algum nó da TreeView. Com isso os nós filhos que estão selecionados são
+		 * excluídos, bem como seus filhos.
+		 * @event Remover filhos selecionados.
+		 * @for Tree
+		 */
+		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-removeall&#x27;, function(e){
+			var node = _this.findNode($(this).parents(&#x27;li&#x27;));
+			if(!node) return;
+
+			//verifica quais os filhos estão selecionados
+			var ids = [];
+			for(var i = 0; i &lt; node.nodes.length; i++){
+				if(node.nodes[i].state.checked) ids.push(node.nodes[i].nodeId);
+			}
+
+			_this.tree = _this.removeNodes(_this.tree, ids);
+			_this.refreshIds();
+			_this.broadcastData();
+
+			_this.$element.empty().append(_this.$wrapper.empty());
+			_this.buildTree(_this.tree, 0);
+			_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
+		});
+
+		/**
+		 * Métodos responsável por filtrar os atributos de um conjunto de valores.
+		 * @method _getValue
+		 * @param {Object | Array} data Conjunto de valores ou um simples objeto.
+		 * @return Caso seja um array, retorna um Objeto presente na primeira posição, caso contrário retorna o objeto inteiro.
+		 * @for Tree.initModalAndEvents
+		 */
+		var _getValue = function(data){
+			return data[0] ? data[0] : data;
+		}
+
+		/**
+		 * Métodos responsável por atualizar a tabela que informa os valores da tabela.
+		 * @method _refreshTable
+		 * @param {jQuery} Corpo da tabela.
+		 * @param {Object} data Atributos a serem inseridos na tabela.
+		 * @for Tree.initModalAndEvents
+		 */
+		var _refreshTable = function(table, data) {
+			//linha da tabela
+			var line = $(
+					&#x27;&lt;tr&gt;\
+						&lt;td class=&quot;name-item&quot;&gt;&lt;/td&gt;\
+					&lt;/tr&gt;&#x27;
+				);
+
+			table.empty(); //limpa previamente a tabela
+
+			for(var item in data){
+				var aux = line.clone();
+				aux.find(&#x27;.name-item&#x27;).text(item);
+				table.append(aux);
+			}
+		}
+
+		/**
+		 * Método responsável por obter os dados a partir de um determinado datasource e atualzar a tabela de atributos.
+		 * @method _getDataFromDatasource
+		 * @param {Object | Array} data Dados obtidos a partir de um datasource
+		 * @for Tree.initModalAndEvents
+		 */
+		var _getDataFromDatasource = function(data){
+			values = _getValue(data);
+			currentData = data;
+				
+			$(&#x27;#msg-error-download&#x27;).hide();
+			$(&#x27;#group-parse&#x27;).show();
+			
+			var panel = $(&#x27;#panel-download-fields&#x27;);
+			var table = panel.find(&#x27;table tbody&#x27;);
+			
+			panel.show();
+			_refreshTable(table, values);
+		}
+
+		/**
+		 * Método responsável por informar que foi possível obter os dados a partir do datasource informado.
+		 * @method _getDataFromDatasourceFail
+		 * @param {jQuery} button Botão que gerou a operação.
+		 * @for Tree.initModalAndEvents
+		 */
+		var _getDataFromDatasourceFail = function(button){
+			currentData = [];
+			button.parents(&#x27;.form-group&#x27;).addClass(&#x27;has-error&#x27;);
+			$(&#x27;#msg-error-download&#x27;).show();
+			$(&#x27;#group-parse&#x27;).hide();
+			$(&#x27;#panel-download-fields&#x27;).hide();
+		}
+
+		/**
+		 * Evento disparado ao clicar no botão baixar informações a partir de um datasource. Caso seja um datasource válido será possível inserir um parse para 
+		 * obter dados internos aos já obtidos.
+		 * @event Remover baixar informações a partir de um datasource.
+		 * @for Tree
+		 */
+		$(document).on(&#x27;click&#x27;, &#x27;#btn-download-information&#x27;, function(e){
+			var link = $(this).parents(&#x27;.form-group&#x27;).find(&#x27;input&#x27;).val().trim();
+			var button = $(this);
+			var node = _this.findNode(button.parents(&#x27;#modal-tree-download&#x27;).data(&#x27;id&#x27;));
+
+			if(node.$data){
+
+				try {
+					var data = eval(&#x27;node.&#x27; + link);
+					
+					if(data){
+						_getDataFromDatasource(data);		
+					}else{
+						_getDataFromDatasourceFail(button);
+					}
+				} catch (e){
+					$.ajax({
+						url: link,
+						type: &#x27;GET&#x27;,
+						success: function(data){
+							data = $.parseJSON($(data.responseText)[0].data);
+							_getDataFromDatasource(data);	
+						},
+
+						error: function(){
+							_getDataFromDatasourceFail(button);	
+						}
+					})					
+				}
+			} else{
+				$.ajax({
+					url: link,
+					type: &#x27;GET&#x27;,
+					success: function(data){
+						data = $.parseJSON($(data.responseText)[0].data);
+						_getDataFromDatasource(data);	
+					},
+
+					error: function(){
+						_getDataFromDatasourceFail(button);	
+					}
+				})
+
+			}
+		});
+
+		/**
+		 * Evento disparado ao clicar no botão parse. Exibe os atributos referentes aos novos dados obtidos. 
+		 * obter dados internos aos já obtidos.
+		 * @event Parse dos dados obtidos.
+		 * @for Tree
+		 */
+		$(document).on(&#x27;click&#x27;, &#x27;#btn-process-parse&#x27;, function(e){
+			var parse = $(this).parents(&#x27;.form-group&#x27;).find(&#x27;input&#x27;).val().trim();
+			if(parse.length &gt; 0){
+				if(values[parse]){
+					currentData = values[parse];
+					values = _getValue(values[parse]);
+					_refreshTable($(&#x27;#panel-download-fields tbody&#x27;), values);
+				}else{
+					alert(&#x27;Não existe o campo &quot;&#x27;+ parse + &#x27;&quot; nos dados&#x27;);
+				}
+			}else{
+				alert(&#x27;Insira um valor.&#x27;);
+			}
+		});
+
+
+		/**
+		 * Evento disparado ao confirmar os dados informados no formulário do modal.
+		 * @event Confirmar dados do modal.
+		 * @for Tree
+		 */
+		$(document).on(&#x27;click&#x27;, &#x27;#btn-confirm-download&#x27;, function(e){
+			//if(!values &amp;&amp; !bind.length &amp;&amp; parse.) return;
+
+			var id = $(&#x27;#modal-tree-download&#x27;).data(&#x27;id&#x27;);
+			var node = _this.findNode(id);
+			
+			//insere os dados no nó
+			//node.data = values;
+			if(values != null) node = _this.setDataToChildren(node, currentData);
+			
+			node.datasource = $(&#x27;#field-datasource&#x27;).val().trim();
+			node.bind = $(&#x27;#field-bind&#x27;).val().trim().length &gt; 0 ? $(&#x27;#field-bind&#x27;).val().trim() : undefined;
+			node.parse = $(&#x27;#parse&#x27;).is(&#x27;:visible&#x27;) &amp;&amp; $(&#x27;#parse&#x27;).val().trim().length ? $(&#x27;#parse&#x27;).val().trim() : undefined;
+
+			//insere o novos dados no modelo
+			//node = _this.createNodes(node, values);
+
+			//refaz a tree
+			_this.tree = _this.refreshTree(_this.tree, node);
+			_this.$element.empty().append(_this.$wrapper.empty());
+			_this.buildTree(_this.tree, 0);
+			_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
+		})
+
+		$(&#x27;body&#x27;).append(modalDownload).append(modalConfirm);
+	}
+
+	/**
+	 * Método responsável por repassar os dados do pai pro filho, se necessário em toda a Tree.
+	 * @method broadcastData
+	 * @for Tree
+	 */
+	Tree.prototype.broadcastData = function(){
+		for(var i=0; i&lt; this.tree.length; i++){
+			this.tree[i] = this.setDataToChildren(this.tree[i], this.tree[i].$data);
+		}
+	}
+
+	/**
+	 * Método responsável por passar os dados de pai para filho, se necessário
+	 * @method setDataToChildren
+	 * @param {Object} node Nó corrente
+	 * @param {Object | Array} data Dados associados ao nó corrente.
+	 * @return node Nó com os dados obtidos do pai.
+	 * @for Tree
+	 */
+	Tree.prototype.setDataToChildren = function(node, data){
+		if(!node) return node;
+
+		if(!node.$data) node.$data = data;
+		if(node.nodes){
+			for(var i=0; i&lt;node.nodes.length;i++) node.nodes[i] = this.setDataToChildren(node.nodes[i], data);
+		}
+
+		return node;
+	}
+
+	/**
+	 * Método responsável por remover os dados do plugin.
+	 * @method remove
+	 * @for Tree 
+	 */
+	Tree.prototype.remove = function () {
+		this.destroy();
+		$.removeData(this, pluginName);
+		$(&#x27;#&#x27; + this.styleId).remove();
+	};
+
+	/**
+	 * Método responsável por destruir a instancia da Tree.
+	 * @method destroy
+	 * @for Tree
+	 */
+	Tree.prototype.destroy = function () {
+
+		if (!this.initialized) return;
+
+		this.$wrapper.remove();
+		this.$wrapper = null;
+
+		// Switch off events
+		this.unsubscribeEvents();
+
+		// Reset this.initialized flag
+		this.initialized = false;
+	};
+
+	/**
+	 * Método responsável por desativar todos os eventos da Tree.
+	 * @method unsubscribeEvents
+	 * @for Tree
+	 */
+	Tree.prototype.unsubscribeEvents = function () {
+
+		this.$element.off(&#x27;click&#x27;);
+		this.$element.off(&#x27;nodeChecked&#x27;);
+		this.$element.off(&#x27;nodeCollapsed&#x27;);
+		this.$element.off(&#x27;nodeDisabled&#x27;);
+		this.$element.off(&#x27;nodeEnabled&#x27;);
+		this.$element.off(&#x27;nodeExpanded&#x27;);
+		this.$element.off(&#x27;nodeSelected&#x27;);
+		this.$element.off(&#x27;nodeUnchecked&#x27;);
+		this.$element.off(&#x27;nodeUnselected&#x27;);
+		this.$element.off(&#x27;searchComplete&#x27;);
+		this.$element.off(&#x27;searchCleared&#x27;);
+		this.$element.off(&#x27;treeRender&#x27;);
+	};
+
+	/**
+	 * Método responsável por ativar os eventos da Tree.
+	 * @method subscribeEvents
+	 * @for Tree
+	 */
+	Tree.prototype.subscribeEvents = function () {
+
+		this.unsubscribeEvents();
+
+		this.$element.on(&#x27;click&#x27;, $.proxy(this.clickHandler, this));
+
+		if (typeof (this.options.onNodeChecked) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;nodeChecked&#x27;, this.options.onNodeChecked);
+		}
+
+		if (typeof (this.options.onNodeCollapsed) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;nodeCollapsed&#x27;, this.options.onNodeCollapsed);
+		}
+
+		if (typeof (this.options.onNodeDisabled) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;nodeDisabled&#x27;, this.options.onNodeDisabled);
+		}
+
+		if (typeof (this.options.onNodeEnabled) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;nodeEnabled&#x27;, this.options.onNodeEnabled);
+		}
+
+		if (typeof (this.options.onNodeExpanded) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;nodeExpanded&#x27;, this.options.onNodeExpanded);
+		}
+
+		if (typeof (this.options.onNodeSelected) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;nodeSelected&#x27;, this.options.onNodeSelected);
+		}
+
+		if (typeof (this.options.onNodeUnchecked) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;nodeUnchecked&#x27;, this.options.onNodeUnchecked);
+		}
+
+		if (typeof (this.options.onNodeUnselected) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;nodeUnselected&#x27;, this.options.onNodeUnselected);
+		}
+
+		if (typeof (this.options.onSearchComplete) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;searchComplete&#x27;, this.options.onSearchComplete);
+		}
+
+		if (typeof (this.options.onSearchCleared) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;searchCleared&#x27;, this.options.onSearchCleared);
+		}
+
+		if (typeof (this.options.onTreeRender) === &#x27;function&#x27;) {
+			this.$element.on(&#x27;treeRender&#x27;, this.options.onTreeRender);
+		}
+
+	};
+
+	/**
+	 * Define o estado inicial de cada nó da árvore (valores padrões) 
+	 * @method setInitialStates
+	 * @param {Object} node Elemento da Tree.
+	 * @param {Number} level Nível na qual o nó se encontra.
+	 * @for Tree
+	 */
+	Tree.prototype.setInitialStates = function (node, level) {
+
+		if (!node.nodes) return;
+		level += 1;
+
+		var parent = node;
+		var _this = this;
+		$.each(node.nodes, function checkStates(index, node) {
+
+			// nodeId : unique, incremental identifier
+			node.nodeId = _this.nodes.length;
+			node.id = _this.setId();
+
+			// parentId : transversing up the tree
+			node.parentId = parent.nodeId;
+
+			// if not provided set selectable default value
+			if (!node.hasOwnProperty(&#x27;selectable&#x27;)) {
+				node.selectable = true;
+			}
+
+			// where provided we should preserve states
+			node.state = node.state || {};
+
+			// set checked state; unless set always false
+			if (!node.state.hasOwnProperty(&#x27;checked&#x27;)) {
+				node.state.checked = false;
+			}
+
+			// set enabled state; unless set always false
+			if (!node.state.hasOwnProperty(&#x27;disabled&#x27;)) {
+				node.state.disabled = false;
+			}
+
+			// set enabled state; unless set always false
+			if (!node.state.hasOwnProperty(&#x27;editable&#x27;)) {
+				node.state.editable = false;
+			}
+
+			// set enabled state; unless set always false
+			if (!node.state.hasOwnProperty(&#x27;added&#x27;)) {
+				node.state.added = false;
+			}
+
+			// set expanded state; if not provided based on levels
+			if (!node.state.hasOwnProperty(&#x27;expanded&#x27;)) {
+				if (!node.state.disabled &amp;&amp;
+						(level &lt; _this.options.levels) &amp;&amp;
+						(node.nodes &amp;&amp; node.nodes.length &gt; 0)) {
+					node.state.expanded = true;
+				}
+				else {
+					node.state.expanded = false;
+				}
+			}
+
+			// set selected state; unless set always false
+			if (!node.state.hasOwnProperty(&#x27;selected&#x27;)) {
+				node.state.selected = false;
+			}
+
+			// index nodes in a flattened structure for use later
+			_this.nodes.push(node);
+
+			// recurse child nodes and transverse the tree
+			if (node.nodes) {
+				_this.setInitialStates(node, level);
+			}
+		});
+	};
+
+	/**
+	 * Método responsável por definir como será o clique em cada item da lista
+	 * @method clickHandler
+	 * @param {Object} event Dados do evento.
+	 * @return 
+	 */
+	Tree.prototype.clickHandler = function (event) {
+		if (!this.options.enableLinks) event.preventDefault();
+
+		var target = $(event.target);
+		var node = this.findNode(target);
+		if (target.parent().is(&#x27;:button&#x27;) || target.is(&#x27;:button&#x27;) || !node || node.state.disabled) return;
+		
+		var classList = target.attr(&#x27;class&#x27;) ? target.attr(&#x27;class&#x27;).split(&#x27; &#x27;) : [];
+		if ((classList.indexOf(&#x27;expand-icon&#x27;) !== -1)) {
+
+			this.toggleExpandedState(node, _default.options);
+			this.render();
+		}
+		else if ((classList.indexOf(&#x27;check-icon&#x27;) !== -1)) {
+			
+			this.toggleCheckedState(node, _default.options);
+			this.render();
+		}
+		else {
+			
+			if (node.selectable) {
+				this.toggleSelectedState(node, _default.options);
+			} else {
+				this.toggleExpandedState(node, _default.options);
+			}
+
+			this.render();
+		}
+	};
+
+	
+	/**
+	 * Método responsável por procurar um nó na Tree. 
+	 * @method findNode
+	 * @param {Number | jQuery} target
+	 * @return node Nó da Tree.
+	 * @for Tree
+	 */
+	Tree.prototype.findNode = function (target) {
+		if( parseInt(target).toString() == &#x27;NaN&#x27; &amp;&amp; 
+			(target.parent().is(&#x27;:button&#x27;) || target.is(&#x27;:button&#x27;) 
+				|| target.is(&#x27;:input&#x27;))) target = target.parents(&#x27;li&#x27;);
+
+		var nodeId = parseInt(target).toString() == &#x27;NaN&#x27; ? target.closest(&#x27;li.list-group-item&#x27;).attr(&#x27;data-nodeid&#x27;) : parseInt(target);
+		
+		//var nodeId = target.closest(&#x27;li.list-group-item&#x27;).attr(&#x27;data-nodeid&#x27;);
+		var node = this.nodes[nodeId];
+
+		if (!node) {
+			console.log(&#x27;Error: node does not exist&#x27;);
+		}
+		return node;
+	};
+
+	/**
+	 * Método responsável por procurar um nó pelo seu idenficador
+	 * @method findNodeById
+	 * @param {Number} id Identificador do nó.
+	 * @return node Nó da Tree.
+	 * @for Tree
+	 */
+	Tree.prototype.findNodeById = function (id) {
+		var items = $.grep(this.nodes, function(item){
+			return item.id == id;
+		})
+
+		var node = items.length &gt; 0 ? items[0] : undefined;
+
+		if (!node) {
+			console.log(&#x27;Error: node does not exist&#x27;);
+		}
+
+		return node;
+	};
+
+	/**
+	 * Método responsável por atualizar um nó e seus filhos.
+	 * @method refreshTree
+	 * @param {Array} nodes Conjunto de nós
+	 * @param {Object} node Nó com novas informações.
+	 * @return nodes Retorna o conjunto de nós atualizados.
+	 * @for Tree
+	 */
+	Tree.prototype.refreshTree = function (nodes, node) {
+		if (!node) return nodes;
+		
+		for(var i=0; i &lt; nodes.length; i++){
+			if(nodes[i].id == node.id) nodes[i] = node;
+			if(nodes[i].nodes) nodes[i].nodes = this.refreshTree(nodes[i].nodes, node);
+		}
+
+		this.nodes[node.nodeId] = node;
+		return nodes;
+	};
+
+	/**
+	 * Método responsável por remover um ou mais nós da Tree.
+	 * @method removeNodes
+	 * @param {Árray} nodes Conjunto de nós para pesquisa
+	 * @param {} ids Conjunto de identificadores dos nós a serem removidos.
+	 * @return Conjunto de nós com os nós removidos.
+	 * @for Tree
+	 */
+	Tree.prototype.removeNodes = function(nodes, ids){
+		if(!ids || ids.length == 0) {
+			console.log(&#x27;Identificadores inválidos&#x27;)
+			return nodes;
+		}
+
+		for(var i = nodes.length-1; i &gt;= 0; i--){
+			if($.inArray(nodes[i].nodeId, ids) &gt; -1) {
+				this.nodes.splice(nodes[i].nodeId, 1); //remove da lista de nós
+				nodes.splice(i,1); //remove da lista aninhada
+				continue;
+			}
+
+			if(nodes[i].nodes) nodes[i].nodes = this.removeNodes(nodes[i].nodes, ids); 
+		}
+
+		return nodes.length &gt; 0 ? nodes : undefined;
+	}
+
+	/**
+	 * Método responsável por atualizar o identificador dos nós.
+	 * @method refreshIds
+	 * @for Tree
+	 */
+	Tree.prototype.refreshIds = function(){
+		for(var i=0; i&lt;this.nodes.length; i++) {
+			var node = this.findNodeById(this.nodes[i].id);
+			node.nodeId = i;
+			this.nodes[i].id = i;
+
+			this.tree = this.refreshTree(this.tree, node);
+		}
+	}
+
+	/**
+	 * Método responsável por trocar o modo e expansão do nó (expandido ou não)
+	 * @method toggleExpandedState
+	 * @param {Object} node Nó corrente.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.toggleExpandedState = function (node, options) {
+		if (!node) return;
+		this.setExpandedState(node, !node.state.expanded, options);
+	};
+
+	/**
+	 * Método responsável por deixar um nó como expandido ou não
+	 * @method setExpandedState
+	 * @param {Object} node Nó alvo.
+	 * @param {boolean} state Estado de expansão (true para expandido) .
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.setExpandedState = function (node, state, options) {
+
+		if (state === node.state.expanded) return;
+
+		if (state &amp;&amp; node.nodes) {
+
+			// Expand a node
+			node.state.expanded = true;
+			if (!options.silent) {
+				this.$element.trigger(&#x27;nodeExpanded&#x27;, $.extend(true, {}, node));
+			}
+		}
+		else if (!state) {
+
+			// Collapse a node
+			node.state.expanded = false;
+			if (!options.silent) {
+				this.$element.trigger(&#x27;nodeCollapsed&#x27;, $.extend(true, {}, node));
+			}
+
+			// Collapse child nodes
+			if (node.nodes &amp;&amp; !options.ignoreChildren) {
+				$.each(node.nodes, $.proxy(function (index, node) {
+					this.setExpandedState(node, false, options);
+				}, this));
+			}
+		}
+	};
+
+	/**
+	 * Método responsável por trocar o estado de seleção do nó.
+	 * @method toggleSelectedState
+	 * @param {Object} node Nó alvo.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.toggleSelectedState = function (node, options) {
+		if (!node) return;
+		this.setSelectedState(node, !node.state.selected, options);
+	};
+
+	/**
+	 * Método responsável por determinar o estado de seleção do nó (selecionado ou não)
+	 * @method setSelectedState
+	 * @param {Object} node Nó alvo.
+	 * @param {} state Estado de seleção do nó (true, para selecionado).
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.setSelectedState = function (node, state, options) {
+
+		if (state === node.state.selected) return;
+
+		if (state) {
+
+			// If multiSelect false, unselect previously selected
+			if (!this.options.multiSelect) {
+				$.each(this.findNodes(&#x27;true&#x27;, &#x27;g&#x27;, &#x27;state.selected&#x27;), $.proxy(function (index, node) {
+					this.setSelectedState(node, false, options);
+				}, this));
+			}
+
+			// Continue selecting node
+			node.state.selected = true;
+			if (!options.silent) {
+				this.$element.trigger(&#x27;nodeSelected&#x27;, $.extend(true, {}, node));
+			}
+		}
+		else {
+
+			// Unselect node
+			node.state.selected = false;
+			if (!options.silent) {
+				this.$element.trigger(&#x27;nodeUnselected&#x27;, $.extend(true, {}, node));
+			}
+		}
+	};
+
+	/**
+	 * Método responsável por trocar o estado de checagem do nó
+	 * @method toggleCheckedState
+	 * @param {Object} node Nó alvo.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.toggleCheckedState = function (node, options) {
+		if (!node) return;
+		this.setCheckedState(node, !node.state.checked, options);
+	};
+
+	/**
+	 * Método responsável por determinar o estado de checagem do nó.
+	 * @method setCheckedState
+	 * @param {Object} node Nó alvo.
+	 * @param {} state Estado de checagem do nó (true, para marcado).
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.setCheckedState = function (node, state, options) {
+
+		if (state === node.state.checked) return;
+
+		if (state) {
+
+			// Check node
+			node.state.checked = true;
+
+			if (!options.silent) {
+				this.$element.trigger(&#x27;nodeChecked&#x27;, $.extend(true, {}, node));
+			}
+		}
+		else {
+
+			// Uncheck node
+			node.state.checked = false;
+			if (!options.silent) {
+				this.$element.trigger(&#x27;nodeUnchecked&#x27;, $.extend(true, {}, node));
+			}
+		}
+	};
+
+	/**
+	 * Método responsável por determinar o estado de ativação do nó.
+	 * @method setDisabledState
+	 * @param {Object} node Nó alvo.
+	 * @param {} state Estado de ativação do no (true, para desativado).
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.setDisabledState = function (node, state, options) {
+
+		if (state === node.state.disabled) return;
+
+		if (state) {
+
+			// Disable node
+			node.state.disabled = true;
+
+			// Disable all other states
+			this.setExpandedState(node, false, options);
+			this.setSelectedState(node, false, options);
+			this.setCheckedState(node, false, options);
+
+			if (!options.silent) {
+				this.$element.trigger(&#x27;nodeDisabled&#x27;, $.extend(true, {}, node));
+			}
+		}
+		else {
+
+			// Enabled node
+			node.state.disabled = false;
+			if (!options.silent) {
+				this.$element.trigger(&#x27;nodeEnabled&#x27;, $.extend(true, {}, node));
+			}
+		}
+	};
+
+	/**
+	 * Método responsável por renderizar a TreeView.
+	 * @method render
+	 * @for Tree
+	 */
+	Tree.prototype.render = function () {
+
+		if (!this.initialized) {
+
+			// Setup first time only components
+			this.$element.addClass(pluginName);
+			this.$wrapper = $(this.template.list);
+
+			this.injectStyle();
+
+			this.initialized = true;
+		}
+
+		this.$element.empty().append(this.$wrapper.empty());
+
+		// Build tree
+		this.buildTree(this.tree, 0);
+		this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, this));
+	};
+
+	/**
+	 * Método responsável por contruir a TreeView.
+	 * @method buildTree
+	 * @param {Array} nodes Conjunto de nós.
+	 * @param {Number} level Nível corrente.
+	 * @return A instância atual da Tree.
+	 * @for Tree
+	 */
+	Tree.prototype.buildTree = function (nodes, level) {
+		this.abstractInterface = this.createAbstractInterface(this.tree);
+		if (!nodes) return;
+		level += 1;
+
+		var _this = this;
+		$.each(nodes, function addNodes(id, node) {
+			var treeItem = $(_this.template.item)
+				.addClass(&#x27;node-&#x27; + _this.elementId)
+				.addClass(node.state.checked ? &#x27;node-checked&#x27; : &#x27;&#x27;)
+				.addClass(node.state.disabled ? &#x27;node-disabled&#x27;: &#x27;&#x27;)
+				.addClass(node.state.selected ? &#x27;node-selected&#x27; : &#x27;&#x27;)
+				.addClass(node.searchResult ? &#x27;search-result&#x27; : &#x27;&#x27;) 
+				.attr(&#x27;data-nodeid&#x27;, node.nodeId)
+				.attr(&#x27;style&#x27;, _this.buildStyleOverride(node));
+
+			//caso seja um nó editável, apenas insere um campo texto
+			if(node.state.added) {
+				// cria um novo item editavel
+				treeItem.append($(_this.template.text)
+								.data(&#x27;id&#x27;, node.nodeId)
+								.val(node.text)
+								.css(&#x27;margin-left&#x27;, ((level) * 20) + &#x27;px&#x27;)
+								.focus()
+								.keyup(function(e){
+									/*
+										Para um item que foi adicionando, caso aperte tab(9) ou enter(13), confirma o nome atual.
+										Caso aperte ESC(27), apenas remove o item;
+									*/
+									if(e.which == 13 || e.which == 9 ){
+										node.state.added = false;
+										node.state.disabled = false;
+										node.text = $(this).val();
+
+										_this.tree = _this.refreshTree(_this.tree, node);
+
+										_this.$element.empty().append(_this.$wrapper.empty());
+										_this.buildTree(_this.tree, 0);
+										_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
+									} else if(e.which == 27) {
+										_this.tree = _this.removeNodes(_this.tree, [node.nodeId]);
+										_this.refreshIds();
+										_this.broadcastData();
+
+										_this.$element.empty().append(_this.$wrapper.empty());
+										_this.buildTree(_this.tree, 0);
+										_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
+									}
+								}));
+				
+				// Add item to the tree
+				_this.$wrapper.append(treeItem);
+
+				// Recursively add child ndoes
+				if (node.nodes &amp;&amp; node.state.expanded &amp;&amp; !node.state.disabled) {
+					return _this.buildTree(node.nodes, level);
+				}
+
+				//vai para o próximo item
+				return true; 
+			}
+
+			// Add indent/spacer to mimic tree structure
+			for (var i = 0; i &lt; (level - 1); i++) {
+				treeItem.append(_this.template.indent);
+			}
+
+			// Add expand, collapse or empty spacer icons
+			var classList = [];
+			if (node.nodes) {
+				classList.push(&#x27;expand-icon&#x27;);
+				if (node.state.expanded) {
+					classList.push(_this.options.collapseIcon);
+				}
+				else {
+					classList.push(_this.options.expandIcon);
+				}
+			}
+			else {
+				classList.push(_this.options.emptyIcon);
+			}
+
+			treeItem
+				.append($(_this.template.icon)
+					.addClass(classList.join(&#x27; &#x27;))
+				);
+
+
+			// Add node icon
+			if (_this.options.showIcon) {
+				
+				var classList = [&#x27;node-icon&#x27;];
+
+				classList.push(node.icon || _this.options.nodeIcon);
+				if (node.state.selected) {
+					classList.pop();
+					classList.push(node.selectedIcon || _this.options.selectedIcon || 
+									node.icon || _this.options.nodeIcon);
+				}
+
+				treeItem
+					.append($(_this.template.icon)
+						.addClass(classList.join(&#x27; &#x27;))
+					);
+			}
+
+			// Add check / unchecked icon
+			if (_this.options.showCheckbox) {
+
+				var classList = [&#x27;check-icon&#x27;];
+				if (node.state.checked) {
+					classList.push(_this.options.checkedIcon); 
+				}
+				else {
+					classList.push(_this.options.uncheckedIcon);
+				}
+
+				treeItem
+					.append($(_this.template.icon)
+						.addClass(classList.join(&#x27; &#x27;))
+					);
+			}
+
+			// Add text
+			if (_this.options.enableLinks) {
+				// Add hyperlink
+				treeItem
+					.append($(_this.template.link)
+						.attr(&#x27;href&#x27;, node.href)
+						.append(node.state.editable ? $(_this.template.text).val(node.text) : node.text)
+						.append(_this.template.buttons)
+					);
+			}
+			else {
+				// otherwise just text
+				treeItem
+					.append(node.state.editable ? $(_this.template.text).val(node.text) : node.text)
+					.append(_this.template.buttons);
+			}
+
+
+
+			// Add tags as badges
+			if (_this.options.showTags &amp;&amp; node.tags) {
+				$.each(node.tags, function addTag(id, tag) {
+					treeItem
+						.append($(_this.template.badge)
+							.append(tag)
+						);
+				});
+			}
+
+			// Add item to the tree
+			_this.$wrapper.append(treeItem);
+
+			// Recursively add child ndoes
+			if (node.nodes &amp;&amp; node.state.expanded &amp;&amp; !node.state.disabled) {
+				return _this.buildTree(node.nodes, level);
+			}
+		});
+
+		return _this.tree;
+	};
+
+	/**
+	 * Método responsável por definir o estilo (CSS) do nó.
+	 * @method buildStyleOverride
+	 * @param {Object} node No corrente.
+	 * @return A expressão CSS para o nó da TreeView.
+	 * @for Tree
+	 */
+	Tree.prototype.buildStyleOverride = function (node) {
+
+		if (node.state.disabled) return &#x27;&#x27;;
+
+		var color = node.color;
+		var backColor = node.backColor;
+
+		if (this.options.highlightSelected &amp;&amp; node.state.selected) {
+			if (this.options.selectedColor) {
+				color = this.options.selectedColor;
+			}
+			if (this.options.selectedBackColor) {
+				backColor = this.options.selectedBackColor;
+			}
+		}
+
+		if (this.options.highlightSearchResults &amp;&amp; node.searchResult &amp;&amp; !node.state.disabled) {
+			if (this.options.searchResultColor) {
+				color = this.options.searchResultColor;
+			}
+			if (this.options.searchResultBackColor) {
+				backColor = this.options.searchResultBackColor;
+			}
+		}
+
+		return &#x27;color:&#x27; + color +
+			&#x27;;background-color:&#x27; + backColor + &#x27;;&#x27;;
+	};
+
+	/**
+	 * Método responsável por injetar o estilo de acordo com a identificação do nó.
+	 * @method injectStyle
+	 * @for Tree
+	 */
+	Tree.prototype.injectStyle = function () {
+
+		if (this.options.injectStyle &amp;&amp; !document.getElementById(this.styleId)) {
+			$(&#x27;&lt;style type=&quot;text/css&quot; id=&quot;&#x27; + this.styleId + &#x27;&quot;&gt; &#x27; + this.buildStyle() + &#x27; &lt;/style&gt;&#x27;).appendTo(&#x27;head&#x27;);
+		}
+	};
+
+	/**
+	 * Método responsável por definir a estilização do no de acordo com as opções passadas para o plugin.
+	 * @method buildStyle
+	 * @return Expressão CSS padrões de acordo com as opções passadas.
+	 * @for Tree
+	 */
+	Tree.prototype.buildStyle = function () {
+
+		var style = &#x27;.node-&#x27; + this.elementId + &#x27;{&#x27;;
+
+		if (this.options.color) {
+			style += &#x27;color:&#x27; + this.options.color + &#x27;;&#x27;;
+		}
+
+		if (this.options.backColor) {
+			style += &#x27;background-color:&#x27; + this.options.backColor + &#x27;;&#x27;;
+		}
+
+		if (!this.options.showBorder) {
+			style += &#x27;border:none;&#x27;;
+		}
+		else if (this.options.borderColor) {
+			style += &#x27;border:1px solid &#x27; + this.options.borderColor + &#x27;;&#x27;;
+		}
+		style += &#x27;}&#x27;;
+
+		if (this.options.onhoverColor) {
+			style += &#x27;.node-&#x27; + this.elementId + &#x27;:not(.node-disabled):hover{&#x27; +
+				&#x27;background-color:&#x27; + this.options.onhoverColor + &#x27;;&#x27; +
+			&#x27;}&#x27;;
+		}
+
+		return this.css + style;
+	};
+
+	/**
+	 * Template para a renderização da TreeView.
+	 *
+	 * @property template
+	 * @type Object
+	 * @for Tree
+	 */
+	Tree.prototype.template = {
+		list: &#x27;&lt;ul class=&quot;list-group&quot;&gt;&lt;/ul&gt;&#x27;,
+		item: &#x27;&lt;li class=&quot;list-group-item&quot;&gt;&lt;/li&gt;&#x27;,
+		indent: &#x27;&lt;span class=&quot;indent&quot;&gt;&lt;/span&gt;&#x27;,
+		icon: &#x27;&lt;span class=&quot;icon&quot;&gt;&lt;/span&gt;&#x27;,
+		link: &#x27;&lt;a href=&quot;#&quot; style=&quot;color:inherit;&quot;&gt;&lt;/a&gt;&#x27;,
+		badge: &#x27;&lt;span class=&quot;badge&quot;&gt;&lt;/span&gt;&#x27;,
+
+		// TODO inserir tooltip
+		buttons: 
+				&#x27;&lt;div class=&quot;pull-right&quot;&gt;\
+					&lt;button class=&quot;btn btn-primary btn-xs btn-tree&quot; data-container=&quot;body&quot; data-trigger=&quot;hover&quot; data-toggle=&quot;popover&quot; data-placement=&quot;top&quot; data-content=&quot;Edita o nome do elemento abstrato.&quot; id=&quot;btn-tree-edit&quot;&gt;&lt;i class=&quot;fa fa-pencil&quot;&gt;&lt;/i&gt;&lt;/button&gt;\
+					&lt;button class=&quot;btn btn-success btn-xs btn-tree&quot; id=&quot;btn-tree-add&quot; data-container=&quot;body&quot; data-trigger=&quot;hover&quot; data-toggle=&quot;popover&quot; data-placement=&quot;top&quot; data-content=&quot;Adiciona um elemento como seu filho.&quot;&gt;&lt;i class=&quot;fa fa-plus&quot;&gt;&lt;/i&gt;&lt;/button&gt;\
+					&lt;button class=&quot;btn btn-success btn-xs btn-tree&quot; id=&quot;btn-tree-download&quot;data-toggle=&quot;modal&quot; data-target=&quot;#modal-tree-download&quot; data-container=&quot;body&quot; data-trigger=&quot;hover&quot; data-toggle=&quot;popover&quot; data-placement=&quot;top&quot; data-content=&quot;Define as informações Bind, Datasource e Parse.&quot;&gt;&lt;i class=&quot;fa fa-download&quot;&gt;&lt;/i&gt;&lt;/button&gt;\
+					&lt;button class=&quot;btn btn-danger btn-xs btn-tree&quot; id=&quot;btn-tree-remove&quot; data-container=&quot;body&quot; data-trigger=&quot;hover&quot; data-toggle=&quot;popover&quot; data-placement=&quot;top&quot; data-content=&quot;Remove o elemento.&quot;&gt;&lt;i class=&quot;fa fa-trash&quot;&gt;&lt;/i&gt;&lt;/button&gt;\
+					&lt;button class=&quot;btn btn-danger btn-xs btn-tree&quot; id=&quot;btn-tree-removeall&quot;&gt;&lt;i class=&quot;fa fa-times&quot; data-container=&quot;body&quot; data-trigger=&quot;hover&quot; data-toggle=&quot;popover&quot; data-placement=&quot;top&quot; data-content=&quot;Remove os filhos que estão selecionados.&quot;&gt;&lt;/i&gt; &lt;i class=&quot;fa fa-list&quot;&gt;&lt;/i&gt;&lt;/button&gt;\
+				&lt;/div&gt;&#x27;,
+		text: &#x27;&lt;input type=&quot;text&quot; class=&quot;form-control tree-text&quot; data-id=&quot;&quot; /&gt;&#x27;
+	};
+
+	/**
+	 * Estilo padrão para os nós da TreeView.
+	 *
+	 * @property css
+	 * @type string
+	 * @for Tree
+	 */
+	Tree.prototype.css = &#x27;.treeview .list-group-item{cursor:pointer}.treeview span.indent{margin-left:10px;margin-right:10px}.treeview span.icon{width:12px;margin-right:5px}.treeview .node-disabled{color:silver;cursor:not-allowed}&#x27;
+
+
+	/**
+	 * Método responsável por retornar um nó da TreeView a partir do identificador interno do plugin
+	 * @method getNode
+	 * @param {Number} nodeId - Identificador interno do nó.
+	 * @return Nó da TreeView.
+	 * @for Tree
+	 */
+	Tree.prototype.getNode = function (nodeId) {
+		return this.nodes[nodeId];
+	};
+
+	/**
+	 * Método responsável por adicionar um nó na raiz da TreeView.
+	 * @method addElement
+	 * @param {Object} node Nó a ser adicionado.
+	 * @for Tree
+	 */
+	Tree.prototype.addElement = function(node){
+		this.tree.push(node);
+		this.nodes.push(node);
+		this.id++;
+	};
+
+	/**
+	 * Método responsável por remover um conjunto de nós da Tree.
+	 * @method removeElements
+	 * @param {Array} ids Conjunto de identificadores do nós a serem removidos.
+	 * @for Tree
+	 */
+	Tree.prototype.removeElements = function(ids){
+		this.tree = this.removeNodes(this.tree, ids);
+		this.refreshIds();
+		this.broadcastData();
+	}
+
+	/**
+	 * Método responsável por obter o pai de um determinado nó
+	 * @method getParent
+	 * @param {jQuery | Number | Selector} identifier Identificador do nó filho.
+	 * @return O pai do nó informado.
+	 * @for Tree
+	 */
+	Tree.prototype.getParent = function (identifier) {
+		var node = this.identifyNode(identifier);
+		return this.nodes[node.parentId];
+	};
+
+	/**
+	 * Método responsável por obter os irmãos de um nó
+	 * @method getSiblings
+	 * @param {jQuery | Number | Selector} identifier Identificador do nó
+	 * @return Os irmãos de um determinado nó.
+	 * @for Tree
+	 */
+	Tree.prototype.getSiblings = function (identifier) {
+		var node = this.identifyNode(identifier);
+		var parent = this.getParent(node);
+		var nodes = parent ? parent.nodes : this.tree;
+		return nodes.filter(function (obj) {
+				return obj.nodeId !== node.nodeId;
+			});
+	};
+
+	/**
+	 * Método responsável por obter todos os nós selecionados.
+	 * @method getSelected
+	 * @return Conjunto do nós selecionados.
+	 * @for Tree
+	 */
+	Tree.prototype.getSelected = function () {
+		return this.findNodes(&#x27;true&#x27;, &#x27;g&#x27;, &#x27;state.selected&#x27;);
+	};
+
+	/**
+	 * Método responsável por obter todos os nós não selecionados.
+	 * @method getUnselected
+	 * @return Conjunto de nós não selecionados.
+	 * @for Tree
+	 */
+	Tree.prototype.getUnselected = function () {
+		return this.findNodes(&#x27;false&#x27;, &#x27;g&#x27;, &#x27;state.selected&#x27;);
+	};
+
+	/**
+	 * Método responsável por obter todos os nós expandidos.
+	 * @method getExpanded
+	 * @return Conjunto de nós expandidos.
+	 * for Tree
+	 */
+	Tree.prototype.getExpanded = function () {
+		return this.findNodes(&#x27;true&#x27;, &#x27;g&#x27;, &#x27;state.expanded&#x27;);
+	};
+
+	/**
+	 * Método responsável por obter todos os nós não expandidos.
+	 * @method getCollapsed
+	 * @return Conjunto de nós não expandidos.
+	 * @for Tree
+	 */
+	Tree.prototype.getCollapsed = function () {
+		return this.findNodes(&#x27;false&#x27;, &#x27;g&#x27;, &#x27;state.expanded&#x27;);
+	};
+
+	/**
+	 * Método responsável por obter todos os nós marcados.
+	 * @method getChecked
+	 * @return Conjunto de nós marcados.
+	 * @for Tree
+	 */
+	Tree.prototype.getChecked = function () {
+		return this.findNodes(&#x27;true&#x27;, &#x27;g&#x27;, &#x27;state.checked&#x27;);
+	};
+
+	/**
+	 * Método responsável por obter todos os nós não marcados.
+	 * @method getUnchecked
+	 * @return Conjunto de nós não marcados.
+	 * @for Tree
+	 */
+	Tree.prototype.getUnchecked = function () {
+		return this.findNodes(&#x27;false&#x27;, &#x27;g&#x27;, &#x27;state.checked&#x27;);
+	};
+
+	/**
+	 * Método responsável por obter todos os nós desativados.
+	 * @method getDisabled
+	 * @return Conjunto de nós desativados.
+	 * @for Tree
+	 */
+	Tree.prototype.getDisabled = function () {
+		return this.findNodes(&#x27;true&#x27;, &#x27;g&#x27;, &#x27;state.disabled&#x27;);
+	};
+
+	/**
+	 * Método responsável por obter todos os nós desativados.
+	 * @method getEnabled
+	 * @return Conjunto de nós desativados.
+	 * @for Tree
+	 */
+	Tree.prototype.getEnabled = function () {
+		return this.findNodes(&#x27;false&#x27;, &#x27;g&#x27;, &#x27;state.disabled&#x27;);
+	};
+
+
+	/**
+	 * Método responsável por selecionar um conjunto de nós.
+	 * @method selectNode
+	 * @param {Array} identifiers Conjunto de nós a serem selecionados.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.selectNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setSelectedState(node, true, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por não selecionar um conjunto de nós.
+	 * @method unselectNode
+	 * @param {Array} identifiers Conjunto de nós
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.unselectNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setSelectedState(node, false, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por trocar a seleção de um conjunto de nós.
+	 * @method toggleNodeSelected
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.toggleNodeSelected = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.toggleSelectedState(node, options);
+		}, this));
+
+		this.render();
+	};
+
+
+	/**
+	 * Método responsável por retrair todos os nós.
+	 * @method collapseAll
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.collapseAll = function (options) {
+		var identifiers = this.findNodes(&#x27;true&#x27;, &#x27;g&#x27;, &#x27;state.expanded&#x27;);
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setExpandedState(node, false, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por retrair un conjunto de nós.
+	 * @method collapseNode
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.collapseNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setExpandedState(node, false, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por expandir todos os nós.
+	 * @method expandAll
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree 
+	 */
+	Tree.prototype.expandAll = function (options) {
+		options = $.extend({}, _default.options, options);
+
+		if (options &amp;&amp; options.levels) {
+			this.expandLevels(this.tree, options.levels, options);
+		}
+		else {
+			var identifiers = this.findNodes(&#x27;false&#x27;, &#x27;g&#x27;, &#x27;state.expanded&#x27;);
+			this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+				this.setExpandedState(node, true, options);
+			}, this));
+		}
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por expandir um conjunto de nós.
+	 * @method expandNode
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.expandNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setExpandedState(node, true, options);
+			if (node.nodes &amp;&amp; (options &amp;&amp; options.levels)) {
+				this.expandLevels(node.nodes, options.levels-1, options);
+			}
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por expandir um conjunto de nós de um determinado nível.
+	 * @method expandLevels
+	 * @param {Array} nodes Conjunto de nós
+	 * @param {Number} level Nível que permite expansão
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.expandLevels = function (nodes, level, options) {
+		options = $.extend({}, _default.options, options);
+
+		$.each(nodes, $.proxy(function (index, node) {
+			this.setExpandedState(node, (level &gt; 0) ? true : false, options);
+			if (node.nodes) {
+				this.expandLevels(node.nodes, level-1, options);
+			}
+		}, this));
+	};
+
+	/**
+	 * Método responsável por expandir o pai de um conjunto de nós
+	 * @method revealNode
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.revealNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			var parentNode = this.getParent(node);
+			while (parentNode) {
+				this.setExpandedState(parentNode, true, options);
+				parentNode = this.getParent(parentNode);
+			};
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por trocar o modo de expansão de um conjunto de nós
+	 * @method toggleNodeExpanded
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.toggleNodeExpanded = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.toggleExpandedState(node, options);
+		}, this));
+		
+		this.render();
+	};
+
+
+	/**
+	 * Método responsável por marcar todos os nós;
+	 * @method checkAll
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.checkAll = function (options) {
+		var identifiers = this.findNodes(&#x27;false&#x27;, &#x27;g&#x27;, &#x27;state.checked&#x27;);
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setCheckedState(node, true, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por marcar um conjunto de nós.
+	 * @method checkNode
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.checkNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setCheckedState(node, true, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por desmarcar todos os nós
+	 * @method uncheckAll
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @return 
+	 */
+	Tree.prototype.uncheckAll = function (options) {
+		var identifiers = this.findNodes(&#x27;true&#x27;, &#x27;g&#x27;, &#x27;state.checked&#x27;);
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setCheckedState(node, false, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por desmarcar um conjunto de nós
+	 * @method uncheckNode
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.uncheckNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setCheckedState(node, false, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por trocar o estado de marcação de um conjunto de nós.
+	 * @method toggleNodeChecked
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.toggleNodeChecked = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.toggleCheckedState(node, options);
+		}, this));
+
+		this.render();
+	};
+
+
+	/**
+	 * Método responsável por desativar todos os nós
+	 * @method disableAll
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.disableAll = function (options) {
+		var identifiers = this.findNodes(&#x27;false&#x27;, &#x27;g&#x27;, &#x27;state.disabled&#x27;);
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setDisabledState(node, true, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por desativar um conjunto de nós
+	 * @method disableNode
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.disableNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setDisabledState(node, true, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por ativar todos os nós
+	 * @method enableAll
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.enableAll = function (options) {
+		var identifiers = this.findNodes(&#x27;true&#x27;, &#x27;g&#x27;, &#x27;state.disabled&#x27;);
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setDisabledState(node, false, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por ativar um conjunto de nós
+	 * @method enableNode
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.enableNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setDisabledState(node, false, options);
+		}, this));
+
+		this.render();
+	};
+
+	/**
+	 * Método responsável por trocar o estado de ativação de um conjunto de nós
+	 * @method toggleNodeDisabled
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.toggleNodeDisabled = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setDisabledState(node, !node.state.disabled, options);
+		}, this));
+
+		this.render();
+	};
+
+
+	/**
+	 * Método responsável por identificar um conjunto de seletores.
+	 * @method forEachIdentifier
+	 * @param {Array} identifiers Conjunto de nós.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @param {Function} callback Função a ser executada para cada nó.
+	 * @for Tree
+	 */
+	Tree.prototype.forEachIdentifier = function (identifiers, options, callback) {
+
+		options = $.extend({}, _default.options, options);
+
+		if (!(identifiers instanceof Array)) {
+			identifiers = [identifiers];
+		}
+
+		$.each(identifiers, $.proxy(function (index, identifier) {
+			callback(this.identifyNode(identifier), options);
+		}, this));	
+	};
+
+	/**
+	 * Método responsável por identificar um seletor
+	 * @method identifyNode
+	 * @param {Selector | Number} identifier
+	 * @return Nó da TreeView.
+	 */
+	Tree.prototype.identifyNode = function (identifier) {
+		return ((typeof identifier) === &#x27;number&#x27;) ?
+						this.nodes[identifier] :
+						identifier;
+	};
+
+	/**
+	 * Método responsável por buscar por um item na TreeView (Caso a opção de busca esteja ativada).
+	 * @method search
+	 * @param {String} pattern Termo a ser pesquisado.
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @return Conjunto de nós.
+	 * @for Tree
+	 */
+	Tree.prototype.search = function (pattern, options) {
+		options = $.extend({}, _default.searchOptions, options);
+
+		this.clearSearch({ render: false });
+
+		var results = [];
+		if (pattern &amp;&amp; pattern.length &gt; 0) {
+
+			if (options.exactMatch) {
+				pattern = &#x27;^&#x27; + pattern + &#x27;$&#x27;;
+			}
+
+			var modifier = &#x27;g&#x27;;
+			if (options.ignoreCase) {
+				modifier += &#x27;i&#x27;;
+			}
+
+			results = this.findNodes(pattern, modifier);
+
+			// Add searchResult property to all matching nodes
+			// This will be used to apply custom styles
+			// and when identifying result to be cleared
+			$.each(results, function (index, node) {
+				node.searchResult = true;
+			})
+		}
+
+		// If revealResults, then render is triggered from revealNode
+		// otherwise we just call render.
+		if (options.revealResults) {
+			this.revealNode(results);
+		}
+		else {
+			this.render();
+		}
+
+		this.$element.trigger(&#x27;searchComplete&#x27;, $.extend(true, {}, results));
+
+		return results;
+	};
+
+	/**
+	 * Método responsável por limpar o campo de busca.
+	 * @method clearSearch
+	 * @param {Object} options Conjunto de opções do plugin.
+	 * @for Tree
+	 */
+	Tree.prototype.clearSearch = function (options) {
+
+		options = $.extend({}, { render: true }, options);
+
+		var results = $.each(this.findNodes(&#x27;true&#x27;, &#x27;g&#x27;, &#x27;searchResult&#x27;), function (index, node) {
+			node.searchResult = false;
+		});
+
+		if (options.render) {
+			this.render();	
+		}
+		
+		this.$element.trigger(&#x27;searchCleared&#x27;, $.extend(true, {}, results));
+	};
+
+	/**
+	 * Método responsável por procurar um conjunto de nós segundo um critério (atributo).
+	 * @method findNodes
+	 * @param {String} pattern Termo a ser pesquisado
+	 * @param {String} modifier Opção para o Regex.
+	 * @param {String} attribute Atributo a ser pesquisado o termo
+	 * @return Conjunto de nós.
+	 * @for Tree
+	 */
+	Tree.prototype.findNodes = function (pattern, modifier, attribute) {
+
+		modifier = modifier || &#x27;g&#x27;;
+		attribute = attribute || &#x27;text&#x27;;
+
+		var _this = this;
+		return $.grep(this.nodes, function (node) {
+			var val = _this.getNodeValue(node, attribute);
+			if (typeof val === &#x27;string&#x27;) {
+				return val.match(new RegExp(pattern, modifier));
+			}
+		});
+	};
+
+	/**
+	 * Método responsável por obter o valor de um determinado atributo de um nó.
+	 * @method getNodeValue
+	 * @param {Object} obj Nó ou um objeto qualquer.
+	 * @param {String} attr Atributo no qual deseja-se obter o valor.
+	 * @return O valor do atributo do objeto.
+	 * @for Tree
+	 */
+	Tree.prototype.getNodeValue = function (obj, attr) {
+		var index = attr.indexOf(&#x27;.&#x27;);
+		if (index &gt; 0) {
+			var _obj = obj[attr.substring(0, index)];
+			var _attr = attr.substring(index + 1, attr.length);
+			return this.getNodeValue(_obj, _attr);
+		}
+		else {
+			if (obj.hasOwnProperty(attr)) {
+				return obj[attr].toString();
+			}
+			else {
+				return undefined;
+			}
+		}
+	};
+
+	var logError = function (message) {
+		if (window.console) {
+			window.console.error(message);
+		}
+	};
+
+	// Prevent against multiple instantiations,
+	// handle updates and method calls
+	$.fn[pluginName] = function (options, args) {
+
+		var result;
+
+		this.each(function () {
+			var _this = $.data(this, pluginName);
+			if (typeof options === &#x27;string&#x27;) {
+				if (!_this) {
+					logError(&#x27;Not initialized, can not call method : &#x27; + options);
+				}
+				else if (!$.isFunction(_this[options]) || options.charAt(0) === &#x27;_&#x27;) {
+					logError(&#x27;No such method : &#x27; + options);
+				}
+				else {
+					if (!(args instanceof Array)) {
+						args = [ args ];
+					}
+					result = _this[options].apply(_this, args);
+				}
+			}
+			else if (typeof options === &#x27;boolean&#x27;) {
+				result = _this;
+			}
+			else {
+				$.data(this, pluginName, new Tree(this, $.extend(true, {}, options)));
+			}
+		});
+
+		return result || this;
+	};
+
+})(jQuery, window, document);
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

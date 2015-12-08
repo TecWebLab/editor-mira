@@ -1,0 +1,3788 @@
+{
+    "project": {
+        "name": "Mira-Editor",
+        "description": "Documentação do Mira-Editor",
+        "version": "1.0",
+        "url": "tecweblab.github.io/mira-editor/docs"
+    },
+    "files": {
+        "bootstrap-treeview.js": {
+            "name": "bootstrap-treeview.js",
+            "modules": {},
+            "classes": {
+                "Tree": 1
+            },
+            "fors": {
+                "Tree": 1,
+                "Tree.initModalAndEvents": 1
+            },
+            "namespaces": {}
+        },
+        "code.js": {
+            "name": "code.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "drag-move.js": {
+            "name": "drag-move.js",
+            "modules": {},
+            "classes": {
+                "UIEvents": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "entities.js": {
+            "name": "entities.js",
+            "modules": {},
+            "classes": {
+                "HTMLElement": 1,
+                "Div": 1,
+                "Paragraph": 1,
+                "Header": 1,
+                "Link": 1,
+                "Span": 1,
+                "Label": 1,
+                "List": 1,
+                "ListItem": 1,
+                "SimpleHtml": 1,
+                "ImageHtml": 1,
+                "Carousel": 1,
+                "CarouselItem": 1,
+                "BootstrapNavigation": 1,
+                "BootstrapNavigationList": 1,
+                "BootstrapNavigationListItem": 1,
+                "Formulario": 1,
+                "InputText": 1,
+                "InputTextarea": 1,
+                "InputRadioCheck": 1,
+                "InputSelect": 1,
+                "InputOption": 1,
+                "Button": 1,
+                "AbstractElement": 1,
+                "AbstractInterface": 1,
+                "ConcreteInterface": 1
+            },
+            "fors": {
+                "HTMLElement": 1,
+                "AbstractInterface": 1,
+                "ConcreteInterface": 1
+            },
+            "namespaces": {}
+        },
+        "preview.js": {
+            "name": "preview.js",
+            "modules": {},
+            "classes": {
+                "Preview": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "project.js": {
+            "name": "project.js",
+            "modules": {},
+            "classes": {
+                "Project": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "render-elements.js": {
+            "name": "render-elements.js",
+            "modules": {},
+            "classes": {
+                "RenderElements": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "sidebar-install.js": {
+            "name": "sidebar-install.js",
+            "modules": {},
+            "classes": {
+                "Code": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Tree": {
+            "name": "Tree",
+            "shortname": "Tree",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "bootstrap-treeview.js",
+            "line": 87,
+            "description": "Módulo reponsável por gerenciar a TreeView representando a interface abstrata. Isso é uma adaptação do Plugin BootstrapTreeView,\ndesenvolvido por Jonathan Miles.",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "Seletor jQuery onde o plugin irá atuar.",
+                    "type": "Selector"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções de inicialização do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Uma instância do plugin BootstrapTreeView."
+            }
+        },
+        "Tree.initModalAndEvents": {
+            "name": "Tree.initModalAndEvents",
+            "shortname": "Tree.initModalAndEvents",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": []
+        },
+        "Code": {
+            "name": "Code",
+            "shortname": "Code",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "sidebar-install.js",
+            "line": 1,
+            "description": "Classe responsável pelos métodos de gereção e exibição do código da interface abstrata e concreta",
+            "is_constructor": 1
+        },
+        "UIEvents": {
+            "name": "UIEvents",
+            "shortname": "UIEvents",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "drag-move.js",
+            "line": 1,
+            "description": "Classe responsável pelos métodos de instalação das funcionalidades Draggable e Resize do jQuery UI.",
+            "is_constructor": 1
+        },
+        "HTMLElement": {
+            "name": "HTMLElement",
+            "shortname": "HTMLElement",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 1,
+            "description": "Elemento concreto generalizado.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "O elemento concreto."
+            }
+        },
+        "Div": {
+            "name": "Div",
+            "shortname": "Div",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 93,
+            "description": "Elemento concreto Div.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um Div HTMLElement com as informações padrões de um Div"
+            }
+        },
+        "Paragraph": {
+            "name": "Paragraph",
+            "shortname": "Paragraph",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 110,
+            "description": "Elemento concreto Paragraph.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um Parágrafo."
+            }
+        },
+        "Header": {
+            "name": "Header",
+            "shortname": "Header",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 131,
+            "description": "Elemento concreto Header.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um Título."
+            }
+        },
+        "Link": {
+            "name": "Link",
+            "shortname": "Link",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 157,
+            "description": "Elemento concreto Link.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um Link."
+            }
+        },
+        "Span": {
+            "name": "Span",
+            "shortname": "Span",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 182,
+            "description": "Elemento concreto Span.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um Span."
+            }
+        },
+        "Label": {
+            "name": "Label",
+            "shortname": "Label",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 201,
+            "description": "Elemento concreto Label.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um Label."
+            }
+        },
+        "List": {
+            "name": "List",
+            "shortname": "List",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 220,
+            "description": "Elemento concreto List.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de uma Lista."
+            }
+        },
+        "ListItem": {
+            "name": "ListItem",
+            "shortname": "ListItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 243,
+            "description": "Elemento concreto ListItem.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um item da Lista."
+            }
+        },
+        "SimpleHtml": {
+            "name": "SimpleHtml",
+            "shortname": "SimpleHtml",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 262,
+            "description": "Elemento concreto SimpleHtml.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um elemento HTML qualquer."
+            }
+        },
+        "ImageHtml": {
+            "name": "ImageHtml",
+            "shortname": "ImageHtml",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 286,
+            "description": "Elemento concreto ImageHtml.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de uma Imagem."
+            }
+        },
+        "Carousel": {
+            "name": "Carousel",
+            "shortname": "Carousel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 329,
+            "description": "Elemento concreto Carousel.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de uma galeria de fotos."
+            }
+        },
+        "CarouselItem": {
+            "name": "CarouselItem",
+            "shortname": "CarouselItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 352,
+            "description": "Elemento concreto CarouselItem.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um item da galeria de fotos."
+            }
+        },
+        "BootstrapNavigation": {
+            "name": "BootstrapNavigation",
+            "shortname": "BootstrapNavigation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 376,
+            "description": "Elemento concreto BootstrapNavigation.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um Bootstrap Menu."
+            }
+        },
+        "BootstrapNavigationList": {
+            "name": "BootstrapNavigationList",
+            "shortname": "BootstrapNavigationList",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 398,
+            "description": "Elemento concreto BootstrapNavigationList.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de uma lista do Bootstrap Menu."
+            }
+        },
+        "BootstrapNavigationListItem": {
+            "name": "BootstrapNavigationListItem",
+            "shortname": "BootstrapNavigationListItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 421,
+            "description": "Elemento concreto BootstrapNavigationListItem.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um item da lista do Bootstrap Menu."
+            }
+        },
+        "Formulario": {
+            "name": "Formulario",
+            "shortname": "Formulario",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 453,
+            "description": "Elemento concreto Formulario.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um formulário."
+            }
+        },
+        "InputText": {
+            "name": "InputText",
+            "shortname": "InputText",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 472,
+            "description": "Elemento concreto InputText.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um input do tipo texto."
+            }
+        },
+        "InputTextarea": {
+            "name": "InputTextarea",
+            "shortname": "InputTextarea",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 496,
+            "description": "Elemento concreto InputTextarea.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de uma caixa de texto."
+            }
+        },
+        "InputRadioCheck": {
+            "name": "InputRadioCheck",
+            "shortname": "InputRadioCheck",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 514,
+            "description": "Elemento concreto InputRadioCheck.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um radiobox ou checkbox."
+            }
+        },
+        "InputSelect": {
+            "name": "InputSelect",
+            "shortname": "InputSelect",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 550,
+            "description": "Elemento concreto InputSelect.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um combobox."
+            }
+        },
+        "InputOption": {
+            "name": "InputOption",
+            "shortname": "InputOption",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 566,
+            "description": "Elemento concreto InputOption.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de uma opção do combobox."
+            }
+        },
+        "Button": {
+            "name": "Button",
+            "shortname": "Button",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 589,
+            "description": "Elemento concreto Button.",
+            "is_constructor": 1,
+            "extends": "HTMLElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado contendo informações iniciais para o construtor.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTMLElement com as informações padrões de um botão."
+            }
+        },
+        "AbstractElement": {
+            "name": "AbstractElement",
+            "shortname": "AbstractElement",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 618,
+            "description": "Classe que representa um elemento abstrato.",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento do plugin BootstrapTreeView.",
+                    "type": "Object"
+                }
+            ],
+            "is_constructor": 1
+        },
+        "AbstractInterface": {
+            "name": "AbstractInterface",
+            "shortname": "AbstractInterface",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 656,
+            "description": "Classe que representa um conjunto de widgets abstratos.",
+            "is_constructor": 1
+        },
+        "ConcreteInterface": {
+            "name": "ConcreteInterface",
+            "shortname": "ConcreteInterface",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "entities.js",
+            "line": 689,
+            "description": "Classe que representa um conjunto de widgets concretos.",
+            "is_constructor": 1
+        },
+        "Preview": {
+            "name": "Preview",
+            "shortname": "Preview",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "preview.js",
+            "line": 1,
+            "description": "Classe responsável pelos métodos de renderização do Preview.",
+            "is_constructor": 1
+        },
+        "Project": {
+            "name": "Project",
+            "shortname": "Project",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "project.js",
+            "line": 1,
+            "description": "Classe responsável pelos métodos de de gerenciamento do projeto (Salvar, novo e abrir).",
+            "is_constructor": 1
+        },
+        "RenderElements": {
+            "name": "RenderElements",
+            "shortname": "RenderElements",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "render-elements.js",
+            "line": 1,
+            "description": "Classe responsável pelos métodos de renderização da aplicação (exibição dos elemento concreto, TreeView, Código gerado)",
+            "is_constructor": 1
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 96,
+            "itemtype": "property",
+            "name": "$element Objeto jQuery onde o plugin irá atuar.",
+            "type": "{jQuery}",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 102,
+            "itemtype": "property",
+            "name": "elementId Identificador do item da lista.",
+            "type": "{Selector}",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 108,
+            "itemtype": "property",
+            "name": "id classe inicial para identificação do item da lista.",
+            "type": "{string}",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 176,
+            "description": "Método responsável por iniciar o plugin com os opões informadas",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções desejadas.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 204,
+            "description": "Dertermina o identificador de um elemento gerado pelo plugin.",
+            "itemtype": "method",
+            "name": "setId",
+            "return": {
+                "description": "O idenficador do elemento gerado."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 215,
+            "description": "Método responsável por criar filhos para um determinado nó.",
+            "itemtype": "method",
+            "name": "createNodes",
+            "params": [
+                {
+                    "name": "node",
+                    "description": ""
+                },
+                {
+                    "name": "values",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "node"
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 246,
+            "description": "Método reponsável por gerar os widgets abstratos.",
+            "itemtype": "method",
+            "name": "createAbstractInterface",
+            "params": [
+                {
+                    "name": "nodes",
+                    "description": "Conjuntos de nós do BootstrapTreeView",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "Conjuto de elementos abstratos aninhados, caso necessário."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 271,
+            "description": "Método responsável por sincronizar os dados da TreeView com dados externos ao plugin.",
+            "itemtype": "method",
+            "name": "reloadData",
+            "params": [
+                {
+                    "name": "tree",
+                    "description": "",
+                    "type": "Elementos da TreeView aninhados"
+                },
+                {
+                    "name": "nodes",
+                    "description": "",
+                    "type": "Elementos da TreeView como uma lista linear"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 283,
+            "description": "Método responsável por iniciar as operações com modal e eventos do botões.",
+            "itemtype": "method",
+            "name": "initModalAndEvents",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 376,
+            "description": "Evento disparado ao clicar no botão de editar a partir de algum nó da TreeView. Com isso o elemento fica editável.",
+            "itemtype": "event",
+            "name": "Editar nó",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 417,
+            "description": "Evento disparado ao clicar no botão de adicionar um filho a partir de algum nó da TreeView. Com isso um novo elemento é inserido como filho do\nnó correspondente.",
+            "itemtype": "event",
+            "name": "Adicionar um filho.",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 457,
+            "description": "Evento disparado ao clicar no botão de baixar informações a partir de algum nó da TreeView. Com isso um modal é exibindo podendo inserir as\ninformações \"bind\", \"datasource\" e \"parse\" (caso haja um datasource válido).",
+            "itemtype": "event",
+            "name": "Baixar informações para um nó.",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 491,
+            "description": "Evento disparado ao clicar no botão de remover um nó da TreeView. Com isso o nó e seus filhos são excluídos.",
+            "itemtype": "event",
+            "name": "Adicionar um filho.",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 508,
+            "description": "Evento disparado ao clicar no botão de remover nós selecionados a partir de algum nó da TreeView. Com isso os nós filhos que estão selecionados são\nexcluídos, bem como seus filhos.",
+            "itemtype": "event",
+            "name": "Remover filhos selecionados.",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 533,
+            "description": "Métodos responsável por filtrar os atributos de um conjunto de valores.",
+            "itemtype": "method",
+            "name": "_getValue",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Conjunto de valores ou um simples objeto.",
+                    "type": "Object | Array"
+                }
+            ],
+            "return": {
+                "description": "Caso seja um array, retorna um Objeto presente na primeira posição, caso contrário retorna o objeto inteiro."
+            },
+            "class": "Tree.initModalAndEvents"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 544,
+            "description": "Métodos responsável por atualizar a tabela que informa os valores da tabela.",
+            "itemtype": "method",
+            "name": "_refreshTable",
+            "params": [
+                {
+                    "name": "Corpo",
+                    "description": "da tabela.",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "data",
+                    "description": "Atributos a serem inseridos na tabela.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree.initModalAndEvents"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 568,
+            "description": "Método responsável por obter os dados a partir de um determinado datasource e atualzar a tabela de atributos.",
+            "itemtype": "method",
+            "name": "_getDataFromDatasource",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dados obtidos a partir de um datasource",
+                    "type": "Object | Array"
+                }
+            ],
+            "class": "Tree.initModalAndEvents"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 588,
+            "description": "Método responsável por informar que foi possível obter os dados a partir do datasource informado.",
+            "itemtype": "method",
+            "name": "_getDataFromDatasourceFail",
+            "params": [
+                {
+                    "name": "button",
+                    "description": "Botão que gerou a operação.",
+                    "type": "JQuery"
+                }
+            ],
+            "class": "Tree.initModalAndEvents"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 602,
+            "description": "Evento disparado ao clicar no botão baixar informações a partir de um datasource. Caso seja um datasource válido será possível inserir um parse para \nobter dados internos aos já obtidos.",
+            "itemtype": "event",
+            "name": "Remover baixar informações a partir de um datasource.",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 654,
+            "description": "Evento disparado ao clicar no botão parse. Exibe os atributos referentes aos novos dados obtidos. \nobter dados internos aos já obtidos.",
+            "itemtype": "event",
+            "name": "Parse dos dados obtidos.",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 676,
+            "description": "Evento disparado ao confirmar os dados informados no formulário do modal.",
+            "itemtype": "event",
+            "name": "Confirmar dados do modal.",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 708,
+            "description": "Método responsável por repassar os dados do pai pro filho, se necessário em toda a Tree.",
+            "itemtype": "method",
+            "name": "broadcastData",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 719,
+            "description": "Método responsável por passar os dados de pai para filho, se necessário",
+            "itemtype": "method",
+            "name": "setDataToChildren",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Nó corrente",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "Dados associados ao nó corrente.",
+                    "type": "Object | Array"
+                }
+            ],
+            "return": {
+                "description": "node Nó com os dados obtidos do pai."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 738,
+            "description": "Método responsável por remover os dados do plugin.",
+            "itemtype": "method",
+            "name": "remove",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 749,
+            "description": "Método responsável por destruir a instancia da Tree.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 768,
+            "description": "Método responsável por desativar todos os eventos da Tree.",
+            "itemtype": "method",
+            "name": "unsubscribeEvents",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 789,
+            "description": "Método responsável por ativar os eventos da Tree.",
+            "itemtype": "method",
+            "name": "subscribeEvents",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 846,
+            "description": "Define o estado inicial de cada nó da árvore (valores padrões)",
+            "itemtype": "method",
+            "name": "setInitialStates",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento da Tree.",
+                    "type": "Object"
+                },
+                {
+                    "name": "level",
+                    "description": "Nível na qual o nó se encontra.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 924,
+            "description": "Método responsável por definir como será o clique em cada item da lista",
+            "itemtype": "method",
+            "name": "clickHandler",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Dados do evento.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": ""
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 961,
+            "description": "Método responsável por procurar um nó na Tree.",
+            "itemtype": "method",
+            "name": "findNode",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "",
+                    "type": "Number | jQuery"
+                }
+            ],
+            "return": {
+                "description": "node Nó da Tree."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 984,
+            "description": "Método responsável por procurar um nó pelo seu idenficador",
+            "itemtype": "method",
+            "name": "findNodeById",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "Identificador do nó.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "node Nó da Tree."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1005,
+            "description": "Método responsável por atualizar um nó e seus filhos.",
+            "itemtype": "method",
+            "name": "refreshTree",
+            "params": [
+                {
+                    "name": "nodes",
+                    "description": "Conjunto de nós",
+                    "type": "Array"
+                },
+                {
+                    "name": "node",
+                    "description": "Nó com novas informações.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "nodes Retorna o conjunto de nós atualizados."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1025,
+            "description": "Método responsável por remover um ou mais nós da Tree.",
+            "itemtype": "method",
+            "name": "removeNodes",
+            "params": [
+                {
+                    "name": "nodes",
+                    "description": "Conjunto de nós para pesquisa",
+                    "type": "Árray"
+                },
+                {
+                    "name": "ids",
+                    "description": "Conjunto de identificadores dos nós a serem removidos."
+                }
+            ],
+            "return": {
+                "description": "Conjunto de nós com os nós removidos."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1052,
+            "description": "Método responsável por atualizar o identificador dos nós.",
+            "itemtype": "method",
+            "name": "refreshIds",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1067,
+            "description": "Método responsável por trocar o modo e expansão do nó (expandido ou não)",
+            "itemtype": "method",
+            "name": "toggleExpandedState",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Nó corrente.",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1079,
+            "description": "Método responsável por deixar um nó como expandido ou não",
+            "itemtype": "method",
+            "name": "setExpandedState",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Nó alvo.",
+                    "type": "Object"
+                },
+                {
+                    "name": "state",
+                    "description": "Estado de expansão (true para expandido) .",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1116,
+            "description": "Método responsável por trocar o estado de seleção do nó.",
+            "itemtype": "method",
+            "name": "toggleSelectedState",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Nó alvo.",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1128,
+            "description": "Método responsável por determinar o estado de seleção do nó (selecionado ou não)",
+            "itemtype": "method",
+            "name": "setSelectedState",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Nó alvo.",
+                    "type": "Object"
+                },
+                {
+                    "name": "state",
+                    "description": "Estado de seleção do nó (true, para selecionado)."
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1165,
+            "description": "Método responsável por trocar o estado de checagem do nó",
+            "itemtype": "method",
+            "name": "toggleCheckedState",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Nó alvo.",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1177,
+            "description": "Método responsável por determinar o estado de checagem do nó.",
+            "itemtype": "method",
+            "name": "setCheckedState",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Nó alvo.",
+                    "type": "Object"
+                },
+                {
+                    "name": "state",
+                    "description": "Estado de checagem do nó (true, para marcado)."
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1208,
+            "description": "Método responsável por determinar o estado de ativação do nó.",
+            "itemtype": "method",
+            "name": "setDisabledState",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Nó alvo.",
+                    "type": "Object"
+                },
+                {
+                    "name": "state",
+                    "description": "Estado de ativação do no (true, para desativado)."
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1244,
+            "description": "Método responsável por renderizar a TreeView.",
+            "itemtype": "method",
+            "name": "render",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1269,
+            "description": "Método responsável por contruir a TreeView.",
+            "itemtype": "method",
+            "name": "buildTree",
+            "params": [
+                {
+                    "name": "nodes",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "level",
+                    "description": "Nível corrente.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "A instância atual da Tree."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1441,
+            "description": "Método responsável por definir o estilo (CSS) do nó.",
+            "itemtype": "method",
+            "name": "buildStyleOverride",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "No corrente.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "A expressão CSS para o nó da TreeView."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1477,
+            "description": "Método responsável por injetar o estilo de acordo com a identificação do nó.",
+            "itemtype": "method",
+            "name": "injectStyle",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1489,
+            "description": "Método responsável por definir a estilização do no de acordo com as opções passadas para o plugin.",
+            "itemtype": "method",
+            "name": "buildStyle",
+            "return": {
+                "description": "Expressão CSS padrões de acordo com as opções passadas."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1524,
+            "description": "Template para a renderização da TreeView.",
+            "itemtype": "property",
+            "name": "template",
+            "type": "Object",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1551,
+            "description": "Estilo padrão para os nós da TreeView.",
+            "itemtype": "property",
+            "name": "css",
+            "type": "string",
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1561,
+            "description": "Método responsável por retornar um nó da TreeView a partir do identificador interno do plugin",
+            "itemtype": "method",
+            "name": "getNode",
+            "params": [
+                {
+                    "name": "nodeId",
+                    "description": "- Identificador interno do nó.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Nó da TreeView."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1572,
+            "description": "Método responsável por adicionar um nó na raiz da TreeView.",
+            "itemtype": "method",
+            "name": "addElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Nó a ser adicionado.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1584,
+            "description": "Método responsável por remover um conjunto de nós da Tree.",
+            "itemtype": "method",
+            "name": "removeElements",
+            "params": [
+                {
+                    "name": "ids",
+                    "description": "Conjunto de identificadores do nós a serem removidos.",
+                    "type": "Array"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1596,
+            "description": "Método responsável por obter o pai de um determinado nó",
+            "itemtype": "method",
+            "name": "getParent",
+            "params": [
+                {
+                    "name": "identifier",
+                    "description": "Identificador do nó filho.",
+                    "type": "JQuery | Number | Selector"
+                }
+            ],
+            "return": {
+                "description": "O pai do nó informado."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1608,
+            "description": "Método responsável por obter os irmãos de um nó",
+            "itemtype": "method",
+            "name": "getSiblings",
+            "params": [
+                {
+                    "name": "identifier",
+                    "description": "Identificador do nó",
+                    "type": "JQuery | Number | Selector"
+                }
+            ],
+            "return": {
+                "description": "Os irmãos de um determinado nó."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1624,
+            "description": "Método responsável por obter todos os nós selecionados.",
+            "itemtype": "method",
+            "name": "getSelected",
+            "return": {
+                "description": "Conjunto do nós selecionados."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1634,
+            "description": "Método responsável por obter todos os nós não selecionados.",
+            "itemtype": "method",
+            "name": "getUnselected",
+            "return": {
+                "description": "Conjunto de nós não selecionados."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1644,
+            "description": "Método responsável por obter todos os nós expandidos.",
+            "itemtype": "method",
+            "name": "getExpanded",
+            "return": {
+                "description": "Conjunto de nós expandidos.\nfor Tree"
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1654,
+            "description": "Método responsável por obter todos os nós não expandidos.",
+            "itemtype": "method",
+            "name": "getCollapsed",
+            "return": {
+                "description": "Conjunto de nós não expandidos."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1664,
+            "description": "Método responsável por obter todos os nós marcados.",
+            "itemtype": "method",
+            "name": "getChecked",
+            "return": {
+                "description": "Conjunto de nós marcados."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1674,
+            "description": "Método responsável por obter todos os nós não marcados.",
+            "itemtype": "method",
+            "name": "getUnchecked",
+            "return": {
+                "description": "Conjunto de nós não marcados."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1684,
+            "description": "Método responsável por obter todos os nós desativados.",
+            "itemtype": "method",
+            "name": "getDisabled",
+            "return": {
+                "description": "Conjunto de nós desativados."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1694,
+            "description": "Método responsável por obter todos os nós desativados.",
+            "itemtype": "method",
+            "name": "getEnabled",
+            "return": {
+                "description": "Conjunto de nós desativados."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1705,
+            "description": "Método responsável por selecionar um conjunto de nós.",
+            "itemtype": "method",
+            "name": "selectNode",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós a serem selecionados.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1720,
+            "description": "Método responsável por não selecionar um conjunto de nós.",
+            "itemtype": "method",
+            "name": "unselectNode",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1735,
+            "description": "Método responsável por trocar a seleção de um conjunto de nós.",
+            "itemtype": "method",
+            "name": "toggleNodeSelected",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1751,
+            "description": "Método responsável por retrair todos os nós.",
+            "itemtype": "method",
+            "name": "collapseAll",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1766,
+            "description": "Método responsável por retrair un conjunto de nós.",
+            "itemtype": "method",
+            "name": "collapseNode",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1781,
+            "description": "Método responsável por expandir todos os nós.",
+            "itemtype": "method",
+            "name": "expandAll",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1803,
+            "description": "Método responsável por expandir um conjunto de nós.",
+            "itemtype": "method",
+            "name": "expandNode",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1821,
+            "description": "Método responsável por expandir um conjunto de nós de um determinado nível.",
+            "itemtype": "method",
+            "name": "expandLevels",
+            "params": [
+                {
+                    "name": "nodes",
+                    "description": "Conjunto de nós",
+                    "type": "Array"
+                },
+                {
+                    "name": "level",
+                    "description": "Nível que permite expansão",
+                    "type": "Number"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1840,
+            "description": "Método responsável por expandir o pai de um conjunto de nós",
+            "itemtype": "method",
+            "name": "revealNode",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1859,
+            "description": "Método responsável por trocar o modo de expansão de um conjunto de nós",
+            "itemtype": "method",
+            "name": "toggleNodeExpanded",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1875,
+            "description": "Método responsável por marcar todos os nós;",
+            "itemtype": "method",
+            "name": "checkAll",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1890,
+            "description": "Método responsável por marcar um conjunto de nós.",
+            "itemtype": "method",
+            "name": "checkNode",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1905,
+            "description": "Método responsável por desmarcar todos os nós",
+            "itemtype": "method",
+            "name": "uncheckAll",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": ""
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1920,
+            "description": "Método responsável por desmarcar um conjunto de nós",
+            "itemtype": "method",
+            "name": "uncheckNode",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1935,
+            "description": "Método responsável por trocar o estado de marcação de um conjunto de nós.",
+            "itemtype": "method",
+            "name": "toggleNodeChecked",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1951,
+            "description": "Método responsável por desativar todos os nós",
+            "itemtype": "method",
+            "name": "disableAll",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1966,
+            "description": "Método responsável por desativar um conjunto de nós",
+            "itemtype": "method",
+            "name": "disableNode",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1981,
+            "description": "Método responsável por ativar todos os nós",
+            "itemtype": "method",
+            "name": "enableAll",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 1996,
+            "description": "Método responsável por ativar um conjunto de nós",
+            "itemtype": "method",
+            "name": "enableNode",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 2011,
+            "description": "Método responsável por trocar o estado de ativação de um conjunto de nós",
+            "itemtype": "method",
+            "name": "toggleNodeDisabled",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 2027,
+            "description": "Método responsável por identificar um conjunto de seletores.",
+            "itemtype": "method",
+            "name": "forEachIdentifier",
+            "params": [
+                {
+                    "name": "identifiers",
+                    "description": "Conjunto de nós.",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "Função a ser executada para cada nó.",
+                    "type": "Function"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 2048,
+            "description": "Método responsável por identificar um seletor",
+            "itemtype": "method",
+            "name": "identifyNode",
+            "params": [
+                {
+                    "name": "identifier",
+                    "description": "",
+                    "type": "Selector | Number"
+                }
+            ],
+            "return": {
+                "description": "Nó da TreeView."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 2060,
+            "description": "Método responsável por buscar por um item na TreeView (Caso a opção de busca esteja ativada).",
+            "itemtype": "method",
+            "name": "search",
+            "params": [
+                {
+                    "name": "pattern",
+                    "description": "Termo a ser pesquisado.",
+                    "type": "String"
+                },
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Conjunto de nós."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 2109,
+            "description": "Método responsável por limpar o campo de busca.",
+            "itemtype": "method",
+            "name": "clearSearch",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Conjunto de opções do plugin.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 2130,
+            "description": "Método responsável por procurar um conjunto de nós segundo um critério (atributo).",
+            "itemtype": "method",
+            "name": "findNodes",
+            "params": [
+                {
+                    "name": "pattern",
+                    "description": "Termo a ser pesquisado",
+                    "type": "String"
+                },
+                {
+                    "name": "modifier",
+                    "description": "Opção para o Regex.",
+                    "type": "String"
+                },
+                {
+                    "name": "attribute",
+                    "description": "Atributo a ser pesquisado o termo",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Conjunto de nós."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "bootstrap-treeview.js",
+            "line": 2153,
+            "description": "Método responsável por obter o valor de um determinado atributo de um nó.",
+            "itemtype": "method",
+            "name": "getNodeValue",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "Nó ou um objeto qualquer.",
+                    "type": "Object"
+                },
+                {
+                    "name": "attr",
+                    "description": "Atributo no qual deseja-se obter o valor.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "O valor do atributo do objeto."
+            },
+            "class": "Tree"
+        },
+        {
+            "file": "code.js",
+            "line": 8,
+            "description": "Método responsável por captar trocar todas as ocorrências de uma determinada expressão por outra.",
+            "params": [
+                {
+                    "name": "de",
+                    "description": "Expressão a ser trocada.",
+                    "type": "String"
+                },
+                {
+                    "name": "para",
+                    "description": "Nova expressão a ser inserida",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Nova string"
+            },
+            "class": "Code"
+        },
+        {
+            "file": "code.js",
+            "line": 25,
+            "description": "Método responsável por remover as aspas duplas de determinados termos.",
+            "author": "João Victor Magela.",
+            "itemtype": "method",
+            "name": "cleanString",
+            "params": [
+                {
+                    "name": "string",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "A string sem termos com aspas duplas."
+            },
+            "class": "Code"
+        },
+        {
+            "file": "code.js",
+            "line": 52,
+            "description": "Método responsável por exibir em um modal do Twitter Bootstrap o código gerado.",
+            "author": "João Victor Magela.",
+            "itemtype": "method",
+            "name": "openModalCode",
+            "static": 1,
+            "class": "Code"
+        },
+        {
+            "file": "code.js",
+            "line": 67,
+            "description": "Método responsável por exibir o código gerado da interface abstrata.",
+            "author": "João Victor Magela.",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Dados com os widgets abstratos.",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "method",
+            "name": "showAbstractInterfaceCode",
+            "static": 1,
+            "class": "Code"
+        },
+        {
+            "file": "code.js",
+            "line": 80,
+            "description": "Método responsável por exibir o código gerado da interface concreta.",
+            "author": "João Victor Magela.",
+            "itemtype": "method",
+            "name": "showConcreteInterfaceCode",
+            "static": 1,
+            "class": "Code"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 9,
+            "description": "Método responsável por selecionar o pai de um determinado elemento.",
+            "itemtype": "method",
+            "name": "_getParent",
+            "params": [
+                {
+                    "name": "el",
+                    "description": "Elemento concreto no qual deseja-se obter o pai.",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "O pai do elemento concreto. Caso não tenha um pai, retorna o protótipo."
+            },
+            "class": "UIEvents"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 19,
+            "description": "Método responsável por obter o handle de um determinado elemento concreto.",
+            "itemtype": "method",
+            "name": "_getHandle",
+            "params": [
+                {
+                    "name": "el",
+                    "description": "Elemento concreto no qual se deseja obter o handle",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "O handle do elemento."
+            },
+            "class": "UIEvents"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 29,
+            "description": "Método responsável por atualizar a posição de um determinado elemento.",
+            "itemtype": "method",
+            "name": "_refreshPosition",
+            "params": [
+                {
+                    "name": "el",
+                    "description": "Elemento no qual deseja-se atualizar a posição.",
+                    "type": "JQuery"
+                }
+            ],
+            "class": "UIEvents"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 43,
+            "description": "Método responsável por obter a largura de um elemento.",
+            "itemtype": "method",
+            "name": "_getWidth",
+            "params": [
+                {
+                    "name": "el",
+                    "description": "Elemento no qual deseja-se obter a largura",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "A largura do elemento concreto."
+            },
+            "class": "UIEvents"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 61,
+            "description": "Método responsável por determinar a altura mínima de um elemento de acordo com seu conteúdo interno.",
+            "itemtype": "method",
+            "name": "_setMinHeight",
+            "params": [
+                {
+                    "name": "el",
+                    "description": "Elemento concreto no qual deseja-se determinar a altura mínima",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "A altura mínima para o elemento."
+            },
+            "class": "UIEvents"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 76,
+            "description": "Método responsável por atualizar o tamanho do elemento concreto.",
+            "itemtype": "method",
+            "name": "_refreshResize",
+            "params": [
+                {
+                    "name": "el",
+                    "description": "Elemento concreto no qual deseja-se atualzar a largura.",
+                    "type": "JQuery"
+                }
+            ],
+            "class": "UIEvents"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 102,
+            "description": "Método responsável por instalar o método Draggable do jQuery UI para os elementos concretos.",
+            "itemtype": "method",
+            "name": "setDraggable",
+            "static": 1,
+            "class": "UIEvents"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 115,
+            "description": "Evento disparado ao fim do arraste. Atualiza a posição do elemento concreto.",
+            "itemtype": "event",
+            "name": "Parar arraste",
+            "class": "UIEvents"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 127,
+            "description": "Método responsável por instalar o método Resize do jQuery UI para os elementos concretos.",
+            "itemtype": "method",
+            "name": "resizeBox",
+            "static": 1,
+            "class": "UIEvents"
+        },
+        {
+            "file": "drag-move.js",
+            "line": 140,
+            "description": "Evento disparado ao redimensionar um elemento. Atualiza a dimensão do mesmo.",
+            "itemtype": "event",
+            "name": "Redimensionar elemento",
+            "class": "UIEvents"
+        },
+        {
+            "file": "entities.js",
+            "line": 9,
+            "itemtype": "property",
+            "name": "id Identificador do Elmento.",
+            "type": "{Number}",
+            "class": "HTMLElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 15,
+            "itemtype": "property",
+            "name": "name Nome do Elmento.",
+            "type": "{string}",
+            "class": "HTMLElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 21,
+            "itemtype": "property",
+            "name": "value Valor associado ao Elmento.",
+            "type": "{string}",
+            "class": "HTMLElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 27,
+            "itemtype": "property",
+            "name": "class Classes CSS associadas ao Elmento.",
+            "type": "{string}",
+            "class": "HTMLElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 33,
+            "itemtype": "property",
+            "name": "typeElement tipo do elemento concreto.",
+            "type": "{string}",
+            "class": "HTMLElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 39,
+            "itemtype": "property",
+            "name": "html Objeto jQuery representado o HTML do elemento concreto.",
+            "type": "{jQuery}",
+            "class": "HTMLElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 45,
+            "itemtype": "property",
+            "name": "tag Tag referente ao elemento concreto.",
+            "type": "{string}",
+            "class": "HTMLElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 54,
+            "description": "Método responsável por atualizar os valores de um HTMLElement.",
+            "itemtype": "method",
+            "name": "updateAttr",
+            "params": [
+                {
+                    "name": "attrs",
+                    "description": "Objeto com os valores a serem atualizados.",
+                    "type": "Object"
+                }
+            ],
+            "class": "HTMLElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 66,
+            "description": "Método responsável por obter o template de um elemento concreto.",
+            "itemtype": "method",
+            "name": "getTemplate",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "Tipo do elemento concreto.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Objeto jQuery com o HTML do elemento concreto.",
+                "type": "JQuery"
+            },
+            "class": "HTMLElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 120,
+            "itemtype": "property",
+            "name": "tag Tag referente ao elemento concreto.",
+            "type": "{string}",
+            "class": "Paragraph"
+        },
+        {
+            "file": "entities.js",
+            "line": 147,
+            "itemtype": "property",
+            "name": "headerTag Determina qual a tag do título (h1-h6).",
+            "type": "{string}",
+            "default": "\"h1\"",
+            "class": "Header"
+        },
+        {
+            "file": "entities.js",
+            "line": 173,
+            "itemtype": "property",
+            "name": "href Caminho do link.",
+            "type": "{string}",
+            "class": "Link"
+        },
+        {
+            "file": "entities.js",
+            "line": 234,
+            "itemtype": "property",
+            "name": "listTag Determina o tipo da lista(\"ul\" ou \"ol\").",
+            "type": "{string}",
+            "class": "List"
+        },
+        {
+            "file": "entities.js",
+            "line": 277,
+            "itemtype": "property",
+            "name": "simpleHtmlTag Valor da tag referente ao elemento concreto.",
+            "type": "{string}",
+            "class": "SimpleHtml"
+        },
+        {
+            "file": "entities.js",
+            "line": 302,
+            "itemtype": "property",
+            "name": "alt Texto alternativo para a imagem.",
+            "type": "{string}",
+            "class": "ImageHtml"
+        },
+        {
+            "file": "entities.js",
+            "line": 308,
+            "itemtype": "property",
+            "name": "src Caminho físico da imagem.",
+            "type": "{string}",
+            "class": "ImageHtml"
+        },
+        {
+            "file": "entities.js",
+            "line": 314,
+            "itemtype": "property",
+            "name": "width largura da imagem.",
+            "type": "{string}",
+            "class": "ImageHtml"
+        },
+        {
+            "file": "entities.js",
+            "line": 320,
+            "itemtype": "property",
+            "name": "height Altura da imagem.",
+            "type": "{string}",
+            "class": "ImageHtml"
+        },
+        {
+            "file": "entities.js",
+            "line": 343,
+            "itemtype": "property",
+            "name": "widget Determina a qual classe pertence elemento concreto.",
+            "type": "{string}",
+            "class": "Carousel"
+        },
+        {
+            "file": "entities.js",
+            "line": 367,
+            "itemtype": "property",
+            "name": "widget Determina a qual classe pertence elemento concreto.",
+            "type": "{string}",
+            "class": "CarouselItem"
+        },
+        {
+            "file": "entities.js",
+            "line": 389,
+            "itemtype": "property",
+            "name": "widget Determina a qual classe pertence elemento concreto.",
+            "type": "{string}",
+            "class": "BootstrapNavigation"
+        },
+        {
+            "file": "entities.js",
+            "line": 412,
+            "itemtype": "property",
+            "name": "widget Determina a qual classe pertence elemento concreto.",
+            "type": "{string}",
+            "class": "BootstrapNavigationList"
+        },
+        {
+            "file": "entities.js",
+            "line": 436,
+            "itemtype": "property",
+            "name": "href Link para o item da lista.",
+            "type": "{string}",
+            "class": "BootstrapNavigationListItem"
+        },
+        {
+            "file": "entities.js",
+            "line": 442,
+            "itemtype": "property",
+            "name": "widget Determina a qual classe pertence elemento concreto.",
+            "type": "{string}",
+            "class": "BootstrapNavigationListItem"
+        },
+        {
+            "file": "entities.js",
+            "line": 487,
+            "itemtype": "property",
+            "name": "type Determina o tipo do input (text, file e etc.).",
+            "type": "{string}",
+            "class": "InputText"
+        },
+        {
+            "file": "entities.js",
+            "line": 529,
+            "itemtype": "property",
+            "name": "type Determina o tipo do input (radio ou check).",
+            "type": "{string}",
+            "class": "InputRadioCheck"
+        },
+        {
+            "file": "entities.js",
+            "line": 535,
+            "itemtype": "property",
+            "name": "tagRadio Determina qual o tipo do elemento concreto no momento (radio ou check).",
+            "type": "{string}",
+            "class": "InputRadioCheck"
+        },
+        {
+            "file": "entities.js",
+            "line": 541,
+            "itemtype": "property",
+            "name": "text Determina o texto apresentado na label.",
+            "type": "{string}",
+            "class": "InputRadioCheck"
+        },
+        {
+            "file": "entities.js",
+            "line": 580,
+            "itemtype": "property",
+            "name": "text Determina o texto da opção.",
+            "type": "{string}",
+            "class": "InputOption"
+        },
+        {
+            "file": "entities.js",
+            "line": 603,
+            "itemtype": "property",
+            "name": "type Determina o tipo do botão.",
+            "type": "{string}",
+            "class": "Button"
+        },
+        {
+            "file": "entities.js",
+            "line": 609,
+            "itemtype": "property",
+            "name": "text Determina o texto apresentado no botão.",
+            "type": "{string}",
+            "class": "Button"
+        },
+        {
+            "file": "entities.js",
+            "line": 625,
+            "itemtype": "property",
+            "name": "name Determina o nome do elemento abstrato.",
+            "type": "{string}",
+            "class": "AbstractElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 631,
+            "itemtype": "property",
+            "name": "datasource Link onde se encontram as informações a serem baixadas.",
+            "type": "{string}",
+            "class": "AbstractElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 637,
+            "itemtype": "property",
+            "name": "bind Expressão para obter informação a partir dos dados a partir do datasource.",
+            "type": "{string}",
+            "class": "AbstractElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 643,
+            "itemtype": "property",
+            "name": "parse Expressão para obter dados internos aos dados já obtidos no datasource.",
+            "type": "{string}",
+            "class": "AbstractElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 649,
+            "itemtype": "property",
+            "name": "children Determina o nome da interface abstrata.",
+            "type": "{Array}",
+            "class": "AbstractElement"
+        },
+        {
+            "file": "entities.js",
+            "line": 662,
+            "itemtype": "property",
+            "name": "name Determina o nome da interface abstrata.",
+            "type": "{string}",
+            "class": "AbstractInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 668,
+            "itemtype": "property",
+            "name": "widgets Conjunto de elementos abstratos.",
+            "type": "{Array}",
+            "class": "AbstractInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 675,
+            "description": "Método responsável por gerar o código da interface abstrata.",
+            "itemtype": "method",
+            "name": "generateAbstractInterface",
+            "params": [
+                {
+                    "name": "widgets",
+                    "description": "Conjunto de elementos abstratos.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Código formatado referente a interface abstrata."
+            },
+            "class": "AbstractInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 695,
+            "itemtype": "property",
+            "name": "name Determina o nome da interface concreta.",
+            "type": "{string}",
+            "class": "ConcreteInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 701,
+            "itemtype": "property",
+            "name": "maps Conjunto de elementos concretos da aplicação mapeados.",
+            "type": "{Array}",
+            "class": "ConcreteInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 707,
+            "itemtype": "property",
+            "name": "head Conjunto de elementos concretos para o cabeçalho da página.",
+            "type": "{Array}",
+            "class": "ConcreteInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 713,
+            "itemtype": "property",
+            "name": "concreteInterfaceItems Conjunto de elementos concretos da aplicação.",
+            "type": "{Array}",
+            "class": "ConcreteInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 720,
+            "description": "Método responsável por gerar o código da interface concreta.",
+            "itemtype": "method",
+            "name": "generateConcreteInterface",
+            "return": {
+                "description": "Código no formato JSON referente a interface concreta."
+            },
+            "class": "ConcreteInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 758,
+            "description": "Método responsável por procurar um determinado elemento concreto na interface concreta",
+            "itemtype": "method",
+            "name": "findItem",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Elemento concreto ou um elemento vazio (caso não seja encontrado)."
+            },
+            "class": "ConcreteInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 772,
+            "description": "Método responsável por atualizar um determinado elemento concreto na interface concreta",
+            "itemtype": "method",
+            "name": "replaceItem",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "Elemento concreto.",
+                    "type": "Object"
+                }
+            ],
+            "class": "ConcreteInterface"
+        },
+        {
+            "file": "entities.js",
+            "line": 791,
+            "description": "Método responsável por limpar a lista de elementos concretos.",
+            "itemtype": "method",
+            "name": "cleanConcreteInterface",
+            "class": "ConcreteInterface"
+        },
+        {
+            "file": "preview.js",
+            "line": 8,
+            "description": "Método responsável por obter o valor associado a um elemento concreto (através do bind ou inserido manualmente)",
+            "itemtype": "method",
+            "name": "_getValue",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrato contendo informações.",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "isBind",
+                    "description": "Determina se o valor deve ser obtido do bind ou não.",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "attr",
+                    "description": "Atributo no qual deseja-se obter o valor.",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "Os valores associados ao elemento concreto."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 45,
+            "description": "Metodo responsável por renderizar um DIV no preview.",
+            "itemtype": "method",
+            "name": "renderDiv",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado a DIV."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 61,
+            "description": "Metodo responsável por renderizar um Parágrafo no preview.",
+            "itemtype": "method",
+            "name": "_renderParagraph",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Parágrafo."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 76,
+            "description": "Metodo responsável por renderizar um Título no preview.",
+            "itemtype": "method",
+            "name": "_renderHeader",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Parágrafo."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 93,
+            "description": "Metodo responsável por renderizar um DIV no preview.",
+            "itemtype": "method",
+            "name": "_renderLink",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Título."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 112,
+            "description": "Metodo responsável por renderizar um Label no preview.",
+            "itemtype": "method",
+            "name": "_renderLabel",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Label."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 129,
+            "description": "Metodo responsável por renderizar um Span no preview.",
+            "itemtype": "method",
+            "name": "_renderSpan",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Span."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 145,
+            "description": "Metodo responsável por renderizar uma Lista no preview.",
+            "itemtype": "method",
+            "name": "_renderList",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado a Lista."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 160,
+            "description": "Metodo responsável por renderizar um Item da Lista no preview.",
+            "itemtype": "method",
+            "name": "_renderListItem",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Item da Lista."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 176,
+            "description": "Metodo responsável por renderizar uma Imagem no preview.",
+            "itemtype": "method",
+            "name": "_renderImage",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Imagem."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 195,
+            "description": "Metodo responsável por renderizar uma Galeria de Imagens no preview.",
+            "itemtype": "method",
+            "name": "_renderCarousel",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado a Galeria de Imagens."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 215,
+            "description": "Metodo responsável por renderizar um Item da Galeria de Imagens no preview.",
+            "itemtype": "method",
+            "name": "_renderCarouselItem",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Item da Galeria de Imagens."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 236,
+            "description": "Metodo responsável por renderizar um Menu no preview.",
+            "itemtype": "method",
+            "name": "_renderNavigation",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Menu."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 256,
+            "description": "Metodo responsável por renderizar uma Lista de Navegação no preview.",
+            "itemtype": "method",
+            "name": "_renderNavigationList",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado a Lista de Navegação."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 274,
+            "description": "Metodo responsável por renderizar um Item da Lista de Navegação no preview.",
+            "itemtype": "method",
+            "name": "_renderNavigationListItem",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Item da Lista de Navegação."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 291,
+            "description": "Metodo responsável por renderizar um Formulário no preview.",
+            "itemtype": "method",
+            "name": "_renderForm",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Formulário."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 307,
+            "description": "Metodo responsável por renderizar um Campo Texto no preview.",
+            "itemtype": "method",
+            "name": "_renderInputText",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Campo Texto."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 322,
+            "description": "Metodo responsável por renderizar um Textarea no preview.",
+            "itemtype": "method",
+            "name": "_renderInputTextarea",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Textarea."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 336,
+            "description": "Metodo responsável por renderizar um Radiobox ou Checkbox no preview.",
+            "itemtype": "method",
+            "name": "_renderInputRadioCheck",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Radiobox ou Checkbox."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 354,
+            "description": "Metodo responsável por renderizar um Combobox no preview.",
+            "itemtype": "method",
+            "name": "_renderInputSelect",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Combobox."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 368,
+            "description": "Metodo responsável por renderizar uma Opção do Combobox no preview.",
+            "itemtype": "method",
+            "name": "_renderInputOption",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Opção do Combobox."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 384,
+            "description": "Metodo responsável por renderizar um Botão no preview.",
+            "itemtype": "method",
+            "name": "_renderInputButton",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "O objeto jQuery representado o Botão."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 400,
+            "description": "Método responsável por renderizar um elemento de acordo com seu tipo.",
+            "itemtype": "method",
+            "name": "_renderElement",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrado com valores associados ao elemento concreto",
+                    "type": "Object"
+                },
+                {
+                    "name": "element",
+                    "description": "Elemento concreto com propriedades atribuidas pelo usuário",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados.",
+                    "type": "Numeber"
+                }
+            ],
+            "return": {
+                "description": "jQuery do elemento concreto."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 435,
+            "description": "Metodo responsável por obter o índice onde serão buscadas as informações para renderização do elemento concreto.",
+            "itemtype": "method",
+            "name": "_getCurrentIndex",
+            "params": [
+                {
+                    "name": "rootNode",
+                    "description": "Elemento abstrato que é pai de um determinado elemento abstrado.",
+                    "type": "Object"
+                },
+                {
+                    "name": "parentIndex",
+                    "description": "Índice associado aos dados do pai"
+                },
+                {
+                    "name": "loopIndex",
+                    "description": "Índice associado ao loop corrente"
+                }
+            ],
+            "return": {
+                "description": "parentIndex"
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 453,
+            "description": "Método responsável por renderizar o preview.",
+            "itemtype": "method",
+            "name": "_renderPreview",
+            "params": [
+                {
+                    "name": "nodes",
+                    "description": "Conjunto de Elementos abstratos",
+                    "type": "Array"
+                },
+                {
+                    "name": "root",
+                    "description": "Local onde serão renderizados os elementos.",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "rootNode",
+                    "description": "Nó corrente.",
+                    "type": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Índice onde se deve obter os dados para renderização do elemento.",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "O preview renderizado."
+            },
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 497,
+            "description": "Métod responsável por iniciar a operação de rendereização do preview.",
+            "itemtype": "method",
+            "name": "_runPreview",
+            "class": "Preview"
+        },
+        {
+            "file": "preview.js",
+            "line": 507,
+            "description": "Método responsável por criar a opção Tab do Bootstrap",
+            "itemtype": "method",
+            "name": "tabBootstrap",
+            "static": 1,
+            "class": "Preview"
+        },
+        {
+            "file": "project.js",
+            "line": 28,
+            "description": "Método responsável por converter um Objeto aninhado em um vetor aninhado.",
+            "itemtype": "method",
+            "name": "_nestedObjectToArray",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "Object como um Array.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Array aninhado."
+            },
+            "class": "Project"
+        },
+        {
+            "file": "project.js",
+            "line": 44,
+            "description": "Método responsável por gerar um arquivo JSON contendo as informações do projeto e fazer o download do mesmo.",
+            "itemtype": "method",
+            "name": "_downloadJson",
+            "class": "Project"
+        },
+        {
+            "file": "project.js",
+            "line": 58,
+            "description": "Método responsável por iniciar o mira-editor com valores padrões.",
+            "itemtype": "method",
+            "name": "initDefault",
+            "static": 1,
+            "class": "Project"
+        },
+        {
+            "file": "project.js",
+            "line": 95,
+            "description": "Método responsável por iniciar o mira-editor com um valor customizado.",
+            "itemtype": "method",
+            "name": "initCustom",
+            "params": [
+                {
+                    "name": "abstractInterface",
+                    "description": "Dados para iniciação custmizada do mira-editor"
+                }
+            ],
+            "static": 1,
+            "class": "Project"
+        },
+        {
+            "file": "project.js",
+            "line": 108,
+            "description": "Description",
+            "itemtype": "method",
+            "name": "onTreeRender",
+            "params": [
+                {
+                    "name": "event",
+                    "description": ""
+                },
+                {
+                    "name": "data",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": ""
+            },
+            "class": "Project"
+        },
+        {
+            "file": "project.js",
+            "line": 180,
+            "description": "Método responsável por salvar os dados do projeto no localStorage.",
+            "itemtype": "method",
+            "name": "saveWebStorage",
+            "static": 1,
+            "class": "Project"
+        },
+        {
+            "file": "project.js",
+            "line": 194,
+            "description": "Método responsável por captar os dados salvos no localStorage.",
+            "itemtype": "method",
+            "name": "loadWebStorage",
+            "static": 1,
+            "class": "Project"
+        },
+        {
+            "file": "render-elements.js",
+            "line": 11,
+            "description": "Método responsável por renderizar os elementos concretos no protótipo.",
+            "itemtype": "method",
+            "name": "_renderConcreteInterface",
+            "params": [
+                {
+                    "name": "node",
+                    "description": "Elemento abstrato.",
+                    "type": "Object"
+                },
+                {
+                    "name": "root",
+                    "description": "Elemento jQuery onde serão inseridos novos elementos concretos.",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "O protótipo com os elementos."
+            },
+            "class": "RenderElements"
+        },
+        {
+            "file": "render-elements.js",
+            "line": 54,
+            "description": "Evento disparado quando há a mudança do elemento concreto no combobox. A partir do novo elemento selecionado, é buscado o template correspondente\ne feita a atualização do elemento concreto.",
+            "itemtype": "event",
+            "name": "ChangeSelectType",
+            "class": "RenderElements"
+        },
+        {
+            "file": "render-elements.js",
+            "line": 100,
+            "description": "Método responsável por obter o template base dos elementos.",
+            "itemtype": "method",
+            "name": "initRenderElements",
+            "static": 1,
+            "class": "RenderElements"
+        },
+        {
+            "file": "render-elements.js",
+            "line": 109,
+            "description": "Método responsável por definir as ações do botão para a raiz da TreeView (Não existe tal funcionalidade no plugin)",
+            "itemtype": "method",
+            "name": "commandsRootTree",
+            "static": 1,
+            "class": "RenderElements"
+        },
+        {
+            "file": "render-elements.js",
+            "line": 156,
+            "description": "Método responsável por renderizar a TreeView e a partir disso atualizar toda a aplicação.",
+            "itemtype": "method",
+            "name": "renderTree",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Instancia do plugin BootstrapTreeView.",
+                    "type": "Object"
+                }
+            ],
+            "static": 1,
+            "class": "RenderElements"
+        },
+        {
+            "file": "sidebar-install.js",
+            "line": 10,
+            "itemtype": "property",
+            "name": "currentObj",
+            "type": "Object",
+            "default": "null",
+            "class": "Code"
+        },
+        {
+            "file": "sidebar-install.js",
+            "line": 18,
+            "itemtype": "property",
+            "name": "currentElement",
+            "type": "jQuery",
+            "default": "null",
+            "class": "Code"
+        },
+        {
+            "file": "sidebar-install.js",
+            "line": 26,
+            "itemtype": "property",
+            "name": "sidebar",
+            "type": "Object",
+            "default": "null",
+            "class": "Code"
+        },
+        {
+            "file": "sidebar-install.js",
+            "line": 34,
+            "description": "Método responsável por renderizar o formulário de propriedades de um determinado elemento concreto.",
+            "itemtype": "method",
+            "name": "_getForm",
+            "params": [
+                {
+                    "name": "attrs",
+                    "description": "Atributos do elemento concreto.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "HTML do formulário para um determinado elemento concreto."
+            },
+            "class": "Code"
+        },
+        {
+            "file": "sidebar-install.js",
+            "line": 44,
+            "description": "Método responsável por obter os valores do atributos de um determinado elemento concreto.",
+            "itemtype": "method",
+            "name": "_getAttrs",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Atributos e valores de um elemento concreto.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Objeto com atributos e valores a serem inserido no formulário."
+            },
+            "class": "Code"
+        },
+        {
+            "file": "sidebar-install.js",
+            "line": 59,
+            "description": "Método responsável por salvar as informações inseridas no formulário de propriedades.",
+            "itemtype": "method",
+            "name": "_saveForm",
+            "class": "Code"
+        },
+        {
+            "file": "sidebar-install.js",
+            "line": 70,
+            "description": "Método responsável por instalar o plugin jQuery.sidr",
+            "itemtype": "method",
+            "name": "installSidebarAndPropForm",
+            "static": 1,
+            "class": "Code"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nMétodo responsável por captar trocar todas as ocorrências de uma determinada expressão por outra.",
+            "line": " code.js:8"
+        }
+    ]
+}

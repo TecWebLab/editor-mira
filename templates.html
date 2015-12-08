@@ -1,361 +1,299 @@
-<script id="container-div" type="text/template">
-    <div class="<%- item %>">
-        <% if(item.indexOf('panel') !=  -1) { %>
-            <div class="panel-heading">Título</div>
-            <div class="panel-body">
+<!-- Templates -->
+<script id="panel-base" type="text/template">
+    <div class="panel panel-default panel-drag panel-resize" data-id="<%- item.id %>" data-component="" data-name="" data-type="<%- item.typeElement %>" 
+    <% if(item.style){ %>
+        style="<%=item.style%>"
+    <%}%>    
+    >
+        <div class="panel-heading"> 
+            <span><% print(item.name) %></span> 
+            <div class="pull-right">
+                <div class="col-md-10">
+                    <select class="select-type-element form-control" value="<%-item.typeElement%>" name="typeElement" style="margin-top: -7px">
+                        <optgroup label="Container">
+                            <option value="div">div</option>
+                        </optgroup>
+
+                        <optgroup label="Texto">
+                            <option value="p" <% if(item.typeElement == 'p') print('selected')%>>p</option>
+                            <option value="header" <% if(item.typeElement == 'header') print('selected')%>>h1 - h6</option>
+                            <option value="a" <% if(item.typeElement == 'a') print('selected')%>>link</option>
+                            <option value="label" <% if(item.typeElement == 'label') print('selected')%>>label</option>
+                            <option value="span" <% if(item.typeElement == 'span') print('selected')%>>span</option>
+                        </optgroup>
+
+                        <optgroup label="Lista">
+                            <option value="list" <% if(item.typeElement == 'list') print('selected')%>>ul-ol</option>
+                            <option value="list-item" <% if(item.typeElement == 'list-item') print('selected')%>>li</option>
+                        </optgroup>
+
+                        <optgroup label="Imagem">
+                            <option value="image" <% if(item.typeElement == 'image') print('selected')%>>img</option>
+                            <option value="carousel" <% if(item.typeElement == 'carousel') print('selected')%>>carousel</option>
+                            <option value="carousel-item" <% if(item.typeElement == 'carousel-item') print('selected')%>>carousel-item</option>    
+                        </optgroup>
+
+                        <optgroup label="Navegação - Menu">
+                            <option value="navigation" <% if(item.typeElement == 'navigation') print('selected')%>>BootstrapNavigation</option>
+                            <option value="navigation-list" <% if(item.typeElement == 'navigation-list') print('selected')%>>BootstrapNavigationList</option>
+                            <option value="navigation-list-item" <% if(item.typeElement == 'navigation-list-item') print('selected')%>>BootstrapNavigationListItem</option>
+                        </optgroup>
+
+                        <optgroup label="Formulário">
+                            <option value="form" <% if(item.typeElement == 'form') print('selected')%>>form</option>
+                            <option value="input-text" <% if(item.typeElement == 'input-text') print('selected')%>>input - text</option>
+                            <option value="input-textarea" <% if(item.typeElement == 'input-textarea') print('selected')%>>input - textarea</option>
+                            <option value="input-radio" <% if(item.typeElement == 'input-radio') print('selected')%>>input - radio/checkbox</option>
+                            <option value="input-select" <% if(item.typeElement == 'input-select') print('selected')%>>select</option>
+                            <option value="input-option" <% if(item.typeElement == 'input-option') print('selected')%>>option</option>
+                            <option value="input-button" <% if(item.typeElement == 'input-button') print('selected')%>>button</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
+                <button data-open="0" class="btn-prop btn btn-primary btn-xs pull-right" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Exibe o formulário de opções do widget concreto."><i class="fa fa-cog"></i></button>
+                <span class="btn-handle btn btn-warning btn-xs pull-right" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="Possibita arrastar o elemento."><i class="fa fa-arrows"></i></span>
 
             </div>
-        <% } %>
+        </div>
+        <div class="panel-body">
+            <%= item.html ? item.html.html() : "" %>
+        </div>
     </div>
 </script>
 
-<script id="container-text" type="text/template">
-	<% if(item == 'text') { %>
-		<p>Texto de exemplo</p>
-	<%} else if (item == 'title') { %>
-		<h1>Texto de exemplo</h1> 
-	<%} %>	
-</script>
-
-<script id="component-image" type="text/template">
-	<% if(item == 'image') { %>
-		<img src="http://placehold.it/400x300" alt="image" />
-	<%} else if (item == 'thumbnail') { %>
-		<div class="thumbnail">
-			<img src="http://placehold.it/400x300" alt="image" />
-		</div>
-	<%}	%>
-</script>
-
-<!-- Menu de navegação -->
-<script id="component-nav" type="text/template">
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
+<!-- Template BootstrapNavigationItem -->
+<script type="text/template" id="template-navigationitem">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Título</a>
+                <a class="navbar-brand" href="#">Brand</a>
             </div>
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="#">Item 1</a></li>
-					<li><a href="#">Item 2</a></li>
-					<li><a href="#">Item 3</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Item 1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Item 2</a></li>
+                    <li><a href="#">Item 3</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </script>
 
-<script id="component-list" type="text/template">
-	<% if(item == 'unordered') { %>
-			<ul>
-				<li>Item 1</li>
-				<li>Item 2</li>
-				<li>Item 3</li>
-			</ul>
-	<% } else { %>
-			<ol>
-				<li>Item 1</li>
-				<li>Item 2</li>
-				<li>Item 3</li>
-			</ol>
-	<%}%>
+<!-- Template Paragraph -->
+<script type="text/template" id="template-paragraph">
+    <p> 
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas laoreet, sem sit amet tempor luctus, erat lorem cursus turpis, nec condimentum est leo eu massa. Integer tincidunt sodales enim in interdum. Nam ac elit enim. Mauris neque quam, viverra eu magna quis, suscipit fermentum ligula. Vestibulum tempor tortor ac lacus egestas lobortis. Praesent placerat porttitor ante, a maximus tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+    </p> 
 </script>
 
-<!-- Formulário -->
-<script id="form-form" type="text/template">
-    <form class="<%- item %>">
-        
-    </form>
+<!-- Template Title -->
+<script type="text/template" id="template-title">
+    <h1>Título de Exemplo</h1>
 </script>
 
-<script id="form-text" type="text/template">
-    <input class="form-control" type="text" name="" />
+<!-- Template link -->
+<script type="text/template" id="template-link">
+    <a href="#">Link de exemplo</a>
 </script>
 
-<script id="form-select" type="text/template">
-    <select class="form-control">
-        <option value="valor 1">Opção 1</option>
-        <option value="valor 2">Opção 2</option>
-        <option value="valor 3">Opção 3</option>
+<!-- Template span -->
+<script type="text/template" id="template-span">
+    <span href="#">Texto de exemplo do span</span>
+</script>
+
+<!-- Template label -->
+<script type="text/template" id="template-label">
+    <label>Texto de exemplo do label</label>
+</script>
+
+<!-- Template listItem -->
+<script type="text/template" id="template-listitem">
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+</script>
+
+<!-- Template img -->
+<script type="text/template" id="template-img">
+    <img src="img/template-img.png" alt="Imagem de Exemplo" class="img-responsive" />
+</script>
+
+<!-- Template Carousel Item -->
+<script type="text/template" id="template-carouselitem">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="img/carousel-item.jpg" alt="Imagem de Exemplo" />
+            </div>
+            <div class="item">
+                <img src="img/carousel-item.jpg" alt="Imagem de Exemplo" />
+            </div>
+            <div class="item">
+                <img src="img/carousel-item.jpg" alt="Imagem de Exemplo" />
+            </div>
+        </div>
+
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</script>
+
+<!-- Template text/textarea -->
+<script type="text/template" id="template-inputtext">
+    <input type="text" class="form-control text-concrete" placeholder="Digite seu texto aqui" />
+</script>
+
+<!-- Template text/textarea -->
+<script type="text/template" id="template-inputtextarea">
+    <textarea class="form-control text-concrete" placeholder="Digite seu texto aqui"></textarea>
+</script>
+
+<!-- Template radio/checkbox -->
+<script type="text/template" id="template-inputradio">
+    <div class="radio">
+        <label><input type="radio" name="optionsRadios" checked> Opçao 1</label>
+    </div>
+    <div class="radio">
+        <label><input type="radio" name="optionsRadios"> Opçao 2</label>
+    </div>
+    <div class="radio">
+        <label><input type="radio" name="optionsRadios"> Opçao 3</label>
+    </div>
+</script>
+
+<!-- Template option -->
+<script type="text/template" id="template-inputoption">
+    <select class="form-control text-concrete">
+        <option value="v1">Opção 1</option>
+        <option value="v2">Opção 2</option>
+        <option value="v3">Opção 3</option>
     </select>
 </script>
 
-<script id="form-textarea" type="text/template">
-    <textarea class="form-control" name=""></textarea> 
+<!-- Template button -->
+<script type="text/template" id="template-button">
+    <button class="btn btn-primary text-concrete">Botão</button>
 </script>
 
-<script id="form-radio-checkbox" type="text/template">
-    <div class="<% item == 'input-radio' ? print('radio') : print('checkbox')%>">
-        <label><input type="<% item == 'input-radio' ? print('radio') : print('checkbox')%>" name="" value="valor 1">Opção 1</label>
-    </div>
-    <div class="<% item == 'input-radio' ? print('radio') : print('checkbox')%>">
-        <label><input type="<% item == 'input-radio' ? print('radio') : print('checkbox')%>" name="" value="valor 2">Opção 2</label>
-    </div>
-    <div class="<% item == 'input-radio' ? print('radio') : print('checkbox')%>">
-        <label><input type="<% item == 'input-radio' ? print('radio') : print('checkbox')%>" name="" value="valor 3">Opção 3</label>
-    </div>
-</script>
-
-<script id="form-file" type="text/template">
-    <input class="form-control" type="file" name="" />
-</script>
-<script id="form-static" type="text/template">
-    <p class="form-control-static">Item estático</p>
-</script>
-
-<script id="form-group" type="text/template">
-    <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">@</span>
-        <input type="text" class="form-control" placeholder="Username">
-    </div>
-</script>
-
-
-
-<!--Template dos formulários -->
-<script type="text/template" id="form-nav">
-    <form class="form-horizontal form-properties">
-        <div class="form-group">
-            <label>Nome</label>
-            <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
-        </div>
-        <div class="form-group">
-            <label>Datasource</label>
-            <div class="input-group">
-                <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Parse</label>
-            <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
-        </div>
-        <div class="form-group">
-            <label>Título</label>
-            <input type="text" class="form-control" name="title" value="<%=item.title%>" id="title" /> 
-        </div>
-
-        <div class="form-group">
-            <label>Valores</label>
-            <label class="radio-inline">
-                <input type="radio" name="value" id="radio-static" value="0" <% if(item.value == 0) print('cheked')%>> Estáticos
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="value" id="radio-dynamic" value="1" <% if(item.value == 1) print('cheked')%>> Dinamicos
-            </label>
-        </div>
-
-        <!-- Valores estátitocs -->
-        <div id="control-static">
+<script type="text/template" id="form-prop">
+    <form class="form-horizontal form-properties" id="form-properties">
+        <% if(item.value != undefined) { %>
             <div class="form-group">
-                <label>Itens</label>
-                <textarea id="txtItens" name="itens" class="form-control" rows="6"><% _.each(item.itens, function(obj){ print(obj + '\n'); })%></textarea>
+                <label>Valor</label>
+                <textarea class="form-control" name="value" rows="10"><%=item.value%></textarea> 
             </div>
-            <div class="form-group">
-                <label>Label</label>
-                <textarea id="txtItens" name="hrefs" class="form-control" rows="6"><% _.each(item.hrefs, function(obj){ print(obj + '\n') })%></textarea>
-            </div>
-        </div>
-        
-        <!-- Valores Dinamicos -->
-        <div id="control-dynamic" style="display:none">
-            <div class="form-group">
-                <label>Itens</label>
-                <input type="text" class="form-control" name="itens" value="<%-item.itens[0] %>" id="itens" />
-            </div>
-            <div class="form-group">
-                <label>Link</label>
-                <input type="text" class="form-control" name="hrefs" value="<%=item.hrefs[0] %>" id="links" />
-            </div>
-        </div>
+        <%}%>
 
-        <div class="form-group">
-            <label>Classes</label>
-            <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%=item.classes%></textarea>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary" id="btnSalvar">Salvar</button>
-            <button class="btn btn-default" id="btnFechar">Fechar</button>
-        </div>
-    </form>
-</script>
-
-<script type="text/template" id="form-text">
-    <form class="form-horizontal form-properties ">
-        <div class="form-group">
-            <label>Nome</label>
-            <input type="text" class="form-control" value="<%=item.name%>" name="name" id="nameComponent" /> 
-        </div>
-        <div class="form-group">
-            <label>Parse</label>
-            <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
-        </div>
-        <div class="form-group">
-            <label>Datasource</label>
-            <div class="input-group">
-                <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
-                </span>
-            </div>
-        </div>
-        <% if(item.type == 'header') {%>
-             <div class="form-group">
-                <label>Largura da Coluna</label>
-                <select class="form-control" id="selectTag" name="tag"  value="<%=item.tag%>">
-                    <option value="h1" <% if(item.tag == 'h1') print('selected') %> >h1</option>
-                    <option value="h2" <% if(item.tag == 'h2') print('selected') %> >h2</option>
-                    <option value="h3" <% if(item.tag == 'h3') print('selected') %> >h3</option>
-                    <option value="h4" <% if(item.tag == 'h4') print('selected') %> >h4</option>
-                    <option value="h5" <% if(item.tag == 'h5') print('selected') %> >h5</option>
-                    <option value="h6" <% if(item.tag == 'h6') print('selected') %> >h6</option>
+        <% if(item.headerTag != undefined) { %>
+            <div class="form-group">
+                <label>Tag</label>
+                <select class="form-control" id="select-header-tag" name="headerTag" value="<%=item.headerTag%>">
+                    <option value="h1">h1</option>
+                    <option value="h2" <% if(item.headerTag == 'h2') print('selected') %> >h2</option>
+                    <option value="h3" <% if(item.headerTag == 'h2') print('selected') %> >h3</option>
+                    <option value="h4" <% if(item.headerTag == 'h2') print('selected') %> >h4</option>
+                    <option value="h5" <% if(item.headerTag == 'h2') print('selected') %> >h5</option>
+                    <option value="h6" <% if(item.headerTag == 'h2') print('selected') %> >h6</option>
                 </select>
             </div>
         <%}%>
-        <div class="form-group">
-            <label>Texto</label>
-            <textarea id="txtTexto" name="text" class="form-control" rows="6"><%= item.text %></textarea>
-        </div>
-        <div class="form-group">
-            <label>Alinhamento</label>
-            <select class="form-control" id="selectAlign" name="align" value="<%=item.align%>">
-                <option value="normal" <% if(item.align == 'normal') print('selected') %> >Normal</option>
-                <option value="left" <% if(item.align == 'left') print('selected') %> >Esquerdo</option>
-                <option value="right" <% if(item.align == 'right') print('selected') %> >Direito</option>
-                <option value="center" <% if(item.align == 'center') print('selected') %> >Centralizado</option>
-                <option value="justify" <% if(item.align == 'justify') print('selected') %> >Justificado</option>
-            </select>
-        </div>
+
+        <% if(item.action != undefined) { %>
+            <div class="form-group">
+                <label>Action</label>
+                <input type="text" class="form-control" name="action" value="<%=item.action%>" /> 
+            </div>
+        <%}%>
+
+        <% if(item.simpleHtmlTag != undefined) { %>
+            <div class="form-group">
+                <label>Tag</label>
+                <input type="text" class="form-control" name="alt" value="<%=item.simpleHtmlTag%>" /> 
+            </div>
+        <%}%>
+
+        <% if(item.href != undefined) { %>
+            <div class="form-group">
+                <label>Href</label>
+                <input type="text" class="form-control" name="href" value="<%=item.href%>" /> 
+            </div>
+        <%}%>
+
+        <% if(item.src != undefined) { %>
+            <div class="form-group">
+                <label>Src</label>
+                <input type="text" class="form-control" name="src" value="<%=item.src%>" /> 
+            </div>
+        <%}%>
+
+        <% if(item.tagRadio != undefined) { %>
+            <div class="form-group">
+                <label>Tag</label>
+                <select class="form-control" id="select-tag-text" name="tagRadio" value="<%=item.tagRadio%>">
+                    <option value="radio">radio</option>
+                    <option value="checkbox" <% if(item.tagRadio == 'checkbox') print('selected') %> >checkbox</option>
+                </select>
+            </div>
+        <%}%>
+
+        <% if(item.listTag != undefined) { %>
+            <div class="form-group">
+                <label>Tag</label>
+                <select class="form-control" id="select-tag-text" name="listTag" value="<%=item.listTag%>">
+                    <option value="ul">ul</option>
+                    <option value="ol" <% if(item.listTag == 'ol') print('selected') %> >ol</option>
+                </select>
+            </div>
+        <%}%>
+
+        <% if(item.alt != undefined) { %>
+            <div class="form-group">
+                <label>Alt</label>
+                <input type="text" class="form-control" name="alt" value="<%=item.alt%>" /> 
+            </div>
+        <%}%>
+
+        <% if(item.width != undefined) { %>
+            <div class="form-group">
+                <label>Largura</label>
+                <input type="text" class="form-control" name="width" value="<%=item.width%>" /> 
+            </div>
+        <%}%>
+
+        <% if(item.height != undefined) { %>
+            <div class="form-group">
+                <label>Altura</label>
+                <input type="text" class="form-control" name="height" value="<%=item.height%>" /> 
+            </div>
+        <%}%>
+
+        <% if(item.text != undefined) { %>
+            <div class="form-group">
+                <label>Texto</label>
+                <textarea class="form-control" name="text" rows="5"><%=item.text%></textarea> 
+            </div>
+        <%}%>
 
         <div class="form-group">
             <label>Classes</label>
-            <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%= item.classes %></textarea>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary" id="btnSalvar">Salvar</button>
-            <button class="btn btn-default" id="btnFechar">Fechar</button>
-        </div>
-    </form>
-</script>
-
-<script type="text/template" id="form-image">
-    <form class="form-horizontal form-properties">
-        <div class="form-group">
-            <label>Nome</label>
-            <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
-        </div>
-        <div class="form-group">
-            <label>Parse</label>
-            <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
-        </div>
-        <div class="form-group">
-            <label>Datasource</label>
-            <div class="input-group">
-                <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Source</label>
-            <input type="text" class="form-control" name="src" value="<%=item.src%>" id="srcImage" /> 
-        </div>
-        
-        <div class="form-group">
-            <label>Largura</label>
-            <input type="text" id="txtLargura" name="width" class="form-control" value="<%=item.width %>" />
-        </div>
-        <div class="form-group">
-            <label>Altura</label>
-            <input type="text" id="txtAltura" class="form-control" name="height" value="<%=item.height %>" />
-        </div>
-        <div class="form-group">
-            <label>Classes</label>
-            <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%= item.classes %></textarea>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary" id="btnSalvar">Salvar</button>
-            <button class="btn btn-default" id="btnFechar">Fechar</button>
-        </div>
-    </form>
-</script>
-
-<script type="text/template" id="form-list">
-    <form class="form-horizontal form-properties">
-        <div class="form-group">
-            <label>Nome</label>
-            <input type="text" class="form-control" name="name" value="<%=item.name%>" id="nameComponent" /> 
-        </div>
-        <div class="form-group">
-            <label>Parse</label>
-            <input type="text" class="form-control" name="parse" value="<%=item.parse%>" id="parse" /> 
-        </div>
-        <div class="form-group">
-            <label>Datasource</label>
-            <div class="input-group">
-                <input type="text" class="form-control" name="datasource" value="<%=item.datasource%>" id="datasource" /> 
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-datasource" type="button"><span class="glyphicon glyphicon-download-alt"></span></button>
-                </span>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label>Valores</label>
-            <label class="radio-inline">
-                <input type="radio" name="value" id="radio-static" value="0" <% if(item.value == 0) print('cheked')%>> Estáticos
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="value" id="radio-dynamic" value="1" <% if(item.value == 1) print('cheked')%>> Dinamicos
-            </label>
-        </div>
-        <div id="control-static">
-            <div class="form-group">
-                <label>Itens</label>
-                <textarea id="txtItens" name="itens" class="form-control" rows="6"><% _.each(item.itens, function(obj){ print(obj + '\n'); })%></textarea>
-            </div>
-            <div class="form-group">
-                <label>Links</label>
-                <textarea id="txtLink" name="hrefs" class="form-control" rows="6"><% _.each(item.hrefs, function(obj){ print(obj + '\n'); })%></textarea>
-            </div>
-        </div>
-        <div id="control-dynamic">
-            <div class="form-group">
-                <label>Variável</label>
-                <input type="text" class="form-control" name="itens" value="<%=item.itens[0]%>" /> 
-            </div>
-            <div class="form-group">
-                <label>Label</label>
-                <input type="text" class="form-control" name="label" value="<%=item.label%>" /> 
-            </div>
-            <div class="form-group">
-                <label>Link</label>
-                <input type="text" class="form-control" name="hrefs" value="<%=item.hrefs[0]%>" /> 
-            </div>
+            <textarea class="form-control" id="txtClasses" name="class" rows="5"><%=item.class%></textarea>
         </div>
 
-        <div class="form-group">
-            <label>Lista do Boostrap</label><br />
-            <label class="radio-inline">
-                <input type="radio" name="bootstrap" value="0" <% if(item.bootstrap == 0) print('checked') %> > Não
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="bootstrap" value="1" <% if(item.bootstrap == 1) print('checked') %>> Sim
-            </label>
-        </div>
-        <div class="form-group">
-            <label>Classes</label>
-            <textarea id="txtClasses" name="classes" class="form-control" rows="6"><%=item.classes%></textarea>
-        </div>
         <div class="form-group">
             <button class="btn btn-primary" id="btnSalvar">Salvar</button>
             <button class="btn btn-default" id="btnFechar">Fechar</button>

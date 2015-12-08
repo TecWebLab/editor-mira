@@ -1,0 +1,10 @@
+{
+    "name": "Mira-Editor",
+    "description": "Documentação do Mira-Editor",
+    "version": "1.0",
+    "url": "tecweblab.github.io/mira-editor/docs",
+    "options": {
+        "exclude": "./js/lib/",
+        "outdir": "../docs"
+    }
+}

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>project.js - Mira-Editor</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Mira-Editor" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AbstractElement.html">AbstractElement</a></li>
+                                <li><a href="../classes/AbstractInterface.html">AbstractInterface</a></li>
+                                <li><a href="../classes/BootstrapNavigation.html">BootstrapNavigation</a></li>
+                                <li><a href="../classes/BootstrapNavigationList.html">BootstrapNavigationList</a></li>
+                                <li><a href="../classes/BootstrapNavigationListItem.html">BootstrapNavigationListItem</a></li>
+                                <li><a href="../classes/Button.html">Button</a></li>
+                                <li><a href="../classes/Carousel.html">Carousel</a></li>
+                                <li><a href="../classes/CarouselItem.html">CarouselItem</a></li>
+                                <li><a href="../classes/Code.html">Code</a></li>
+                                <li><a href="../classes/ConcreteInterface.html">ConcreteInterface</a></li>
+                                <li><a href="../classes/Div.html">Div</a></li>
+                                <li><a href="../classes/Formulario.html">Formulario</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
+                                <li><a href="../classes/HTMLElement.html">HTMLElement</a></li>
+                                <li><a href="../classes/ImageHtml.html">ImageHtml</a></li>
+                                <li><a href="../classes/InputOption.html">InputOption</a></li>
+                                <li><a href="../classes/InputRadioCheck.html">InputRadioCheck</a></li>
+                                <li><a href="../classes/InputSelect.html">InputSelect</a></li>
+                                <li><a href="../classes/InputText.html">InputText</a></li>
+                                <li><a href="../classes/InputTextarea.html">InputTextarea</a></li>
+                                <li><a href="../classes/Label.html">Label</a></li>
+                                <li><a href="../classes/Link.html">Link</a></li>
+                                <li><a href="../classes/List.html">List</a></li>
+                                <li><a href="../classes/ListItem.html">ListItem</a></li>
+                                <li><a href="../classes/Paragraph.html">Paragraph</a></li>
+                                <li><a href="../classes/Preview.html">Preview</a></li>
+                                <li><a href="../classes/Project.html">Project</a></li>
+                                <li><a href="../classes/RenderElements.html">RenderElements</a></li>
+                                <li><a href="../classes/SimpleHtml.html">SimpleHtml</a></li>
+                                <li><a href="../classes/Span.html">Span</a></li>
+                                <li><a href="../classes/Tree.html">Tree</a></li>
+                                <li><a href="../classes/Tree.initModalAndEvents.html">Tree.initModalAndEvents</a></li>
+                                <li><a href="../classes/UIEvents.html">UIEvents</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: project.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * Classe responsável pelos métodos de de gerenciamento do projeto (Salvar, novo e abrir).
+ *
+ * @class Project
+ * @constructor
+ */
+var Project = function () {
+    &quot;use strict&quot;;
+
+    /*
+    * Método responsável por captar a extensão de um determinado arquivo.    
+    * @param {string} filename Nome do arquivo a qual deseja captar a extensão.&lt;/param&gt;
+    * @return A extensão do arquivo desejado
+    */
+    var _getExtensionFile = function(filename) {
+        return filename.split(&#x27;.&#x27;).pop();
+    };
+
+    /*
+    * Método responsável por verificar se o arquivo é do formato JSON.
+    * @param {string} filename Nome do arquivo a qual deseja verificar se é do formato JSON.
+    * @return Verdadeiro, se o arquivo é do formato JSON
+    */
+    var _isJson = function(filename){
+        return _getExtensionFile(filename).toLowerCase() == &#x27;json&#x27;;
+    };
+
+    /**
+     * Método responsável por converter um Objeto aninhado em um vetor aninhado.
+     * @method _nestedObjectToArray
+     * @param {Object} obj Object como um Array.
+     * @return Array aninhado.
+     */
+    var _nestedObjectToArray = function(obj) {
+        var result = [];
+
+        for(var i in obj){
+            result.push(obj[i]);
+        }
+
+        return result;
+    }
+
+    /**
+     * Método responsável por gerar um arquivo JSON contendo as informações do projeto e fazer o download do mesmo.
+     * @method _downloadJson
+     */
+    var _downloadJson = function() {
+        var link = $(&#x27;#link-download&#x27;);
+        saveWebStorage();
+
+        var data = &quot;text/json;charset=utf-8,&quot; + encodeURIComponent(localStorage.getItem(&#x27;project&#x27;));
+        link.attr(&#x27;href&#x27;, &#x27;data:&#x27; + data).attr(&#x27;download&#x27;, &#x27;Inteface.json&#x27;);
+
+        link[0].click();
+    };
+
+    /**
+     * Método responsável por iniciar o mira-editor com valores padrões.
+     * @method initDefault
+     * @static
+     */
+    var initDefault = function() {
+        var dataTree =
+        [
+            {
+                text: &quot;navigation&quot;,
+                nodes:
+                [
+                    {
+                        text: &quot;navigation-list&quot;,
+                        nodes:
+                        [
+                            { text: &quot;navigation-list-item&quot; },
+                        ]
+                    },
+                ]
+            },
+            { text: &quot;container&quot; }
+        ];
+
+        concreteInterfaceItems = [];
+
+        $(&quot;#tree&quot;).treeview({
+            data: dataTree,
+            showCheckbox: true,
+            highlightSelected: false,
+
+            onTreeRender: function(event, data){
+                renderTree(data);
+            }
+        });
+    };
+
+    /**
+     * Método responsável por iniciar o mira-editor com um valor customizado.
+     * @method initCustom
+     * @param {} abstractInterface Dados para iniciação custmizada do mira-editor
+     * @static
+     */
+    var initCustom = function(abstractInterface) {
+        var dataTree = abstractInterface;
+        $(&quot;#tree&quot;).treeview({
+            data: dataTree,
+            showCheckbox: true,
+            highlightSelected: false,
+
+            /**
+             * Description
+             * @method onTreeRender
+             * @param {} event
+             * @param {} data
+             * @return 
+             */
+            onTreeRender: function(event, data){
+                renderTree(data);
+            }
+        });
+    };
+
+    /*
+    * Ao clicar no botõa novo será aberta uma caixa de diálogo para o usuário se deseja mesmo fazer essa operação. Caso seja confirmado, o projeto é
+    * iniciado com seu valor padrão.
+    */
+    $(&#x27;#project-new&#x27;).click(function(e){
+        e.preventDefault();
+
+        if(confirm(&#x27;Deseja realmente fechar esse projeto para iniciar outro?&#x27;)){
+            initDefault();
+        }
+    });
+
+    // Faz o download de um arquivo JSON contento os dados do corrente projeto.
+    $(&#x27;#project-save&#x27;).click(function(e) {
+        e.preventDefault();
+        _downloadJson();
+    });
+
+    // Abre um projeto existente, fazendo primeiro uma verificação se o arquivo está no padrão correto.
+    $(&#x27;#project-open&#x27;).on(&#x27;change&#x27;, function(e) {
+        var filename = $(this).val().replace(&quot;C:\\fakepath\\&quot;, &quot;&quot;); // Pega o nome do arquivo selecionado.
+        $(&quot;#upload-file-info&quot;).html(filename); // Exibe o nome do arquivo.
+        if(!_isJson(filename)) {
+            // Verifica se é do formato JSON
+            alert(&#x27;O arquivo selecionado não é do formato JSON&#x27;);
+            return;
+        }
+
+        /*
+        * Faz a leitura do arquivo para verificar se os dados contidos no mesmo possuem um padrão aceito pelo mira-editor. Para ser aceito o arquivo
+        * JSON deve contar as informações &quot;name&quot;, &quot;abstractInterface&quot; e &quot;concreteInterfaceItems&quot;. Caso algum desses itens não estejam no arquivo JSON,
+        * ele é considerado inválido.
+        */
+        var files = e.target.files;
+        for(var i = 0; i &lt; files.length; i++) {
+            var file = files[i];
+
+            var reader = new FileReader();
+            reader.onload = (function(f) {
+                return function(e) {
+                    var obj = JSON.parse(e.target.result);
+                    if(obj.name == undefined || obj.abstractInterface == undefined || obj.concreteInterfaceItems == undefined) {
+                        alert(&#x27;O arquivo selecionado não está no padrão desejado.&#x27;);
+                    } else {
+                        localStorage.setItem(&#x27;project&#x27;, e.target.result);
+                        $(&#x27;#nameInterface&#x27;).val(obj.name);
+                        concreteInterfaceItems = _nestedObjectToArray(JSON.parse(obj.concreteInterfaceItems));
+
+                        var project = JSON.parse(localStorage.getItem(&#x27;project&#x27;));
+                        initCustom(JSON.parse(project.abstractInterface));
+                    }
+                }
+            })(file);
+
+            reader.readAsText(file);
+        }
+    });
+
+    return {
+        /**
+         * Método responsável por salvar os dados do projeto no localStorage.
+         * @method saveWebStorage
+         * @static
+         */
+        saveWebStorage: function() {
+            var obj = new Object();
+            obj.name = $(&#x27;#nameInterface&#x27;).val();
+            obj.abstractInterface = JSON.stringify($.extend({}, true, globalTree.tree));
+            obj.concreteInterfaceItems = JSON.stringify($.extend({}, true, concreteInterfaceItems));
+
+            localStorage.setItem(&#x27;project&#x27;, JSON.stringify(obj));
+        },
+
+        /**
+         * Método responsável por captar os dados salvos no localStorage.
+         * @method loadWebStorage
+         * @static
+         */
+        loadWebStorage: function() {
+            var project = localStorage.getItem(&#x27;project&#x27;); // Coleta os dados do localStorage
+
+            // Caso haja alguma informação, informa o usuário se o mesmo dejeja continuar o projeto.
+            if(project &amp;&amp; confirm(&#x27;Já existe um projeto em andamento. Deseja abrí-lo?&#x27;)) {
+                // Inicia o mira-editor com as informações salvas no localStorage
+                project = JSON.parse(project);
+                $(&#x27;#nameInterface&#x27;).val(project.name);
+                concreteInterfaceItems = JSON.parse(project.concreteInterfaceItems);
+                concreteInterfaceItems = Array.prototype.slice(concreteInterfaceItems);
+
+                var abstractInterface = JSON.parse(project.abstractInterface);
+                abstractInterface = Array.prototype.slice(abstractInterface);
+                initCustom(abstractInterface);
+            } else {
+                //Inicia o mira-editor com o valor padrão.
+                localStorage.clear();
+                initDefault();
+            }
+        },
+
+        initDefault: initDefault,
+        initCustom: initCustom
+    }
+}();
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

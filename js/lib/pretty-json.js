@@ -68,6 +68,13 @@ function stringify(obj, options) {
       var nextIndent = currentIndent + indent
       var items = []
       var delimiters
+      /**
+       * Description
+       * @method comma
+       * @param {} array
+       * @param {} index
+       * @return ConditionalExpression
+       */
       var comma = function(array, index) {
         return (index === array.length - 1 ? 0 : 1)
       }

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>UIEvents - Mira-Editor</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Mira-Editor" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AbstractElement.html">AbstractElement</a></li>
+                                <li><a href="../classes/AbstractInterface.html">AbstractInterface</a></li>
+                                <li><a href="../classes/BootstrapNavigation.html">BootstrapNavigation</a></li>
+                                <li><a href="../classes/BootstrapNavigationList.html">BootstrapNavigationList</a></li>
+                                <li><a href="../classes/BootstrapNavigationListItem.html">BootstrapNavigationListItem</a></li>
+                                <li><a href="../classes/Button.html">Button</a></li>
+                                <li><a href="../classes/Carousel.html">Carousel</a></li>
+                                <li><a href="../classes/CarouselItem.html">CarouselItem</a></li>
+                                <li><a href="../classes/Code.html">Code</a></li>
+                                <li><a href="../classes/ConcreteInterface.html">ConcreteInterface</a></li>
+                                <li><a href="../classes/Div.html">Div</a></li>
+                                <li><a href="../classes/Formulario.html">Formulario</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
+                                <li><a href="../classes/HTMLElement.html">HTMLElement</a></li>
+                                <li><a href="../classes/ImageHtml.html">ImageHtml</a></li>
+                                <li><a href="../classes/InputOption.html">InputOption</a></li>
+                                <li><a href="../classes/InputRadioCheck.html">InputRadioCheck</a></li>
+                                <li><a href="../classes/InputSelect.html">InputSelect</a></li>
+                                <li><a href="../classes/InputText.html">InputText</a></li>
+                                <li><a href="../classes/InputTextarea.html">InputTextarea</a></li>
+                                <li><a href="../classes/Label.html">Label</a></li>
+                                <li><a href="../classes/Link.html">Link</a></li>
+                                <li><a href="../classes/List.html">List</a></li>
+                                <li><a href="../classes/ListItem.html">ListItem</a></li>
+                                <li><a href="../classes/Paragraph.html">Paragraph</a></li>
+                                <li><a href="../classes/Preview.html">Preview</a></li>
+                                <li><a href="../classes/Project.html">Project</a></li>
+                                <li><a href="../classes/RenderElements.html">RenderElements</a></li>
+                                <li><a href="../classes/SimpleHtml.html">SimpleHtml</a></li>
+                                <li><a href="../classes/Span.html">Span</a></li>
+                                <li><a href="../classes/Tree.html">Tree</a></li>
+                                <li><a href="../classes/Tree.initModalAndEvents.html">Tree.initModalAndEvents</a></li>
+                                <li><a href="../classes/UIEvents.html">UIEvents</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>UIEvents Class</h1>
+<div class="box meta">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/drag-move.js.html#l1"><code>drag-move.js:1</code></a>
+        </div>
+
+
+</div>
+
+
+<div class="box intro">
+    <p>Classe responsável pelos métodos de instalação das funcionalidades Draggable e Resize do jQuery UI.</p>
+
+</div>
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+<div id="method_UIEvents" class="method item">
+    <h3 class="name"><code>UIEvents</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/drag-move.js.html#l1"><code>drag-move.js:1</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+
+</div>
+    </div>
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method__getHandle">_getHandle</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method__getParent">_getParent</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method__getWidth">_getWidth</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method__refreshPosition">_refreshPosition</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method__refreshResize">_refreshResize</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method__setMinHeight">_setMinHeight</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_resizeBox">resizeBox</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setDraggable">setDraggable</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                            <li class="index-item event">
+                                <a href="#event_Parar arraste">Parar arraste</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_Redimensionar elemento">Redimensionar elemento</a>
+
+                            </li>
+                    </ul>
+                </div>
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method__getHandle" class="method item">
+    <h3 class="name"><code>_getHandle</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>el</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/drag-move.js.html#l19"><code>drag-move.js:19</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter o handle de um determinado elemento concreto.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">el</code>
+                        <span class="type">JQuery</span>
+
+
+                    <div class="param-description">
+                        <p>Elemento concreto no qual se deseja obter o handle</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>O handle do elemento.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__getParent" class="method item">
+    <h3 class="name"><code>_getParent</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>el</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/drag-move.js.html#l9"><code>drag-move.js:9</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por selecionar o pai de um determinado elemento.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">el</code>
+                        <span class="type">JQuery</span>
+
+
+                    <div class="param-description">
+                        <p>Elemento concreto no qual deseja-se obter o pai.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>O pai do elemento concreto. Caso não tenha um pai, retorna o protótipo.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__getWidth" class="method item">
+    <h3 class="name"><code>_getWidth</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>el</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/drag-move.js.html#l43"><code>drag-move.js:43</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por obter a largura de um elemento.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">el</code>
+                        <span class="type">JQuery</span>
+
+
+                    <div class="param-description">
+                        <p>Elemento no qual deseja-se obter a largura</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>A largura do elemento concreto.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__refreshPosition" class="method item">
+    <h3 class="name"><code>_refreshPosition</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>el</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/drag-move.js.html#l29"><code>drag-move.js:29</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por atualizar a posição de um determinado elemento.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">el</code>
+                        <span class="type">JQuery</span>
+
+
+                    <div class="param-description">
+                        <p>Elemento no qual deseja-se atualizar a posição.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method__refreshResize" class="method item">
+    <h3 class="name"><code>_refreshResize</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>el</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/drag-move.js.html#l76"><code>drag-move.js:76</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por atualizar o tamanho do elemento concreto.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">el</code>
+                        <span class="type">JQuery</span>
+
+
+                    <div class="param-description">
+                        <p>Elemento concreto no qual deseja-se atualzar a largura.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method__setMinHeight" class="method item">
+    <h3 class="name"><code>_setMinHeight</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>el</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/drag-move.js.html#l61"><code>drag-move.js:61</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por determinar a altura mínima de um elemento de acordo com seu conteúdo interno.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">el</code>
+                        <span class="type">JQuery</span>
+
+
+                    <div class="param-description">
+                        <p>Elemento concreto no qual deseja-se determinar a altura mínima</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>A altura mínima para o elemento.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_resizeBox" class="method item">
+    <h3 class="name"><code>resizeBox</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+        <span class="flag static">static</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/drag-move.js.html#l127"><code>drag-move.js:127</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por instalar o método Resize do jQuery UI para os elementos concretos.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_setDraggable" class="method item">
+    <h3 class="name"><code>setDraggable</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+        <span class="flag static">static</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/drag-move.js.html#l102"><code>drag-move.js:102</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Método responsável por instalar o método Draggable do jQuery UI para os elementos concretos.</p>
+
+    </div>
+
+
+
+
+</div>
+            </div>
+
+
+
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_Parar arraste" class="events item">
+                        <h3 class="name"><code>Parar arraste</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/drag-move.js.html#l115"><code>drag-move.js:115</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao fim do arraste. Atualiza a posição do elemento concreto.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_Redimensionar elemento" class="events item">
+                        <h3 class="name"><code>Redimensionar elemento</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/drag-move.js.html#l140"><code>drag-move.js:140</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Evento disparado ao redimensionar um elemento. Atualiza a dimensão do mesmo.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
