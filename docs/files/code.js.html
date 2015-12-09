@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>code.js - Mira-Editor</title>
+    <title>Code.js - Mira-Editor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -108,7 +108,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: code.js</h1>
+<h1 class="file-heading">File: Code.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -119,8 +119,107 @@
  * @constructor
  */
 var Code = function () {
+    &quot;use strict&quot;;
+    
     /**
-     * Método responsável por captar trocar todas as ocorrências de uma determinada expressão por outra.
+    * @property times Modelo pré definido para execução dos testes.
+    * @type {Object}
+    */
+    var times = 
+    [
+        {
+            text: &#x27;container&#x27;, 
+            nodes: [
+                {
+                    text: &#x27;content-panel&#x27;,
+                    nodes: [
+                        {
+                        text: &#x27;panel&#x27;, 
+                        nodes: [
+                            {text: &#x27;panel-title&#x27;},
+                            {
+                                text: &#x27;panel-body&#x27;,
+                                nodes: [
+                                    {text: &#x27;label-state&#x27;},
+                                    {text: &#x27;value-state&#x27;},
+                                    {text: &#x27;label-points&#x27;},
+                                    {text: &#x27;value-points&#x27;},
+                                ]
+                            }
+                        ]
+                    }
+                    ]
+                }
+            ]
+        }
+    ];
+
+    /**
+    * @property resultAbstractInterface Interface Concreta para teste.
+    * @type {Object}
+    */
+    var resultAbstractInterface = 
+    {
+        name: &#x27;landing&#x27;,
+        widgets: 
+        [
+            {
+                name: &#x27;container&#x27;,
+                datasource: &#x27;http://mira.tecweb.inf.puc-rio.br/api/futebol&#x27;,
+                children: 
+                [
+                    {
+                        name: &#x27;content-panel&#x27;,
+                        children: [
+                            {
+                                name: &#x27;panel&#x27;,
+                                children: 
+                                [
+                                    {name: &#x27;panel-title&#x27;, bind: &#x27;$data.nome&#x27;},
+                                    {
+                                        name: &#x27;panel-body&#x27;, 
+                                        children:
+                                        [
+                                            {name: &#x27;label-state&#x27;},
+                                            {name: &#x27;value-state&#x27;, bind: &#x27;$data.estado&#x27;},
+                                            {name: &#x27;label-points&#x27;},
+                                            {name: &#x27;value-points&#x27;, bind: &#x27;$data.ponto&#x27;}
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
+    
+
+    /**
+    * @property resultConcreteInterface Interface Concreta para teste.
+    * @type {Object}
+    */
+    var resultConcreteInterface = 
+    {
+        name: &#x27;landing&#x27;,
+        maps: 
+        [
+            {name: &#x27;container&#x27;, class: &#x27;container&#x27;},
+            {name: &#x27;content-panel&#x27;, class: &#x27;col-md-4&#x27;},
+            {name: &#x27;panel&#x27;, class: &#x27;panel panel-primary&#x27;},
+            {name: &#x27;panel-title&#x27;, class: &#x27;panel-heading&#x27;, value: &#x27;$bind&#x27;},
+            {name: &#x27;panel-body&#x27;, class: &#x27;panel-body&#x27;},
+            {name: &#x27;label-state&#x27;, tag: &#x27;label&#x27;, value: &quot;Estado: &quot;},
+            {name: &#x27;value-state&#x27;, tag: &#x27;p&#x27;, value: &#x27;$bind&#x27;},
+            {name: &#x27;label-points&#x27;, tag: &#x27;label&#x27;, value: &quot;Pontos: &quot;},
+            {name: &#x27;value-points&#x27;, tag: &#x27;p&#x27;, value: &#x27;$bind&#x27;},
+        ]
+    };
+    
+    
+    /**
+     * Método responsável por trocar todas as ocorrências de uma determinada expressão por outra.
      * @param {string} de Expressão a ser trocada.
      * @param {string} para Nova expressão a ser inserida
      * @return Nova string
@@ -135,7 +234,7 @@ var Code = function () {
         return (str);
     };
 
-    &quot;use strict&quot;;
+    
     /**
      * Método responsável por remover as aspas duplas de determinados termos.
      * @author João Victor Magela.
@@ -160,6 +259,122 @@ var Code = function () {
         .replaceAll(&#x27;\&quot;alt\&quot;:&#x27;, &#x27;alt:&#x27;)
         .replaceAll(&#x27;\&quot;bind\&quot;:&#x27;, &#x27;bind:&#x27;)
         .replaceAll(&#x27;\\\&quot;&#x27;, &#x27;\&#x27;&#x27;);
+    };
+
+    /**
+     * Método responsável por gerar uma interface abstrata para testes.
+     * @author João Victor Magela.
+     * @method initAbstract
+     * 
+     */
+    var initAbstract = function(){
+        var _processAjax = function(){
+            var panelTitle = globalTree.nodes[3];
+            panelTitle.bind = &#x27;$data.nome&#x27;;
+
+            var valueState = globalTree.nodes[6];
+            valueState.bind = &#x27;$data.estado&#x27;;
+
+            var valuePoints = globalTree.nodes[8];
+            valuePoints.bind = &#x27;$data.ponto&#x27;;
+
+            globalTree.tree = globalTree.refreshTree(globalTree.tree, panelTitle);
+            globalTree.tree = globalTree.refreshTree(globalTree.tree, valueState);
+            globalTree.tree = globalTree.refreshTree(globalTree.tree, valuePoints);
+        }
+
+
+        var node = globalTree.nodes[0];
+        node.datasource = &#x27;http://mira.tecweb.inf.puc-rio.br/api/futebol&#x27;;
+
+        $.ajax({
+            url: node.datasource,
+            type: &#x27;GET&#x27;,
+            success: function(data){
+                data = $.parseJSON($(data.responseText)[0].data);
+                node = globalTree.setDataToChildren(node, data);
+                globalTree.tree = globalTree.refreshTree(globalTree.tree, node);
+                _processAjax();
+            }
+        });
+    };
+
+    /**
+     * Método responsável por gerar uma interface concreta para testes.
+     * @author João Victor Magela.
+     * @method initConcrete
+     * 
+     */
+    var initConcrete = function(){
+        concreteInterfaceObj.concreteInterfaceItems[0].class = &#x27;container&#x27;;
+        concreteInterfaceObj.concreteInterfaceItems[1].class = &#x27;col-md-4&#x27;;
+        concreteInterfaceObj.concreteInterfaceItems[2].class = &#x27;panel panel-primary&#x27;;
+        concreteInterfaceObj.concreteInterfaceItems[3] = new Div(globalTree.nodes[3]);
+        concreteInterfaceObj.concreteInterfaceItems[3].class = &#x27;panel-heading&#x27;;
+
+        concreteInterfaceObj.concreteInterfaceItems[4].class = &#x27;panel-body&#x27;;
+
+        concreteInterfaceObj.concreteInterfaceItems[5] = new Label(globalTree.nodes[5]);
+        concreteInterfaceObj.concreteInterfaceItems[5].value = &quot;Estado: &quot;;
+
+        concreteInterfaceObj.concreteInterfaceItems[6] = new Paragraph(globalTree.nodes[6]);
+
+        concreteInterfaceObj.concreteInterfaceItems[7] = new Label(globalTree.nodes[7]);
+        concreteInterfaceObj.concreteInterfaceItems[7].value = &quot;Pontos: &quot;;
+
+        concreteInterfaceObj.concreteInterfaceItems[8] = new Paragraph(globalTree.nodes[8]);
+    }
+
+    /**
+     * Método responsável por executar os testes
+     * @author João Victor Magela.
+     * @method tests
+     * @static 
+     */
+    var tests = function(){
+        concreteInterfaceObj.concreteInterfaceItems = [];
+
+        // Inicia com o modelo pre-definido
+        Project.initCustom(times); 
+        QUnit.module(&quot;Código Gerado&quot;);
+
+        /**
+        * Teste: Gerar código das interfaces
+        * @author João Victor Magela
+        *
+        * Verificar se a geração do código para a Interface Concreta e Abstrata está de acordo com o esperado.
+        * Passos:
+        *1 - Gerar o código das Interfaces.
+        *2 - Verificar se está de acordo com o esperado.
+        */
+        QUnit.test(&quot;Gerar código das interfaces&quot;, function(assert){
+            assert.expect(4);
+            var done = assert.async();
+            initAbstract();
+            setTimeout(function() {
+                initConcrete();
+                
+                //Passo 1
+                globalTree.$element.empty().append(globalTree.$wrapper.empty());
+                globalTree.buildTree(globalTree.tree, 0);
+                globalTree.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, globalTree));
+
+                //Passo 2
+                //Verifica se a interface abstrata foi gerada corretamente
+                var widgets1 = JSON.parse(stringify(abstractInterfaceObj.widgets, {maxLength: 80, indent: 2}));
+                var widgets2 = JSON.parse(stringify(resultAbstractInterface.widgets, {maxLength: 80, indent: 2}));
+
+                assert.equal(abstractInterfaceObj.name, resultAbstractInterface.name, &quot;Nome da Interface Abstrata está correta.&quot;);
+                assert.ok(_.isEqual(widgets1, widgets2), &quot;Widgets Abstratos foram gerados corretamente.&quot;);    
+
+                //Verifica se a interface concreta foi gerada corretamente
+                var maps1 = JSON.parse(stringify(concreteInterfaceObj.maps, {maxLength: 80, indent: 2}));
+                var maps2 = JSON.parse(stringify(resultConcreteInterface.maps, {maxLength: 80, indent: 2}));
+                assert.equal(concreteInterfaceObj.name, resultConcreteInterface.name, &quot;Nome da Interface Concreta está correta.&quot;);
+                assert.deepEqual(maps1, maps2, &quot;Mapeamento dos widgtes concretos foi feito corretamente.&quot;);    
+                done();
+            }, 800);
+        });
     };
 
     return {
@@ -201,7 +416,12 @@ var Code = function () {
             $(&#x27;#concrete-code pre&#x27;).html(
                 _cleanString(concreteInterfaceObj.generateConcreteInterface())
             );
-        }
+        },
+
+        tests: tests,
+        times: times,
+        initAbstract: initAbstract,
+        initConcrete: initConcrete,
     };
 }();
     </pre>

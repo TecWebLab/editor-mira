@@ -105,6 +105,12 @@ var UIEvents = function () {
         }
     };
 
+    /**
+     * Método responsável por executar os testes
+     * @author João Victor Magela.
+     * @method tests
+     * @static 
+     */
     var tests = function(){
         QUnit.module("Interface Concreta", {
             setup: function(){
@@ -177,7 +183,6 @@ var UIEvents = function () {
         });
 
 
-        
         /**
         * Teste: Redimensionar elemento
         * @author João Victor Magela

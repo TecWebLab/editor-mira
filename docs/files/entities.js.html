@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>entities.js - Mira-Editor</title>
+    <title>Entities.js - Mira-Editor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -108,38 +108,40 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: entities.js</h1>
+<h1 class="file-heading">File: Entities.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
  * Elemento concreto generalizado.
  * @class HTMLElement
+ * @author João Victor Magela
  * @constructor
  * @param {Object} node Elemento abstrado contendo informações iniciais para o construtor.
  * @return O elemento concreto.
  */
 var HTMLElement = function(node) {
+   if(!node) return this;
    /**
-    * @property id Identificador do Elmento.
+    * @property id Identificador do Elemento.
     * @type {Number}
     */
     this.id = node.id;
 
     /**
-    * @property name Nome do Elmento.
+    * @property name Nome do Elemento.
     * @type {string}
     */
     this.name = node.text;
 
     /**
-    * @property value Valor associado ao Elmento.
+    * @property value Valor associado ao Elemento.
     * @type {string}
     */
     this.value = node.bind ? &quot;$bind&quot; : undefined;
 
     /**
-    * @property class Classes CSS associadas ao Elmento.
+    * @property class Classes CSS associadas ao Elemento.
     * @type {string}
     */
     this.class = &#x27;&#x27;;
@@ -168,6 +170,7 @@ var HTMLElement = function(node) {
 /**
  * Método responsável por atualizar os valores de um HTMLElement.
  * @method updateAttr
+ * @author João Victor Magela
  * @param {Object} attrs Objeto com os valores a serem atualizados.
  * @for HTMLElement
  */
@@ -180,6 +183,7 @@ HTMLElement.prototype.updateAttr = function(attrs) {
 /**
  * Método responsável por obter o template de um elemento concreto.
  * @method getTemplate
+ * @author João Victor Magela
  * @param {string} item Tipo do elemento concreto.
  * @for HTMLElement
  * @return {jQuery} Objeto jQuery com o HTML do elemento concreto. 
@@ -216,7 +220,7 @@ var Div = function(node) {
     var htmlElement = new HTMLElement(node);
     
     htmlElement.typeElement = &#x27;div&#x27;;
-    htmlElement.value = &quot;&quot;;
+    htmlElement.value = node.bind ? &quot;$bind&quot; : &quot;&quot;;
     
     return htmlElement;
 };
@@ -238,7 +242,7 @@ var Paragraph = function (node) {
     htmlElement.tag = &#x27;p&#x27;;
     htmlElement.value = node.bind ? &quot;$bind&quot; : &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas laoreet, sem sit amet tempor luctus, erat lorem cursus turpis, nec condimentum est leo eu massa. Integer tincidunt sodales enim in interdum. Nam ac elit enim. Mauris neque quam, viverra eu magna quis, suscipit fermentum ligula. Vestibulum tempor tortor ac lacus egestas lobortis. Praesent placerat porttitor ante, a maximus tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.&quot;;
     htmlElement.typeElement = &#x27;p&#x27;;
-    htmlElement.html = getTemplate(&#x27;p&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;p&#x27;);
     return htmlElement;
 };
 
@@ -256,7 +260,7 @@ var Header = function (node) {
     htmlElement.tag = &#x27;h1&#x27;;
     htmlElement.typeElement = &#x27;header&#x27;;
     htmlElement.value = node.bind ? &quot;$bind&quot; : &quot;Valor de exemplo&quot;;
-    htmlElement.html = getTemplate(&#x27;header&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;header&#x27;);
 
     /**
     * @property headerTag Determina qual a tag do título (h1-h6).
@@ -282,7 +286,7 @@ var Link = function (node) {
     htmlElement.tag = &#x27;a&#x27;;
     htmlElement.typeElement = &#x27;a&#x27;;
     htmlElement.value = node.bind ? &quot;$bind&quot; : &quot;Valor de exemplo&quot;;
-    htmlElement.html = getTemplate(&#x27;a&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;a&#x27;);
 
     /**
     * @property href Caminho do link.
@@ -307,7 +311,7 @@ var Span = function (node) {
     htmlElement.tag = &#x27;span&#x27;;
     htmlElement.typeElement = &#x27;span&#x27;;
     htmlElement.value = node.bind ? &quot;$bind&quot; : &quot;Texto de exemplo do span&quot;;
-    htmlElement.html = getTemplate(&#x27;span&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;span&#x27;);
 
     return htmlElement;    
 };
@@ -326,7 +330,7 @@ var Label = function (node) {
     htmlElement.tag = &#x27;label&#x27;;
     htmlElement.typeElement = &#x27;label&#x27;;
     htmlElement.value = node.bind ? &quot;$bind&quot; : &quot;Texto de exemplo do label&quot;;
-    htmlElement.html = getTemplate(&#x27;label&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;label&#x27;);
 
     return htmlElement;    
 };
@@ -368,7 +372,7 @@ var ListItem = function (node) {
     htmlElement.tag = &#x27;li&#x27;;
     htmlElement.typeElement = &#x27;list-item&#x27;;
     htmlElement.value = node.bind ? &quot;$bind&quot; : &quot;Item da lista&quot;;
-    htmlElement.html = getTemplate(&#x27;list-item&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;list-item&#x27;);
 
     return htmlElement;
 };
@@ -411,7 +415,7 @@ var ImageHtml = function (node) {
     htmlElement.tag = &#x27;img&#x27;;
     htmlElement.value = undefined;
     htmlElement.typeElement = &#x27;image&#x27;;
-    htmlElement.html = getTemplate(&#x27;img&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;img&#x27;);
 
     /**
     * @property alt Texto alternativo para a imagem.
@@ -476,7 +480,7 @@ var CarouselItem = function (node) {
     
     htmlElement.typeElement = &#x27;carousel-item&#x27;;
     htmlElement.value = node.bind ? &quot;$bind&quot; : &quot;img/carousel-item.jpg&quot;;
-    htmlElement.html = getTemplate(&#x27;carousel-item&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;carousel-item&#x27;);
 
     /**
     * @property widget Determina a qual classe pertence elemento concreto.
@@ -544,7 +548,7 @@ var BootstrapNavigationListItem = function (node) {
     var htmlElement = new HTMLElement(node);
     
     htmlElement.typeElement = &#x27;navigation-list-item&#x27;;
-    htmlElement.html = getTemplate(&#x27;navigation-item&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;navigation-item&#x27;);
     htmlElement.value = node.bind ? &quot;$bind&quot; : &quot;Item do Menu&quot;;
     
     /**
@@ -596,7 +600,7 @@ var InputText = function (node) {
     
     htmlElement.tag = &#x27;input&#x27;;
     htmlElement.typeElement = &#x27;input-text&#x27;;
-    htmlElement.html = getTemplate(&#x27;input-text&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;input-text&#x27;);
     
     /**
     * @property type Determina o tipo do input (text, file e etc.).
@@ -620,7 +624,7 @@ var InputTextarea = function (node) {
     
     htmlElement.tag = &#x27;input&#x27;;
     htmlElement.typeElement = &#x27;input-textarea&#x27;;
-    htmlElement.html = getTemplate(&#x27;input-textarea&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;input-textarea&#x27;);
 
     return htmlElement;
 };
@@ -638,7 +642,7 @@ var InputRadioCheck = function (node) {
     
     htmlElement.tag = &#x27;input&#x27;;
     htmlElement.typeElement = &#x27;input-radio&#x27;;
-    htmlElement.html = getTemplate(&#x27;input-radio&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;input-radio&#x27;);
     
     /**
     * @property type Determina o tipo do input (radio ou check).
@@ -689,7 +693,7 @@ var InputOption = function (node) {
     var htmlElement = new HTMLElement(node);
     htmlElement.tag = &#x27;option&#x27;;
     htmlElement.typeElement = &#x27;input-option&#x27;;
-    htmlElement.html = getTemplate(&#x27;input-option&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;input-option&#x27;);
 
     /**
     * @property text Determina o texto da opção.
@@ -712,7 +716,7 @@ var Button = function (node) {
     var htmlElement = new HTMLElement(node);
     htmlElement.tag = &#x27;button&#x27;;
     htmlElement.typeElement = &#x27;input-button&#x27;;
-    htmlElement.html = getTemplate(&#x27;input-button&#x27;);
+    htmlElement.html = htmlElement.getTemplate(&#x27;input-button&#x27;);
     
     /**
     * @property type Determina o tipo do botão.
@@ -789,6 +793,7 @@ var AbstractInterface = function () {
 /**
  * Método responsável por gerar o código da interface abstrata.
  * @method generateAbstractInterface
+ * @author João Victor Magela
  * @param {Object} widgets Conjunto de elementos abstratos.
  * @for AbstractInterface
  * @return Código formatado referente a interface abstrata.
@@ -834,6 +839,7 @@ var ConcreteInterface = function(){
 /**
  * Método responsável por gerar o código da interface concreta.
  * @method generateConcreteInterface
+ * @author João Victor Magela
  * @for ConcreteInterface
  * @return Código no formato JSON referente a interface concreta.
  */
@@ -848,12 +854,6 @@ ConcreteInterface.prototype.generateConcreteInterface = function () {
         var item = new Object();
         for(var attr in this.concreteInterfaceItems[i]){
             if(invalidKeys.indexOf(attr) &gt; -1) continue;
-            if(attr == &#x27;classes&#x27;) {                            
-                item.class = this.concreteInterfaceItems[i][attr]; 
-                continue;
-            }
-
-
             item[attr] = this.concreteInterfaceItems[i][attr]; 
         }
 
@@ -872,6 +872,7 @@ ConcreteInterface.prototype.generateConcreteInterface = function () {
 /**
  * Método responsável por procurar um determinado elemento concreto na interface concreta
  * @method findItem
+ * @author João Victor Magela
  * @param {Object} node Elemento abstrado.
  * @for ConcreteInterface
  * @return Elemento concreto ou um elemento vazio (caso não seja encontrado).
@@ -886,6 +887,7 @@ ConcreteInterface.prototype.findItem = function(node) {
 /**
  * Método responsável por atualizar um determinado elemento concreto na interface concreta
  * @method replaceItem
+ * @author João Victor Magela
  * @param {Object} item Elemento concreto.
  * @for ConcreteInterface
  */
@@ -905,13 +907,18 @@ ConcreteInterface.prototype.replaceItem = function(item) {
 /**
  * Método responsável por limpar a lista de elementos concretos.
  * @method cleanConcreteInterface
+ * @author João Victor Magela
  * @for ConcreteInterface
  */
 ConcreteInterface.prototype.cleanConcreteInterface = function(){
-    for(var i = concreteInterfaceItems.length-1; i &gt;= 0; i--){
-        var node = globalTree.findNodeById(concreteInterfaceItems[i].id);
+    for(var i = this.concreteInterfaceItems.length-1; i &gt;= 0; i--){
+        var node = globalTree.findNodeById(this.concreteInterfaceItems[i].id);
         if(!node) this.concreteInterfaceItems.splice(i,1);    
     }
+}
+
+Array.prototype.clone = function(){
+    return this.slice(0);
 }
     </pre>
 </div>

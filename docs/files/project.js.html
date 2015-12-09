@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>project.js - Mira-Editor</title>
+    <title>Project.js - Mira-Editor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -108,7 +108,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: project.js</h1>
+<h1 class="file-heading">File: Project.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -116,13 +116,47 @@
  * Classe responsável pelos métodos de de gerenciamento do projeto (Salvar, novo e abrir).
  *
  * @class Project
+ * @author João Victor Magela
  * @constructor
  */
 var Project = function () {
     &quot;use strict&quot;;
 
+    var DATA_TREE =
+    [
+        {
+            text: &quot;navigation&quot;,
+            nodes:
+            [
+                {
+                    text: &quot;navigation-list&quot;,
+                    nodes:
+                    [
+                        { text: &quot;navigation-list-item&quot; },
+                    ]
+                },
+            ]
+        },
+        { text: &quot;container&quot; }
+    ];
+
+    var myApp;
+    myApp = myApp || (function () {
+        var pleaseWaitDiv = $(&#x27;#pleaseWaitDialog&#x27;);
+        return {
+            showPleaseWait: function() {
+                pleaseWaitDiv.modal();
+            },
+            hidePleaseWait: function () {
+                pleaseWaitDiv.modal(&#x27;hide&#x27;);
+            },
+        };
+    })();
+
     /*
-    * Método responsável por captar a extensão de um determinado arquivo.    
+    * Método responsável por captar a extensão de um determinado arquivo.
+    * @method _getExtensionFile  
+    * @author João Victor Magela 
     * @param {string} filename Nome do arquivo a qual deseja captar a extensão.&lt;/param&gt;
     * @return A extensão do arquivo desejado
     */
@@ -132,6 +166,8 @@ var Project = function () {
 
     /*
     * Método responsável por verificar se o arquivo é do formato JSON.
+    * @method _isJson
+    * @author João Victor Magela
     * @param {string} filename Nome do arquivo a qual deseja verificar se é do formato JSON.
     * @return Verdadeiro, se o arquivo é do formato JSON
     */
@@ -142,6 +178,7 @@ var Project = function () {
     /**
      * Método responsável por converter um Objeto aninhado em um vetor aninhado.
      * @method _nestedObjectToArray
+     * @author João Victor Magela
      * @param {Object} obj Object como um Array.
      * @return Array aninhado.
      */
@@ -149,7 +186,14 @@ var Project = function () {
         var result = [];
 
         for(var i in obj){
-            result.push(obj[i]);
+            var htmlElement = new HTMLElement();
+            
+            htmlElement.bind = undefined;
+            htmlElement.tag = undefined; 
+            htmlElement.html = undefined;
+
+            htmlElement.updateAttr(obj[i]);
+            result.push(htmlElement);
         }
 
         return result;
@@ -158,6 +202,7 @@ var Project = function () {
     /**
      * Método responsável por gerar um arquivo JSON contendo as informações do projeto e fazer o download do mesmo.
      * @method _downloadJson
+     * @author João Victor Magela
      */
     var _downloadJson = function() {
         var link = $(&#x27;#link-download&#x27;);
@@ -172,36 +217,21 @@ var Project = function () {
     /**
      * Método responsável por iniciar o mira-editor com valores padrões.
      * @method initDefault
+     * @author João Victor Magela
      * @static
      */
     var initDefault = function() {
-        var dataTree =
-        [
-            {
-                text: &quot;navigation&quot;,
-                nodes:
-                [
-                    {
-                        text: &quot;navigation-list&quot;,
-                        nodes:
-                        [
-                            { text: &quot;navigation-list-item&quot; },
-                        ]
-                    },
-                ]
-            },
-            { text: &quot;container&quot; }
-        ];
-
-        concreteInterfaceItems = [];
+        concreteInterfaceObj.concreteInterfaceItems = [];
+        $(&quot;#prototype&quot;).empty();
+        $(&#x27;#nameInterface&#x27;).val(&#x27;landing&#x27;);
 
         $(&quot;#tree&quot;).treeview({
-            data: dataTree,
+            data: DATA_TREE,
             showCheckbox: true,
             highlightSelected: false,
 
             onTreeRender: function(event, data){
-                renderTree(data);
+                RenderElements.renderTree(data);
             }
         });
     };
@@ -209,28 +239,50 @@ var Project = function () {
     /**
      * Método responsável por iniciar o mira-editor com um valor customizado.
      * @method initCustom
-     * @param {} abstractInterface Dados para iniciação custmizada do mira-editor
+     * @author João Victor Magela
+     * @param {Object} abstractInterface Dados para iniciação custmizada do mira-editor
      * @static
      */
     var initCustom = function(abstractInterface) {
-        var dataTree = abstractInterface;
         $(&quot;#tree&quot;).treeview({
-            data: dataTree,
+            data: abstractInterface,
             showCheckbox: true,
             highlightSelected: false,
 
-            /**
-             * Description
-             * @method onTreeRender
-             * @param {} event
-             * @param {} data
-             * @return 
-             */
             onTreeRender: function(event, data){
-                renderTree(data);
+                RenderElements.renderTree(data);
             }
         });
     };
+
+    $(&#x27;#btn-show-tests&#x27;).click(function(e){
+        e.preventDefault();
+        
+        $(&#x27;#dialog-confirm&#x27;).dialog({
+            resizable: false,
+              height:230,
+              width: 550,
+              modal: true,
+              buttons: {
+                &quot;Sim&quot;: function() {
+                    $(&#x27;#project-save&#x27;).click();
+                    localStorage.clear();
+                    localStorage.setItem(&#x27;test&#x27;, &#x27;1&#x27;);
+                    window.location.reload();
+                },
+                &quot;Não&quot; : function(){
+                    
+                    localStorage.clear();
+                    localStorage.setItem(&#x27;test&#x27;, &#x27;1&#x27;);
+                    window.location.reload();
+                },
+                Cancel: function() {
+                  $( this ).dialog( &quot;close&quot; );
+                }
+              }
+        })
+
+    })
 
     /*
     * Ao clicar no botõa novo será aberta uma caixa de diálogo para o usuário se deseja mesmo fazer essa operação. Caso seja confirmado, o projeto é
@@ -278,7 +330,7 @@ var Project = function () {
                     } else {
                         localStorage.setItem(&#x27;project&#x27;, e.target.result);
                         $(&#x27;#nameInterface&#x27;).val(obj.name);
-                        concreteInterfaceItems = _nestedObjectToArray(JSON.parse(obj.concreteInterfaceItems));
+                        concreteInterfaceObj.concreteInterfaceItems = _nestedObjectToArray(JSON.parse(obj.concreteInterfaceItems));
 
                         var project = JSON.parse(localStorage.getItem(&#x27;project&#x27;));
                         initCustom(JSON.parse(project.abstractInterface));
@@ -290,49 +342,146 @@ var Project = function () {
         }
     });
 
-    return {
+    /**
+     * Método responsável por salvar os dados do projeto no localStorage.
+     * @method saveWebStorage
+     * @author João Victor Magela
+     * @static
+     */
+    var saveWebStorage = function() {
+        var obj = new Object();
+        obj.name = $(&#x27;#nameInterface&#x27;).val();
+        obj.abstractInterface = JSON.stringify($.extend({}, true, globalTree.tree));
+        obj.concreteInterfaceItems = JSON.stringify($.extend({}, true, concreteInterfaceObj.concreteInterfaceItems));
+
+        localStorage.setItem(&#x27;project&#x27;, JSON.stringify(obj));
+    };
+
+    /**
+     * Método responsável por captar os dados salvos no localStorage.
+     * @method loadWebStorage
+     * @author João Victor Magela
+     * @static
+     */
+    var loadWebStorage = function() {
+        var project = localStorage.getItem(&#x27;project&#x27;); // Coleta os dados do localStorage
+
+        // Caso haja alguma informação, informa o usuário se o mesmo dejeja continuar o projeto.
+        if(project &amp;&amp; confirm(&#x27;Já existe um projeto em andamento. Deseja abrí-lo?&#x27;)) {
+            // Inicia o mira-editor com as informações salvas no localStorage
+            project = JSON.parse(project);
+            $(&#x27;#nameInterface&#x27;).val(project.name);
+            concreteInterfaceObj.concreteInterfaceItems = JSON.parse(project.concreteInterfaceItems);
+            concreteInterfaceObj.concreteInterfaceItems = Array.prototype.slice(concreteInterfaceItems);
+
+            var abstractInterface = JSON.parse(project.abstractInterface);
+            abstractInterface = Array.prototype.slice(abstractInterface);
+            initCustom(abstractInterface);
+        } else {
+            //Inicia o mira-editor com o valor padrão.
+            localStorage.clear();
+            initDefault();
+        }
+    };
+
+    /**
+     * Método responsável por executar os testes
+     * @author João Victor Magela.
+     * @method tests
+     * @static 
+     */
+    var tests = function(){
+        QUnit.module(&quot;Projeto&quot;);
         /**
-         * Método responsável por salvar os dados do projeto no localStorage.
-         * @method saveWebStorage
-         * @static
-         */
-        saveWebStorage: function() {
+        * Teste: Salvar projeto
+        * @author João Victor Magela
+        *
+        * Verificar se o projeto foi salvo com os valores corretos.
+        * Passos:
+        * 1 - Salvar os dados no localStorage
+        * 2 - Buscar os dados no localStorage
+        * 3 - Verificar se os resultados são os mesmos
+        */
+        QUnit.test(&quot;Salvar projeto&quot;, function(assert) {
+            // Passo 1 
             var obj = new Object();
             obj.name = $(&#x27;#nameInterface&#x27;).val();
             obj.abstractInterface = JSON.stringify($.extend({}, true, globalTree.tree));
-            obj.concreteInterfaceItems = JSON.stringify($.extend({}, true, concreteInterfaceItems));
+            obj.concreteInterfaceItems = JSON.stringify($.extend({}, true, concreteInterfaceObj.concreteInterfaceItems));
+            
+            saveWebStorage();
 
-            localStorage.setItem(&#x27;project&#x27;, JSON.stringify(obj));
-        },
+            //Passo 2
+            var valueWebStorage = JSON.parse(localStorage.getItem(&#x27;project&#x27;));
+            
+            //Passo 3
+            assert.deepEqual(valueWebStorage, obj, &quot;Objeto salvo no localStorage corretamente&quot;);
+
+        });
 
         /**
-         * Método responsável por captar os dados salvos no localStorage.
-         * @method loadWebStorage
-         * @static
-         */
-        loadWebStorage: function() {
-            var project = localStorage.getItem(&#x27;project&#x27;); // Coleta os dados do localStorage
+        * Teste: Novo projeto
+        * @author João Victor Magela
+        *
+        * Verificar se foi iniciado um projeto com os valores padrões.
+        * Passos:
+        * 1 - Inicializar o projeto com os valores padrões.
+        * 2 - Verificar se a Interface Concreta, Abstrata e o nome do projeto estão com os valores padrões.
+        */
+        QUnit.test(&quot;Novo&quot;, function(assert) {
+            // Passo 1
+            var concreteItems = concreteInterfaceObj.concreteInterfaceItems.clone();
+            concreteInterfaceObj.concreteInterfaceItems = [];
+            var abstractItems = abstractInterfaceObj.widgets.clone();
+            abstractInterfaceObj.widgets = [];
+            $(&quot;#nameInterface&quot;).val(&#x27;lorem ipsum&#x27;);
+            
+            initDefault();
 
-            // Caso haja alguma informação, informa o usuário se o mesmo dejeja continuar o projeto.
-            if(project &amp;&amp; confirm(&#x27;Já existe um projeto em andamento. Deseja abrí-lo?&#x27;)) {
-                // Inicia o mira-editor com as informações salvas no localStorage
-                project = JSON.parse(project);
-                $(&#x27;#nameInterface&#x27;).val(project.name);
-                concreteInterfaceItems = JSON.parse(project.concreteInterfaceItems);
-                concreteInterfaceItems = Array.prototype.slice(concreteInterfaceItems);
+            //Passo 2
+            assert.deepEqual(concreteItems, concreteInterfaceObj.concreteInterfaceItems, &quot;Interface Concreta está com os valores padrões.&quot;);
+            assert.deepEqual(abstractItems, abstractInterfaceObj.widgets, &quot;Interface Abstrata está com os valores padrões.&quot;);
+            assert.equal($(&quot;#nameInterface&quot;).val(), &quot;landing&quot;, &quot;Nome do projeto é o valor padrão&quot;);
+        });
 
-                var abstractInterface = JSON.parse(project.abstractInterface);
-                abstractInterface = Array.prototype.slice(abstractInterface);
-                initCustom(abstractInterface);
-            } else {
-                //Inicia o mira-editor com o valor padrão.
-                localStorage.clear();
-                initDefault();
-            }
-        },
+        /**
+        * Teste: Abrir projeto
+        * @author João Victor Magela
+        *
+        * Verificar se o projeto foi iniciado com os valores contidos no arquivo..
+        * Passos:
+        * 1 - Verificar a extensão de um arquivo.
+        * 2 - Verificar se o arquivo é válido.
+        * 3 - Verificar se os dados foram carregados com sucesso.
+        */
+        QUnit.test(&quot;Abrir&quot;, function(assert){
+            //Arquivo de Entrada
+            var fileTest = &#x27;{&quot;name&quot;:&quot;landing&quot;,&quot;abstractInterface&quot;:&quot;{\\&quot;0\\&quot;:{\\&quot;text\\&quot;:\\&quot;navigation\\&quot;,\\&quot;nodes\\&quot;:[{\\&quot;text\\&quot;:\\&quot;navigation-list\\&quot;,\\&quot;nodes\\&quot;:[{\\&quot;text\\&quot;:\\&quot;navigation-list-item\\&quot;,\\&quot;nodeId\\&quot;:2,\\&quot;id\\&quot;:3,\\&quot;parentId\\&quot;:1,\\&quot;selectable\\&quot;:true,\\&quot;state\\&quot;:{\\&quot;checked\\&quot;:false,\\&quot;disabled\\&quot;:false,\\&quot;editable\\&quot;:false,\\&quot;added\\&quot;:false,\\&quot;expanded\\&quot;:false,\\&quot;selected\\&quot;:false}}],\\&quot;nodeId\\&quot;:1,\\&quot;id\\&quot;:2,\\&quot;parentId\\&quot;:0,\\&quot;selectable\\&quot;:true,\\&quot;state\\&quot;:{\\&quot;checked\\&quot;:false,\\&quot;disabled\\&quot;:false,\\&quot;editable\\&quot;:false,\\&quot;added\\&quot;:false,\\&quot;expanded\\&quot;:true,\\&quot;selected\\&quot;:false}}],\\&quot;nodeId\\&quot;:0,\\&quot;id\\&quot;:1,\\&quot;selectable\\&quot;:true,\\&quot;state\\&quot;:{\\&quot;checked\\&quot;:false,\\&quot;disabled\\&quot;:false,\\&quot;editable\\&quot;:false,\\&quot;added\\&quot;:false,\\&quot;expanded\\&quot;:true,\\&quot;selected\\&quot;:false}},\\&quot;1\\&quot;:{\\&quot;text\\&quot;:\\&quot;container\\&quot;,\\&quot;nodeId\\&quot;:3,\\&quot;id\\&quot;:4,\\&quot;selectable\\&quot;:true,\\&quot;state\\&quot;:{\\&quot;checked\\&quot;:false,\\&quot;disabled\\&quot;:false,\\&quot;editable\\&quot;:false,\\&quot;added\\&quot;:false,\\&quot;expanded\\&quot;:false,\\&quot;selected\\&quot;:false}}}&quot;,&quot;concreteInterfaceItems&quot;:&quot;{\\&quot;0\\&quot;:{\\&quot;id\\&quot;:1,\\&quot;name\\&quot;:\\&quot;navigation\\&quot;,\\&quot;value\\&quot;:\\&quot;\\&quot;,\\&quot;class\\&quot;:\\&quot;\\&quot;,\\&quot;typeElement\\&quot;:\\&quot;div\\&quot;},\\&quot;1\\&quot;:{\\&quot;id\\&quot;:2,\\&quot;name\\&quot;:\\&quot;navigation-list\\&quot;,\\&quot;value\\&quot;:\\&quot;\\&quot;,\\&quot;class\\&quot;:\\&quot;\\&quot;,\\&quot;typeElement\\&quot;:\\&quot;div\\&quot;},\\&quot;2\\&quot;:{\\&quot;id\\&quot;:3,\\&quot;name\\&quot;:\\&quot;navigation-list-item\\&quot;,\\&quot;value\\&quot;:\\&quot;\\&quot;,\\&quot;class\\&quot;:\\&quot;\\&quot;,\\&quot;typeElement\\&quot;:\\&quot;div\\&quot;},\\&quot;3\\&quot;:{\\&quot;id\\&quot;:4,\\&quot;name\\&quot;:\\&quot;container\\&quot;,\\&quot;value\\&quot;:\\&quot;\\&quot;,\\&quot;class\\&quot;:\\&quot;\\&quot;,\\&quot;typeElement\\&quot;:\\&quot;div\\&quot;}}&quot;}&#x27;;
 
+            // Passo 1
+            assert.ok(_isJson(&#x27;teste.json&#x27;), &quot;Passado um arquivo com extensão json, retornou true!&quot;);
+            assert.ok(!_isJson(&#x27;teste.txt&#x27;), &quot;Passado um arquivo com extensão txt, retornou false!&quot;);
+            assert.ok(_isJson(&#x27;teste.txt.json&#x27;), &quot;Passado um arquivo com extensão json, porém com mais de um ponto, retornou true!&quot;);
+
+            // Passo 2
+            var obj = JSON.parse(fileTest);
+            assert.ok(obj.name, &quot;Name está ok!&quot;);
+            assert.ok(obj.concreteInterfaceItems, &quot;Itens Concretos estão ok!&quot;);
+            assert.ok(obj.abstractInterface, &quot;Itens Abstratos estão ok!&quot;);
+
+            // Passo 3
+            var concreteItems = _nestedObjectToArray(JSON.parse(obj.concreteInterfaceItems));
+            assert.deepEqual(concreteInterfaceObj.concreteInterfaceItems, concreteItems, &quot;Objeto aninhado convertido para objeto aninhado&quot;);
+        });
+    };
+    
+    return {
+        saveWebStorage: saveWebStorage,
+        loadWebStorage: localStorage,
         initDefault: initDefault,
-        initCustom: initCustom
+        initCustom: initCustom,
+        tests: tests,
+        modal: myApp
     }
 }();
     </pre>

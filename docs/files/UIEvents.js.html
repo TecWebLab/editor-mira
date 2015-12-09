@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>drag-move.js - Mira-Editor</title>
+    <title>UIEvents.js - Mira-Editor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -108,7 +108,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: drag-move.js</h1>
+<h1 class="file-heading">File: UIEvents.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -116,6 +116,7 @@
  * Classe responsável pelos métodos de instalação das funcionalidades Draggable e Resize do jQuery UI.
  *
  * @class UIEvents
+ * @author João Victor Magela
  * @constructor
  */
 var UIEvents = function () {
@@ -123,6 +124,7 @@ var UIEvents = function () {
     /**
      * Método responsável por selecionar o pai de um determinado elemento.
      * @method _getParent
+     * @author João Victor Magela
      * @param {jQuery} el Elemento concreto no qual deseja-se obter o pai.
      * @return O pai do elemento concreto. Caso não tenha um pai, retorna o protótipo.
      */
@@ -133,6 +135,7 @@ var UIEvents = function () {
     /**
      * Método responsável por obter o handle de um determinado elemento concreto.
      * @method _getHandle
+     * @author João Victor Magela
      * @param {jQuery} el Elemento concreto no qual se deseja obter o handle
      * @return O handle do elemento.
      */
@@ -143,13 +146,14 @@ var UIEvents = function () {
     /**
      * Método responsável por atualizar a posição de um determinado elemento.
      * @method _refreshPosition
+     * @author João Victor Magela
      * @param {jQuery} el Elemento no qual deseja-se atualizar a posição.
      */
     var _refreshPosition = function (el) {
         var parent = _getParent(el);
         var id = el.data(&#x27;id&#x27;);
         var node = globalTree.findNodeById(id);
-        var item = findItem(node);
+        var item = concreteInterfaceObj.findItem(node);
         item.style = el.attr(&#x27;style&#x27;);
         concreteInterfaceObj.replaceItem(item);
     };
@@ -157,6 +161,7 @@ var UIEvents = function () {
     /**
      * Método responsável por obter a largura de um elemento.
      * @method _getWidth
+     * @author João Victor Magela
      * @param {jQuery} el Elemento no qual deseja-se obter a largura
      * @return A largura do elemento concreto.
      */
@@ -175,6 +180,7 @@ var UIEvents = function () {
     /**
      * Método responsável por determinar a altura mínima de um elemento de acordo com seu conteúdo interno.
      * @method _setMinHeight
+     * @author João Victor Magela
      * @param {jQuery} el Elemento concreto no qual deseja-se determinar a altura mínima
      * @return A altura mínima para o elemento.
      */
@@ -190,6 +196,7 @@ var UIEvents = function () {
     /**
      * Método responsável por atualizar o tamanho do elemento concreto.
      * @method _refreshResize
+     * @author João Victor Magela
      * @param {jQuery} el Elemento concreto no qual deseja-se atualzar a largura.
      */
     var _refreshResize = function(el){
@@ -199,7 +206,7 @@ var UIEvents = function () {
         
         var id = el.data(&#x27;id&#x27;);
         var node = globalTree.findNodeById(id);
-        var item = findItem(node);
+        var item = concreteInterfaceObj.findItem(node);
         item.style = el.attr(&#x27;style&#x27;);
         item.componentWidth = el.width() + &#x27;px&#x27;;
         concreteInterfaceObj.replaceItem(item);
@@ -212,10 +219,136 @@ var UIEvents = function () {
         }
     };
 
+    /**
+     * Método responsável por executar os testes
+     * @author João Victor Magela.
+     * @method tests
+     * @static 
+     */
+    var tests = function(){
+        QUnit.module(&quot;Interface Concreta&quot;, {
+            setup: function(){
+                Project.initDefault();
+            }
+        });
+        /**
+        * Teste: Arrastar elemento
+        * @author João Victor Magela
+        *
+        * Verificar se, ao arrastar um elemento, o mesmo respeita as regras de negócio.
+        * Passos:
+        * 1 - Alterar o tipo do elemento.
+        * 2 - Verificar se a operação foi feita com sucesso.
+        */
+        QUnit.test(&quot;Arrastar elemento&quot;, function(assert){
+            Project.initDefault();
+            // Passo 1
+            var element1 = concreteInterfaceObj.concreteInterfaceItems[0]; 
+            var element2 = concreteInterfaceObj.concreteInterfaceItems[1];
+            
+            var panel1 = $(&#x27;.panel-drag[data-id=&#x27;+ element1.id +&#x27;]&#x27;);
+            var panel2 = $(&#x27;.panel-drag[data-id=&#x27;+ element2.id +&#x27;]&#x27;);
+            
+            assert.equal(_getParent(panel1).attr(&#x27;id&#x27;), &quot;prototype&quot;, &#x27;Pai do elemento concreto &quot;&#x27;+ element1.name+&#x27;&quot; é o protótipo.&#x27;);
+            assert.equal(_getParent(panel2).parent().data(&#x27;id&#x27;), element1.id, &#x27;Pai do elemento concreto &quot;&#x27;+ element2.name+&#x27;&quot; é o &#x27;+element1.name+&#x27;.&#x27;);
+
+            //Passo 2
+            //Arrasta o panel1 para cima e para direita
+            panel1.children(&#x27;.panel-heading&#x27;).find(&#x27;.btn-handle&#x27;).simulate(&quot;drag&quot;, {
+                dx: 100,
+                dy: -100
+            });
+            var prototypePositions = $(&quot;#prototype&quot;).offset();
+            prototypePositions.width = $(&quot;#prototype&quot;).width();
+
+            var element1Positions = panel1.offset();
+            element1Positions.width = panel1.width();
+            element1Positions.height = panel1.height();
+            assert.ok(
+                //canto superior esquerdo do pane11 abaixo do protótipo
+                prototypePositions.top &lt; element1Positions.top &amp;&amp; 
+                //Canto esquerdo do Panel1 a antes do canto esquerdo do protótipo
+                prototypePositions.left + prototypePositions.width &lt; element1Positions.left + element1Positions.width, 
+                &#x27;Arrastou o elemento &quot;&#x27;+element1.name+&#x27;&quot; e não saiu do protótipo.&#x27;
+            );
+
+            //Arrasta o panel2 para baixo e para direita
+            panel2.children(&#x27;.panel-heading&#x27;).find(&#x27;.btn-handle&#x27;).simulate(&quot;drag&quot;, {
+                dx: 200,
+                dy: -150
+            });
+
+            var element2Positions = panel2.offset();
+            element2Positions.width = panel2.width();
+            element2Positions.height = panel2.height();
+
+            element1Positions.top += 30;
+            assert.ok(
+                //canto superior esquerdo do pane12 abaixo do panel1
+                element1Positions.top &lt; element2Positions.top &amp;&amp; 
+                //canto inferior esquerdo do pane12 acima do panel1
+                element1Positions.top + element1Positions.height &gt;= element2Positions.top + element2Positions.height &amp;&amp;
+                //canto esquerdo do pane12 a frente do panel1
+                element1Positions.left &lt; element2Positions.left &amp;&amp; 
+                //Canto direito do Panel1 a frente canto direito do panel2
+                element1Positions.left + element1Positions.width &gt;= element2Positions.left + element2Positions.width, 
+                &#x27;Arrastou o elemento &quot;&#x27;+element2.name+&#x27;&quot; e não saiu do &quot;&#x27;+element1.name+&#x27;&quot;.&#x27;
+            );
+        });
+
+
+        /**
+        * Teste: Redimensionar elemento
+        * @author João Victor Magela
+        *
+        * Verificar se, ao redimensionar um elemento, o mesmo respeita as regras de negócio.
+        * Passos:
+        * 1 - Redimensionar e verificar se não está menor que a largura mínima.
+        * 2 - Redimensionar e verificar se a altura é superior a soma da altura dos filhos.
+        */
+        QUnit.test(&quot;Redimensionar elemento&quot;, function(assert){
+            Project.initDefault();
+            // Passo 1
+            var element1 = concreteInterfaceObj.concreteInterfaceItems[0]; 
+            var element2 = concreteInterfaceObj.concreteInterfaceItems[1];
+            var element3 = concreteInterfaceObj.concreteInterfaceItems[2];
+            
+            console.log(concreteInterfaceObj.concreteInterfaceItems);
+            var panel1 = $(&#x27;.panel-drag[data-id=&#x27;+ element1.id +&#x27;]&#x27;);
+            var panel2 = $(&#x27;.panel-drag[data-id=&#x27;+ element2.id +&#x27;]&#x27;);
+            var panel3 = $(&#x27;.panel-drag[data-id=&#x27;+ element3.id +&#x27;]&#x27;);
+
+            
+            var oldwidth = panel3.width();
+
+            //Seleciona a lateral direita e arrasta pra esquerda
+            panel3.children(&#x27;.ui-resizable-e&#x27;).simulate(&quot;mouseover&quot;).simulate(&quot;drag&quot;,{
+                moves: 2,
+                dx: -1000, //arrasta tudo pra esquerda
+                dy: 0
+            });
+
+            assert.equal(panel3.css(&#x27;width&#x27;), &quot;200px&quot;, &quot;Arrastou tudo para a esquerda e caiu parou na largura mínima&quot;);
+            
+            //Passo 2
+            panel3.removeAttr(&#x27;style&#x27;); //Volta a largura original
+            
+            //seleciona a borda de baixo e arrasta pra cima
+            panel1.children(&#x27;.ui-resizable-s&#x27;).simulate(&quot;mouseover&quot;).simulate(&quot;drag&quot;,{
+                moves: 2,
+                dx: 0, //arrasta tudo pra esquerda
+                dy: -500
+            });
+
+            assert.ok(panel1.height() &gt; panel2.height(), &quot;Altura do pai ainda é maior que a soma da altura dos filhos&quot;);
+        })
+    }
+
     return {
         /**
          * Método responsável por instalar o método Draggable do jQuery UI para os elementos concretos.
          * @method setDraggable
+         * @author João Victor Magela
          * @static 
          */
         setDraggable: function () {
@@ -241,6 +374,7 @@ var UIEvents = function () {
         /**
          * Método responsável por instalar o método Resize do jQuery UI para os elementos concretos.
          * @method resizeBox
+         * @author João Victor Magela
          * @static
          */
         resizeBox: function() {
@@ -261,7 +395,9 @@ var UIEvents = function () {
                     }
                 });
             })
-        }
+        },
+
+        tests: tests
     }
 }();
 

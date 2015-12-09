@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>sidebar-install.js - Mira-Editor</title>
+    <title>Sidebar.js - Mira-Editor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -108,7 +108,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: sidebar-install.js</h1>
+<h1 class="file-heading">File: Sidebar.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -116,6 +116,7 @@
  * Classe responsável pelos métodos de gereção e exibição do código da interface abstrata e concreta
  *
  * @class Code
+ * @author João Victor Magela
  * @constructor
  */
 var Sidebar = function () {
@@ -123,31 +124,32 @@ var Sidebar = function () {
 
     /** Elemento abstrado selecionado. 
      *
-     * @property currentObj
+     * @property _currentObj
      * @type Object
      * @default null
      */
-    var currentObj = null;
+    var _currentObj = null;
 
     /** Elemento concreto selecionado. 
      *
-     * @property currentElement
+     * @property _currentElement
      * @type jQuery
      * @default null
      */
-    var currentElement = null;
+    var _currentElement = null;
 
     /** Instância do jQuery.sidr. 
      *
-     * @property sidebar
-     * @type Object
+     * @property _sidebar
+     * @type HTMLElement
      * @default null
      */
-    var sidebar = null;
+    var _sidebar = null;
 
     /**
      * Método responsável por renderizar o formulário de propriedades de um determinado elemento concreto.
      * @method _getForm
+     * @author João Victor Magela
      * @param {Object} attrs Atributos do elemento concreto.
      * @return HTML do formulário para um determinado elemento concreto.
      */
@@ -158,6 +160,7 @@ var Sidebar = function () {
     /**
      * Método responsável por obter os valores do atributos de um determinado elemento concreto.
      * @method _getAttrs
+     * @author João Victor Magela
      * @param {Object} data Atributos e valores de um elemento concreto.
      * @return Objeto com atributos e valores a serem inserido no formulário.
      */
@@ -173,23 +176,100 @@ var Sidebar = function () {
     /**
      * Método responsável por salvar as informações inseridas no formulário de propriedades.
      * @method _saveForm 
+     * @author João Victor Magela
      */
     var _saveForm = function(){
         var data = $(&#x27;#form-properties&#x27;).serializeArray();
-        currentObj.updateAttr(_getAttrs(data));
-        concreteInterfaceObj.replaceItem(currentObj);
+        _currentObj.updateAttr(_getAttrs(data));
+        concreteInterfaceObj.replaceItem(_currentObj);
+    }
+
+    /**
+     * Método responsável por executar os testes
+     * @method tests 
+     * @author João Victor Magela
+     */
+    var tests = function(){
+        QUnit.module(&quot;Interface Concreta&quot;);
+
+        /**
+        * Teste: Propriedades do elemento
+        * @author João Victor Magela
+        *
+        * Verificar se, ao abrir o formulário de propriedades, o campo “valor” está preenchido com “$bind”, para um elemento abstrato com Bind associado.
+        * Passos:
+        * 1 - Clicar no botão de propriedades do elemento.
+        * 2 - Verificar se o campo “Valor” está com o valor “$bind”.
+        */
+        QUnit.test(&quot;Propriedades do elemento&quot;, function(assert){
+            assert.expect(3);
+            var done = assert.async();
+            
+            var node = globalTree.nodes[0];
+            node.bind = &quot;$data.name&quot;;
+            globalTree.tree = globalTree.refreshTree(globalTree.tree, node);
+
+            //Renderiza novamente a tela
+            globalTree.$element.empty().append(globalTree.$wrapper.empty());
+            globalTree.buildTree(globalTree.tree, 0);
+            globalTree.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, globalTree));
+
+            // Passo 1
+            var element = new Div(node);
+            concreteInterfaceObj.replaceItem(element);
+            
+            var btnProp = $(&#x27;.panel-drag[data-id=&#x27;+ element.id +&#x27;]&#x27;).children(&#x27;.panel-heading&#x27;).find(&#x27;.btn-prop&#x27;);
+            btnProp.trigger(&#x27;click&#x27;);
+            
+            // Passo 2
+            assert.ok($(&#x27;#sidr-sidebar&#x27;).is(&#x27;:visible&#x27;), &quot;Clicou no botão de propriedade e abriu o formulário de propriedades.&quot;);
+            assert.equal($(&#x27;#form-properties&#x27;).find(&#x27;[name=&quot;value&quot;]&#x27;).val(), &quot;$bind&quot;, &quot;Valor associonado ao elemento abstrato exibiu $bind&quot;); //RN1
+            
+            setTimeout(function() {
+                btnProp.trigger(&#x27;click&#x27;);
+                assert.equal(btnProp.data(&#x27;open&#x27;), 0, &quot;Clicou no mesmo botão e fechou o formulário de propriedades.&quot;);
+                done();
+            }, 1000);
+        });
+
+        QUnit.module(&quot;Propriedades&quot;);
+        Project.initDefault();
+
+        /**
+        * Teste: Salvar propriedades
+        * @author João Victor Magela
+        *
+        * Verificar se o método updateAttr está funcionando corretamente.
+        * Passos:
+        * 1 - Executar o método updateAttr com um conjunto de atributos como parâmetro.
+        */
+        QUnit.test(&quot;Salvar propriedades&quot;, function(assert){
+            var attrs = {
+                value: &#x27;Valor de teste&#x27;,
+                class: &#x27;panel panel-body class-test&#x27;, 
+            };
+            var node = globalTree.nodes[0];
+            var item = new Div(node); //cria uma div
+
+            //Passo 1
+            item.updateAttr(attrs);
+            assert.equal(item.value, attrs.value, &#x27;Atualizou o atributo &quot;value&quot;.&#x27;);
+            assert.equal(item.class, attrs.class, &#x27;Atualizou o atributo &quot;classes&quot;.&#x27;);
+        });
+
     }
 
     return {
         /**
          * Método responsável por instalar o plugin jQuery.sidr
          * @method installSidebarAndPropForm
+         * @author João Victor Magela
          * @static
          */
         installSidebarAndPropForm: function(){
             var currentProp = null;
 
-            sidebar = $(&#x27;.btn-prop&#x27;).sidr({
+            _sidebar = $(&#x27;.btn-prop&#x27;).sidr({
                 name: &#x27;sidr-sidebar&#x27;,
                 side: &#x27;right&#x27;,
                 source: &quot;#title-property, #content-property&quot;
@@ -218,14 +298,13 @@ var Sidebar = function () {
                 var id = $this.parent().parent().parent().attr(&#x27;data-id&#x27;);
                 var node = new Object();
                 node.id = id;
-                
                 if(open == 0) {
                     $.sidr(&#x27;open&#x27;, &#x27;sidr-sidebar&#x27;);
                     
-                    currentObj = findItem(node);
-                    currentElement = $this.parent().parent().parent();
-                    if(currentObj.id != undefined){
-                        $(&#x27;#sidr-id-form-content&#x27;).html(_getForm(currentObj));
+                    _currentObj = concreteInterfaceObj.findItem(node);
+                    _currentElement = $this.parent().parent().parent();
+                    if(_currentObj.id != undefined){
+                        $(&#x27;#sidr-id-form-content&#x27;).html(_getForm(_currentObj));
                     }
 
                     open = 1;
@@ -236,8 +315,12 @@ var Sidebar = function () {
 
                 $this.data(&#x27;open&#x27;, open);
             });
-        }
+        },
+
+        tests: tests
     }
+
+
 }();
     </pre>
 </div>

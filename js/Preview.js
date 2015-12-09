@@ -528,6 +528,12 @@ var Preview = function () {
         _renderPreview(globalTree.tree);
     };
 
+    /**
+     * Método responsável por executar os testes
+     * @author João Victor Magela.
+     * @method tests
+     * @static 
+     */
     var tests = function(){
         QUnit.module("Preview");
 

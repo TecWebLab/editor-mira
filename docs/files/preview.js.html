@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>preview.js - Mira-Editor</title>
+    <title>Preview.js - Mira-Editor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -108,7 +108,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: preview.js</h1>
+<h1 class="file-heading">File: Preview.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -116,12 +116,14 @@
  * Classe responsável pelos métodos de renderização do Preview.
  *
  * @class Preview
+ * @author João Victor Magela
  * @constructor
  */
 var Preview = function () {
     /**
      * Método responsável por obter o valor associado a um elemento concreto (através do bind ou inserido manualmente)
      * @method _getValue
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrato contendo informações.
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {boolean} isBind Determina se o valor deve ser obtido do bind ou não.
@@ -131,7 +133,6 @@ var Preview = function () {
      */
     var _getValue = function(node, element, isBind, attr, index) {
         var value = &quot;&quot;;
-
         if(node.$data &amp;&amp; (element[attr] == &quot;$bind&quot; || element[attr].indexOf(&quot;$data&quot;) &gt; -1)){
             var data = [];
             if(index == undefined ){
@@ -144,7 +145,7 @@ var Preview = function () {
             try {
 
                 var strEval = isBind ? node.bind : element[attr];
-                value = eval(strEval) ? eval(strEval) : element[attr]; 
+                value = eval(strEval) !== false ? eval(strEval) : element[attr]; 
 
             }catch(error){
                 value = element[attr];
@@ -158,23 +159,25 @@ var Preview = function () {
 
     /**
      * Metodo responsável por renderizar um DIV no preview.
-     * @method renderDiv
+     * @method _renderDiv
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
      * @return O objeto jQuery representado a DIV.
      */
-    var renderDiv = function(node, element, index) {
+    var _renderDiv = function(node, element, index) {
         var value = _getValue(node, element, true, &quot;value&quot;, index);
         return $(&#x27;&lt;div /&gt;&#x27;)
             .append(value)
-            .addClass(element.classes ? element.classes : &quot;&quot;)
+            .addClass(element.class ? element.class : &quot;&quot;)
             .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Parágrafo no preview.
      * @method _renderParagraph
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -183,13 +186,14 @@ var Preview = function () {
     var _renderParagraph = function(node, element, index) {
         var value = _getValue(node, element, true, &quot;value&quot;, index);
         return $(&#x27;&lt;p /&gt;&#x27;).append(value)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Título no preview.
      * @method _renderHeader
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -200,13 +204,14 @@ var Preview = function () {
 
         return $(&#x27;&lt;&#x27;+element.headerTag+&#x27; /&gt;&#x27;)
                 .append(value)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um DIV no preview.
      * @method _renderLink
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -219,13 +224,14 @@ var Preview = function () {
         return $(&#x27;&lt;a /&gt;&#x27;)
             .append(value)
             .attr(&#x27;href&#x27;, href)
-            .addClass(element.classes ? element.classes : &quot;&quot;)
+            .addClass(element.class ? element.class : &quot;&quot;)
             .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Label no preview.
      * @method _renderLabel
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -236,13 +242,14 @@ var Preview = function () {
 
         return $(&#x27;&lt;label /&gt;&#x27;)
                 .append(value)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Span no preview.
      * @method _renderSpan
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -252,13 +259,14 @@ var Preview = function () {
         var value = _getValue(node, element, true, &quot;value&quot;, index);
 
         return $(&#x27;&lt;span /&gt;&#x27;).append(value)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar uma Lista no preview.
      * @method _renderList
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -266,7 +274,7 @@ var Preview = function () {
      */
     var _renderList = function(node, element, index) {
         return $(&#x27;&lt;&#x27;+ element.listTag +&#x27; /&gt;&#x27;)
-            .addClass(element.classes ? element.classes : &quot;&quot;)
+            .addClass(element.class ? element.class : &quot;&quot;)
             .attr(&#x27;style&#x27;, element.style)
             .attr(&#x27;style&#x27;, element.style);
     };
@@ -274,6 +282,7 @@ var Preview = function () {
     /**
      * Metodo responsável por renderizar um Item da Lista no preview.
      * @method _renderListItem
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -283,13 +292,14 @@ var Preview = function () {
         var value = _getValue(node, element, true, &quot;value&quot;, index);
         
         return $(&#x27;&lt;li /&gt;&#x27;).append(value)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar uma Imagem no preview.
      * @method _renderImage
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -302,13 +312,14 @@ var Preview = function () {
         return $(&#x27;&lt;img /&gt;&#x27;)
             .attr(&#x27;src&#x27;, src)
             .attr(&#x27;alt&#x27;, alt)
-            .addClass(element.classes ? element.classes : &quot;&quot;)
+            .addClass(element.class ? element.class : &quot;&quot;)
             .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar uma Galeria de Imagens no preview.
      * @method _renderCarousel
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -322,13 +333,14 @@ var Preview = function () {
 
         return carousel
             .attr(&#x27;id&#x27;, &quot;preview-carousel&quot;)
-            .addClass(&quot;carousel slide &quot; + element.classes ? element.classes : &quot;&quot;)
+            .addClass(&quot;carousel slide &quot; + element.class ? element.class : &quot;&quot;)
             .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Item da Galeria de Imagens no preview.
      * @method _renderCarouselItem
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -343,13 +355,14 @@ var Preview = function () {
             &lt;/div&gt;&#x27;);
         
         return carouselItem
-            .addClass(&quot;item &quot; + element.classes ? element.classes : &quot;&quot;)
+            .addClass(&quot;item &quot; + element.class ? element.class : &quot;&quot;)
             .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Menu no preview.
      * @method _renderNavigation
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -363,13 +376,14 @@ var Preview = function () {
 
         
         return navigation
-                .addClass(&quot;navbar navbar-default &quot; + element.classes ? element.classes : &quot;&quot;)
+                .addClass(&quot;navbar navbar-default &quot; + element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar uma Lista de Navegação no preview.
      * @method _renderNavigationList
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -381,13 +395,14 @@ var Preview = function () {
         navigationList.find(&#x27;ul&#x27;).empty();
         
         return navigationList
-                .addClass(&quot;collapse navbar-collapse &quot; + element.classes ? element.classes : &quot;&quot;)
+                .addClass(&quot;collapse navbar-collapse &quot; + element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Item da Lista de Navegação no preview.
      * @method _renderNavigationListItem
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -398,13 +413,14 @@ var Preview = function () {
         var listItem = $(&#x27;&lt;li&gt;&lt;a href=#&gt;&#x27;+value+&#x27;&lt;/a&gt;&lt;/li&gt;&#x27;);
         
         return listItem
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Formulário no preview.
      * @method _renderForm
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -414,13 +430,14 @@ var Preview = function () {
         var value = _getValue(node, element, true, &quot;value&quot;, index);
         return $(&#x27;&lt;form /&gt;&#x27;)
                 .attr(&#x27;action&#x27;, value)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Campo Texto no preview.
      * @method _renderInputText
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -429,13 +446,14 @@ var Preview = function () {
     var _renderInputText = function(node, element, index) {
         return $(&#x27;&lt;input /&gt;&#x27;)
                 .attr(&#x27;type&#x27;, &#x27;text&#x27;)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Textarea no preview.
      * @method _renderInputTextarea
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -443,13 +461,14 @@ var Preview = function () {
      */
     var _renderInputTextarea = function(node, element, index) {
         return $(&#x27;&lt;textarea /&gt;&#x27;)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Radiobox ou Checkbox no preview.
      * @method _renderInputRadioCheck
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -460,7 +479,7 @@ var Preview = function () {
         return $(&#x27;&lt;input /&gt;&#x27;)
             .attr(&#x27;type&#x27;, element.tagRadio)
             .attr(&#x27;name&#x27;, element.name.replaceAll(&quot; &quot;, &quot;&quot;) + element.tagRadio)
-            .addClass(element.classes ? element.classes : &quot;&quot;)
+            .addClass(element.class ? element.class : &quot;&quot;)
             .attr(&#x27;style&#x27;, element.style)
             .after(&#x27;&lt;label&gt;&#x27;+value+&#x27;&lt;/label&gt;&#x27;);
     };
@@ -468,6 +487,7 @@ var Preview = function () {
     /**
      * Metodo responsável por renderizar um Combobox no preview.
      * @method _renderInputSelect
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -475,13 +495,14 @@ var Preview = function () {
      */
     var _renderInputSelect = function(node, element, index) {
         return $(&#x27;&lt;select /&gt;&#x27;)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar uma Opção do Combobox no preview.
      * @method _renderInputOption
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -491,13 +512,14 @@ var Preview = function () {
         var value = _getValue(node, element, true, &quot;text&quot;, index);
         return $(&#x27;&lt;option /&gt;&#x27;)
                 .text(value)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Metodo responsável por renderizar um Botão no preview.
      * @method _renderInputButton
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -507,13 +529,14 @@ var Preview = function () {
         var value = _getValue(node, element, true, &quot;value&quot;, index);
         return $(&#x27;&lt;button /&gt;&#x27;)
                 .text(element.text)
-                .addClass(element.classes ? element.classes : &quot;&quot;)
+                .addClass(element.class ? element.class : &quot;&quot;)
                 .attr(&#x27;style&#x27;, element.style);
     };
 
     /**
      * Método responsável por renderizar um elemento de acordo com seu tipo.
      * @method _renderElement
+     * @author João Victor Magela
      * @param {Object} node Elemento abstrado com valores associados ao elemento concreto
      * @param {Object} element Elemento concreto com propriedades atribuidas pelo usuário
      * @param {Numeber} index Índice onde se deve obter os dados.
@@ -521,7 +544,7 @@ var Preview = function () {
      */
     var _renderElement = function(node, element, index) {
         switch(element.typeElement){
-            case &#x27;div&#x27;: return renderDiv(node, element, index);
+            case &#x27;div&#x27;: return _renderDiv(node, element, index);
             case &#x27;p&#x27;: return _renderParagraph(node,element, index);
             case &#x27;header&#x27;: return _renderHeader(node,element, index);
             case &#x27;a&#x27;: return _renderLink(node,element, index);
@@ -549,6 +572,7 @@ var Preview = function () {
     /**
      * Metodo responsável por obter o índice onde serão buscadas as informações para renderização do elemento concreto.
      * @method _getCurrentIndex
+     * @author João Victor Magela
      * @param {Object} rootNode Elemento abstrato que é pai de um determinado elemento abstrado.
      * @param {} parentIndex Índice associado aos dados do pai
      * @param {} loopIndex Índice associado ao loop corrente
@@ -567,6 +591,7 @@ var Preview = function () {
     /**
      * Método responsável por renderizar o preview.
      * @method _renderPreview
+     * @author João Victor Magela
      * @param {Array} nodes Conjunto de Elementos abstratos
      * @param {jQuery} root Local onde serão renderizados os elementos.
      * @param {Object} rootNode Nó corrente.
@@ -585,7 +610,7 @@ var Preview = function () {
             for(var i=0; i&lt;nodes.length; i++){
                 var currentIndex = _getCurrentIndex(rootNode, index, j);
                 
-                var element = findItem(nodes[i]);    
+                var element = concreteInterfaceObj.findItem(nodes[i]);    
                 var rendered = _renderElement(nodes[i], element, currentIndex);
 
                 if(nodes[i].nodes){
@@ -611,16 +636,63 @@ var Preview = function () {
     /**
      * Métod responsável por iniciar a operação de rendereização do preview.
      * @method _runPreview
+     * @author João Victor Magela
      */
     var _runPreview = function(){
         _renderPreview(globalTree.tree);
     };
+
+    /**
+     * Método responsável por executar os testes
+     * @author João Victor Magela.
+     * @method tests
+     * @static 
+     */
+    var tests = function(){
+        QUnit.module(&quot;Preview&quot;);
+
+        /**
+        * Teste: Exibir Preview
+        * @author João Victor Magela
+        *
+        * Verificar se está captando os valores de forma correta.
+        * Passos:
+        *1 - Testar o método _getValue.
+        *2 - Verificar se o valor captado é o esperado.
+        */
+        QUnit.test(&quot;Exibir Preview&quot;, function(assert){
+            assert.expect(2);
+            var done = assert.async();
+
+            Project.initCustom(Code.times);
+            Code.initAbstract();
+            setTimeout(function() {
+                Code.initConcrete();
+                
+                globalTree.$element.empty().append(globalTree.$wrapper.empty());
+                globalTree.buildTree(globalTree.tree, 0);
+                globalTree.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, globalTree));
+
+
+                var node = globalTree.nodes[3]; // seleciona o nó &quot;panel-title&quot;
+                var element = concreteInterfaceObj.concreteInterfaceItems[3];
+                var value = _getValue(node, element, true, &quot;value&quot;, 0);
+                assert.equal(value, &quot;Time J&quot;, &quot;Preview capitou o valor corretamente.&quot;);
+                
+                node = globalTree.nodes[8];
+                value = _getValue(node, element, true, &quot;value&quot;, 0);
+                assert.equal(value, 0, &quot;Preview captou valor igual a 0.&quot;);
+                done();
+            }, 1000);
+        })
+    }
 
     return {
 
         /**
          * Método responsável por criar a opção Tab do Bootstrap
          * @method tabBootstrap
+         * @author João Victor Magela
          * @static
          */
         tabBootstrap: function(){
@@ -633,7 +705,9 @@ var Preview = function () {
                 _runPreview();
               }
             });
-        }
+        },
+
+        tests: tests
     }
 }();
     </pre>

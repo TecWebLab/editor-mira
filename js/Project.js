@@ -270,8 +270,13 @@ var Project = function () {
         }
     };
 
+    /**
+     * Método responsável por executar os testes
+     * @author João Victor Magela.
+     * @method tests
+     * @static 
+     */
     var tests = function(){
-        /********************************************************* Testes ***************************************************/
         QUnit.module("Projeto");
         /**
         * Teste: Salvar projeto
@@ -353,8 +358,7 @@ var Project = function () {
             // Passo 3
             var concreteItems = _nestedObjectToArray(JSON.parse(obj.concreteInterfaceItems));
             assert.deepEqual(concreteInterfaceObj.concreteInterfaceItems, concreteItems, "Objeto aninhado convertido para objeto aninhado");
-        })
-        /********************************************************* Fim dos Testes *******************************************/
+        });
     };
     
     return {

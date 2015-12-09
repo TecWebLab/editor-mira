@@ -5,8 +5,12 @@
  * @constructor
  */
 var Code = function () {
-    /************************************************************ Variáveis para testes **************************************************/
-    //Modelo pré-definido
+    "use strict";
+    
+    /**
+    * @property times Modelo pré definido para execução dos testes.
+    * @type {Object}
+    */
     var times = 
     [
         {
@@ -35,7 +39,11 @@ var Code = function () {
             ]
         }
     ];
-    //Como deve ficar a interface abstrata
+
+    /**
+    * @property resultAbstractInterface Interface Concreta para teste.
+    * @type {Object}
+    */
     var resultAbstractInterface = 
     {
         name: 'landing',
@@ -74,7 +82,10 @@ var Code = function () {
     };
     
 
-    //Interface Concreta que deve dar como resultado
+    /**
+    * @property resultConcreteInterface Interface Concreta para teste.
+    * @type {Object}
+    */
     var resultConcreteInterface = 
     {
         name: 'landing',
@@ -92,11 +103,9 @@ var Code = function () {
         ]
     };
     
-
-    /************************************************************Fim - Variáveis para testes **************************************************
     
     /**
-     * Método responsável por captar trocar todas as ocorrências de uma determinada expressão por outra.
+     * Método responsável por trocar todas as ocorrências de uma determinada expressão por outra.
      * @param {string} de Expressão a ser trocada.
      * @param {string} para Nova expressão a ser inserida
      * @return Nova string
@@ -111,7 +120,7 @@ var Code = function () {
         return (str);
     };
 
-    "use strict";
+    
     /**
      * Método responsável por remover as aspas duplas de determinados termos.
      * @author João Victor Magela.
@@ -138,6 +147,12 @@ var Code = function () {
         .replaceAll('\\\"', '\'');
     };
 
+    /**
+     * Método responsável por gerar uma interface abstrata para testes.
+     * @author João Victor Magela.
+     * @method initAbstract
+     * 
+     */
     var initAbstract = function(){
         var _processAjax = function(){
             var panelTitle = globalTree.nodes[3];
@@ -170,6 +185,12 @@ var Code = function () {
         });
     };
 
+    /**
+     * Método responsável por gerar uma interface concreta para testes.
+     * @author João Victor Magela.
+     * @method initConcrete
+     * 
+     */
     var initConcrete = function(){
         concreteInterfaceObj.concreteInterfaceItems[0].class = 'container';
         concreteInterfaceObj.concreteInterfaceItems[1].class = 'col-md-4';
@@ -191,7 +212,7 @@ var Code = function () {
     }
 
     /**
-     * Método responsável por exibir executar os testes
+     * Método responsável por executar os testes
      * @author João Victor Magela.
      * @method tests
      * @static 

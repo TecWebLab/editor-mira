@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>bootstrap-treeview.js - Mira-Editor</title>
+    <title>Tree.js - Mira-Editor</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -108,7 +108,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: bootstrap-treeview.js</h1>
+<h1 class="file-heading">File: Tree.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -202,6 +202,7 @@
 	 * Módulo reponsável por gerenciar a TreeView representando a interface abstrata. Isso é uma adaptação do Plugin BootstrapTreeView,
 	 * desenvolvido por Jonathan Miles.
 	 * @class Tree
+	 * @author Jonathan Miles
 	 * @param {Selector} element Seletor jQuery onde o plugin irá atuar.
 	 * @param {Object} options Conjunto de opções de inicialização do plugin.
 	 * @return Uma instância do plugin BootstrapTreeView.
@@ -290,6 +291,7 @@
 	/**
 	 * Método responsável por iniciar o plugin com os opões informadas
 	 * @method init
+	 * @author Jonathan Miles
 	 * @param {Object} options Conjunto de opções desejadas.
 	 * @for Tree
 	 */
@@ -318,6 +320,7 @@
 	/**
 	 * Dertermina o identificador de um elemento gerado pelo plugin.
 	 * @method setId
+	 * @author Jonathan Miles
 	 * @return O idenficador do elemento gerado.
 	 * @for Tree
 	 */
@@ -329,9 +332,10 @@
 	/**
 	 * Método responsável por criar filhos para um determinado nó.
 	 * @method createNodes
-	 * @param {} node
-	 * @param {} values
-	 * @return node
+	 * @author João Victor Magela
+	 * @param {Object} node Nó que será o pai no novo nó.
+	 * @param {Object} values Valores a serem inseridos no novo elemento.
+	 * @return node Nó pai atualizado.
 	 */
 	Tree.prototype.createNodes = function(node, values){
 		for(var item in values){
@@ -360,6 +364,7 @@
 	/**
 	 * Método reponsável por gerar os widgets abstratos.
 	 * @method createAbstractInterface
+	 * @author João Victor Magela
 	 * @param {Array} nodes Conjuntos de nós do BootstrapTreeView
 	 * @for Tree
 	 * @return Conjuto de elementos abstratos aninhados, caso necessário.
@@ -385,6 +390,7 @@
 	/**
 	 * Método responsável por sincronizar os dados da TreeView com dados externos ao plugin.
 	 * @method reloadData
+	 * @author João Victor Magela
 	 * @param {Elementos da TreeView aninhados} tree
 	 * @param {Elementos da TreeView como uma lista linear} nodes
 	 * @for Tree 
@@ -394,15 +400,48 @@
 		this.nodes = nodes;
 	}
 
+	Tree.prototype.getChidrenNode = function(node, ids) {
+		ids.push(node.id);
+		if(node.nodes) {
+			for(var i=0; i &lt; node.nodes.length; i++) {
+				ids = this.getChidrenNode(node.nodes[i], ids);
+			}
+		}
+
+		return ids;
+	};
+
 	/**
 	 * Método responsável por iniciar as operações com modal e eventos do botões.
 	 * @method initModalAndEvents
+	 * @author João Victor Magela
 	 * @for Tree
 	 */
 	Tree.prototype.initModalAndEvents = function(){
 		var _this = this;
 		var values; //valores baixados
 		var currentData = [];
+
+		/**
+		 * Método responsável por fazer o parse dos dados de acordo com um determinado atributo
+		 * @method initModalAndEvents
+		 * @author João Victor Magela
+		 * @for Tree
+		 */
+		Tree.prototype.processParse = function(parse){
+			if(parse.length &gt; 0) {
+				if(values[parse]) {
+					currentData = values[parse];
+					values = _getValue(values[parse]);
+					_refreshTable($(&#x27;#panel-download-fields tbody&#x27;), values);
+					return {error: false, currentData: currentData};
+				}
+				
+				return {error: true, message: &#x27;Não existe o campo &quot;&#x27;+ parse + &#x27;&quot; nos dados&#x27;};
+			}
+			
+			return {error: true, message: &quot;Insira um parse&quot;};
+		};
 
 		//Modal
 		var modalDownload = 
@@ -495,8 +534,14 @@
 		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-edit&#x27;, function(e){
 			var item = $(this).parent().parent();
 			var node = _this.findNode(item);
+
+			//impede que seja adicionado mais de um campo input
+			if(item.find(&#x27;input&#x27;).length &gt; 0) return false;
+
 			node.state.editable = true;
 			node.state.disabled = true;
+
+			_this.refreshTree(_this.tree, node);
 
 			item.contents().filter(function() {
 				return this.nodeType === 3;
@@ -505,7 +550,7 @@
 			item.append($(_this.template.text)
 						.focus()
 						.val(node.text)
-						.keyup(function(e){
+						.keydown(function(e){
 							if(e.which == 13 || e.which == 9 ){
 								node.state.editable = false;
 								node.state.disabled = false;
@@ -517,6 +562,7 @@
 								_this.buildTree(_this.tree, 0);
 								_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
 							} else if(e.which == 27) {
+								
 								node.state.editable = false;
 								node.state.disabled = false;
 
@@ -536,7 +582,9 @@
 		 */
 		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-add&#x27;, function(e){
 			var node = _this.findNode($(this).parents(&#x27;li&#x27;));
-			if(!node) return;
+			if(!node) {
+				return;
+			}
 
 			//cria um novo objeto
 			var newItem = new Object();
@@ -565,12 +613,14 @@
 			_this.tree = _this.refreshTree(_this.tree, node);
 			_this.$element.empty().append(_this.$wrapper.empty());
 			_this.buildTree(_this.tree, 0);
+
 			_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
 		});
 
 		/**
 		 * Evento disparado ao clicar no botão de baixar informações a partir de algum nó da TreeView. Com isso um modal é exibindo podendo inserir as
 		 * informações &quot;bind&quot;, &quot;datasource&quot; e &quot;parse&quot; (caso haja um datasource válido).
+		 * @author João Victor Magela
 		 * @event Baixar informações para um nó.
 		 * @for Tree
 		 */
@@ -602,17 +652,18 @@
 			}
 		});
 
+
 		/**
 		 * Evento disparado ao clicar no botão de remover um nó da TreeView. Com isso o nó e seus filhos são excluídos.
 		 * @event Adicionar um filho.
+		 * @author João Victor Magela
 		 * @for Tree
 		 */
-		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-remove&#x27;, function(e){
+		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-remove&#x27;, function(e) {
 			var node = _this.findNode($(this).parents(&#x27;li&#x27;));
 			if(!node) return;
-			_this.tree = _this.removeNodes(_this.tree, [node.nodeId]);
-			_this.refreshIds();
-			_this.broadcastData();
+
+			_this.removeElements(_this.getChidrenNode(node, []));
 
 			_this.$element.empty().append(_this.$wrapper.empty());
 			_this.buildTree(_this.tree, 0);
@@ -623,6 +674,7 @@
 		 * Evento disparado ao clicar no botão de remover nós selecionados a partir de algum nó da TreeView. Com isso os nós filhos que estão selecionados são
 		 * excluídos, bem como seus filhos.
 		 * @event Remover filhos selecionados.
+		 * @author João Victor Magela
 		 * @for Tree
 		 */
 		$(document).on(&#x27;click&#x27;, &#x27;#btn-tree-removeall&#x27;, function(e){
@@ -631,13 +683,11 @@
 
 			//verifica quais os filhos estão selecionados
 			var ids = [];
-			for(var i = 0; i &lt; node.nodes.length; i++){
-				if(node.nodes[i].state.checked) ids.push(node.nodes[i].nodeId);
+			for(var i = 0; i &lt; node.nodes.length; i++) {
+				if(node.nodes[i].state.checked) ids = _this.getChidrenNode(node.nodes[i], ids);
 			}
 
-			_this.tree = _this.removeNodes(_this.tree, ids);
-			_this.refreshIds();
-			_this.broadcastData();
+			_this.removeElements(ids);
 
 			_this.$element.empty().append(_this.$wrapper.empty());
 			_this.buildTree(_this.tree, 0);
@@ -647,6 +697,7 @@
 		/**
 		 * Métodos responsável por filtrar os atributos de um conjunto de valores.
 		 * @method _getValue
+		 * @author João Victor Magela
 		 * @param {Object | Array} data Conjunto de valores ou um simples objeto.
 		 * @return Caso seja um array, retorna um Objeto presente na primeira posição, caso contrário retorna o objeto inteiro.
 		 * @for Tree.initModalAndEvents
@@ -658,6 +709,7 @@
 		/**
 		 * Métodos responsável por atualizar a tabela que informa os valores da tabela.
 		 * @method _refreshTable
+		 * @author João Victor Magela
 		 * @param {jQuery} Corpo da tabela.
 		 * @param {Object} data Atributos a serem inseridos na tabela.
 		 * @for Tree.initModalAndEvents
@@ -682,6 +734,7 @@
 		/**
 		 * Método responsável por obter os dados a partir de um determinado datasource e atualzar a tabela de atributos.
 		 * @method _getDataFromDatasource
+		 * @author João Victor Magela
 		 * @param {Object | Array} data Dados obtidos a partir de um datasource
 		 * @for Tree.initModalAndEvents
 		 */
@@ -702,6 +755,7 @@
 		/**
 		 * Método responsável por informar que foi possível obter os dados a partir do datasource informado.
 		 * @method _getDataFromDatasourceFail
+		 * @author João Victor Magela
 		 * @param {jQuery} button Botão que gerou a operação.
 		 * @for Tree.initModalAndEvents
 		 */
@@ -768,27 +822,21 @@
 		/**
 		 * Evento disparado ao clicar no botão parse. Exibe os atributos referentes aos novos dados obtidos. 
 		 * obter dados internos aos já obtidos.
+		 * @author João Victor Magela
 		 * @event Parse dos dados obtidos.
 		 * @for Tree
 		 */
 		$(document).on(&#x27;click&#x27;, &#x27;#btn-process-parse&#x27;, function(e){
 			var parse = $(this).parents(&#x27;.form-group&#x27;).find(&#x27;input&#x27;).val().trim();
-			if(parse.length &gt; 0){
-				if(values[parse]){
-					currentData = values[parse];
-					values = _getValue(values[parse]);
-					_refreshTable($(&#x27;#panel-download-fields tbody&#x27;), values);
-				}else{
-					alert(&#x27;Não existe o campo &quot;&#x27;+ parse + &#x27;&quot; nos dados&#x27;);
-				}
-			}else{
-				alert(&#x27;Insira um valor.&#x27;);
-			}
+
+			var process = _this.processParse(parse);
+			if(process.error) alert(process.message);
 		});
 
 
 		/**
 		 * Evento disparado ao confirmar os dados informados no formulário do modal.
+		 * @author João Victor Magela
 		 * @event Confirmar dados do modal.
 		 * @for Tree
 		 */
@@ -800,7 +848,10 @@
 			
 			//insere os dados no nó
 			//node.data = values;
-			if(values != null) node = _this.setDataToChildren(node, currentData);
+			if(values != null) {
+				node.$data = undefined;
+				node = _this.setDataToChildren(node, currentData);
+			}
 			
 			node.datasource = $(&#x27;#field-datasource&#x27;).val().trim();
 			node.bind = $(&#x27;#field-bind&#x27;).val().trim().length &gt; 0 ? $(&#x27;#field-bind&#x27;).val().trim() : undefined;
@@ -817,33 +868,41 @@
 		})
 
 		$(&#x27;body&#x27;).append(modalDownload).append(modalConfirm);
-	}
+	};
 
 	/**
 	 * Método responsável por repassar os dados do pai pro filho, se necessário em toda a Tree.
 	 * @method broadcastData
+	 * @author João Victor Magela
 	 * @for Tree
 	 */
 	Tree.prototype.broadcastData = function(){
 		for(var i=0; i&lt; this.tree.length; i++){
 			this.tree[i] = this.setDataToChildren(this.tree[i], this.tree[i].$data);
+			this.nodes[this.tree[i].nodeId] = this.tree[i];
 		}
 	}
 
 	/**
 	 * Método responsável por passar os dados de pai para filho, se necessário
 	 * @method setDataToChildren
+	 * @author João Victor Magela
 	 * @param {Object} node Nó corrente
 	 * @param {Object | Array} data Dados associados ao nó corrente.
 	 * @return node Nó com os dados obtidos do pai.
 	 * @for Tree
 	 */
 	Tree.prototype.setDataToChildren = function(node, data){
-		if(!node) return node;
+		// Caso o nó tenha um datasource, então não passa os dados do pai para seus filhos.
+		if(!node || (node.$data &amp;&amp; node.datasource)) return node;
 
-		if(!node.$data) node.$data = data;
+		node.$data = data;
+
 		if(node.nodes){
-			for(var i=0; i&lt;node.nodes.length;i++) node.nodes[i] = this.setDataToChildren(node.nodes[i], data);
+			for(var i=0; i&lt;node.nodes.length;i++) {
+				node.nodes[i] = this.setDataToChildren(node.nodes[i], data);
+				this.nodes[node.nodes[i].nodeId] = node.nodes[i];
+			}
 		}
 
 		return node;
@@ -852,6 +911,7 @@
 	/**
 	 * Método responsável por remover os dados do plugin.
 	 * @method remove
+	 * @author Jonathan Miles
 	 * @for Tree 
 	 */
 	Tree.prototype.remove = function () {
@@ -863,6 +923,7 @@
 	/**
 	 * Método responsável por destruir a instancia da Tree.
 	 * @method destroy
+	 * @author Jonathan Miles
 	 * @for Tree
 	 */
 	Tree.prototype.destroy = function () {
@@ -882,6 +943,7 @@
 	/**
 	 * Método responsável por desativar todos os eventos da Tree.
 	 * @method unsubscribeEvents
+	 * @author Jonathan Miles
 	 * @for Tree
 	 */
 	Tree.prototype.unsubscribeEvents = function () {
@@ -903,6 +965,7 @@
 	/**
 	 * Método responsável por ativar os eventos da Tree.
 	 * @method subscribeEvents
+	 * @author Jonathan Miles
 	 * @for Tree
 	 */
 	Tree.prototype.subscribeEvents = function () {
@@ -960,6 +1023,7 @@
 	/**
 	 * Define o estado inicial de cada nó da árvore (valores padrões) 
 	 * @method setInitialStates
+	 * @author Jonathan Miles
 	 * @param {Object} node Elemento da Tree.
 	 * @param {Number} level Nível na qual o nó se encontra.
 	 * @for Tree
@@ -1038,6 +1102,7 @@
 	/**
 	 * Método responsável por definir como será o clique em cada item da lista
 	 * @method clickHandler
+	 * @author Jonathan Miles
 	 * @param {Object} event Dados do evento.
 	 * @return 
 	 */
@@ -1075,6 +1140,7 @@
 	/**
 	 * Método responsável por procurar um nó na Tree. 
 	 * @method findNode
+	 * @author Jonathan Miles
 	 * @param {Number | jQuery} target
 	 * @return node Nó da Tree.
 	 * @for Tree
@@ -1098,6 +1164,7 @@
 	/**
 	 * Método responsável por procurar um nó pelo seu idenficador
 	 * @method findNodeById
+	 * @author João Victor Magela
 	 * @param {Number} id Identificador do nó.
 	 * @return node Nó da Tree.
 	 * @for Tree
@@ -1110,7 +1177,7 @@
 		var node = items.length &gt; 0 ? items[0] : undefined;
 
 		if (!node) {
-			console.log(&#x27;Error: node does not exist&#x27;);
+			//console.log(&#x27;Error: node does not exist&#x27;);
 		}
 
 		return node;
@@ -1119,6 +1186,7 @@
 	/**
 	 * Método responsável por atualizar um nó e seus filhos.
 	 * @method refreshTree
+	 * @author João Victor Magela
 	 * @param {Array} nodes Conjunto de nós
 	 * @param {Object} node Nó com novas informações.
 	 * @return nodes Retorna o conjunto de nós atualizados.
@@ -1137,27 +1205,46 @@
 	};
 
 	/**
-	 * Método responsável por remover um ou mais nós da Tree.
-	 * @method removeNodes
+	 * Método responsável por remover um ou mais nós da lista de elementos.
+	 * @method removeNodesInNodes
+	 * @author João Victor Magela
 	 * @param {Árray} nodes Conjunto de nós para pesquisa
-	 * @param {} ids Conjunto de identificadores dos nós a serem removidos.
+	 * @param {Array} ids Conjunto de identificadores dos nós a serem removidos.
 	 * @return Conjunto de nós com os nós removidos.
 	 * @for Tree
 	 */
-	Tree.prototype.removeNodes = function(nodes, ids){
-		if(!ids || ids.length == 0) {
-			console.log(&#x27;Identificadores inválidos&#x27;)
-			return nodes;
+	Tree.prototype.removeNodesInNodes = function(ids) {
+		for(var i = this.nodes.length -1 ; i &gt;= 0; i--) {
+			if($.inArray(this.nodes[i].id, ids) &gt; -1){
+				this.nodes.splice(i,1);
+				continue;
+			}
 		}
+	}
+
+	
+	/**
+	 * Método responsável por remover um ou mais nós da Tree.
+	 * @method removeNodesInTree
+	 * @author João Victor Magela
+	 * @param {Árray} nodes Conjunto de nós para pesquisa
+	 * @param {Array} ids Conjunto de identificadores dos nós a serem removidos.
+	 * @return Conjunto de nós com os nós removidos.
+	 * @for Tree
+	 */
+	Tree.prototype.removeNodesInTree = function(nodes, ids){
+		if(!ids || ids.length == 0) {
+			//console.log(&#x27;Identificadores inválidos&#x27;)
+			return nodes;
+		};
 
 		for(var i = nodes.length-1; i &gt;= 0; i--){
-			if($.inArray(nodes[i].nodeId, ids) &gt; -1) {
-				this.nodes.splice(nodes[i].nodeId, 1); //remove da lista de nós
-				nodes.splice(i,1); //remove da lista aninhada
+			if($.inArray(nodes[i].id, ids) &gt; -1) {
+				nodes.splice(i,1);
 				continue;
 			}
 
-			if(nodes[i].nodes) nodes[i].nodes = this.removeNodes(nodes[i].nodes, ids); 
+			if(nodes[i].nodes) nodes[i].nodes = this.removeNodesInTree(nodes[i].nodes, ids); 
 		}
 
 		return nodes.length &gt; 0 ? nodes : undefined;
@@ -1166,13 +1253,24 @@
 	/**
 	 * Método responsável por atualizar o identificador dos nós.
 	 * @method refreshIds
+	 * @author João Victor Magela
 	 * @for Tree
 	 */
 	Tree.prototype.refreshIds = function(){
+		var _refreshParentId = function(node){
+			if(!node.nodes) return node;
+
+			for(var i=0; i&lt;node.nodes.length; i++) {
+				node.nodes[i].parentId = node.nodeId;
+			}
+
+			return node;
+		};
+
 		for(var i=0; i&lt;this.nodes.length; i++) {
 			var node = this.findNodeById(this.nodes[i].id);
 			node.nodeId = i;
-			this.nodes[i].id = i;
+			this.nodes[i] = _refreshParentId(this.nodes[i]);
 
 			this.tree = this.refreshTree(this.tree, node);
 		}
@@ -1181,6 +1279,7 @@
 	/**
 	 * Método responsável por trocar o modo e expansão do nó (expandido ou não)
 	 * @method toggleExpandedState
+	 * @author Jonathan Miles
 	 * @param {Object} node Nó corrente.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1193,6 +1292,7 @@
 	/**
 	 * Método responsável por deixar um nó como expandido ou não
 	 * @method setExpandedState
+	 * @author Jonathan Miles
 	 * @param {Object} node Nó alvo.
 	 * @param {boolean} state Estado de expansão (true para expandido) .
 	 * @param {Object} options Conjunto de opções do plugin.
@@ -1230,6 +1330,7 @@
 	/**
 	 * Método responsável por trocar o estado de seleção do nó.
 	 * @method toggleSelectedState
+	 * @author Jonathan Miles
 	 * @param {Object} node Nó alvo.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1242,6 +1343,7 @@
 	/**
 	 * Método responsável por determinar o estado de seleção do nó (selecionado ou não)
 	 * @method setSelectedState
+	 * @author Jonathan Miles
 	 * @param {Object} node Nó alvo.
 	 * @param {} state Estado de seleção do nó (true, para selecionado).
 	 * @param {Object} options Conjunto de opções do plugin.
@@ -1279,6 +1381,7 @@
 	/**
 	 * Método responsável por trocar o estado de checagem do nó
 	 * @method toggleCheckedState
+	 * @author Jonathan Miles
 	 * @param {Object} node Nó alvo.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1291,6 +1394,7 @@
 	/**
 	 * Método responsável por determinar o estado de checagem do nó.
 	 * @method setCheckedState
+	 * @author Jonathan Miles
 	 * @param {Object} node Nó alvo.
 	 * @param {} state Estado de checagem do nó (true, para marcado).
 	 * @param {Object} options Conjunto de opções do plugin.
@@ -1322,6 +1426,7 @@
 	/**
 	 * Método responsável por determinar o estado de ativação do nó.
 	 * @method setDisabledState
+	 * @author Jonathan Miles
 	 * @param {Object} node Nó alvo.
 	 * @param {} state Estado de ativação do no (true, para desativado).
 	 * @param {Object} options Conjunto de opções do plugin.
@@ -1358,6 +1463,7 @@
 	/**
 	 * Método responsável por renderizar a TreeView.
 	 * @method render
+	 * @author Jonathan Miles
 	 * @for Tree
 	 */
 	Tree.prototype.render = function () {
@@ -1383,6 +1489,7 @@
 	/**
 	 * Método responsável por contruir a TreeView.
 	 * @method buildTree
+	 * @author Jonathan Miles | João Victor Magela
 	 * @param {Array} nodes Conjunto de nós.
 	 * @param {Number} level Nível corrente.
 	 * @return A instância atual da Tree.
@@ -1412,12 +1519,14 @@
 								.val(node.text)
 								.css(&#x27;margin-left&#x27;, ((level) * 20) + &#x27;px&#x27;)
 								.focus()
-								.keyup(function(e){
+								.keydown(function(e){
+									
 									/*
 										Para um item que foi adicionando, caso aperte tab(9) ou enter(13), confirma o nome atual.
 										Caso aperte ESC(27), apenas remove o item;
 									*/
 									if(e.which == 13 || e.which == 9 ){
+
 										node.state.added = false;
 										node.state.disabled = false;
 										node.text = $(this).val();
@@ -1428,9 +1537,7 @@
 										_this.buildTree(_this.tree, 0);
 										_this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, _this));
 									} else if(e.which == 27) {
-										_this.tree = _this.removeNodes(_this.tree, [node.nodeId]);
-										_this.refreshIds();
-										_this.broadcastData();
+										_this.removeElements([node.id]);
 
 										_this.$element.empty().append(_this.$wrapper.empty());
 										_this.buildTree(_this.tree, 0);
@@ -1555,6 +1662,7 @@
 	/**
 	 * Método responsável por definir o estilo (CSS) do nó.
 	 * @method buildStyleOverride
+	 * @author Jonathan Miles
 	 * @param {Object} node No corrente.
 	 * @return A expressão CSS para o nó da TreeView.
 	 * @for Tree
@@ -1591,6 +1699,7 @@
 	/**
 	 * Método responsável por injetar o estilo de acordo com a identificação do nó.
 	 * @method injectStyle
+	 * @author Jonathan Miles
 	 * @for Tree
 	 */
 	Tree.prototype.injectStyle = function () {
@@ -1603,6 +1712,7 @@
 	/**
 	 * Método responsável por definir a estilização do no de acordo com as opções passadas para o plugin.
 	 * @method buildStyle
+	 * @author Jonathan Miles
 	 * @return Expressão CSS padrões de acordo com as opções passadas.
 	 * @for Tree
 	 */
@@ -1675,6 +1785,7 @@
 	/**
 	 * Método responsável por retornar um nó da TreeView a partir do identificador interno do plugin
 	 * @method getNode
+	 * @author Jonathan Miles
 	 * @param {Number} nodeId - Identificador interno do nó.
 	 * @return Nó da TreeView.
 	 * @for Tree
@@ -1686,6 +1797,7 @@
 	/**
 	 * Método responsável por adicionar um nó na raiz da TreeView.
 	 * @method addElement
+	 * @author João Victor Magela
 	 * @param {Object} node Nó a ser adicionado.
 	 * @for Tree
 	 */
@@ -1693,16 +1805,22 @@
 		this.tree.push(node);
 		this.nodes.push(node);
 		this.id++;
+
+		this.$element.empty().append(this.$wrapper.empty());
+        this.buildTree(this.tree, 0);
+        this.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, this));
 	};
 
 	/**
 	 * Método responsável por remover um conjunto de nós da Tree.
 	 * @method removeElements
+	 * @author João Victor Magela
 	 * @param {Array} ids Conjunto de identificadores do nós a serem removidos.
 	 * @for Tree
 	 */
 	Tree.prototype.removeElements = function(ids){
-		this.tree = this.removeNodes(this.tree, ids);
+		this.tree = this.removeNodesInTree(this.tree, ids);
+		this.removeNodesInNodes(ids);
 		this.refreshIds();
 		this.broadcastData();
 	}
@@ -1710,6 +1828,7 @@
 	/**
 	 * Método responsável por obter o pai de um determinado nó
 	 * @method getParent
+	 * @author Jonathan Miles
 	 * @param {jQuery | Number | Selector} identifier Identificador do nó filho.
 	 * @return O pai do nó informado.
 	 * @for Tree
@@ -1722,6 +1841,7 @@
 	/**
 	 * Método responsável por obter os irmãos de um nó
 	 * @method getSiblings
+	 * @author Jonathan Miles
 	 * @param {jQuery | Number | Selector} identifier Identificador do nó
 	 * @return Os irmãos de um determinado nó.
 	 * @for Tree
@@ -1738,6 +1858,7 @@
 	/**
 	 * Método responsável por obter todos os nós selecionados.
 	 * @method getSelected
+	 * @author Jonathan Miles
 	 * @return Conjunto do nós selecionados.
 	 * @for Tree
 	 */
@@ -1748,6 +1869,7 @@
 	/**
 	 * Método responsável por obter todos os nós não selecionados.
 	 * @method getUnselected
+	 * @author Jonathan Miles
 	 * @return Conjunto de nós não selecionados.
 	 * @for Tree
 	 */
@@ -1758,6 +1880,7 @@
 	/**
 	 * Método responsável por obter todos os nós expandidos.
 	 * @method getExpanded
+	 * @author Jonathan Miles
 	 * @return Conjunto de nós expandidos.
 	 * for Tree
 	 */
@@ -1768,6 +1891,7 @@
 	/**
 	 * Método responsável por obter todos os nós não expandidos.
 	 * @method getCollapsed
+	 * @author Jonathan Miles
 	 * @return Conjunto de nós não expandidos.
 	 * @for Tree
 	 */
@@ -1778,6 +1902,7 @@
 	/**
 	 * Método responsável por obter todos os nós marcados.
 	 * @method getChecked
+	 * @author Jonathan Miles
 	 * @return Conjunto de nós marcados.
 	 * @for Tree
 	 */
@@ -1788,6 +1913,7 @@
 	/**
 	 * Método responsável por obter todos os nós não marcados.
 	 * @method getUnchecked
+	 * @author Jonathan Miles
 	 * @return Conjunto de nós não marcados.
 	 * @for Tree
 	 */
@@ -1798,6 +1924,7 @@
 	/**
 	 * Método responsável por obter todos os nós desativados.
 	 * @method getDisabled
+	 * @author Jonathan Miles
 	 * @return Conjunto de nós desativados.
 	 * @for Tree
 	 */
@@ -1808,6 +1935,7 @@
 	/**
 	 * Método responsável por obter todos os nós desativados.
 	 * @method getEnabled
+	 * @author Jonathan Miles
 	 * @return Conjunto de nós desativados.
 	 * @for Tree
 	 */
@@ -1819,6 +1947,7 @@
 	/**
 	 * Método responsável por selecionar um conjunto de nós.
 	 * @method selectNode
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós a serem selecionados.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1834,6 +1963,7 @@
 	/**
 	 * Método responsável por não selecionar um conjunto de nós.
 	 * @method unselectNode
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1849,6 +1979,7 @@
 	/**
 	 * Método responsável por trocar a seleção de um conjunto de nós.
 	 * @method toggleNodeSelected
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1865,6 +1996,7 @@
 	/**
 	 * Método responsável por retrair todos os nós.
 	 * @method collapseAll
+	 * @author Jonathan Miles
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
 	 */
@@ -1880,6 +2012,7 @@
 	/**
 	 * Método responsável por retrair un conjunto de nós.
 	 * @method collapseNode
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1895,6 +2028,7 @@
 	/**
 	 * Método responsável por expandir todos os nós.
 	 * @method expandAll
+	 * @author Jonathan Miles
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree 
 	 */
@@ -1917,6 +2051,7 @@
 	/**
 	 * Método responsável por expandir um conjunto de nós.
 	 * @method expandNode
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1935,6 +2070,7 @@
 	/**
 	 * Método responsável por expandir um conjunto de nós de um determinado nível.
 	 * @method expandLevels
+	 * @author Jonathan Miles
 	 * @param {Array} nodes Conjunto de nós
 	 * @param {Number} level Nível que permite expansão
 	 * @param {Object} options Conjunto de opções do plugin.
@@ -1954,6 +2090,7 @@
 	/**
 	 * Método responsável por expandir o pai de um conjunto de nós
 	 * @method revealNode
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1973,6 +2110,7 @@
 	/**
 	 * Método responsável por trocar o modo de expansão de um conjunto de nós
 	 * @method toggleNodeExpanded
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -1989,6 +2127,7 @@
 	/**
 	 * Método responsável por marcar todos os nós;
 	 * @method checkAll
+	 * @author Jonathan Miles
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
 	 */
@@ -2004,6 +2143,7 @@
 	/**
 	 * Método responsável por marcar um conjunto de nós.
 	 * @method checkNode
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -2019,6 +2159,7 @@
 	/**
 	 * Método responsável por desmarcar todos os nós
 	 * @method uncheckAll
+	 * @author Jonathan Miles
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @return 
 	 */
@@ -2034,6 +2175,7 @@
 	/**
 	 * Método responsável por desmarcar um conjunto de nós
 	 * @method uncheckNode
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -2049,6 +2191,7 @@
 	/**
 	 * Método responsável por trocar o estado de marcação de um conjunto de nós.
 	 * @method toggleNodeChecked
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -2065,6 +2208,7 @@
 	/**
 	 * Método responsável por desativar todos os nós
 	 * @method disableAll
+	 * @author Jonathan Miles
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
 	 */
@@ -2080,6 +2224,7 @@
 	/**
 	 * Método responsável por desativar um conjunto de nós
 	 * @method disableNode
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -2095,6 +2240,7 @@
 	/**
 	 * Método responsável por ativar todos os nós
 	 * @method enableAll
+	 * @author Jonathan Miles
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
 	 */
@@ -2110,6 +2256,7 @@
 	/**
 	 * Método responsável por ativar um conjunto de nós
 	 * @method enableNode
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -2125,6 +2272,7 @@
 	/**
 	 * Método responsável por trocar o estado de ativação de um conjunto de nós
 	 * @method toggleNodeDisabled
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
@@ -2141,6 +2289,7 @@
 	/**
 	 * Método responsável por identificar um conjunto de seletores.
 	 * @method forEachIdentifier
+	 * @author Jonathan Miles
 	 * @param {Array} identifiers Conjunto de nós.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @param {Function} callback Função a ser executada para cada nó.
@@ -2162,6 +2311,7 @@
 	/**
 	 * Método responsável por identificar um seletor
 	 * @method identifyNode
+	 * @author Jonathan Miles
 	 * @param {Selector | Number} identifier
 	 * @return Nó da TreeView.
 	 */
@@ -2174,6 +2324,7 @@
 	/**
 	 * Método responsável por buscar por um item na TreeView (Caso a opção de busca esteja ativada).
 	 * @method search
+	 * @author Jonathan Miles
 	 * @param {String} pattern Termo a ser pesquisado.
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @return Conjunto de nós.
@@ -2223,6 +2374,7 @@
 	/**
 	 * Método responsável por limpar o campo de busca.
 	 * @method clearSearch
+	 * @author Jonathan Miles
 	 * @param {Object} options Conjunto de opções do plugin.
 	 * @for Tree
 	 */
@@ -2244,6 +2396,7 @@
 	/**
 	 * Método responsável por procurar um conjunto de nós segundo um critério (atributo).
 	 * @method findNodes
+	 * @author Jonathan Miles
 	 * @param {String} pattern Termo a ser pesquisado
 	 * @param {String} modifier Opção para o Regex.
 	 * @param {String} attribute Atributo a ser pesquisado o termo
@@ -2267,6 +2420,7 @@
 	/**
 	 * Método responsável por obter o valor de um determinado atributo de um nó.
 	 * @method getNodeValue
+	 * @author Jonathan Miles
 	 * @param {Object} obj Nó ou um objeto qualquer.
 	 * @param {String} attr Atributo no qual deseja-se obter o valor.
 	 * @return O valor do atributo do objeto.

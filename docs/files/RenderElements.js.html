@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>RenderElements.js - Mira-Editor</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Mira-Editor" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AbstractElement.html">AbstractElement</a></li>
+                                <li><a href="../classes/AbstractInterface.html">AbstractInterface</a></li>
+                                <li><a href="../classes/BootstrapNavigation.html">BootstrapNavigation</a></li>
+                                <li><a href="../classes/BootstrapNavigationList.html">BootstrapNavigationList</a></li>
+                                <li><a href="../classes/BootstrapNavigationListItem.html">BootstrapNavigationListItem</a></li>
+                                <li><a href="../classes/Button.html">Button</a></li>
+                                <li><a href="../classes/Carousel.html">Carousel</a></li>
+                                <li><a href="../classes/CarouselItem.html">CarouselItem</a></li>
+                                <li><a href="../classes/Code.html">Code</a></li>
+                                <li><a href="../classes/ConcreteInterface.html">ConcreteInterface</a></li>
+                                <li><a href="../classes/Div.html">Div</a></li>
+                                <li><a href="../classes/Formulario.html">Formulario</a></li>
+                                <li><a href="../classes/Header.html">Header</a></li>
+                                <li><a href="../classes/HTMLElement.html">HTMLElement</a></li>
+                                <li><a href="../classes/ImageHtml.html">ImageHtml</a></li>
+                                <li><a href="../classes/InputOption.html">InputOption</a></li>
+                                <li><a href="../classes/InputRadioCheck.html">InputRadioCheck</a></li>
+                                <li><a href="../classes/InputSelect.html">InputSelect</a></li>
+                                <li><a href="../classes/InputText.html">InputText</a></li>
+                                <li><a href="../classes/InputTextarea.html">InputTextarea</a></li>
+                                <li><a href="../classes/Label.html">Label</a></li>
+                                <li><a href="../classes/Link.html">Link</a></li>
+                                <li><a href="../classes/List.html">List</a></li>
+                                <li><a href="../classes/ListItem.html">ListItem</a></li>
+                                <li><a href="../classes/Paragraph.html">Paragraph</a></li>
+                                <li><a href="../classes/Preview.html">Preview</a></li>
+                                <li><a href="../classes/Project.html">Project</a></li>
+                                <li><a href="../classes/RenderElements.html">RenderElements</a></li>
+                                <li><a href="../classes/SimpleHtml.html">SimpleHtml</a></li>
+                                <li><a href="../classes/Span.html">Span</a></li>
+                                <li><a href="../classes/Tree.html">Tree</a></li>
+                                <li><a href="../classes/Tree.initModalAndEvents.html">Tree.initModalAndEvents</a></li>
+                                <li><a href="../classes/UIEvents.html">UIEvents</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: RenderElements.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * Classe responsável pelos métodos de renderização da aplicação (exibição dos elemento concreto, TreeView, Código gerado)
+ *
+ * @class RenderElements
+ * @author João Victor Magela
+ * @constructor
+ */
+var RenderElements = function() {
+    &quot;use strict&quot;;
+    var panelBase;
+
+    /**
+     * Método responsável por renderizar os elementos concretos no protótipo.
+     * @method _renderConcreteInterface
+     * @author João Victor Magela
+     * @param {Object} node Elemento abstrato. 
+     * @param {jQuery} root Elemento jQuery onde serão inseridos novos elementos concretos.
+     * @return O protótipo com os elementos.
+     */
+    var _renderConcreteInterface = function(node, root) {
+        if(!root) {
+            var item = concreteInterfaceObj.findItem(node);
+            if(item.id == undefined) item = new Div(node);
+            
+            item.typeElement = item.typeElement ? item.typeElement : &quot;div&quot;;
+            item.html = item.html &amp;&amp; item.html.jquery ? item.html.clone() : item.getTemplate(item.typeElement);
+            item.name = node.text;
+            item.bind = node.bind ? node.bind : undefined;
+            
+            concreteInterfaceObj.replaceItem(item);
+            
+            root = $(_.template(panelBase)({item:item})); //insere o elemento dentro do panel base
+        }
+
+        var length = node.nodes ? node.nodes.length : 0;
+        for(var i=0; i &lt; length; i++) {
+            var itemNode = concreteInterfaceObj.findItem(node.nodes[i]);
+            if(itemNode.id == undefined) itemNode = new Div(node.nodes[i]);
+            
+            itemNode.typeElement = itemNode.typeElement ? itemNode.typeElement : &quot;div&quot;;
+            itemNode.html = itemNode.html &amp;&amp; itemNode.html.jquery ? itemNode.html.clone() : itemNode.getTemplate(itemNode.typeElement);
+            itemNode.name = node.nodes[i].text;
+            itemNode.bind = node.nodes[i].bind ? node.nodes[i].bind : undefined;
+            
+            concreteInterfaceObj.replaceItem(itemNode);
+
+            var child = $(_.template(panelBase)({item:itemNode})); //insere o elemento dentro do panel base
+            if(node.nodes[i].nodes) child = _renderConcreteInterface(node.nodes[i], child);
+
+            root.find(&#x27;.panel-body&#x27;).first().append(child);
+        }
+
+        return root;
+    };
+
+    /**
+     * Método responsável por realizar a mudança de um elemento concreto para outro tipo.
+     * @method _changeElement
+     * @author João Victor Magela
+     * @param {Object} item Elemento concreto. 
+     * @param {string} value Tipo do novo elemento concreto.
+     * @return O novo elemento concreto.
+     */
+    var _changeElement = function(value, node){
+        switch(value){
+            case &#x27;div&#x27; :                    return new Div(node);
+            case &#x27;p&#x27; :                      return new Paragraph(node);
+            case &#x27;header&#x27; :                 return new Header(node);
+            case &#x27;a&#x27; :                      return new Link(node);
+            case &#x27;label&#x27; :                  return new Label(node);
+            case &#x27;span&#x27; :                   return new Span(node);
+            case &#x27;list&#x27; :                   return new List(node);
+            case &#x27;list-item&#x27; :              return new ListItem(node);
+            case &#x27;image&#x27; :                  return new ImageHtml(node);
+            case &#x27;carousel&#x27; :               return new Carousel(node);
+            case &#x27;carousel-item&#x27; :          return new CarouselItem(node);
+            case &#x27;navigation&#x27; :             return new BootstrapNavigation(node);
+            case &#x27;navigation-list&#x27; :        return new BootstrapNavigationList(node);
+            case &#x27;navigation-list-item&#x27; :   return new BootstrapNavigationListItem(node);
+            case &#x27;form&#x27; :                   return new Formulario(node);
+            case &#x27;input-text&#x27; :             return new InputText(node);
+            case &#x27;input-textarea&#x27; :         return new InputTextarea(node);
+            case &#x27;input-radio&#x27; :            return new InputRadioCheck(node);
+            case &#x27;input-select&#x27; :           return new InputSelect(node);
+            case &#x27;input-option&#x27; :           return new InputOption(node);
+            case &#x27;input-button&#x27; :           return new Button(node);
+        }
+
+        return undefined;
+    };
+
+    /**
+     * Evento disparado quando há a mudança do elemento concreto no combobox. A partir do novo elemento selecionado, é buscado o template correspondente
+     * e feita a atualização do elemento concreto.
+     *
+     * @event ChangeSelectType
+     */
+    $(document).on(&#x27;change&#x27;, &#x27;.select-type-element&#x27;, function(e){
+        var value = $(this).val();
+        var root = $(this).parent().parent().parent().parent();
+        var id = root.data(&#x27;id&#x27;);
+        var node = globalTree.findNodeById(id);
+        var item = concreteInterfaceObj.findItem(node);
+        item = _changeElement(value, node);
+
+        item.componentWidth = root.width() + &#x27;px&#x27;;
+        concreteInterfaceObj.replaceItem(item);
+        Code.showConcreteInterfaceCode();
+        
+        $(&#x27;#tree&#x27;).trigger(&#x27;treeRender&#x27;, $.extend({}, true, globalTree));
+    });
+
+    /**
+     * Método responsável por executar os testes
+     * @method testsTreeView
+     * @author João Victor Magela
+     */
+    var testsTreeView = function(){
+        var btnRoot = $(&#x27;#btn-root-add&#x27;), keydown = $.Event(&#x27;keydown&#x27;);
+        var assert;
+        /**
+         * Método responsável por executar o evento keydown de para Esc, Enter ou Tab em um input text
+         * @method _triggerkeyDownEvent
+         * @author João Victor Magela
+         */
+        var _triggerkeyDownEvent = function(assert, input, which, value){
+            
+            var oldText = input.val();
+            input.focus();
+            keydown.which = which;
+            
+            input.val(value).trigger(keydown); //Altera o valor do campo e pressiona enter    
+            if(which == 27) {
+                assert.equal(globalTree.nodes[globalTree.nodes.length-1].text, oldText, &quot;Pressionou Esc e voltou ao valor antigo.&quot;); // Verifica se não foi alterado o nome pressionando ESC    
+            }else {
+                assert.equal(globalTree.nodes[globalTree.nodes.length-1].text, value, &quot;Alterou o valor do campo para \&quot;&quot;+ value +&quot;\&quot;.&quot;); // Verifica se o alterou o texto do elemento
+                assert.ok(!globalTree.nodes[globalTree.nodes.length-1].state.editable &amp;&amp; !globalTree.nodes[globalTree.nodes.length-1].state.added, &quot;Pressionou &quot;+ which == 9 ? &quot;Tab&quot; : &quot;Enter&quot; + &quot; e saiu do modo editável.&quot;); // Verifica se o item saiu do modo editável
+            }
+        }
+
+        /**
+         * Método responsável por testar a adição de um elemento e pressionar enter no campo. O resultado deve ser a confirmação da operação
+         * @method _testAddElementRootEnter
+         * @author João Victor Magela
+         */
+        var _testAddElementRootEnter = function(assert){
+            var length = globalTree.nodes.length; //tamanho antes de adicionar
+            
+            btnRoot.trigger(&#x27;click&#x27;); // Passo 1
+            var newlength = globalTree.nodes.length;
+
+            assert.equal(newlength, length+1, &quot;Novo item adicionado!&quot;); // Verifica se adicionou um novo item
+            assert.ok(globalTree.nodes[globalTree.nodes.length-1].state.added, &quot;Item está no modo editável.&quot;); // Verifica se o item está no mdo editável
+
+            var newItem = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+(globalTree.nodes.length-1)+&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            _triggerkeyDownEvent(assert, newItem.find(&#x27;input&#x27;), 13, &quot;TestEnter&quot;);
+        };
+
+        /**
+         * Método responsável por testar a adição de um elemento e pressionar tab no campo. O resultado deve ser a confirmação da operação
+         * @method _testAddElementRootTab
+         * @author João Victor Magela
+         */
+        var _testAddElementRootTab = function(assert){
+            btnRoot.trigger(&#x27;click&#x27;);
+
+            var newItem = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+(globalTree.nodes.length-1)+&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            _triggerkeyDownEvent(assert, newItem.find(&#x27;input&#x27;), 9, &quot;TestTab&quot;);
+        };
+
+        /**
+         * Método responsável por testar a adição de um elemento e pressionar esc no campo. O resultado deve ser a anulação da operação
+         * @method _testAddElementRootEsc
+         * @author João Victor Magela
+         */
+        var _testAddElementRootEsc = function(assert){
+            btnRoot.trigger(&#x27;click&#x27;);
+            var length = globalTree.nodes.length; //armazena quantos itens tinham antes da operação
+
+            var input = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+(globalTree.nodes.length-1)+&#x27;&quot;]&#x27;).find(&#x27;input&#x27;); //seleciona o último item adicionado
+            keydown.which = 27;
+            input.trigger(keydown); //Pressiona Esc no input
+            assert.equal(globalTree.nodes.length, length-1, &quot;Pressionou Esc no campo e o item foi removido.&quot;); //Verifica se o item foi removido.
+        };
+
+        /**
+         * Método responsável por testar a remoção dos elementos selecionados.
+         * @method _testRemoveSelectedsRoot
+         * @author João Victor Magela
+         */
+        var _testRemoveSelectedsRoot = function(assert){
+            var length = globalTree.nodes.length;
+            
+            //Passo 1
+            var items = globalTree.$element.find(&#x27;.node-tree&#x27;).filter(function(){
+                return parseInt($(this).attr(&#x27;data-nodeid&#x27;)) &gt; globalTree.nodes.length-3;
+            });
+
+            items.each(function(index, element){
+                var el = globalTree.$element.find(&#x27;[data-nodeid=&#x27;+$(this).data(&#x27;nodeid&#x27;)+&#x27;]&#x27;);
+                el.children(&#x27;.check-icon&#x27;).trigger(&#x27;click&#x27;);
+            });
+
+            // Passo 2
+            $(&#x27;#btn-root-removeall&#x27;).click(); //remove as itens selecionados
+
+            // Passo 3
+            assert.equal(globalTree.nodes.length, length-2, &quot;Dois últimos itens removidos com sucesso!&quot;); // verifica se foram removidos
+        };
+
+        /**
+         * Método responsável por testar a edição de um elemento.
+         * @method _testRemoveSelectedsRoot
+         * @author João Victor Magela
+         */
+        var testEditElement = function(assert){
+            
+            // Passo 1 - Clica no botão editar de um elemento.
+            var item = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+(globalTree.nodes.length-1)+&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            item.find(&#x27;#btn-tree-edit&#x27;).trigger(&#x27;click&#x27;);
+
+            // Passo 2 - Pressionar a tecla Enter no campo e verifica se foi confirmada a operação.
+            assert.equal(item.find(&#x27;input&#x27;).length, 1 , &quot;Item está no estado editável.&quot;); //Verifica se o item ficou editável
+            _triggerkeyDownEvent(assert, item.find(&#x27;input&#x27;), 13, &quot;TestEnter&quot;); // Altera o nome do input e pressiona enter
+
+            // Passo 3 - Repetir a operação pressionando a tecla Tab e verifica se foi confirmada.
+            item = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+(globalTree.nodes.length-1)+&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            item.find(&#x27;#btn-tree-edit&#x27;).click(); //clica novamente pra editar
+            assert.equal(item.find(&#x27;input&#x27;).length, 1 , &quot;Item está no estado editável.&quot;); //Verifica se o item ficou editável
+            _triggerkeyDownEvent(assert, item.find(&#x27;input&#x27;), 9, &quot;TestTab&quot;); // Altera o nome do input e pressiona tab
+            
+            // Passo 4 - Repetir a operação pressionando a tecla Esc e verifica se foi cancelada.
+            item = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+(globalTree.nodes.length-1)+&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            item.find(&#x27;#btn-tree-edit&#x27;).click(); //clica novamente pra editar
+            assert.equal(item.find(&#x27;input&#x27;).length, 1 , &quot;Item está no estado editável.&quot;); //Verifica se o item ficou editável
+            _triggerkeyDownEvent(assert, item.find(&#x27;input&#x27;), 27, &quot;TestEsc&quot;); // Altera o nome do input e pressiona Esc*/
+        };
+
+        /**
+         * Método responsável por testar a adição de um filho a um elemento.
+         * @method _testAddChild
+         * @author João Victor Magela
+         */
+        var _testAddChild = function(assert) {
+            var nodeId = 3; // Nó com filhos
+
+            // Passo 1 - Clica no botão adicionar filho de um elemento.
+            var item = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+ nodeId +&#x27;&quot;]&#x27;); //seleciona o item pai
+            item.find(&#x27;#btn-tree-add&#x27;).trigger(&#x27;click&#x27;); //Clica no botão de adicionar filho
+
+            // Passo 2 - Pressionar a tecla Enter no campo e verificar se foi confirmada a operação.    
+            var node = globalTree.findNode(nodeId); //Obtém os dados do pai
+            assert.ok(node.nodes &amp;&amp; node.nodes.length == 1, &quot;Primeiro filho adicionado com sucesso&quot;); // verifica se foi adicionado um filho
+            assert.ok(node.nodes[0].state.added, &quot;Primeiro filho adicionado no estado editável&quot;); // Verifica se foi adicionado no estado editável
+            var child = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+node.nodes[0].nodeId+&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            _triggerkeyDownEvent(assert, child.find(&#x27;input&#x27;), 13, &quot;ChildEnter&quot;); // Pressiona Enter
+
+            // Passo 3 - Repetir a operação pressionando a tecla Tab e verificar se a mesma foi confirmada.
+            item = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+ nodeId +&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            item.find(&#x27;#btn-tree-add&#x27;).trigger(&#x27;click&#x27;); //Clica no botão de adicionar filho
+            node = globalTree.findNode(nodeId); //faz a busca dos dados do nó
+            assert.ok(node.nodes &amp;&amp; node.nodes.length == 2, &quot;Segundo filho adicionado com sucesso&quot;); // verifica se foi adicionado um filho
+            assert.ok(node.nodes[1].state.added, &quot;Segundo filho adicionado está no estado editável&quot;);// Verifica se foi adicionado no estado editável
+            child =  globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+node.nodes[1].nodeId+&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            _triggerkeyDownEvent(assert, child.find(&#x27;input&#x27;), 9, &quot;ChildTab&quot;); //Pressiona Tab
+
+            // Passo 4 - Repetir a operação pressionando a tecla Esc e verificar se a mesma foi cancelada.
+            item = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+ nodeId +&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            item.find(&#x27;#btn-tree-add&#x27;).trigger(&#x27;click&#x27;); //Clica no botão de adicionar filho
+            node = globalTree.findNode(item); //faz a busca dos dados do nó
+            assert.ok(node.nodes &amp;&amp; node.nodes.length == 3, &quot;Terceiro filho adicionado com sucesso&quot;); // verifica se foi adicionado um filho
+            assert.ok(node.nodes[2].state.added, &quot;Terceiro filho adicionado está no estado editável&quot;); // Verifica se foi adicionado no estado editável
+            child =  globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+node.nodes[2].nodeId+&#x27;&quot;]&#x27;); //seleciona o último item adicionado
+            
+            keydown.which = 27;
+            child.find(&#x27;input&#x27;).trigger(keydown); //Pressiona Esc no campo.
+            node = globalTree.findNode(item); //Atualiza os dados do nó
+            assert.equal(node.nodes.length, 2, &quot;Pressionou Esc e o filho foi removido.&quot;); //Verifica se o item foi removido.
+        };
+
+        /**
+         * Método responsável por testar a remoção de um elemento e seus filhos
+         * @method _testRemoveElement
+         * @author João Victor Magela
+         */
+        var _testRemoveElement = function(assert) {
+            var _checkChildrenRemoved = function(assert, node) {
+                for(var i=0; node.nodes &amp;&amp; i &lt; node.nodes.length; i++) {
+                    _checkChildrenRemoved(assert, node.nodes[i]);
+                }
+
+                var child = globalTree.findNodeById(node.id);
+                assert.ok(!child, &#x27;&quot;&#x27; + node.text + &#x27;&quot; foi removido.&#x27;);                    
+            };
+
+            // Passo  1 - Clicar no botão de remoção de um elemento.
+            var nodeId = 0;            
+            var node = globalTree.findNode(nodeId); //Obtém os dados do pai
+            assert.ok(node.nodes &amp;&amp; node.nodes.length &gt; 0, &quot;O item selecionado possui filho(s)&quot;);
+            var item = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+ nodeId +&#x27;&quot;]&#x27;); //seleciona o item;
+            item.find(&#x27;#btn-tree-remove&#x27;).trigger(&#x27;click&#x27;); //Clica no botão de remover item
+            
+            // Passo 2 - Verificar se os filhos foram removidos.
+            var newNode = globalTree.findNodeById(node.id);
+            _checkChildrenRemoved(assert, node);
+        };
+
+        /**
+         * Método responsável por testar a remoção dos filhos de um elemento
+         * @method _testRemoveChidrenSelected
+         * @author João Victor Magela
+         */
+        var _testRemoveChidrenSelected = function(assert){
+            var nodeId = 0; // Nó com filhos
+
+            //Passo 1 - Selecionar os itens a serem removidos.
+            var node = globalTree.findNode(nodeId); //Obtém os dados do pai
+            assert.equal(node.nodes.length, 2, &quot;Pai contém dois filhos.&quot;);
+            var child = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+ node.nodes[0].nodeId +&#x27;&quot;]&#x27;).find(&#x27;.check-icon&#x27;).trigger(&#x27;click&#x27;); 
+            
+            // Passo 2 - Clicar no botão de remover filhos selecionados do pai.
+            var item = globalTree.$element.find(&#x27;[data-nodeid=&quot;&#x27;+ nodeId +&#x27;&quot;]&#x27;); //seleciona o item pai
+            item.find(&#x27;#btn-tree-removeall&#x27;).trigger(&#x27;click&#x27;); //Clica no botão de remoção de filhos selecionados
+            
+            // Passo 3 - Verificar se os itens foram removidos.
+            node = globalTree.findNodeById(node.id);
+            assert.equal(node.nodes.length, 1, &quot;Pai contém apenas um filho.&quot;); //Verifica se foi realmente excluído um item
+        };
+
+        /**
+         * Método responsável por testar a inserção de dados em um elemento com uma expressão inválida
+         * @method _testInsertDataError
+         * @author João Victor Magela
+         */
+         /*
+        var _testInsertDataError = function(assert, nodeId){
+            var done = assert.async();
+
+            //Primeiro verifica com o link errado
+            $(&#x27;#field-datasource&#x27;).val(&#x27;lorem ipsun&#x27;);
+            $(&#x27;#modal-tree-download&#x27;).find(&#x27;#btn-download-information&#x27;).trigger(&#x27;click&#x27;);
+            setTimeout(function(){
+                $(&#x27;#btn-confirm-download&#x27;).trigger(&#x27;click&#x27;);
+                var node = globalTree.findNode(nodeId);
+                assert.ok(!node.$data, &quot;Inseriu uma expressão/url inválida e não inseriu nenhum dado no nó.&quot;);
+                done();
+            }, 200);
+        };*/
+
+        /**
+         * Método responsável por retornar os dados da requisição AJAX
+         * @method _testAjax
+         * @author João Victor Magela
+         */
+        var _testAjax = function(assert, nodeId, url, callback){
+            var node = globalTree.findNode(nodeId);
+            
+            var result = $.ajax({
+                url: url,
+                type: &#x27;GET&#x27;,
+                success: function(data){
+                    data = $.parseJSON($(data.responseText)[0].data);
+                    node.$data = data;
+                }
+
+            }).always(function(){
+                callback(node);
+            })
+        };
+
+        /**
+         * Método responsável por testar a operação de inserir informações em um elemento.
+         * @method _testInsertData
+         * @author João Victor Magela
+         */
+        var _testInsertData = function(assert) {
+            var _testSetDataToChildren = function(node){
+                //Passa os dados de pai pra filho
+                node = globalTree.setDataToChildren(node, node.$data);
+                globalTree.tree = globalTree.refreshTree(globalTree.tree, node);
+                for(var i = 0; i &lt; node.nodes.length; i++) {
+                    assert.deepEqual(node.$data, node.nodes[i].$data, &#x27;Dados do &quot;&#x27;+ node.text +&#x27;&quot; foram passados para o filho &quot;&#x27;+ node.nodes[i].text+&#x27;&quot;.&#x27;);
+                }
+
+                return node;
+            };
+
+            assert.expect(3);
+            var done = assert.async(2);
+
+            // Passo 1 - Selecionar os itens da árvore com filhos.
+            var nodeId = 0;
+            var modal = $(&#x27;#modal-tree-download&#x27;);
+            var node = globalTree.findNode(nodeId);
+            modal.attr(&#x27;data-id&#x27;, node.id);
+            var url = &#x27;http://mira.tecweb.inf.puc-rio.br/api/futebol/1&#x27;; //Seleciona um time de futebol
+            var oldData = node.$data;
+
+            //Passo 2 - Fazer uma requisição AJAX com uma url/expressão inválida.
+            _testAjax(assert, nodeId, &quot;lorem ipsun&quot;, function(n){
+                node = n;    
+                assert.deepEqual(node.$data, oldData, &#x27;Inseriu a url inválida: lorem ipsun e não alterou o valor anterior.&#x27;);
+                done();
+            });
+
+            // Passo 3 - Fazer uma requisição AJAX com uma url/expressão válida.
+            _testAjax(assert, nodeId, url, function(n){
+                node = n;    
+                assert.ok(node.$data, &#x27;Inseriu a url válida: &#x27; + url + &#x27; e alterou o valor anterior.&#x27;);
+
+                // Passo 4 - Verificar se os dados foram passados para os filhos.
+                node = _testSetDataToChildren(node);
+                done();
+            });
+        };
+
+        /**
+         * Método responsável por testar a mudança do tipo de elemento.
+         * @method _testChangeElement
+         * @author João Victor Magela
+         */
+        var _testChangeElement = function(assert){
+            var node = globalTree.nodes[0]; //seleciona um item abstrato
+            var item = concreteInterfaceObj.findItem(node) //seleciona o item concreto relacionado ao item abstrato;
+
+            var types =  [&#x27;div&#x27;, &#x27;p&#x27;, &#x27;header&#x27;, &#x27;a&#x27;, &#x27;label&#x27;, &#x27;span&#x27;, &#x27;list&#x27;, &#x27;list-item&#x27;, &#x27;image&#x27;, &#x27;carousel&#x27;, &#x27;carousel-item&#x27;,
+                        &#x27;navigation&#x27;, &#x27;navigation-list&#x27;, &#x27;navigation-list-item&#x27;, &#x27;form&#x27;, &#x27;input-text&#x27;, &#x27;input-textarea&#x27;, &#x27;input-radio&#x27;,
+                        &#x27;input-select&#x27;, &#x27;input-option&#x27;, &#x27;input-button&#x27;];
+            for(var i =0 ; i &lt; types.length; i++) {
+                var current = item.typeElement;
+                // Passo 1 - Alterar o tipo do elemento.
+                item = _changeElement(types[i], node);
+
+                // Passo 2 - Verificar se a operação foi feita com sucesso.
+                assert.equal(types[i], item.typeElement, &#x27;Mudou de &quot;&#x27;+ current +&#x27;&quot; para &quot;&#x27; + item.typeElement+ &#x27;&quot;.&#x27;);
+            }
+        }
+                
+        QUnit.module(&quot;Interface Abstrata&quot;);
+        /**
+        * Teste: Adicionar item à raiz da árvore
+        * @author João Victor Magela
+        *
+        * Verificar a adição de elementos na raiz da árvore.
+        * Passos:
+        * 1 - Clicar no botão e pressionar &quot;Enter&quot; no campo.
+        * 2 - Clicar no botão e pressionar &quot;Tab&quot; no campo.
+        * 3 - Clicar no botão e pressionar &quot;Esc&quot; no campo.
+        */
+        QUnit.test(&quot;Adicionar item à raiz da árvore&quot;, function(assert){
+            _testAddElementRootEnter(assert);
+            _testAddElementRootTab(assert);
+            _testAddElementRootEsc(assert);
+        });
+
+        /**
+        * Teste: Remover itens selecionados da raiz
+        * @author João Victor Magela
+        *
+        * Verificar se os itens selecionados da raiz estão sendo removidos.
+        * Passos:
+        * 1 - Selecionar os itens da raiz que deseja remover.
+        * 2 - Clicar no botão de remoção.
+        * 3 - Verificar se os itens foram removidos.
+        */
+        QUnit.test(&quot;Remover itens selecionados da raiz&quot;, function(assert){
+            _testRemoveSelectedsRoot(assert);
+        });
+
+
+        /**
+        * Teste: Editar elemento
+        * @author João Victor Magela
+        *
+        * Verificar se a edição de um elemento é feita com sucesso.
+        * Passos:
+        * 1 - Clica no botão editar de um elemento.
+        * 2 - Pressionar a tecla Enter no campo e verifica se foi confirmada a operação.
+        * 3 - Repetir a operação pressionando a tecla Tab e verificar se a mesma foi confirmada.
+        * 4 - Repetir a operação pressionando a tecla Esc e verificar se a mesmafoi cancelada.
+        */
+        QUnit.test(&quot;Editar elemento&quot;, function(assert){
+            testEditElement(assert);
+        });
+
+
+        Project.initDefault(); //retorna ao valores padrões
+        /**
+        * Teste: Adicionar filho
+        * @author João Victor Magela
+        *
+        * Verificar a adição de um item para um nó existente.
+        * Passos:
+        * 1 - Clica no botão adicionar filho de um elemento.
+        * 2 - Pressionar a tecla Enter no campo e verificar se foi confirmada a operação.
+        * 3 - Repetir a operação pressionando a tecla Tab e verificar se a mesma foi confirmada.
+        * 4 - Repetir a operação pressionando a tecla Esc e verificar se a mesma foi cancelada.
+        */
+        QUnit.test(&quot;Adicionar filho&quot;, function(assert){
+            _testAddChild(assert);
+        });
+
+        /**
+        * Teste: Remover Elemento
+        * @author João Victor Magela
+        *
+        * Verificar se, ao excluir um item, seus filhos também são removidos.
+        * Passos:
+        * 1 - Clicar no botão de remoção de um elemento.
+        * 2 - Verificar se os filhos foram removidos.
+        */
+        QUnit.test(&quot;Remover Elemento&quot;, function(assert){
+            _testRemoveElement(assert);
+        });
+
+        /**
+        * Teste: Remover filhos selecionados
+        * @author João Victor Magela
+        *
+        * Verificar a remoção dos itens selecionados de um nó existente.
+        * Passos:
+        * 1 - Selecionar os itens a serem removidos.
+        * 2 - Clicar no botão de remover filhos selecionados do pai.
+        * 3 - Verificar se os itens foram removidos.
+        */
+        QUnit.test(&quot;Remover filhos selecionados&quot;, function(assert){
+            _testRemoveChidrenSelected(assert);
+        });
+
+        Project.initDefault(); //retorna ao valores padrões
+        /**
+        * Teste: Inserir dados
+        * @author João Victor Magela
+        *
+        * Verificar se a requisição e passagem dos dados é feita com sucesso.
+        * Passos:
+        * 1 - Selecionar os itens da árvore com filhos.
+        * 2 - Fazer uma requisição AJAX com uma url/expressão inválida.
+        * 3 - Fazer uma requisição AJAX com uma url/expressão válida.
+        * 4 - Verificar se os dados foram passados para os filhos.
+        */
+        QUnit.test(&quot;Inserir dados&quot;, function(assert){
+            _testInsertData(assert);
+        });
+
+        Project.initDefault(); //retorna ao valores padrões
+
+        QUnit.module(&quot;Interface Concreta&quot;);
+        /**
+        * Teste: Alterar Tipo do Elemento
+        * @author João Victor Magela
+        *
+        * Verificar se a operação de mudança do elemento é feita com sucesso.
+        * Passos:
+        * 1 - Alterar o tipo do elemento.
+        * 2 - Verificar se a operação foi feita com sucesso.
+        */
+        QUnit.test(&quot;Alterar tipo do elemento&quot;, function(assert){
+            _testChangeElement(assert);
+        });
+
+    };
+
+    return {
+        /**
+         * Método responsável por obter o template base dos elementos.
+         * @method initRenderElements
+         * @author João Victor Magela
+         * @static
+         */
+        initRenderElements: function() {
+            panelBase = $(&#x27;#panel-base&#x27;).html();
+        },
+
+        /**
+         * Método responsável por definir as ações do botão para a raiz da TreeView (Não existe tal funcionalidade no plugin)
+         * @method commandsRootTree
+         * @author João Victor Magela
+         * @static
+         */
+        commandsRootTree: function() {
+            $(&quot;#btn-root-add&quot;).click(function(e) {
+                //cria um novo objeto
+                var newItem = new Object();
+                newItem.text = &quot;Novo Item&quot;;
+                newItem.state = new Object();
+                newItem.state.added = true;
+                newItem.state.disabled = true;
+                newItem.nodeId = globalTree.nodes.length;
+                newItem.id = globalTree.setId();
+                newItem.selectable = false;
+                
+                //insere como filho do nó corrente
+                globalTree.tree.push(newItem);
+
+                //insere a fila de nós
+                globalTree.nodes.push(newItem);
+
+                $(&#x27;#tree&#x27;).treeview(&#x27;addElement&#x27;, [ newItem , { silent: true } ]);
+            });
+
+            $(&quot;#btn-root-removeall&quot;).click(function(e){
+                var ids = [];
+                for(var i=0; i&lt;globalTree.tree.length; i++){
+                    if(globalTree.tree[i].state.checked) ids = globalTree.getChidrenNode(globalTree.tree[i], ids);
+                }
+
+                globalTree.removeElements(ids);
+                
+                $(&quot;#tree&quot;).treeview(&#x27;removeElements&#x27;, [ ids , { silent: true } ]);
+                
+                globalTree.$element.empty().append(globalTree.$wrapper.empty());
+                globalTree.buildTree(globalTree.tree, 0);
+                globalTree.$element.trigger(&#x27;treeRender&#x27;, $.extend(true, {}, globalTree));
+            })
+        },
+
+        /**
+         * Método responsável por renderizar a TreeView e a partir disso atualizar toda a aplicação.
+         * @method renderTree
+         * @author João Victor Magela
+         * @param {Object} data Instancia do plugin BootstrapTreeView.
+         * @static
+         */
+        renderTree: function(data){
+            var listItens = [];
+            globalTree = data;
+
+            concreteInterfaceObj.cleanConcreteInterface();
+            
+            $(&quot;#prototype&quot;).empty();
+            for(var i=0; i&lt;data.tree.length; i++){
+                $(&quot;#prototype&quot;).append(_renderConcreteInterface(data.tree[i]));
+            }
+
+            Code.showAbstractInterfaceCode(data);
+            Code.showConcreteInterfaceCode();
+            
+            UIEvents.resizeBox();
+            UIEvents.setDraggable();
+
+            $(&#x27;.carousel&#x27;).carousel();
+            Project.saveWebStorage();
+        },
+
+        testsTreeView: testsTreeView
+    }
+}();
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

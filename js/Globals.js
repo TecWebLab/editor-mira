@@ -24,6 +24,7 @@ var runTest = function(){
     }, 7000);
 };
 
+// gerar os logs dos testes
 var generateLog = (function(){
 	var text = '';
 
