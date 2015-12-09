@@ -138,7 +138,7 @@ var Code = function () {
         .replaceAll('\\\"', '\'');
     };
 
-    var _initAbstract = function(){
+    var initAbstract = function(){
         var _processAjax = function(){
             var panelTitle = globalTree.nodes[3];
             panelTitle.bind = '$data.nome';
@@ -170,7 +170,7 @@ var Code = function () {
         });
     };
 
-    var _initConcrete = function(){
+    var initConcrete = function(){
         concreteInterfaceObj.concreteInterfaceItems[0].class = 'container';
         concreteInterfaceObj.concreteInterfaceItems[1].class = 'col-md-4';
         concreteInterfaceObj.concreteInterfaceItems[2].class = 'panel panel-primary';
@@ -215,9 +215,9 @@ var Code = function () {
         QUnit.test("Gerar código das interfaces", function(assert){
             assert.expect(4);
             var done = assert.async();
-            _initAbstract();
+            initAbstract();
             setTimeout(function() {
-                _initConcrete();
+                initConcrete();
                 
                 //Passo 1
                 globalTree.$element.empty().append(globalTree.$wrapper.empty());
@@ -283,6 +283,9 @@ var Code = function () {
             );
         },
 
-        tests: tests
+        tests: tests,
+        times: times,
+        initAbstract: initAbstract,
+        initConcrete: initConcrete,
     };
 }();

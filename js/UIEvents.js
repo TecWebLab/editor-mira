@@ -106,9 +106,11 @@ var UIEvents = function () {
     };
 
     var tests = function(){
-        QUnit.module("Interface Concreta");
-        Project.initDefault();
-
+        QUnit.module("Interface Concreta", {
+            setup: function(){
+                Project.initDefault();
+            }
+        });
         /**
         * Teste: Arrastar elemento
         * @author João Victor Magela
@@ -119,6 +121,7 @@ var UIEvents = function () {
         * 2 - Verificar se a operação foi feita com sucesso.
         */
         QUnit.test("Arrastar elemento", function(assert){
+            Project.initDefault();
             // Passo 1
             var element1 = concreteInterfaceObj.concreteInterfaceItems[0]; 
             var element2 = concreteInterfaceObj.concreteInterfaceItems[1];
@@ -174,7 +177,7 @@ var UIEvents = function () {
         });
 
 
-        Project.initDefault();
+        
         /**
         * Teste: Redimensionar elemento
         * @author João Victor Magela
@@ -185,11 +188,13 @@ var UIEvents = function () {
         * 2 - Redimensionar e verificar se a altura é superior a soma da altura dos filhos.
         */
         QUnit.test("Redimensionar elemento", function(assert){
+            Project.initDefault();
             // Passo 1
             var element1 = concreteInterfaceObj.concreteInterfaceItems[0]; 
             var element2 = concreteInterfaceObj.concreteInterfaceItems[1];
             var element3 = concreteInterfaceObj.concreteInterfaceItems[2];
             
+            console.log(concreteInterfaceObj.concreteInterfaceItems);
             var panel1 = $('.panel-drag[data-id='+ element1.id +']');
             var panel2 = $('.panel-drag[data-id='+ element2.id +']');
             var panel3 = $('.panel-drag[data-id='+ element3.id +']');

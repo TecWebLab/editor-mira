@@ -134,9 +134,8 @@ var Sidebar = function () {
                 value: 'Valor de teste',
                 class: 'panel panel-body class-test', 
             };
-
-            var item = concreteInterfaceObj.concreteInterfaceItems[0];
-            var oldItem = $.extend(true, {}, item);
+            var node = globalTree.nodes[0];
+            var item = new Div(node); //cria uma div
 
             //Passo 1
             item.updateAttr(attrs);

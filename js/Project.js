@@ -108,6 +108,7 @@ var Project = function () {
      */
     var initDefault = function() {
         concreteInterfaceObj.concreteInterfaceItems = [];
+        $("#prototype").empty();
         $('#nameInterface').val('landing');
 
         $("#tree").treeview({
@@ -142,40 +143,24 @@ var Project = function () {
 
     $('#btn-show-tests').click(function(e){
         e.preventDefault();
-        var runTest = function(){
-            myApp.showPleaseWait();
-            Project.initDefault();
-            Project.tests();
-            RenderElements.testsTreeView();
-            UIEvents.tests();
-            Sidebar.tests();
-            setTimeout(function() {
-                Code.tests();
-                Preview.tests();
-            }, 4000);    
-
-            setTimeout(function() {
-                myApp.hidePleaseWait();
-                $('#modal-test').modal('show');
-            }, 7000);
-                
-            
-        }
+        
         $('#dialog-confirm').dialog({
             resizable: false,
-              height:200,
-              width: 500,
+              height:230,
+              width: 550,
               modal: true,
               buttons: {
                 "Sim": function() {
-                    $( this ).dialog( "close" );
                     $('#project-save').click();
-                    runTest();
-                    
+                    localStorage.clear();
+                    localStorage.setItem('test', '1');
+                    window.location.reload();
                 },
                 "Não" : function(){
-                    $( this ).dialog( "close" );
-                    runTest();
+                    
+                    localStorage.clear();
+                    localStorage.setItem('test', '1');
+                    window.location.reload();
                 },
                 Cancel: function() {
                   $( this ).dialog( "close" );
@@ -377,6 +362,7 @@ var Project = function () {
         loadWebStorage: localStorage,
         initDefault: initDefault,
         initCustom: initCustom,
-        tests: tests
+        tests: tests,
+        modal: myApp
     }
 }();

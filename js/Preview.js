@@ -541,14 +541,29 @@ var Preview = function () {
         *2 - Verificar se o valor captado é o esperado.
         */
         QUnit.test("Exibir Preview", function(assert){
-            var node = globalTree.nodes[3]; // seleciona o nó "panel-title"
-            var element = concreteInterfaceObj.concreteInterfaceItems[3];
-            var value = _getValue(node, element, true, "value", 0);
-            assert.equal(value, "Time J", "Preview capitou o valor corretamente.");
-            
-            node = globalTree.nodes[8];
-            value = _getValue(node, element, true, "value", 0);
-            assert.equal(value, 0, "Preview captou valor igual a 0.");
+            assert.expect(2);
+            var done = assert.async();
+
+            Project.initCustom(Code.times);
+            Code.initAbstract();
+            setTimeout(function() {
+                Code.initConcrete();
+                
+                globalTree.$element.empty().append(globalTree.$wrapper.empty());
+                globalTree.buildTree(globalTree.tree, 0);
+                globalTree.$element.trigger('treeRender', $.extend(true, {}, globalTree));
+
+
+                var node = globalTree.nodes[3]; // seleciona o nó "panel-title"
+                var element = concreteInterfaceObj.concreteInterfaceItems[3];
+                var value = _getValue(node, element, true, "value", 0);
+                assert.equal(value, "Time J", "Preview capitou o valor corretamente.");
+                
+                node = globalTree.nodes[8];
+                value = _getValue(node, element, true, "value", 0);
+                assert.equal(value, 0, "Preview captou valor igual a 0.");
+                done();
+            }, 1000);
         })
     }
 
