@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gerador de Interfaces</title>
+	<meta charset="utf-8">
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+	<link href="css/interface.css" rel="stylesheet">
+
+</head>
+<body>
+	<div class="container">
+		<!-- Collapse -->
+
+		<!-- Dados do API e seleção do arquivo -->
+
+		<!-- Arquivo selecionado e interface gerada -->
+		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			<div class="panel panel-primary">
+				<div class="panel-heading" role="tab" id="header-dados-gerais">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#dados-gerais" aria-expanded="true" aria-controls="dados-gerais">
+						Dados Gerais
+						</a>
+					</h4>
+				</div>
+				<div id="dados-gerais" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="header-dados-gerais">
+					<div class="panel-body">
+						<!-- Formulário -->
+						<form class="form-horizontal" id="form-api">
+							
+							<div class="form-group">
+								<label for="nome" class="control-label col-sm-2">Nome</label>
+								<div class="col-sm-10">
+									<input type="text" name="nome" id="nome" class="form-control" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="key" class="control-label col-sm-2">Key</label>
+								<div class="col-sm-10">
+									<input type="text" name="key" id="key" class="form-control" />
+								</div>
+							</div>
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading" role="tab" id="header-carregar-arquivo">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#carregar-arquivo" aria-expanded="true" aria-controls="carregar-arquivo">
+						Carregar Arquivo
+						</a>
+					</h4>
+				</div>
+				<div id="carregar-arquivo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="header-carregar-arquivo">
+					<div class="panel-body">
+						<div class="input-group image-preview">
+							<input id=""placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+						
+							<!-- don't give a name === doesn't send on POST/GET --> 
+							<span class="input-group-btn"> 
+							
+								<!-- image-preview-clear button -->
+								<button id="btn-clear" type="button" class="btn btn-default image-preview-clear" style="display:none;"> <span class="glyphicon glyphicon-remove"></span> Limpar </button>
+						
+								<!-- image-preview-input -->
+								<div class="btn btn-default image-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Procurar</span>
+									<input type="file" accept=".json" name="input-file-preview" id= "input-json" />
+									<!-- rename it --> 
+								</div>
+								<button type="button" class="btn btn-labeled btn-primary" id="btn-process"> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Processar</button>
+							</span> 
+						</div>
+						
+						<!-- /input-group image-preview [TO HERE]--> 
+					
+						<br />
+
+						<!-- Drop Zone -->
+						<div class="upload-drop-zone" id="drop-zone"> Ou arraste o arquivo aqui </div>
+
+						<br />
+
+						<!-- Progress Bar -->
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"> <span class="sr-only">60% Complete</span> </div>
+						</div>
+						
+						<br />
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="panel panel-primary">
+				<div class="panel-heading" role="tab" id="header-interfaces">
+					<h4 class="panel-title">
+						<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#interfaces" aria-expanded="false" aria-controls="interfaces">
+							Interfaces
+						</a>
+					</h4>
+				</div>
+				<div id="interfaces" class="panel-collapse collapse" role="tabpanel" aria-labelledby="header-interfaces">
+					<div class="panel-body">
+						<!-- Tabs -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/appInterfaces.js"></script>
+</body>
+</html>
