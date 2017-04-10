@@ -61,7 +61,7 @@
 				<div id="carregar-arquivo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="header-carregar-arquivo">
 					<div class="panel-body">
 						<div class="input-group image-preview">
-							<input id=""placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
+							<input id="text-file" placeholder="" type="text" class="form-control image-preview-filename" disabled="disabled">
 						
 							<!-- don't give a name === doesn't send on POST/GET --> 
 							<span class="input-group-btn"> 
@@ -108,7 +108,28 @@
 				</div>
 				<div id="interfaces" class="panel-collapse collapse" role="tabpanel" aria-labelledby="header-interfaces">
 					<div class="panel-body">
-						<!-- Tabs -->
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#model" aria-controls="model" role="tab" data-toggle="tab">Modelo de Intenções</a></li>
+							<li role="presentation"><a href="#mira-interfaces" aria-controls="profile" role="tab" data-toggle="tab">Interfaces do Mira</a></li>
+					  </ul>
+
+					  <!-- Tab panes -->
+					  <div class="tab-content">
+					    <div role="tabpanel" class="tab-pane active" id="model">
+					    	<pre id="pre-model">
+					    		
+					    	</pre>
+					    </div>
+					    <div role="tabpanel" class="tab-pane" id="mira-interfaces">
+					    	<pre id="pre-mira">
+					    		
+					    	</pre>
+					    </div>
+					  </div>
+
+
+
 					</div>
 				</div>
 			</div>
@@ -118,5 +139,6 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/appInterfaces.js"></script>
+	<script type="text/javascript" src="js/mainInterfaces.js"></script>
 </body>
 </html>
