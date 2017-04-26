@@ -1,3 +1,5 @@
+"use strict";
+
 var AppInterfaces = function(){
 	//Dados gerais
 	this.Name = "";
@@ -16,7 +18,6 @@ var AppInterfaces = function(){
 	this.$txtFile = $("#text-file");
 	this.$codeModel = $("#pre-model");
 	this.$codeMira = $("#pre-mira");
-
 }
 
 /*
@@ -55,7 +56,7 @@ AppInterfaces.prototype.ProcessFile = function(file) {
 	var reader = new FileReader();
 	reader.onload = (function(fileAsText) {
 		return function(e){
-			var import = JSON.parse(e.target.result, function(key, value){
+			var importJSON = JSON.parse(e.target.result, function(key, value){
 				//Converte o validation de string para function
 				return key == "validation" ? new Function(value) : value;
 			});
@@ -72,11 +73,11 @@ AppInterfaces.prototype.ProcessFile = function(file) {
 	reader.readAsText(file);
 };
 
-AppInterfaces.prototype.CreateMiraInterfaces = function(import) {
+AppInterfaces.prototype.CreateMiraInterfaces = function(importJSON) {
 
 };
 
-AppInterfaces.AppInterfaces.prototype.GetDeepPropertiesValue = function(widgtes){
+AppInterfaces.prototype.GetDeepPropertiesValue = function(widgtes){
     var titles = [];
     var findName = function(list){
     	if(_.isString(list)){
