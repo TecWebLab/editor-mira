@@ -1,0 +1,104 @@
+<% 
+    var replacer = function(key,value){
+        return (typeof value === 'function' ) ? '' + value : value;
+    };
+%>
+"use strict";
+//Define as regras para avaliação de widgets
+var rules = [
+    
+];
+
+//Define as regras para seleção de interface
+var selection = [
+    <% _.each(params.interfaces, function(interface){ 
+        if(interface.name == "landing")
+            return;
+    %>
+    {
+        when: "",
+        abstract: "<%= interface.name %>"
+    },
+    <% }) %> 
+];
+
+var GeralHead = [
+    {name: "main_css", widget:"Head", href:"css/bootstrap.css", tag: "style"},
+    {name: "fontawesone_css", widget:"Head", href:"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", tag: "style"},
+    {name: "viewport", widget:"Meta", content:"width=device-width, initial-scale=1"}
+];
+
+
+<% _.each(params.interfaces, function(interface){ %>
+//---------------------------------------------------------------------------------------- <%=interface.name %> ----------------------------------------------------------------------------------------
+var <%=interface.name%>Abstrata = <%= JSON.stringify(interface.abstrata, replacer, 4).replace(/\"([^(\")"]+)\":/g,"$1:") %>;
+var <%=interface.name%>Concreta = 
+{
+    name: "<%=interface.name%>",
+    head: GeralHead.concat([
+        {name: "title", widget:"Title", value: "Title Page"}
+    ]),
+    structure: [],
+    maps: 
+    [
+        <% _.each(interface.concreta, function(itemConcreto){ %>    
+        <%= JSON.stringify(itemConcreto, replacer, 4).replace(/\"([^(\")"]+)\":/g,"$1:") %>,
+        <% }) %> 
+    ]
+};
+//---------------------------------------------------------------------------------------- Fim: <%=interface.name %> ----------------------------------------------------------------------------------------
+<% }) %>
+
+//---------------------------------------------------------------------------------------- Fim das Interfaces  ----------------------------------------------------------------------------------------
+var interface_abstracts = [
+<% _.each(params.interfaces, function(interface){ %>
+    <%=interface.name%>Abstrata, 
+<% }) %>
+];
+
+var concrete_interface = [
+<% _.each(params.interfaces, function(interface){ %>
+    <%=interface.name%>Concreta, 
+<% }) %>
+];
+
+var ajaxSetup = {
+
+};
+
+var configAPIAi = {
+    defaultLanguage: "<%= params.api.defaultLanguage %>",
+    tokens: [
+        <% if(params.api["pt-BR"].length){ print('{ "pt-BR": ' + '"' + params.api["pt-BR"] + '" }'); } %>    
+        <% if(params.api["en-US"].length){ print('{ "en-US": ' + '"' + params.api["en-US"] + '" }'); } %>
+    ];
+    
+};
+
+if(typeof define === 'function') {
+    define([
+        "jquery",
+        "bootstrap",
+        "mira/init"
+    ], function ($, $bootstrap, Mira) {
+
+        return function BookingMira() {
+            var app = new Mira.Application(interface_abstracts, concrete_interface, rules, selection, configAPIAi);
+            Mira.Widget.setDefault("BootstrapSimple");
+
+            //Eventos que serão chamados a partir de uma intenção
+            <% _.each(params.funcs, function(name){ %>
+            window.<%=name%> = function(options){
+
+            };
+
+            <%})%>
+        };
+    });
+} else {
+    exports.ajaxSetup = ajaxSetup;
+    exports.abstracts = interface_abstracts;
+    exports.mapping = concrete_interface;
+    exports.selection = selection;
+    exports.rules = rules;
+}

@@ -32,16 +32,16 @@
 						<form class="form-horizontal" id="form-api">
 							
 							<div class="form-group">
-								<label for="nome" class="control-label col-sm-2">Nome</label>
+								<label for="nome" class="control-label col-sm-2">API Key - Português</label>
 								<div class="col-sm-10">
-									<input type="text" name="nome" id="nome" class="form-control" />
+									<input type="text" name="key_pt" id="key_pt" class="form-control" />
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="key" class="control-label col-sm-2">Key</label>
+								<label for="key" class="control-label col-sm-2">API Key - Inglês</label>
 								<div class="col-sm-10">
-									<input type="text" name="key" id="key" class="form-control" />
+									<input type="text" name="key_us" id="key_us" class="form-control" />
 								</div>
 							</div>
 						</form>
@@ -117,10 +117,10 @@
 					  	<!-- Tab panes -->
 					  	<div class="tab-content">
 					  		<div role="tabpanel" class="tab-pane active" id="model">
-					  			<pre><code id="language-json"></code></pre>
+					  			<pre id="code-model" class="language-json"></pre>
 				  			</div>
 				  			<div role="tabpanel" class="tab-pane" id="mira-interfaces">
-					    		<pre><code id="pre-mira" class="language-javascript"></code></pre>
+					    		<pre id="code-mira" class="language-javascript"></pre>
 				    		</div>
 			    		</div>
 		    		</div>
@@ -131,7 +131,9 @@
 
 	<script type="text/javascript" src="js/lib/jquery.min.js"></script> 
 	<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/lib/prism.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script type="text/javascript" src="js/lib/jsonfn.min.js"></script>
+	<script type="text/javascript" src="js/lib/waitDialog.js"></script>
 	<script type="text/javascript" src="js/appInterfaces.js"></script>
 	<script type="text/javascript" src="js/mainInterfaces.js"></script>
 </body>
