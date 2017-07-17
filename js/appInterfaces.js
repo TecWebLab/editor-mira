@@ -89,9 +89,8 @@ AppInterfaces.prototype.ProcessFile = function(file, apiKeys) {
 	reader.onload = (function(fileAsText) {
 		
 		return function(e){
-			var importJSON = '';
 			try{
-				importJSON = JSON.parse(e.target.result);
+				eval(e.target.result);
 			} catch(ex){
 				throw ex;
 			}
@@ -100,29 +99,11 @@ AppInterfaces.prototype.ProcessFile = function(file, apiKeys) {
 			//Exibe o json importado
 			_this.$codeModel.html(e.target.result);
 
-			//Cria os objetos para alimentar o template
-			var interfaces = [];
-			_.each(importJSON.interfaces, function(item){
-				var widget = new Object();
-				widget.name = item.name;
-				
-				//Atribui o parâmetro validation para o widget abstrato
-				widget.abstrata = item;
-				
-				_.each(widget.abstrata.widgets, function(widgetAbstrato){
-					_this.SetValidation(widgetAbstrato, importJSON.intents);
-				});
-
-				widget.concreta = _this.WidgetsToList(item.widgets);
-
-				interfaces.push(widget);
-			});
-
 			//Exibe as interfaces do Mira de acordo com o template
 			var params = {
 				interfaces: interfaces,
 				api: apiKeys,
-				funcs: _this.GetFunctions(importJSON.intents)
+				funcs: _this.GetFunctions(intents)
 			};
 
 			var codeMira = _.template(_this.template, {variable: "params"})(params);
@@ -132,11 +113,11 @@ AppInterfaces.prototype.ProcessFile = function(file, apiKeys) {
 
 			//Cadastra os dados no API.ai
 			waitingDialog.setMessage("Registrando as entidades no API.ai.");
-			_this.SetValueEntities(importJSON.entities, importJSON.intents);
-			_this.CreateEntities(importJSON.entities, apiKeys);
+			_this.SetValueEntities(entities, intents);
+			_this.CreateEntities(entities, apiKeys);
 
 			waitingDialog.setMessage("Registrando as intenções no API.ai");
-			_this.CreateIntents(importJSON.intents, apiKeys);
+			_this.CreateIntents(intents, apiKeys);
 
 			waitingDialog.hide();
 		
@@ -178,8 +159,7 @@ AppInterfaces.prototype.GetFunctions = function(intents) {
 
 		return memory;
 	}, []);
-
-	console.log(funcs);
+	
 	return funcs;
 
 }
