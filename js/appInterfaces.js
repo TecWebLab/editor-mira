@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 var AppInterfaces = function(){
 	//Funções que são internas
@@ -101,7 +101,7 @@ AppInterfaces.prototype.ProcessFile = function(file, apiKeys) {
 
 			//Exibe as interfaces do Mira de acordo com o template
 			var params = {
-				interfaces: interfaces,
+				interfaces: _this.GetAbstractAndConcreteInterfaces(interfaces, intents),
 				api: apiKeys,
 				funcs: _this.GetFunctions(intents)
 			};
@@ -126,6 +126,28 @@ AppInterfaces.prototype.ProcessFile = function(file, apiKeys) {
 
 	reader.readAsText(file);
 };
+
+AppInterfaces.prototype.GetAbstractAndConcreteInterfaces = function(interfaces, intents){
+	var _this = this;
+	var result = [];
+	_.each(interfaces, function(item){
+		var widget = new Object();
+		widget.name = item.name;
+		
+		//Atribui o parâmetro validation para o widget abstrato
+		widget.abstrata = item;
+		
+		_.each(widget.abstrata.widgets, function(widgetAbstrato){
+			_this.SetValidation(widgetAbstrato, intents);
+		});
+
+		widget.concreta = _this.WidgetsToList(item.widgets);
+
+		result.push(widget);
+	});
+
+	return result;
+}
 
 //Verifica se algum widget da interface abstrata tem como ação SetValue. Caso tenha, coloca o atributo validation no objeto
 AppInterfaces.prototype.SetValidation = function(widget, intents){
