@@ -69,8 +69,8 @@ var ajaxSetup = {
 var configAPIAi = {
     defaultLanguage: "<%= params.api.defaultLanguage %>",
     tokens: {
-        <% if(params.api["pt-BR"].length){ print('{ "pt-BR": ' + '"' + params.api["pt-BR"] + '" }'); } %>    
-        <% if(params.api["en-US"].length){ print('{ "en-US": ' + '"' + params.api["en-US"] + '" }'); } %>
+        <% if(params.api["pt-BR"].length){ print('"pt-BR": ' + '"' + params.api["pt-BR"] + '"'); } %>    
+        <% if(params.api["en-US"].length){ print('"en-US": ' + '"' + params.api["en-US"] + '"'); } %>
     }
 };
 

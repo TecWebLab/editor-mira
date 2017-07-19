@@ -136,35 +136,12 @@ AppInterfaces.prototype.GetAbstractAndConcreteInterfaces = function(interfaces, 
 		
 		//Atribui o parâmetro validation para o widget abstrato
 		widget.abstrata = item;
-		
-		_.each(widget.abstrata.widgets, function(widgetAbstrato){
-			_this.SetValidation(widgetAbstrato, intents);
-		});
-
 		widget.concreta = _this.WidgetsToList(item.widgets);
 
 		result.push(widget);
 	});
 
 	return result;
-}
-
-//Verifica se algum widget da interface abstrata tem como ação SetValue. Caso tenha, coloca o atributo validation no objeto
-AppInterfaces.prototype.SetValidation = function(widget, intents){
-	var _this = this;
-	var intent = _.find(intents, function(x){ return x.name == widget.name; });
-	if(intent && intent.action === "SetValue"){
-		widget.validation = function(value){
-			return { success: true }
-		};
-
-		return;
-	}
-
-	var children = widget.children || [];
-	_.each(children, function(child){ 
-		_this.SetValidation(child, intents);
-	});
 }
 
 AppInterfaces.prototype.GetFunctions = function(intents) {
@@ -271,6 +248,7 @@ AppInterfaces.prototype.CreateEntities = function(entities, tokens) {
 
 	//Fazer a chamada do API.ai
 	var url = "https://api.api.ai/v1/entities?v=20150910";
+	console.log(entitiesToSave);
 	if(tokens["pt-BR"])
 		_this.AjaxCurl(url, "PUT", tokens["pt-BR"], entitiesToSave["pt-BR"]);
 
@@ -497,14 +475,21 @@ AppInterfaces.prototype.AjaxCurl = function(url, type, token, data, callback){
     var _this = this;
     return $.ajax({
         url: url,
-        beforeSend: function(xhr) { 
-          xhr.setRequestHeader("Authorization", "Bearer " + token);
+        crossDomain: true, 
+        beforeSend: function(xhr) {
+        	xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
+        xhrFields: {
+	        withCredentials: true
+	    },
+	    headers: type != "PUT" ? {} : {
+
+	    },
         type: type,
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         processData: false,
-        data: data != null ? JSON.stringify(data) : undefined,
+        data: data ? JSON.stringify(data) : undefined,
         success: callback,
         
         error: function(err){
