@@ -249,11 +249,20 @@ AppInterfaces.prototype.CreateEntities = function(entities, tokens) {
 	//Fazer a chamada do API.ai
 	var url = "https://api.api.ai/v1/entities?v=20150910";
 	console.log(entitiesToSave);
-	if(tokens["pt-BR"])
-		_this.AjaxCurl(url, "PUT", tokens["pt-BR"], entitiesToSave["pt-BR"]);
+	if(tokens["pt-BR"]){
+		_.each(entitiesToSave["pt-BR"], function(entityToSave){
+			_this.AjaxCurl(url, "POST", tokens["pt-BR"], entityToSave);
+		});
+	}
+		
+	//_this.AjaxCurl(url, "PUT", tokens["pt-BR"], entitiesToSave["pt-BR"]);
 
-	if(tokens["en-US"])
-		_this.AjaxCurl(url, "PUT", tokens["en-US"], entitiesToSave["en-US"]);		
+	if(tokens["en-US"]){
+		_.each(entitiesToSave["en-US"], function(entityToSave){
+			_this.AjaxCurl(url, "POST", tokens["en-US"], entityToSave);
+		});
+	}
+	//_this.AjaxCurl(url, "PUT", tokens["en-US"], entitiesToSave["en-US"]);		
 	
 };
 
@@ -483,6 +492,7 @@ AppInterfaces.prototype.AjaxCurl = function(url, type, token, data, callback){
 	        withCredentials: true
 	    },
         type: type,
+
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         processData: false,
