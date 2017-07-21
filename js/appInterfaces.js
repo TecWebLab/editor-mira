@@ -482,9 +482,6 @@ AppInterfaces.prototype.AjaxCurl = function(url, type, token, data, callback){
         xhrFields: {
 	        withCredentials: true
 	    },
-	    headers: type != "PUT" ? {} : {
-
-	    },
         type: type,
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
