@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 var AppInterfaces = function(){
 	//Funções que são internas
@@ -101,7 +101,7 @@ AppInterfaces.prototype.ProcessFile = function(file, apiKeys) {
 
 			//Exibe as interfaces do Mira de acordo com o template
 			var params = {
-				interfaces: interfaces,
+				interfaces: _this.GetAbstractAndConcreteInterfaces(interfaces, intents),
 				api: apiKeys,
 				funcs: _this.GetFunctions(intents)
 			};
@@ -127,22 +127,21 @@ AppInterfaces.prototype.ProcessFile = function(file, apiKeys) {
 	reader.readAsText(file);
 };
 
-//Verifica se algum widget da interface abstrata tem como ação SetValue. Caso tenha, coloca o atributo validation no objeto
-AppInterfaces.prototype.SetValidation = function(widget, intents){
+AppInterfaces.prototype.GetAbstractAndConcreteInterfaces = function(interfaces, intents){
 	var _this = this;
-	var intent = _.find(intents, function(x){ return x.name == widget.name; });
-	if(intent && intent.action === "SetValue"){
-		widget.validation = function(value){
-			return { success: true }
-		};
+	var result = [];
+	_.each(interfaces, function(item){
+		var widget = new Object();
+		widget.name = item.name;
+		
+		//Atribui o parâmetro validation para o widget abstrato
+		widget.abstrata = item;
+		widget.concreta = _this.WidgetsToList(item.widgets);
 
-		return;
-	}
-
-	var children = widget.children || [];
-	_.each(children, function(child){ 
-		_this.SetValidation(child, intents);
+		result.push(widget);
 	});
+
+	return result;
 }
 
 AppInterfaces.prototype.GetFunctions = function(intents) {
@@ -249,6 +248,7 @@ AppInterfaces.prototype.CreateEntities = function(entities, tokens) {
 
 	//Fazer a chamada do API.ai
 	var url = "https://api.api.ai/v1/entities?v=20150910";
+	console.log(entitiesToSave);
 	if(tokens["pt-BR"])
 		_this.AjaxCurl(url, "PUT", tokens["pt-BR"], entitiesToSave["pt-BR"]);
 
@@ -475,14 +475,18 @@ AppInterfaces.prototype.AjaxCurl = function(url, type, token, data, callback){
     var _this = this;
     return $.ajax({
         url: url,
-        beforeSend: function(xhr) { 
-          xhr.setRequestHeader("Authorization", "Bearer " + token);
+        crossDomain: true, 
+        beforeSend: function(xhr) {
+        	xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
+        xhrFields: {
+	        withCredentials: true
+	    },
         type: type,
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         processData: false,
-        data: data != null ? JSON.stringify(data) : undefined,
+        data: data ? JSON.stringify(data) : undefined,
         success: callback,
         
         error: function(err){
